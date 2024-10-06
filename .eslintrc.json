@@ -1,3 +1,58 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react/jsx-no-useless-fragment": 0,
+    "import/order": 0,
+    "import/prefer-default-export": "off",
+    "import/extensions": 0,
+    "import/no-unresolved": 0,
+    "prefer-arrow-callback": "off",
+    "no-var": "error",
+    "no-dupe-keys": "error",
+    "react/prop-types": "off",
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": ["arrow-function", "function-declaration"]
+      }
+    ],
+    "@typescript-eslint/no-explicit-any": "warn",
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": 0,
+    "react/prefer-stateless-function": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "no-nested-ternary": 0,
+    "react/require-default-props": 0,
+    "react/no-unescaped-entities": 0,
+    "react/no-children-prop": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "no-alert": 0,
+    "@typescript-eslint/no-unused-vars": 0
+  }
 }
