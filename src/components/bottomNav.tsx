@@ -2,17 +2,17 @@
 import "@/styles/globals.css";
 import Image from "next/image";
 
-import IconPower from "../../public/icon/nav_power.png";
-import IconBook from "../../public/icon/nav_book.png";
-import IconAppliance from "../../public/icon/nav_appliance.png";
-import IconHome from "../../public/icon/nav_home.png";
-import IconMy from "../../public/icon/nav_my.png";
+import IconPower from "../../public/icon/nav_power.svg";
+import IconBook from "../../public/icon/nav_book.svg";
+import IconAppliance from "../../public/icon/nav_appliance.svg";
+import IconHome from "../../public/icon/nav_home.svg";
+import IconMy from "../../public/icon/nav_my.svg";
 
-import IconClickPower from "../../public/icon/nav_power_click.png";
-import IconClickBook from "../../public/icon/nav_book_click.png";
-import IconClickAppliance from "../../public/icon/nav_appliance_click.png";
-import IconClickHome from "../../public/icon/nav_home_click.png";
-import IconClickMy from "../../public/icon/nav_my_click.png";
+import IconClickPower from "../../public/icon/nav_power_click.svg";
+import IconClickBook from "../../public/icon/nav_book_click.svg";
+import IconClickAppliance from "../../public/icon/nav_appliance_click.svg";
+import IconClickHome from "../../public/icon/nav_home_click.svg";
+import IconClickMy from "../../public/icon/nav_my_click.svg";
 
 import styled from "styled-components";
 export default function bottomNav() {
@@ -20,7 +20,7 @@ export default function bottomNav() {
     <>
       <NavContainer>
         <NavBtn>
-          <Image src={IconPower} alt="로고 이미지" width={60} height={60} />
+          <Image src={IconClickPower} alt="로고 이미지" width={60} height={60} />
           <MenuName>파워</MenuName>
         </NavBtn>
         <NavBtn>
