@@ -20,7 +20,7 @@ export default function bottomNav() {
     <>
       <NavContainer>
         <NavBtn>
-          <Image src={IconClickPower} alt="로고 이미지" width={60} height={60} />
+          <Image src={IconPower} alt="로고 이미지" width={60} height={60} />
           <MenuName>파워</MenuName>
         </NavBtn>
         <NavBtn>
@@ -45,61 +45,47 @@ export default function bottomNav() {
   );
 }
 const NavContainer = styled.div`
-/* background-color: #e6d7fa; */
-background-color: #fff;
-box-shadow: 0px 0px 15px 0px var(--Main-Color, #D7F3C6);
-/* height: 7.4rem; */
-height: 74px;
-border-radius: 30px 30px 0px 0px;
-padding: 0 1.5rem;
-display: flex;
-justify-content: center;
-align-items: center;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px 0px var(--Main-Color, #D7F3C6);
+    /* height: 7.4rem; */
+    height: 74px;
+    border-radius: 30px 30px 0px 0px;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 const NavBtn = styled.div`
-height: 100%;
-width: 6rem;
-
-/* border: 1px solid black; */
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-background-color: #fff;
-`;
-const NavIconContainer = styled.div`
-width: 60px;
-/* width:3rem; */
-height: 4rem;
-/* border: 1px solid black; */
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+    height: 100%;
+    width: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
 `;
 const Icon = styled.img`
-width: 2.4rem;
-height: 2.4rem;
-background-color: #fff;
-margin-bottom: 7px;
+    width: 2.4rem;
+    height: 2.4rem;
+    background-color: #fff;
+    margin-bottom: 7px;
 `;
 const MenuName = styled.p`
-position: relative;
-top: -1rem;
-width: 2rem;
-font-size: 10px;
-font-weight: 400;
-text-align: center;
-/* background-color: #fff; */
+    position: relative;
+    top: -1rem;
+    width: 2rem;
+    font-size: 10px;
+    font-weight: 400;
+    text-align: center;
 `;
 const MenuHomeContainer = styled.div`
-width: 7rem;
-display: flex;
-justify-content: center;
+    width: 7rem;
+    display: flex;
+    justify-content: center;
 `;
 const MenuHome = styled.div`
     position: relative;
-    top: -2rem;
+    top: -1.5rem;
     background-color: #91E26B;
     /* background-color: #fff; */
     border: #91E26B 1px solid;
