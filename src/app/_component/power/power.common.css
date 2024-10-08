@@ -1,0 +1,23 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+.title {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: 20rem;
+}
+
+.box {
+  width: 20rem;
+  height: 10rem;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0px 1px 8px 0px var(--Main-Color, #d7f3c6);
+}

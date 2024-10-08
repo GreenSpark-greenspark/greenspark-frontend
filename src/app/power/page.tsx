@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
+
+import NowPower from "../_component/power/NowPower";
+import AICharge from "../_component/power/AICharge";
+import GraphCharge from "../_component/power/GraphCharge";
+import PreCharge from "../_component/power/PreCharge";
 
 export default function Power() {
   return (
     <div>
-      Power 페이지
+      <NowPower />
+      <AICharge />
+      <GraphCharge />
+      <PreCharge />
     </div>
-  )
+  );
 }
