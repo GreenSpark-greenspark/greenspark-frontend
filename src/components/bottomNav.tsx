@@ -35,14 +35,14 @@ export default function BottomNav() {
     <NavContainer>
       <NavBtn onClick={togglePower}>
         <NavIcon src={isPowerActive ? IconClickPower : IconPower} alt="Power Icon" />
-        <MenuName isActive={isPowerActive}>파워</MenuName>
+        <MenuName isactive={isPowerActive ? "true" : undefined}>파워</MenuName>
       </NavBtn>
       <NavBtn onClick={toggleBook}>
         <NavIcon src={isBookActive ? IconClickBook : IconBook} alt="Book Icon" />
-        <MenuName isActive={isBookActive}>백과</MenuName>
+        <MenuName isactive={isBookActive ? "true" : undefined}>백과</MenuName>
       </NavBtn>
       <MenuHomeContainer>
-        <MenuHome isHomeActive={isHomeActive} onClick={toggleHome}>
+        <MenuHome onClick={toggleHome} ishomeactive={isHomeActive ? "true" : undefined}>
           <NavHomeIcon src={isHomeActive ? IconClickHome : IconHome} alt="Home Icon" />
         </MenuHome>
       </MenuHomeContainer>
@@ -51,11 +51,11 @@ export default function BottomNav() {
           src={isApplianceActive ? IconClickAppliance : IconAppliance}
           alt="Appliance Icon"
         />
-        <MenuName isActive={isApplianceActive}>가전</MenuName>
+        <MenuName isactive={isApplianceActive ? "true" : undefined}>가전</MenuName>
       </NavBtn>
       <NavBtn onClick={toggleMy}>
         <NavIcon src={isMyActive ? IconClickMy : IconMy} alt="My Icon" />
-        <MenuName isActive={isMyActive}>마이</MenuName>
+        <MenuName isactive={isMyActive ? "true" : undefined}>마이</MenuName>
       </NavBtn>
     </NavContainer>
   );
@@ -93,14 +93,14 @@ const NavBtn = styled.div`
   cursor: pointer;
 `;
 
-const MenuName = styled.p<{ isActive: boolean }>`
+const MenuName = styled.p<{ isactive: string | undefined }>`
   position: relative;
   top: -1rem;
   width: 2rem;
   font-size: 10px;
   font-weight: 400;
   text-align: center;
-  color: ${({ isActive }) => (isActive ? "black" : "gray")}; 
+  ${({ isactive }) => (isactive === "true" ? `color: black;` : `color: gray;`)};
 `;
 
 const MenuHomeContainer = styled.div`
@@ -109,10 +109,12 @@ const MenuHomeContainer = styled.div`
   justify-content: center;
 `;
 
-const MenuHome = styled.div<{ isHomeActive: boolean }>`
+const MenuHome = styled.div.attrs<{ ishomeactive: string | undefined }>(props => ({
+  // ishomeactive는 DOM에 전달되지 않도록 처리
+}))`
   position: relative;
   top: -1.5rem;
-  background-color: ${({ isHomeActive }) => (isHomeActive ? "#91e26b" : "white")};
+  ${({ ishomeactive }) => (ishomeactive === "true" ? `background-color: #91e26b;` : `background-color: white;`)};
   border: #91e26b 1px solid;
   box-shadow: 0px 0px 15px 0px var(--Main-Color, #D7F3C6);
   display: flex;
