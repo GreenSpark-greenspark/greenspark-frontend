@@ -3,6 +3,7 @@ import "@/styles/reset.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import BottomNav from "@/components/bottomNav";
+import StyledComponentsRegistry from "@/lib/registry";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,9 +21,11 @@ export default function RootLayout({
     <>
       <html lang="ko">
         <body className={inter.className}>
-          <div>레이아웃</div>
-          {children}
-          <BottomNav />
+          <StyledComponentsRegistry>
+            <div>레이아웃</div>
+            {children}
+            <BottomNav />
+          </StyledComponentsRegistry>
         </body>
       </html>
     </>
