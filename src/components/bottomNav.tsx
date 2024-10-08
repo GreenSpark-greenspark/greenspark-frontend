@@ -85,10 +85,15 @@ const NavContainer = styled.div`
   box-shadow: 0px 0px 15px 0px var(--Main-Color, #D7F3C6);
   height: 74px;
   border-radius: 30px 30px 0px 0px;
-  padding: 0 1.5rem;
+  /* padding: 0 1.5rem; */
   display: flex;
   justify-content: center;
   align-items: center;
+
+  position:fixed;
+  bottom: 0;
+  z-index: 1000;
+  max-width: 375px;
 `;
 
 const NavBtn = styled.div`
@@ -98,7 +103,6 @@ const NavBtn = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
   cursor: pointer;
 `;
 
