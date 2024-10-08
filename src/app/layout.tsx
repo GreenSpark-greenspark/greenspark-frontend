@@ -18,15 +18,13 @@ export default function RootLayout({
 }>) {
   return (
     <>
-    
-    <html lang="ko">
-      <body className={inter.className}>
-        <div>레이아웃</div>
-        {children}
-        <BottomNav/>
-      </body>
-    </html>
-    
+      <html lang="ko">
+        <body className={inter.className}>
+          <div>레이아웃</div>
+          {children}
+          <BottomNav />
+        </body>
+      </html>
     </>
   );
 }

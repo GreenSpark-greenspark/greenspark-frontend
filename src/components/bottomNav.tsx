@@ -122,8 +122,8 @@ const MenuHome = styled.div.attrs<{ $ishomeactive: string | undefined }>(props =
   position: relative;
   top: -1.5rem;
   ${({ $ishomeactive }) => ($ishomeactive === "true" ? `background-color: #91e26b;` : `background-color: white;`)};
+  ${({ $ishomeactive }) => ($ishomeactive === "true" ? `box-shadow: 0px 0px 15px 0px var(--Main-Color, #D7F3C6);` : `box-shadow:none;`)};
   border: #91e26b 1px solid;
-  box-shadow: 0px 0px 15px 0px var(--Main-Color, #D7F3C6);
   display: flex;
   width: 3.3rem;
   height: 3.3rem;
