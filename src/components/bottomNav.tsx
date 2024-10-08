@@ -32,7 +32,7 @@ export default function BottomNav() {
           alt="Power Icon"
           priority
         />
-        <MenuName isactive={activeButton === "power" ? "true" : undefined}>파워</MenuName>
+        <MenuName $isactive={activeButton === "power" ? "true" : undefined}>파워</MenuName>
       </NavBtn>
       <NavBtn onClick={() => handleButtonClick("book")}>
         <NavIcon
@@ -40,12 +40,12 @@ export default function BottomNav() {
           alt="Book Icon"
           priority
         />
-        <MenuName isactive={activeButton === "book" ? "true" : undefined}>백과</MenuName>
+        <MenuName $isactive={activeButton === "book" ? "true" : undefined}>백과</MenuName>
       </NavBtn>
       <MenuHomeContainer>
         <MenuHome
           onClick={() => handleButtonClick("home")}
-          ishomeactive={activeButton === "home" ? "true" : undefined}
+          $ishomeactive={activeButton === "home" ? "true" : undefined}
         >
           <NavHomeIcon
             src={activeButton === "home" ? IconClickHome : IconHome}
@@ -60,11 +60,11 @@ export default function BottomNav() {
           alt="Appliance Icon"
           priority
         />
-        <MenuName isactive={activeButton === "appliance" ? "true" : undefined}>가전</MenuName>
+        <MenuName $isactive={activeButton === "appliance" ? "true" : undefined}>가전</MenuName>
       </NavBtn>
       <NavBtn onClick={() => handleButtonClick("my")}>
         <NavIcon src={activeButton === "my" ? IconClickMy : IconMy} alt="My Icon" priority />
-        <MenuName isactive={activeButton === "my" ? "true" : undefined}>마이</MenuName>
+        <MenuName $isactive={activeButton === "my" ? "true" : undefined}>마이</MenuName>
       </NavBtn>
     </NavContainer>
   );
@@ -102,14 +102,14 @@ const NavBtn = styled.div`
   cursor: pointer;
 `;
 
-const MenuName = styled.p<{ isactive: string | undefined }>`
+const MenuName = styled.p<{ $isactive: string | undefined }>`
   position: relative;
   top: -1rem;
   width: 2rem;
   font-size: 10px;
   font-weight: 500;
   text-align: center;
-  ${({ isactive }) => (isactive === "true" ? `color: black;` : `color: gray;`)};
+  ${({ $isactive }) => ($isactive === "true" ? `color: black;` : `color: gray;`)};
 `;
 
 const MenuHomeContainer = styled.div`
@@ -118,10 +118,10 @@ const MenuHomeContainer = styled.div`
   justify-content: center;
 `;
 
-const MenuHome = styled.div.attrs<{ ishomeactive: string | undefined }>(props => ({}))`
+const MenuHome = styled.div.attrs<{ $ishomeactive: string | undefined }>(props => ({}))`
   position: relative;
   top: -1.5rem;
-  ${({ ishomeactive }) => (ishomeactive === "true" ? `background-color: #91e26b;` : `background-color: white;`)};
+  ${({ $ishomeactive }) => ($ishomeactive === "true" ? `background-color: #91e26b;` : `background-color: white;`)};
   border: #91e26b 1px solid;
   box-shadow: 0px 0px 15px 0px var(--Main-Color, #D7F3C6);
   display: flex;
