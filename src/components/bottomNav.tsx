@@ -18,44 +18,53 @@ import IconClickMy from "../../public/icon/nav_my_click.svg";
 import styled from "styled-components";
 
 export default function BottomNav() {
-  const [isPowerActive, setPowerActive] = useState(false);
-  const [isBookActive, setBookActive] = useState(false);
-  const [isApplianceActive, setApplianceActive] = useState(false);
-  const [isHomeActive, setHomeActive] = useState(false);
-  const [isMyActive, setMyActive] = useState(false);
+  const [activeButton, setActiveButton] = useState<string>("home");
 
-  // 각 버튼 클릭 시 상태를 토글하는 함수
-  const togglePower = () => setPowerActive(!isPowerActive);
-  const toggleBook = () => setBookActive(!isBookActive);
-  const toggleAppliance = () => setApplianceActive(!isApplianceActive);
-  const toggleHome = () => setHomeActive(!isHomeActive);
-  const toggleMy = () => setMyActive(!isMyActive);
+  const handleButtonClick = (button: string) => {
+    setActiveButton(button);
+  };
 
   return (
     <NavContainer>
-      <NavBtn onClick={togglePower}>
-        <NavIcon src={isPowerActive ? IconClickPower : IconPower} alt="Power Icon" />
-        <MenuName isactive={isPowerActive ? "true" : undefined}>파워</MenuName>
+      <NavBtn onClick={() => handleButtonClick("power")}>
+        <NavIcon
+          src={activeButton === "power" ? IconClickPower : IconPower}
+          alt="Power Icon"
+          priority
+        />
+        <MenuName isactive={activeButton === "power" ? "true" : undefined}>파워</MenuName>
       </NavBtn>
-      <NavBtn onClick={toggleBook}>
-        <NavIcon src={isBookActive ? IconClickBook : IconBook} alt="Book Icon" />
-        <MenuName isactive={isBookActive ? "true" : undefined}>백과</MenuName>
+      <NavBtn onClick={() => handleButtonClick("book")}>
+        <NavIcon
+          src={activeButton === "book" ? IconClickBook : IconBook}
+          alt="Book Icon"
+          priority
+        />
+        <MenuName isactive={activeButton === "book" ? "true" : undefined}>백과</MenuName>
       </NavBtn>
       <MenuHomeContainer>
-        <MenuHome onClick={toggleHome} ishomeactive={isHomeActive ? "true" : undefined}>
-          <NavHomeIcon src={isHomeActive ? IconClickHome : IconHome} alt="Home Icon" />
+        <MenuHome
+          onClick={() => handleButtonClick("home")}
+          ishomeactive={activeButton === "home" ? "true" : undefined}
+        >
+          <NavHomeIcon
+            src={activeButton === "home" ? IconClickHome : IconHome}
+            alt="Home Icon"
+            priority
+          />
         </MenuHome>
       </MenuHomeContainer>
-      <NavBtn onClick={toggleAppliance}>
+      <NavBtn onClick={() => handleButtonClick("appliance")}>
         <NavIcon
-          src={isApplianceActive ? IconClickAppliance : IconAppliance}
+          src={activeButton === "appliance" ? IconClickAppliance : IconAppliance}
           alt="Appliance Icon"
+          priority
         />
-        <MenuName isactive={isApplianceActive ? "true" : undefined}>가전</MenuName>
+        <MenuName isactive={activeButton === "appliance" ? "true" : undefined}>가전</MenuName>
       </NavBtn>
-      <NavBtn onClick={toggleMy}>
-        <NavIcon src={isMyActive ? IconClickMy : IconMy} alt="My Icon" />
-        <MenuName isactive={isMyActive ? "true" : undefined}>마이</MenuName>
+      <NavBtn onClick={() => handleButtonClick("my")}>
+        <NavIcon src={activeButton === "my" ? IconClickMy : IconMy} alt="My Icon" priority />
+        <MenuName isactive={activeButton === "my" ? "true" : undefined}>마이</MenuName>
       </NavBtn>
     </NavContainer>
   );
@@ -98,7 +107,7 @@ const MenuName = styled.p<{ isactive: string | undefined }>`
   top: -1rem;
   width: 2rem;
   font-size: 10px;
-  font-weight: 400;
+  font-weight: 500;
   text-align: center;
   ${({ isactive }) => (isactive === "true" ? `color: black;` : `color: gray;`)};
 `;
@@ -109,9 +118,7 @@ const MenuHomeContainer = styled.div`
   justify-content: center;
 `;
 
-const MenuHome = styled.div.attrs<{ ishomeactive: string | undefined }>(props => ({
-  // ishomeactive는 DOM에 전달되지 않도록 처리
-}))`
+const MenuHome = styled.div.attrs<{ ishomeactive: string | undefined }>(props => ({}))`
   position: relative;
   top: -1.5rem;
   ${({ ishomeactive }) => (ishomeactive === "true" ? `background-color: #91e26b;` : `background-color: white;`)};
