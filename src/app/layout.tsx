@@ -22,7 +22,6 @@ export default function RootLayout({
       <html lang="ko">
         <body className={inter.className}>
           <StyledComponentsRegistry>
-            <div>레이아웃</div>
             {children}
             <BottomNav />
           </StyledComponentsRegistry>
