@@ -12,16 +12,16 @@
   font-weight: 600;
   line-height: normal;
   width: 20rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
 }
 
 .box {
   width: 20rem;
-  height: 10rem;
+  /* height: 10rem; */
   border-radius: 15px;
   background-color: #fff;
   box-shadow: 0px 1px 8px 0px var(--Main-Color, #d7f3c6);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 /* 입력하기, 전체 히스토리 버튼 */
 .btn {
@@ -50,7 +50,6 @@
 }
 .text_bold {
   color: #000;
-
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
