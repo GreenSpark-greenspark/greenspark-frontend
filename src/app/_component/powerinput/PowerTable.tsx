@@ -9,7 +9,7 @@ type TableRow = {
 };
 
 const sampleData: TableRow[] = [
-  { year: "2024년 10월", cost: 50000, usage: 350 },
+  { year: "2024년 10월", cost: 54000, usage: 30 },
   { year: "2024년 9월", cost: 45000, usage: 320 },
   { year: "2024년 9월", cost: 45000, usage: 320 },
   { year: "2024년 9월", cost: 45000, usage: 320 },
@@ -27,11 +27,17 @@ const PowerTable: React.FC = () => {
       },
       {
         Header: "전기요금",
-        accessor: "cost"
+        accessor: "cost",
+        Cell: ({ value }: Cell<TableRow>) => {
+          return `${value.toLocaleString()}원`;
+        }
       },
       {
         Header: "전력사용량",
-        accessor: "usage"
+        accessor: "usage",
+        Cell: ({ value }: Cell<TableRow>) => {
+          return `${value.toLocaleString()}kWh`;
+        }
       }
     ],
     []

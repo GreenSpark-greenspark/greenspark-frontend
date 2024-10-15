@@ -53,9 +53,9 @@
 }
 
 .yearCell {
+  width: 80px;
   color: #929292;
   text-align: center;
-
   font-family: Pretendard;
   font-size: 10px;
   font-style: normal;
