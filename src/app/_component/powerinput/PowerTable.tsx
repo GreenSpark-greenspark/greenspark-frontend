@@ -28,7 +28,9 @@ const PowerTable: React.FC = () => {
   const sampleData: TableRow[] = [
     { year: "2024년 10월", cost: 54000, usage: 30 },
     { year: "2024년 9월", cost: 45000, usage: 320 },
-    { year: "2024년 8월", cost: 43000, usage: 310 }
+    { year: "2024년 5월", cost: 45000, usage: 320 },
+    { year: "2024년 6월", cost: 45000, usage: 320 },
+    { year: "2024년 8월", cost: 43000 }
   ];
 
   const fullData: TableRow[] = useMemo(() => {
@@ -48,14 +50,22 @@ const PowerTable: React.FC = () => {
         Header: "전기요금",
         accessor: "cost",
         Cell: ({ value }: Cell<TableRow>) => {
-          return value !== undefined ? `${value.toLocaleString()}원` : <IconPlus />;
+          return value !== undefined ? (
+            `${value.toLocaleString()}원`
+          ) : (
+            <IconPlus className={styles.plusIcon} />
+          );
         }
       },
       {
         Header: "전력사용량",
         accessor: "usage",
         Cell: ({ value }: Cell<TableRow>) => {
-          return value !== undefined ? `${value.toLocaleString()}kWh` : <IconPlus />;
+          return value !== undefined ? (
+            `${value.toLocaleString()}kWh`
+          ) : (
+            <IconPlus className={styles.plusIcon} />
+          );
         }
       }
     ],

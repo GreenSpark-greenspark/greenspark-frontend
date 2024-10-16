@@ -41,10 +41,11 @@
 
 .tableRow td {
   padding: 9px;
+  /* height: 30px; */
   border-bottom: 1px solid #f1f3f5;
   color: #000;
   text-align: center;
-
+  justify-content: center;
   font-family: Pretendard;
   font-size: 12px;
   font-style: normal;
@@ -60,4 +61,8 @@
 
 .costUsageDivider {
   border-left: 2px solid#F1F3F5; /* 년도와 전기요금 사이의 줄 */
+}
+.plusIcon {
+  width: 11px;
+  height: 11px;
 }
