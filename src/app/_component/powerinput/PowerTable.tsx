@@ -10,6 +10,7 @@ type TableRow = {
   usage?: number;
 };
 
+// 최근 36개월 계산
 const getLast36Months = () => {
   const months: string[] = [];
   const currentDate = new Date();
@@ -24,6 +25,7 @@ const getLast36Months = () => {
   return months;
 };
 
+// 드롭다운 년도 계산
 const getYearsOptions = () => {
   const currentYear = new Date().getFullYear();
   return [
@@ -38,7 +40,7 @@ const PowerTable: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const months = useMemo(getLast36Months, []);
-  const yearsOptions = useMemo(getYearsOptions, []);
+  const yearsOptions = useMemo(getYearsOptions, []); // 드롭다운에 표시할 년도 옵션
 
   const sampleData: TableRow[] = [
     { year: "2024년 10월", cost: 54000, usage: 30 },
@@ -48,6 +50,7 @@ const PowerTable: React.FC = () => {
     { year: "2024년 8월", cost: 43000 }
   ];
 
+  // 선택한 년도에 맞게 데이터 필터링
   const fullData: TableRow[] = useMemo(() => {
     const filteredMonths = selectedYear
       ? months.filter(month => month.startsWith(selectedYear))
@@ -59,6 +62,7 @@ const PowerTable: React.FC = () => {
     });
   }, [months, sampleData, selectedYear]);
 
+  // 테이블에 필요한 컬럼 정의
   const columns: Column<TableRow>[] = useMemo(
     () => [
       {
