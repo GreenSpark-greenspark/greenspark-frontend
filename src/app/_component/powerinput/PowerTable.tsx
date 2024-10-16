@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useTable, Column, ColumnInstance, HeaderGroup, Row, Cell } from "react-table";
 import styles from "./PowerTable.module.css";
-
+import IconPlus from "../../../../public/icon/power_plus.svg";
 type TableRow = {
   year: string;
   cost: number;
