@@ -1,13 +1,15 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useTable, Column, ColumnInstance, HeaderGroup, Row, Cell } from "react-table";
 import styles from "./PowerTable.module.css";
 import IconPlus from "../../../../public/icon/power_plus.svg";
+import IconDropDown from "../../../../public/icon/power_dropdown.svg";
 
 type TableRow = {
   year: string;
   cost?: number;
   usage?: number;
 };
+
 const getLast36Months = () => {
   const months: string[] = [];
   const currentDate = new Date();
@@ -22,8 +24,21 @@ const getLast36Months = () => {
   return months;
 };
 
+const getYearsOptions = () => {
+  const currentYear = new Date().getFullYear();
+  return [
+    { label: `${currentYear}년`, value: `${currentYear}년` },
+    { label: `${currentYear - 1}년`, value: `${currentYear - 1}년` },
+    { label: `${currentYear - 2}년`, value: `${currentYear - 2}년` }
+  ];
+};
+
 const PowerTable: React.FC = () => {
+  const [selectedYear, setSelectedYear] = useState<string | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const months = useMemo(getLast36Months, []);
+  const yearsOptions = useMemo(getYearsOptions, []);
 
   const sampleData: TableRow[] = [
     { year: "2024년 10월", cost: 54000, usage: 30 },
@@ -34,16 +49,52 @@ const PowerTable: React.FC = () => {
   ];
 
   const fullData: TableRow[] = useMemo(() => {
-    return months.map(month => {
+    const filteredMonths = selectedYear
+      ? months.filter(month => month.startsWith(selectedYear))
+      : months;
+
+    return filteredMonths.map(month => {
       const existingData = sampleData.find(row => row.year === month);
       return existingData || { year: month };
     });
-  }, [months, sampleData]);
+  }, [months, sampleData, selectedYear]);
 
   const columns: Column<TableRow>[] = useMemo(
     () => [
       {
-        Header: "년도",
+        Header: () => (
+          <div className={styles.yearHeader}>
+            <span className={styles.dropdownbtn} onClick={() => setIsDropdownOpen(prev => !prev)}>
+              년도
+              <IconDropDown className={styles.dropDownIcon} />
+            </span>
+            {isDropdownOpen && (
+              <div className={styles.dropdownMenu}>
+                {yearsOptions.map(yearOption => (
+                  <div
+                    key={yearOption.value}
+                    className={styles.dropdownItem}
+                    onClick={() => {
+                      setSelectedYear(yearOption.value);
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    {yearOption.label}
+                  </div>
+                ))}
+                <div
+                  className={styles.dropdownItem}
+                  onClick={() => {
+                    setSelectedYear(null);
+                    setIsDropdownOpen(false);
+                  }}
+                >
+                  모든 년도
+                </div>
+              </div>
+            )}
+          </div>
+        ),
         accessor: "year"
       },
       {
@@ -69,7 +120,7 @@ const PowerTable: React.FC = () => {
         }
       }
     ],
-    []
+    [isDropdownOpen, yearsOptions]
   );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable<TableRow>({

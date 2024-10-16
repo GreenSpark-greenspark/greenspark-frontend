@@ -37,10 +37,11 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  justify-content: center;
 }
 
 .tableRow td {
-  padding: 9px;
+  padding: 9px 0;
   /* height: 30px; */
   border-bottom: 1px solid #f1f3f5;
   color: #000;
@@ -65,4 +66,49 @@
 .plusIcon {
   width: 11px;
   height: 11px;
+}
+
+.yearHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropDownIcon {
+  margin-left: 5px;
+  width: 18px;
+  height: 18px;
+}
+
+.dropdownMenu {
+  width: 100px;
+  position: absolute;
+  top: 60px;
+  border-radius: 10px;
+  border: 1px solid #b6ec94;
+  box-shadow: 0px 1px 8px 0px #d7f3c6;
+  background: #fff;
+  z-index: 100;
+  padding: 10px 0;
+}
+
+.dropdownItem {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #5e5e5e;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.dropdownItem:hover {
+  background: #b6ec94;
+}
+
+.dropdownbtn {
+  display: flex;
+  align-items: center;
 }
