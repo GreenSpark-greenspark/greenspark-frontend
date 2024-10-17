@@ -1,0 +1,76 @@
+.navContainer {
+  background-color: #fff;
+  box-shadow: 0px 0px 15px 0px var(--Main-Color, #d7f3c6);
+  height: 74px;
+  border-radius: 30px 30px 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+  max-width: 375px;
+}
+
+.navBtn {
+  height: 100%;
+  width: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.menuName {
+  position: relative;
+  top: -1rem;
+  width: 2rem;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  color: gray;
+}
+
+.menuNameActive {
+  color: black;
+}
+
+.menuHomeContainer {
+  width: 7rem;
+  display: flex;
+  justify-content: center;
+}
+
+.menuHome {
+  position: relative;
+  top: -1.5rem;
+  background-color: white;
+  border: #91e26b 1px solid;
+  display: flex;
+  width: 3.3rem;
+  height: 3.3rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.menuHomeActive {
+  background-color: #91e26b;
+  box-shadow: 0px 0px 15px 0px #d7f3c6;
+}
+
+.NavIcon {
+  width: 60px;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+}
+
+.homeIcon {
+  width: 27px;
+  height: 27px;
+}
