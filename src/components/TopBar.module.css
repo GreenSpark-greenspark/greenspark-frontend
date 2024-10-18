@@ -1,0 +1,23 @@
+.TopBarWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  height: 62px;
+  background-color: #f8fff3;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: #000;
+  text-align: center;
+}
+
+.IconWrapper {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 27px;
+}
