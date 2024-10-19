@@ -1,50 +1,27 @@
-import style from "./MyAppliances.module.css";
-import IconPlus from "@/../public/icon/power_plus.svg";
 import { data } from "@/mock/appliances";
-import Image from "next/image";
-import airConditioner from "@/../public/img/air-conditioner.png";
-import refrigerator from "@/../public/img/refrigerator.png";
-import washingMachine from "@/../public/img/washing-machine.png";
-import { getColorfromGrade } from "@/utils/getColorfromgrade";
+import Box from "@/components/Box";
+import Link from "next/link";
+import Appliance from "./Appliance";
+import IconPlus from "@/../public/icon/power_plus.svg";
+import style from "./MyAppliances.module.css";
 
-export default function Box() {
-  // type에 따라 이미지 반환하는 함수 (추후 수정 필요)
-  const getImage = (type: "airconditioner" | "refrigerator" | "washingMachine") => {
-    switch (type) {
-      case "airconditioner":
-        return airConditioner;
-      case "refrigerator":
-        return refrigerator;
-      case "washingMachine":
-        return washingMachine;
-      default:
-        return washingMachine;
-    }
-  };
-
-  const getBorderColor = getColorfromGrade;
-
+export default function MyAppliances() {
   return (
     <div className={style.BoxWrapper}>
-      <div className={style.Box}>
-        {data.map(item => (
-          <div key={item.id} className={style.CircleContainer}>
-            <div className={style.Circle} style={{ borderColor: getBorderColor(item.grade) }}>
-              <Image
-                src={getImage(item.type)}
-                alt={item.type}
-                width={25}
-                style={{ objectFit: "cover" }}
-                priority={true}
-              />
+      <Box minHeight="452px">
+        <div className={style.GridLayout}>
+          {data.map(item => (
+            <Link href={`/appliances/${item.id}`} key={item.id}>
+              <Appliance id={item.id} grade={item.grade} type={item.type} />
+            </Link>
+          ))}
+          <Link href={`/appliances/add`}>
+            <div className={style.AddCircle}>
+              <IconPlus width={"2.4rem"} height={"2.4rem"} />
             </div>
-            <div className={style.CircleText}>{item.grade}등급</div>
-          </div>
-        ))}
-        <div className={style.AddCircle}>
-          <IconPlus width={"2.4rem"} height={"2.4rem"} />
+          </Link>
         </div>
-      </div>
+      </Box>
     </div>
   );
 }
