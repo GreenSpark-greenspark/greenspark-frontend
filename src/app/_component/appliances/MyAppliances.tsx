@@ -13,9 +13,11 @@ export default function Box() {
             <Appliance id={item.id} grade={item.grade} type={item.type} />
           </Link>
         ))}
-        <div className={style.AddCircle}>
-          <IconPlus width={"2.4rem"} height={"2.4rem"} />
-        </div>
+        <Link href={`/appliances/add`}>
+          <div className={style.AddCircle}>
+            <IconPlus width={"2.4rem"} height={"2.4rem"} />
+          </div>
+        </Link>
       </div>
     </div>
   );
