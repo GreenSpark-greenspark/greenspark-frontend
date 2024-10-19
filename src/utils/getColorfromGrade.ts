@@ -1,5 +1,5 @@
 // 등급(숫자)을 받으면 색을 반환해주는 함수
-export const getColorfromGrade = (grade: number): string => {
+export const getColorFromGrade = (grade: number): string => {
   switch (grade) {
     case 1:
       return "#8EC63F";

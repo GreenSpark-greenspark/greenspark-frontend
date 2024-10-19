@@ -1,4 +1,4 @@
-type ApplianceType = "airconditioner" | "refrigerator" | "washingMachine";
+export type ApplianceType = "airconditioner" | "refrigerator" | "washingMachine";
 
 export const data: { id: number; grade: number; type: ApplianceType }[] = [
   { id: 1, grade: 1, type: "airconditioner" },
