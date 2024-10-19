@@ -1,3 +1,9 @@
+import Box from "@/components/Box";
+
 export default function Page() {
-  return <div>추가 페이지</div>;
+  return (
+    <div>
+      <Box>추가 페이지</Box>
+    </div>
+  );
 }
