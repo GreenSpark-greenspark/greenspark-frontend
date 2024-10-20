@@ -121,7 +121,9 @@ const PowerTable: React.FC = () => {
           return value !== undefined ? (
             `${value.toLocaleString()}원`
           ) : (
-            <IconPlus className={styles.plusIcon} />
+            <div className={styles.iconWrapper}>
+              <IconPlus className={styles.plusIcon} />
+            </div>
           );
         }
       },
@@ -132,7 +134,9 @@ const PowerTable: React.FC = () => {
           return value !== undefined ? (
             `${value.toLocaleString()}kWh`
           ) : (
-            <IconPlus className={styles.plusIcon} />
+            <div className={styles.iconWrapper}>
+              <IconPlus className={styles.plusIcon} />
+            </div>
           );
         }
       }
