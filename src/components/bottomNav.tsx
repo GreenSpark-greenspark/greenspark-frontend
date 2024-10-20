@@ -13,7 +13,7 @@ import IconClickAppliance from "../../public/icon/nav_appliance_click.svg";
 import IconClickHome from "../../public/icon/nav_home_click.svg";
 import IconClickMy from "../../public/icon/nav_my_click.svg";
 
-import styles from "./BottomNav.module.css";
+import styles from "./bottomNav.module.css";
 
 export default function BottomNav() {
   const [activeButton, setActiveButton] = useState<string>("home");
