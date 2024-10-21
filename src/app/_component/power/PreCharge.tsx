@@ -1,10 +1,13 @@
 import React from "react";
+import Box from "@/components/Box";
 
 export default function PreCharge() {
   return (
-    <div className="wrap">
+    <>
       <p className="title">저번달 요금</p>
-      <div className="box"></div>
-    </div>
+      <div className="wrap">
+        <Box>그래프</Box>
+      </div>
+    </>
   );
 }

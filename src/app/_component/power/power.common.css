@@ -7,23 +7,15 @@
 .title {
   color: #000;
   font-family: Pretendard;
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  width: 20rem;
   margin-bottom: 0.6rem;
+  margin-left: 2.3rem;
+  margin-top: 2.5rem;
 }
 
-.box {
-  width: 17rem;
-  /* height: 10rem; */
-  border-radius: 15px;
-  background-color: #fff;
-  box-shadow: 0px 1px 8px 0px var(--Main-Color, #d7f3c6);
-  margin-bottom: 2.5rem;
-  padding: 1rem 1.5rem;
-}
 .powerinput {
   display: flex;
   align-items: center;
