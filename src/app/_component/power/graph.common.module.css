@@ -1,0 +1,32 @@
+.graphBtn {
+  width: 6.3rem;
+  height: 2.4rem;
+  border-radius: 2em;
+  background: var(--Base-Color, #f8fff3);
+  border: 1px solid var(--Point-Color, #f8fff3);
+
+  color: var(--Color-3, #5e5e5e);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btnActive {
+  border: 1px solid var(--Point-Color, #91e26b);
+  background: var(--Main-Color, #d7f3c6);
+  color: var(--Color-2, #111);
+}
+
+.btnContainer {
+  display: flex;
+  width: 14.3rem;
+  justify-content: space-between;
+}
