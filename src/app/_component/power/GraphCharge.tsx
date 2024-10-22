@@ -18,19 +18,31 @@ export default function GraphCharge() {
       <p className={styles.title}>한 눈에 보는 내 파워</p>
       <div className={styles.wrap}>
         <Box>
-          <div className={graphStyles.btnContainer}>
-            <div
-              className={`${graphStyles.graphBtn} ${activeButton === "bill" ? graphStyles.btnActive : ""}`}
-              onClick={() => handleButtonClick("bill")}
-            >
-              <p>전기요금</p>
-            </div>
+          <div className={graphStyles.topContainer}>
+            <div className={graphStyles.btnContainer}>
+              <div
+                className={`${graphStyles.graphBtn} ${activeButton === "bill" ? graphStyles.btnActive : ""}`}
+                onClick={() => handleButtonClick("bill")}
+              >
+                <p>전기요금</p>
+              </div>
 
-            <div
-              className={`${graphStyles.graphBtn} ${activeButton === "usage" ? graphStyles.btnActive : ""}`}
-              onClick={() => handleButtonClick("usage")}
-            >
-              <p>전력사용량</p>
+              <div
+                className={`${graphStyles.graphBtn} ${activeButton === "usage" ? graphStyles.btnActive : ""}`}
+                onClick={() => handleButtonClick("usage")}
+              >
+                <p>전력사용량</p>
+              </div>
+            </div>
+            <div className={graphStyles.yearContainer}>
+              <div className={graphStyles.yearUnit}>
+                <div className={graphStyles.greenCircle} />
+                <p>올해</p>
+              </div>
+              <div className={graphStyles.yearUnit}>
+                <div className={graphStyles.greyCircle} />
+                <p>1년 전</p>
+              </div>
             </div>
           </div>
           {activeButton === "bill" && <BillGraph />}
