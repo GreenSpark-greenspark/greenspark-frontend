@@ -61,7 +61,7 @@ const data: ChartData<"line"> = {
   labels: getLast12Months(),
   datasets: [
     {
-      label: "전기요금",
+      label: "올해 전기요금",
       data: [65, 59, 80, 81, 56, 55, 40, 70, 90, 60, 50, 77],
       fill: false,
       borderColor: "#19E407",
@@ -71,6 +71,18 @@ const data: ChartData<"line"> = {
       pointHoverRadius: 8,
       pointHoverBorderColor: "#CBF4B8",
       pointHoverBorderWidth: 6
+    },
+    {
+      label: "1년 전 전기요금",
+      data: [90, 50, 75, 95, 50, 52, 45, 68, 88, 57, 48, 72],
+      fill: false,
+      borderColor: "#C4C4C4",
+      borderWidth: 2,
+      pointRadius: 2,
+      pointBackgroundColor: "#C4C4C4",
+      pointHoverRadius: 8,
+      pointHoverBorderColor: "#E0E0E0",
+      pointHoverBorderWidth: 6
     }
   ]
 };
@@ -79,7 +91,12 @@ const options: ChartOptions<"line"> = {
   responsive: true,
   plugins: {
     legend: {
-      display: false
+      display: false,
+      labels: {
+        font: {
+          size: 12
+        }
+      }
     }
   },
   scales: {
@@ -88,7 +105,6 @@ const options: ChartOptions<"line"> = {
         font: {
           size: 10
         },
-
         maxRotation: 0, // 글씨 기울어짐 없도록 설정
         minRotation: 0
       },
@@ -107,11 +123,9 @@ const options: ChartOptions<"line"> = {
       ticks: {
         display: false
       },
-
       grid: {
         color: "rgba(0, 0, 0, 0.1)",
         lineWidth: 1
-        // borderDash: [5, 5]
       },
       border: {
         display: false
