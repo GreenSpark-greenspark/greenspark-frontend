@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
 import {
   Chart as ChartJS,
@@ -8,12 +8,23 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 } from "chart.js";
+
 import { ChartData, ChartOptions } from "chart.js";
 
 // Chart.js에서 필요한 컴포넌트들을 등록
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 // Chart.js는 클라이언트에서만 렌더링하기 위해 dynamic import 사용
 const Line = dynamic(() => import("react-chartjs-2").then(mod => mod.Line), { ssr: false });
@@ -53,7 +64,13 @@ const data: ChartData<"line"> = {
       label: "전기요금",
       data: [65, 59, 80, 81, 56, 55, 40, 70, 90, 60, 50, 77],
       fill: false,
-      borderColor: "#19E407"
+      borderColor: "#19E407",
+      borderWidth: 2,
+      pointRadius: 2,
+      pointBackgroundColor: "#19E407",
+      pointHoverRadius: 8,
+      pointHoverBorderColor: "#CBF4B8",
+      pointHoverBorderWidth: 6
     }
   ]
 };
@@ -71,11 +88,34 @@ const options: ChartOptions<"line"> = {
         font: {
           size: 10
         },
+
         maxRotation: 0, // 글씨 기울어짐 없도록 설정
         minRotation: 0
+      },
+      grid: {
+        display: false
+      },
+      title: {
+        display: false
+      },
+      border: {
+        color: "#5E5E5E",
+        width: 2
       }
     },
     y: {
+      ticks: {
+        display: false
+      },
+
+      grid: {
+        color: "rgba(0, 0, 0, 0.1)",
+        lineWidth: 1
+        // borderDash: [5, 5]
+      },
+      border: {
+        display: false
+      },
       beginAtZero: true // y축 값 0부터 시작
     }
   }
