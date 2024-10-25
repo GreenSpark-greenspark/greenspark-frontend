@@ -137,13 +137,26 @@ const options: ChartOptions<"line"> = {
 };
 
 export default function BillGraph() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // 컴포넌트가 마운트된 후 스크롤을 가장 오른쪽으로 이동
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
+    }
+  }, []);
+
   return (
-    <div style={{ overflowX: "scroll", overflowY: "hidden", maxWidth: "100%" }}>
-      {" "}
-      {/* 스크롤 가능하도록 설정 */}
+    <div
+      ref={scrollContainerRef}
+      style={{
+        overflowX: "scroll",
+        overflowY: "hidden",
+        maxWidth: "100%"
+      }}
+    >
       <div style={{ width: "56rem", height: "13rem" }}>
         {" "}
-        {/* 캔버스가 가로로 더 넓게 표시되도록 */}
         <Line data={data} options={options} />
       </div>
     </div>
