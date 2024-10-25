@@ -11,7 +11,6 @@ import {
   Legend,
   Filler
 } from "chart.js";
-
 import { ChartData, ChartOptions } from "chart.js";
 
 // Chart.js에서 필요한 컴포넌트들을 등록
@@ -57,99 +56,48 @@ const getLast12Months = (): string[] => {
   return result;
 };
 
-const data: ChartData<"line"> = {
-  labels: getLast12Months(),
-  datasets: [
-    {
-      label: "올해 전기요금",
-      data: [65, 59, 80, 81, 56, 55, 40, 70, 90, 60, 50, 77],
-      fill: false,
-      borderColor: "#19E407",
-      borderWidth: 2,
-      pointRadius: 2,
-      pointBackgroundColor: "#19E407",
-      pointHoverRadius: 8,
-      pointHoverBorderColor: "#CBF4B8",
-      pointHoverBorderWidth: 6
-    },
-    {
-      label: "1년 전 전기요금",
-      data: [90, 50, 75, 95, 50, 52, 45, 68, 88, 57, 48, 72],
-      fill: false,
-      borderColor: "#C4C4C4",
-      borderWidth: 2,
-      pointRadius: 2,
-      pointBackgroundColor: "#C4C4C4",
-      pointHoverRadius: 8,
-      pointHoverBorderColor: "#E0E0E0",
-      pointHoverBorderWidth: 6
+// 현재 월 기준으로 최근 24개월 데이터를 채워주는 함수
+const createRecent24MonthsData = (data: any[], currentYear: number): (number | null)[] => {
+  const result = Array(24).fill(null);
+  const today = new Date();
+  const currentMonth = today.getMonth() + 1;
+
+  // 데이터를 24개월 기준으로 매칭
+  data.forEach(entry => {
+    const { year, month, value } = entry;
+    const monthDiff = (currentYear - year) * 12 + (currentMonth - month);
+
+    if (monthDiff >= 0 && monthDiff < 24) {
+      result[23 - monthDiff] = value; // 가장 최근 달이 마지막이 되도록
     }
-  ]
+  });
+
+  return result;
 };
 
-const options: ChartOptions<"line"> = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      display: false,
-      labels: {
-        font: {
-          size: 12
-        }
-      }
-    },
-    tooltip: {
-      backgroundColor: "#F1F3F5",
-      titleFont: {
-        size: 10
-      },
-      titleColor: "#333333",
-      bodyFont: {
-        size: 10
-      },
-      bodyColor: "#000000",
-      padding: 10,
-      cornerRadius: 10
-    }
-  },
-  scales: {
-    x: {
-      ticks: {
-        font: {
-          size: 10
-        },
-        maxRotation: 0, // 글씨 기울어짐 없도록 설정
-        minRotation: 0
-      },
-      grid: {
-        display: false
-      },
-      title: {
-        display: false
-      },
-      border: {
-        color: "#5E5E5E",
-        width: 2
-      }
-    },
-    y: {
-      ticks: {
-        display: false
-      },
-      grid: {
-        color: "rgba(0, 0, 0, 0.1)",
-        lineWidth: 1
-      },
-      border: {
-        display: false
-      },
-      beginAtZero: true // y축 값 0부터 시작
-    }
-  }
-};
+const exampleData = [
+  { year: 2024, month: 1, value: 8000 },
+  { year: 2024, month: 2, value: 9000 },
+  { year: 2024, month: 3, value: 8500 },
+  { year: 2024, month: 4, value: 9850 },
+  { year: 2024, month: 5, value: 7600 },
+  { year: 2024, month: 7, value: 8850 },
+  { year: 2024, month: 8, value: 8430 },
+  { year: 2024, month: 10, value: 8440 },
+  { year: 2023, month: 12, value: 7970 },
+  { year: 2023, month: 11, value: 7530 },
+  { year: 2023, month: 10, value: 6690 },
+  { year: 2023, month: 8, value: 8640 },
+  { year: 2023, month: 7, value: 8210 },
+  { year: 2023, month: 6, value: 7770 },
+  { year: 2023, month: 5, value: 6970 },
+  { year: 2023, month: 1, value: 6650 },
+  { year: 2023, month: 2, value: 7790 },
+  { year: 2022, month: 11, value: 7020 },
+  { year: 2022, month: 12, value: 6600 }
+];
 
-export default function BillGraph() {
+const BillGraph = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -158,6 +106,108 @@ export default function BillGraph() {
       scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
     }
   }, []);
+
+  const currentYear = new Date().getFullYear();
+
+  const recent24MonthsData = createRecent24MonthsData(exampleData, currentYear);
+
+  // 올해, 작년 데이터 추출
+  const thisYearData = recent24MonthsData.slice(12, 24);
+  const lastYearData = recent24MonthsData.slice(0, 11);
+
+  const data: ChartData<"line"> = {
+    labels: getLast12Months(),
+    datasets: [
+      {
+        label: "올해 전기요금",
+        data: thisYearData,
+        fill: false,
+        borderColor: "#19E407",
+        borderWidth: 2,
+        pointRadius: 2,
+        pointBackgroundColor: "#19E407",
+        pointHoverRadius: 8,
+        pointHoverBorderColor: "#CBF4B8",
+        pointHoverBorderWidth: 6,
+        spanGaps: true
+      },
+      {
+        label: "1년 전 전기요금",
+        data: lastYearData,
+        fill: false,
+        borderColor: "#C4C4C4",
+        borderWidth: 2,
+        pointRadius: 2,
+        pointBackgroundColor: "#C4C4C4",
+        pointHoverRadius: 8,
+        pointHoverBorderColor: "#E0E0E0",
+        pointHoverBorderWidth: 6,
+        spanGaps: true
+      }
+    ]
+  };
+
+  const options: ChartOptions<"line"> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+        labels: {
+          font: {
+            size: 12
+          }
+        }
+      },
+      tooltip: {
+        backgroundColor: "#F1F3F5",
+        titleFont: {
+          size: 10
+        },
+        titleColor: "#333333",
+        bodyFont: {
+          size: 10
+        },
+        bodyColor: "#000000",
+        padding: 10,
+        cornerRadius: 10
+      }
+    },
+    scales: {
+      x: {
+        ticks: {
+          font: {
+            size: 10
+          },
+          maxRotation: 0, // 글씨 기울어짐 없도록 설정
+          minRotation: 0
+        },
+        grid: {
+          display: false
+        },
+        title: {
+          display: false
+        },
+        border: {
+          color: "#5E5E5E",
+          width: 2
+        }
+      },
+      y: {
+        ticks: {
+          display: false
+        },
+        grid: {
+          color: "rgba(0, 0, 0, 0.1)",
+          lineWidth: 1
+        },
+        border: {
+          display: false
+        },
+        beginAtZero: true // y축 값 0부터 시작
+      }
+    }
+  };
 
   return (
     <div
@@ -169,9 +219,9 @@ export default function BillGraph() {
       }}
     >
       <div style={{ width: "56rem", height: "13rem" }}>
-        {" "}
         <Line data={data} options={options} />
       </div>
     </div>
   );
-}
+};
+export default BillGraph;
