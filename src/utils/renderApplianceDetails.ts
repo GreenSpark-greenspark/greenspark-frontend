@@ -17,7 +17,7 @@ export function mapApplianceDetails(appliance: ApplianceData, applianceType: str
     모델명: appliance.모델명,
     구모델명: appliance.구모델명,
     제조원: appliance.제조원,
-    효율등급: appliance.효율등급 || appliance.효율수준 || appliance.효율기준
+    효율등급: appliance.효율등급
   };
 
   // 고유 필드 매핑
