@@ -1,6 +1,8 @@
 import Box from "@/components/Box";
 import { mapApplianceDetails } from "@/utils/renderApplianceDetails";
 import style from "./page.module.css";
+import TopView from "@/app/_component/appliances/[id]/TopView";
+import BottomView from "@/app/_component/appliances/[id]/BottomView";
 
 export default function AppliancePage({ params }: { params: { id: string | string[] } }) {
   // 서버에서 받은 전체 응답 (api 명세서)
@@ -39,7 +41,8 @@ export default function AppliancePage({ params }: { params: { id: string | strin
       <h1>{applianceDetails.기자재명칭}</h1>
       <h1>{applianceDetails.효율등급}등급</h1>
       <Box>
-        {Object.entries(applianceDetails).map(
+        <div className={style.ViewWrapper}>
+          {/* {Object.entries(applianceDetails).map(
           ([key, value]) =>
             value !== null &&
             value !== "NULL" && (
@@ -47,7 +50,10 @@ export default function AppliancePage({ params }: { params: { id: string | strin
                 {key}: {value}
               </p>
             )
-        )}
+        )} */}
+          <TopView {...applianceDetails} />
+          <BottomView />
+        </div>
       </Box>
     </div>
   );

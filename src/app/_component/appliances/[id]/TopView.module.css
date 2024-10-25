@@ -1,0 +1,89 @@
+.TopWrapper {
+  display: flex;
+  align-items: center;
+  gap: 2.7rem;
+}
+
+.Circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 10rem;
+  height: 10rem;
+  border-radius: 200%;
+
+  background-color: white;
+  border: 3px solid #83c63f;
+  box-sizing: border-box;
+}
+
+.RightContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.TextWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.TextContainer {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+.TextBold {
+  color: #000;
+
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.TextRegular {
+  color: #000;
+
+  font-family: Pretendard;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.014rem;
+}
+.BtnContainer {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.GrayBtn {
+  display: flex;
+  align-items: center;
+  padding: 0 0.8rem;
+  border-radius: 2rem;
+  background: #5e5e5e;
+  height: 2rem;
+
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.ColorBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1.6rem;
+  border-radius: 2rem;
+  height: 2rem;
+
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
