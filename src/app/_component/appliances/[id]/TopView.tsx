@@ -1,6 +1,5 @@
 import Image from "next/image";
 import style from "./TopView.module.css";
-import { ApplianceType } from "@/mock/appliances";
 import { getColorFromGrade } from "@/utils/getColorfromGrade";
 import washingMachine from "@/../public/img/washing-machine.png";
 

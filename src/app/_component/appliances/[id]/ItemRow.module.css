@@ -1,0 +1,36 @@
+.row {
+  display: flex;
+  align-items: center;
+
+  height: 4rem;
+  margin: 0;
+  width: 31.8rem;
+}
+
+.key {
+  width: 20rem;
+  padding-left: 1em;
+
+  color: #5e5e5e;
+  text-align: left;
+  font-size: 1.4rem;
+
+  font-weight: 400;
+  line-height: normal;
+}
+
+.separator {
+  width: 0.2rem;
+  height: 100%;
+  margin-right: 2em;
+
+  background-color: #f1f3f5;
+}
+
+.value {
+  width: 10.4rem;
+  color: #000;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+}

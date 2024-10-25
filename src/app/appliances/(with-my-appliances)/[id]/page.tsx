@@ -36,23 +36,10 @@ export default function AppliancePage({ params }: { params: { id: string | strin
 
   return (
     <div className={style.BoxWrapper}>
-      <h1>모델명: {applianceDetails.모델명}</h1>
-      <h1>업체명: {applianceDetails.업체명칭}</h1>
-      <h1>{applianceDetails.기자재명칭}</h1>
-      <h1>{applianceDetails.효율등급}등급</h1>
-      <Box>
+      <Box minHeight="452px">
         <div className={style.ViewWrapper}>
-          {/* {Object.entries(applianceDetails).map(
-          ([key, value]) =>
-            value !== null &&
-            value !== "NULL" && (
-              <p key={key}>
-                {key}: {value}
-              </p>
-            )
-        )} */}
           <TopView {...applianceDetails} />
-          <BottomView />
+          <BottomView {...applianceDetails} />
         </div>
       </Box>
     </div>
