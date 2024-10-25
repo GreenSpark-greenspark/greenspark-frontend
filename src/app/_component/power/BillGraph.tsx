@@ -89,6 +89,7 @@ const data: ChartData<"line"> = {
 
 const options: ChartOptions<"line"> = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       display: false,
@@ -137,8 +138,14 @@ const options: ChartOptions<"line"> = {
 
 export default function BillGraph() {
   return (
-    <div>
-      <Line data={data} options={options} />
+    <div style={{ overflowX: "scroll", overflowY: "hidden", maxWidth: "100%" }}>
+      {" "}
+      {/* 스크롤 가능하도록 설정 */}
+      <div style={{ width: "56rem", height: "13rem" }}>
+        {" "}
+        {/* 캔버스가 가로로 더 넓게 표시되도록 */}
+        <Line data={data} options={options} />
+      </div>
     </div>
   );
 }
