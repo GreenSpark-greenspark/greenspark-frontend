@@ -98,6 +98,19 @@ const options: ChartOptions<"line"> = {
           size: 12
         }
       }
+    },
+    tooltip: {
+      backgroundColor: "#F1F3F5",
+      titleFont: {
+        size: 10
+      },
+      titleColor: "#333333",
+      bodyFont: {
+        size: 10
+      },
+      bodyColor: "#000000",
+      padding: 10,
+      cornerRadius: 10
     }
   },
   scales: {
