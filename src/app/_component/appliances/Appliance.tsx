@@ -1,5 +1,5 @@
 import style from "./Appliance.module.css";
-import { getColorFromGrade } from "@/utils/getColorFromGrade";
+import { getColorFromGrade } from "@/utils/getColorfromGrade";
 import Image from "next/image";
 import airConditioner from "@/../public/img/air-conditioner.png";
 import refrigerator from "@/../public/img/refrigerator.png";

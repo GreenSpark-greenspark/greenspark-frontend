@@ -17,7 +17,7 @@ export function mapApplianceDetails(appliance: ApplianceData, applianceType: str
     모델명: appliance.모델명,
     구모델명: appliance.구모델명,
     제조원: appliance.제조원,
-    효율등급: appliance.효율등급 || appliance.효율수준 || appliance.효율기준
+    효율등급: appliance.효율등급
   };
 
   // 고유 필드 매핑
@@ -68,9 +68,9 @@ export function mapApplianceDetails(appliance: ApplianceData, applianceType: str
       break;
     case "김치냉장고":
       uniqueFields = {
-        김치저장실유효내용적: appliance.KIMCHI_CAPA,
-        월산소비전력량: appliance.MONTHLY_CONS_PWR,
-        소비자효율등급지표: appliance.CONSUMER_EFFIC_INDEX
+        김치저장실유효내용적: appliance.KIMCHI_AVAIL_CAPA,
+        월산소비전력량: appliance.MONTH_CONS_PWR,
+        소비자효율등급지표: appliance.R
       };
       break;
     case "전기온풍기":
