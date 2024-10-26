@@ -15,7 +15,7 @@ export default function GraphCharge() {
 
   return (
     <>
-      <p className={styles.title}>한 눈에 보는 내 파워</p>
+      <p className={styles.title}>한눈에 보는 내 파워</p>
       <div className={styles.wrap}>
         <Box>
           <div className={graphStyles.topContainer}>
