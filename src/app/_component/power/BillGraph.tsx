@@ -57,9 +57,15 @@ const getLast12Months = (): string[] => {
   return result;
 };
 
+type DataPoint = {
+  value: number;
+  year: number;
+  month: number;
+};
+
 // 현재 월 기준으로 최근 24개월 데이터를 채워주는 함수
-const createRecent24MonthsData = (data: any[], currentYear: number): (number | null)[] => {
-  const result = Array(24).fill(null);
+const createRecent24MonthsData = (data: any[], currentYear: number): DataPoint[] => {
+  const result: DataPoint[] = Array(24).fill({ value: null, year: null, month: null });
   const today = new Date();
   const currentMonth = today.getMonth() + 1;
 
@@ -69,7 +75,7 @@ const createRecent24MonthsData = (data: any[], currentYear: number): (number | n
     const monthDiff = (currentYear - year) * 12 + (currentMonth - month);
 
     if (monthDiff >= 0 && monthDiff < 24) {
-      result[23 - monthDiff] = value; // 가장 최근 달이 마지막이 되도록
+      result[23 - monthDiff] = { value, year, month }; // 월에 맞는 데이터 배치
     }
   });
 
@@ -91,8 +97,8 @@ const BillGraph = () => {
   const recent24MonthsData = createRecent24MonthsData(powerGraph, currentYear);
 
   // 올해, 작년 데이터 추출
-  const thisYearData = recent24MonthsData.slice(12, 24);
-  const lastYearData = recent24MonthsData.slice(0, 11);
+  const thisYearData = recent24MonthsData.slice(12, 24).map(item => item.value);
+  const lastYearData = recent24MonthsData.slice(0, 12).map(item => item.value);
 
   const data: ChartData<"line"> = {
     labels: getLast12Months(),
@@ -131,46 +137,60 @@ const BillGraph = () => {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false,
-        labels: {
-          font: {
-            size: 12
-          }
-        }
+        display: false
       },
       tooltip: {
         backgroundColor: "#F1F3F5",
-        titleFont: {
-          size: 10
-        },
+        titleFont: { size: 10, weight: 400 },
         titleColor: "#333333",
-        bodyFont: {
-          size: 10
-        },
+        titleAlign: "center",
+        bodyFont: { size: 10, weight: 700 },
         bodyColor: "#000000",
+        bodyAlign: "center",
         padding: 10,
-        cornerRadius: 10
+        cornerRadius: 10,
+        displayColors: false,
+        callbacks: {
+          title: tooltipItems => {
+            const item = tooltipItems[0];
+            const datasetIndex = item.datasetIndex;
+            const dataIndex = item.dataIndex;
+
+            const dataPoint =
+              datasetIndex === 0
+                ? recent24MonthsData[12 + dataIndex] // 올해 데이터
+                : recent24MonthsData[dataIndex]; // 작년 데이터
+
+            const { year, month } = dataPoint;
+            return `${year}년 ${month}월\n전기요금`;
+          },
+          label: tooltipItem => {
+            const datasetIndex = tooltipItem.datasetIndex;
+            const dataIndex = tooltipItem.dataIndex;
+
+            // 작년 데이터는 recent24MonthsData의 첫 12개월에, 올해 데이터는 마지막 12개월에 위치
+            const dataPoint =
+              datasetIndex === 0
+                ? recent24MonthsData[12 + dataIndex] // 올해 데이터
+                : recent24MonthsData[dataIndex]; // 작년 데이터
+
+            const { value } = dataPoint;
+            return `${value.toLocaleString()}원`;
+          }
+        }
       }
     },
     scales: {
       x: {
         ticks: {
-          font: {
-            size: 10
-          },
+          font: { size: 10 },
           maxRotation: 0, // 글씨 기울어짐 없도록 설정
           minRotation: 0
         },
         grid: {
           display: false
         },
-        title: {
-          display: false
-        },
-        border: {
-          color: "#5E5E5E",
-          width: 2
-        }
+        border: { color: "#5E5E5E", width: 2 }
       },
       y: {
         ticks: {
