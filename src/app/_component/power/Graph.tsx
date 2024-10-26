@@ -153,10 +153,40 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
         backgroundColor: "#F1F3F5",
         titleFont: { size: 10, weight: 400 },
         titleColor: "#333333",
+        titleAlign: "center",
         bodyFont: { size: 10, weight: 700 },
+        bodyColor: "#000000",
+        bodyAlign: "center",
         padding: 10,
         cornerRadius: 10,
-        displayColors: false
+        displayColors: false,
+        callbacks: {
+          title: tooltipItems => {
+            const item = tooltipItems[0];
+            const datasetIndex = item.datasetIndex;
+            const dataIndex = item.dataIndex;
+
+            const dataPoint =
+              datasetIndex === 0
+                ? recent24MonthsData[12 + dataIndex] // 올해 데이터
+                : recent24MonthsData[dataIndex]; // 작년 데이터
+
+            const { year, month } = dataPoint;
+            return `${year}년 ${month}월\n${isBillGraph ? "전기요금" : "전력사용량"}`;
+          },
+          label: tooltipItem => {
+            const datasetIndex = tooltipItem.datasetIndex;
+            const dataIndex = tooltipItem.dataIndex;
+
+            const dataPoint =
+              datasetIndex === 0
+                ? recent24MonthsData[12 + dataIndex] // 올해 데이터
+                : recent24MonthsData[dataIndex]; // 작년 데이터
+
+            const { value } = dataPoint;
+            return `${value.toLocaleString()}${unit}`;
+          }
+        }
       }
     },
     scales: {
