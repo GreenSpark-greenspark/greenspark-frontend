@@ -1,5 +1,5 @@
 import React from "react";
-import Graph from "./Graph"; // Adjust the import path as necessary
+import Graph from "./Graph";
 import { powerGraph } from "@/mock/powerGraph";
 
 const UsageGraph = () => {
