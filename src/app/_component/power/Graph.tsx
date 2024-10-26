@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
+import ImgGraph from "../../../../public/img/graph-default.png";
+import Image from "next/image";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,11 +27,10 @@ ChartJS.register(
   Filler
 );
 
-// Chart.js는 클라이언트에서만 렌더링하기 위해 dynamic import 사용
 const Line = dynamic(() => import("react-chartjs-2").then(mod => mod.Line), { ssr: false });
 
 // 12개월의 월 이름을 반환하는 함수
-const getLast12Months = (): string[] => {
+const getLast12Months = (monthsToShow = 12): string[] => {
   const months = [
     "1월",
     "2월",
@@ -48,9 +49,9 @@ const getLast12Months = (): string[] => {
   const today = new Date();
   const currentMonth = today.getMonth();
 
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < monthsToShow; i++) {
     const monthIndex = (currentMonth - i + 12) % 12;
-    result.unshift(months[monthIndex]); // 최신 달이 마지막이 되도록 unshift 사용
+    result.unshift(months[monthIndex]);
   }
 
   return result;
@@ -62,19 +63,17 @@ type DataPoint = {
   month: number;
 };
 
-// 현재 월 기준으로 최근 24개월 데이터를 채워주는 함수
 const createRecent24MonthsData = (data: any[], currentYear: number): DataPoint[] => {
   const result: DataPoint[] = Array(24).fill({ value: null, year: null, month: null });
   const today = new Date();
   const currentMonth = today.getMonth() + 1;
 
-  // 데이터를 24개월 기준으로 매칭
   data.forEach(entry => {
     const { year, month, value } = entry;
     const monthDiff = (currentYear - year) * 12 + (currentMonth - month);
 
     if (monthDiff >= 0 && monthDiff < 24) {
-      result[23 - monthDiff] = { value, year, month }; // 월에 맞는 데이터 배치
+      result[23 - monthDiff] = { value, year, month };
     }
   });
 
@@ -83,14 +82,13 @@ const createRecent24MonthsData = (data: any[], currentYear: number): DataPoint[]
 
 interface GraphProps {
   data: any[];
-  isBillGraph?: boolean; // Determines the context of the graph
+  isBillGraph?: boolean;
 }
 
 const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 컴포넌트가 마운트된 후 스크롤을 가장 오른쪽으로 이동
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
     }
@@ -99,7 +97,6 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
   const currentYear = new Date().getFullYear();
   const recent24MonthsData = createRecent24MonthsData(data, currentYear);
 
-  // 올해, 작년 데이터 추출
   const thisYearData = recent24MonthsData.slice(12, 24).map(item => item.value);
   const lastYearData = recent24MonthsData.slice(0, 12).map(item => item.value);
 
@@ -107,109 +104,71 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
   const lastYearLabel = isBillGraph ? "1년 전 전기요금" : "1년 전 전력사용량";
   const unit = isBillGraph ? "원" : "kWh";
 
+  const noData =
+    thisYearData.every(value => value === null) && lastYearData.every(value => value === null);
+
+  const labels = getLast12Months(noData ? 7 : 12); // 데이터가 없을때
+  const displayedData = noData ? Array(7).fill(null) : { thisYearData, lastYearData };
+
   const chartData: ChartData<"line"> = {
-    labels: getLast12Months(),
-    datasets: [
-      {
-        label: dataSetLabel,
-        data: thisYearData,
-        fill: false,
-        borderColor: "#19E407",
-        borderWidth: 2,
-        pointRadius: 2,
-        pointBackgroundColor: "#19E407",
-        pointHoverRadius: 8,
-        pointHoverBorderColor: "#CBF4B8",
-        pointHoverBorderWidth: 6,
-        spanGaps: true
-      },
-      {
-        label: lastYearLabel,
-        data: lastYearData,
-        fill: false,
-        borderColor: "#C4C4C4",
-        borderWidth: 2,
-        pointRadius: 2,
-        pointBackgroundColor: "#C4C4C4",
-        pointHoverRadius: 8,
-        pointHoverBorderColor: "#E0E0E0",
-        pointHoverBorderWidth: 6,
-        spanGaps: true
-      }
-    ]
+    labels,
+    datasets: noData
+      ? []
+      : [
+          {
+            label: dataSetLabel,
+            data: thisYearData,
+            fill: false,
+            borderColor: "#19E407",
+            borderWidth: 2,
+            pointRadius: 2,
+            pointBackgroundColor: "#19E407",
+            pointHoverRadius: 8,
+            pointHoverBorderColor: "#CBF4B8",
+            pointHoverBorderWidth: 6,
+            spanGaps: true
+          },
+          {
+            label: lastYearLabel,
+            data: lastYearData,
+            fill: false,
+            borderColor: "#C4C4C4",
+            borderWidth: 2,
+            pointRadius: 2,
+            pointBackgroundColor: "#C4C4C4",
+            pointHoverRadius: 8,
+            pointHoverBorderColor: "#E0E0E0",
+            pointHoverBorderWidth: 6,
+            spanGaps: true
+          }
+        ]
   };
 
   const options: ChartOptions<"line"> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: {
-        display: false
-      },
+      legend: { display: false },
       tooltip: {
         backgroundColor: "#F1F3F5",
         titleFont: { size: 10, weight: 400 },
         titleColor: "#333333",
-        titleAlign: "center",
         bodyFont: { size: 10, weight: 700 },
-        bodyColor: "#000000",
-        bodyAlign: "center",
         padding: 10,
         cornerRadius: 10,
-        displayColors: false,
-        callbacks: {
-          title: tooltipItems => {
-            const item = tooltipItems[0];
-            const datasetIndex = item.datasetIndex;
-            const dataIndex = item.dataIndex;
-
-            const dataPoint =
-              datasetIndex === 0
-                ? recent24MonthsData[12 + dataIndex] // 올해 데이터
-                : recent24MonthsData[dataIndex]; // 작년 데이터
-
-            const { year, month } = dataPoint;
-            return `${year}년 ${month}월\n${isBillGraph ? "전기요금" : "전력사용량"}`;
-          },
-          label: tooltipItem => {
-            const datasetIndex = tooltipItem.datasetIndex;
-            const dataIndex = tooltipItem.dataIndex;
-
-            const dataPoint =
-              datasetIndex === 0
-                ? recent24MonthsData[12 + dataIndex] // 올해 데이터
-                : recent24MonthsData[dataIndex]; // 작년 데이터
-
-            const { value } = dataPoint;
-            return `${value.toLocaleString()}${unit}`;
-          }
-        }
+        displayColors: false
       }
     },
     scales: {
       x: {
-        ticks: {
-          font: { size: 10 },
-          maxRotation: 0, // 글씨 기울어짐 없도록 설정
-          minRotation: 0
-        },
-        grid: {
-          display: false
-        },
+        ticks: { font: { size: 10 }, maxRotation: 0, minRotation: 0 },
+        grid: { display: false },
         border: { color: "#5E5E5E", width: 2 }
       },
       y: {
-        ticks: {
-          display: false
-        },
-        grid: {
-          color: "rgba(0, 0, 0, 0.1)",
-          lineWidth: 1
-        },
-        border: {
-          display: false
-        },
-        beginAtZero: true // y축 값 0부터 시작
+        ticks: { display: false },
+        grid: { color: "rgba(0, 0, 0, 0.1)", lineWidth: 1 },
+        border: { display: false }
       }
     }
   };
@@ -218,13 +177,42 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
     <div
       ref={scrollContainerRef}
       style={{
-        overflowX: "scroll",
+        overflowX: noData ? "hidden" : "scroll",
         overflowY: "hidden",
-        maxWidth: "100%"
+        maxWidth: "100%",
+        position: "relative"
       }}
     >
-      <div style={{ width: "56rem", height: "13rem" }}>
+      <div style={{ width: noData ? "32rem" : "56rem", height: "13rem" }}>
+        {" "}
         <Line data={chartData} options={options} />
+        {noData && (
+          <>
+            <Image
+              src={ImgGraph}
+              alt="No Data Available"
+              layout="fill"
+              objectFit="cover"
+              style={{ position: "absolute", top: -30, left: 0, zIndex: 1 }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                width: "20rem",
+                top: 50,
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                color: "#000000",
+                fontSize: "1.2rem",
+                fontWeight: "400",
+                zIndex: 1,
+                textAlign: "center"
+              }}
+            >
+              정보를 입력하면 그래프를 볼 수 있어요!
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
