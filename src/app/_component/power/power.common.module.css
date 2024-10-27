@@ -55,3 +55,51 @@
   line-height: normal;
   letter-spacing: 0.14px;
 }
+
+/* 예상요금, 저번달요금 */
+.comment {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.iconComment {
+  width: 35rem;
+  height: 3.5rem;
+}
+
+.commentText {
+  position: absolute;
+  top: 64%;
+  left: 50%;
+  width: 30rem;
+  transform: translate(-50%, -50%);
+  color: #000;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.commentBlue {
+  color: #039cf5;
+  font-weight: 600;
+}
+.cost {
+  color: #111;
+  text-align: left;
+
+  font-family: "Pretendard Variable";
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding-left: 2rem;
+  margin-top: 0.7rem;
+}
+.costGreen {
+  color: var(--highlight-color, #19e407);
+}
