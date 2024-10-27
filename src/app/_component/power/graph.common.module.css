@@ -1,0 +1,84 @@
+.topContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 30rem;
+  margin-bottom: 3.2em;
+}
+
+/* 버튼 */
+.graphBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 6.3rem;
+  height: 2.4rem;
+  border-radius: 2em;
+
+  background: #f8fff3;
+  border: 0.1em solid #f8fff3;
+
+  color: #5e5e5e;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  cursor: pointer;
+}
+
+.btnActive {
+  border: 0.1em solid #91e26b;
+  background: #d7f3c6;
+  color: #111;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: space-between;
+
+  width: 14.3rem;
+}
+
+/* 범례 */
+.yearContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 2.8rem;
+}
+
+.yearUnit {
+  display: flex;
+  align-items: center;
+
+  color: #5e5e5e;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.greenCircle {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  margin-right: 0.7em;
+
+  background-color: #19e407;
+}
+
+.greyCircle {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  margin-right: 0.7em;
+
+  background-color: #c4c4c4;
+}
