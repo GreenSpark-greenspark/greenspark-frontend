@@ -21,5 +21,5 @@ export default function Power() {
 }
 const PagesWrap = styled.div`
   margin-top: 4rem;
-  margin-bottom: 4rem;
+  padding-bottom: 10rem;
 `;
