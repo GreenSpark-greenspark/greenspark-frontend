@@ -34,7 +34,7 @@ export default function PreCharge() {
 
     const mockData: ChargeData = {
       lastMonth: 3222,
-      twoMonthsAgo: null
+      twoMonthsAgo: 3222
     };
 
     setChargeData(mockData);
@@ -87,13 +87,28 @@ export default function PreCharge() {
   const renderTipMent = () => {
     switch (differenceType) {
       case "noLastMonth":
-        return "비교할 데이터가 없어요. 전기 요금 입력 후 절약 팁을 확인해 보세요!";
+        return <>{twoMonthsAgoLabel} 전기 요금을 입력해 전기 요금을 비교해보세요!</>;
       case "increase":
-        return "조금 더 전기를 아껴보는 건 어떨까요? 에너지 백과를 통해 다양한 팁을 살펴보아요!";
+        return (
+          <>
+            조금 더 전기를 아껴보는 건 어떨까요? <br />
+            에너지 백과를 통해 다양한 팁을 살펴보아요!
+          </>
+        );
       case "unchanged":
-        return "조금 더 아껴서 다음 달에는 절약해보는 건 어떨까요? 에너지 백과를 통해 다양한 팁을 살펴보아요!";
+        return (
+          <>
+            조금 더 아껴서 다음 달에는 절약해보는 건 어떨까요? <br />
+            에너지 백과를 통해 다양한 팁을 살펴보아요!
+          </>
+        );
       case "decrease":
-        return "아주 잘하고 있군요:) 앞으로도 그린스파크와 더 나은 전력소비 해보아요!";
+        return (
+          <>
+            아주 잘하고 있군요:) <br />
+            앞으로도 그린스파크와 더 나은 전력소비 해보아요!
+          </>
+        );
       default:
         return "";
     }
