@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import Box from "@/components/Box";
 import styles from "./power.common.module.css";
 import IconComment from "../../../../public/icon/power_comment.svg";
+
 interface ChargeData {
-  currentMonth: number;
+  currentMonth: number | null;
   lastMonth: number | null;
 }
 
-type DifferenceType = "increase" | "unchanged" | "decrease" | "noLastMonth";
+type DifferenceType = "increase" | "unchanged" | "decrease" | "noLastMonth" | "noCurrentMonth";
 
 export default function AICharge() {
   const [chargeData, setChargeData] = useState<ChargeData | null>(null);
   const [differenceType, setDifferenceType] = useState<DifferenceType>("noLastMonth");
-  const [currentMonthLabel, setcurrentMonthLabel] = useState<string>("");
+  const [currentMonthLabel, setCurrentMonthLabel] = useState<string>("");
   const [previousMonthLabel, setPreviousMonthLabel] = useState<string>("");
 
   useEffect(() => {
@@ -22,16 +23,17 @@ export default function AICharge() {
     const currentMonthDate = new Date(now.getFullYear(), now.getMonth(), 1);
     const currentMonthYear = currentMonthDate.getFullYear();
     const currentMonth = currentMonthDate.getMonth() + 1;
-    setcurrentMonthLabel(
+    setCurrentMonthLabel(
       `${currentMonthYear}년 ${currentMonth < 10 ? `0${currentMonth}` : currentMonth}월`
-    ); // 09월 처럼 보이게 하기 위해
+    );
 
     // 저번달 날짜
     const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
     const lastMonth = lastMonthDate.getMonth() + 1;
-    setPreviousMonthLabel(`${lastMonth < 10 ? `0${lastMonth}` : lastMonth}월`);
+    setPreviousMonthLabel(`${lastMonth}월`);
+
     const mockData: ChargeData = {
-      currentMonth: 3222,
+      currentMonth: null,
       lastMonth: null
     };
 
@@ -39,6 +41,8 @@ export default function AICharge() {
 
     if (mockData.lastMonth === null) {
       setDifferenceType("noLastMonth");
+    } else if (mockData.currentMonth === null) {
+      setDifferenceType("noCurrentMonth");
     } else {
       const difference = mockData.currentMonth - mockData.lastMonth;
       setDifferenceType(difference > 0 ? "increase" : difference === 0 ? "unchanged" : "decrease");
@@ -50,7 +54,12 @@ export default function AICharge() {
     if (!chargeData) return null;
 
     const { currentMonth, lastMonth } = chargeData;
-    const difference = lastMonth ? currentMonth - lastMonth : 0;
+
+    if (currentMonth === null) {
+      return <p className={styles.commentText}>정보를 입력하면 이번 달 요금을 예상해줘요!</p>;
+    }
+
+    const difference = lastMonth !== null ? currentMonth - lastMonth : 0; // 저번달 데이터가 null이 아닐 경우만 계산
 
     switch (differenceType) {
       case "noLastMonth":
@@ -91,7 +100,9 @@ export default function AICharge() {
           </p>
           <p className={styles.cost}>
             <span className={styles.costGreen}>
-              {chargeData ? chargeData.currentMonth.toLocaleString() : "?,???"}
+              {chargeData && chargeData.currentMonth !== null
+                ? chargeData.currentMonth.toLocaleString()
+                : "?,???"}
             </span>{" "}
             원
           </p>

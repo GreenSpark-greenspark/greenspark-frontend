@@ -4,15 +4,15 @@ import styles from "./power.common.module.css";
 import IconComment from "../../../../public/icon/power_comment.svg";
 
 interface ChargeData {
-  lastMonth: number;
+  lastMonth: number | null;
   twoMonthsAgo: number | null;
 }
 
-type DifferenceType = "increase" | "unchanged" | "decrease" | "noLastMonth";
+type DifferenceType = "increase" | "unchanged" | "decrease" | "notwoMonthAgo" | "noLastMonth";
 
 export default function PreCharge() {
   const [chargeData, setChargeData] = useState<ChargeData | null>(null);
-  const [differenceType, setDifferenceType] = useState<DifferenceType>("noLastMonth");
+  const [differenceType, setDifferenceType] = useState<DifferenceType>("notwoMonthAgo");
   const [previousMonthLabel, setPreviousMonthLabel] = useState<string>("");
   const [twoMonthsAgoLabel, setTwoMonthsAgoLabel] = useState<string>("");
 
@@ -28,19 +28,19 @@ export default function PreCharge() {
     // 저저번달 날짜
     const twoMonthsAgoDate = new Date(now.getFullYear(), now.getMonth() - 2, 1);
     const twoMonthsAgoMonth = twoMonthsAgoDate.getMonth() + 1;
-    setTwoMonthsAgoLabel(
-      `${twoMonthsAgoMonth < 10 ? `0${twoMonthsAgoMonth}` : twoMonthsAgoMonth}월`
-    );
+    setTwoMonthsAgoLabel(`${twoMonthsAgoMonth}월`);
 
     const mockData: ChargeData = {
-      lastMonth: 3222,
+      lastMonth: null,
       twoMonthsAgo: 3222
     };
 
     setChargeData(mockData);
 
-    if (mockData.twoMonthsAgo === null) {
+    if (mockData.lastMonth === null) {
       setDifferenceType("noLastMonth");
+    } else if (mockData.twoMonthsAgo === null) {
+      setDifferenceType("notwoMonthAgo");
     } else {
       const difference = mockData.lastMonth - mockData.twoMonthsAgo;
       setDifferenceType(difference > 0 ? "increase" : difference === 0 ? "unchanged" : "decrease");
@@ -52,11 +52,14 @@ export default function PreCharge() {
     if (!chargeData) return null;
 
     const { lastMonth, twoMonthsAgo } = chargeData;
-    const difference = twoMonthsAgo ? lastMonth - twoMonthsAgo : 0;
+
+    if (lastMonth === null) {
+      return null;
+    }
+
+    const difference = twoMonthsAgo !== null ? lastMonth - twoMonthsAgo : 0; // 전전달 데이터가 null이 아닐 경우만 계산
 
     switch (differenceType) {
-      case "noLastMonth":
-        return <p className={styles.commentText}>{twoMonthsAgoLabel} 전기 요금을 입력해주세요!</p>;
       case "increase":
         return (
           <p className={styles.commentText}>
@@ -86,8 +89,15 @@ export default function PreCharge() {
   // 케이스별 tipMent 메시지 설정
   const renderTipMent = () => {
     switch (differenceType) {
-      case "noLastMonth":
+      case "notwoMonthAgo":
         return <>{twoMonthsAgoLabel} 전기 요금을 입력해 전기 요금을 비교해보세요!</>;
+      case "noLastMonth":
+        return (
+          <>
+            {twoMonthsAgoLabel}에 비해 증가한 요금을 알고 싶다면? <br />
+            정보를 입력해주세요!
+          </>
+        );
       case "increase":
         return (
           <>
@@ -124,16 +134,21 @@ export default function PreCharge() {
           </p>
           <p className={styles.cost}>
             <span className={styles.costGreen}>
-              {chargeData ? chargeData.lastMonth.toLocaleString() : "?,???"}
+              {chargeData && chargeData.lastMonth !== null
+                ? chargeData.lastMonth.toLocaleString()
+                : "?,???"}
             </span>{" "}
             원
           </p>
+
           <div className={styles.compareContainer}>
-            <div className={styles.comment}>
-              <IconComment className={styles.iconComment} />
-              {renderComment()}
-            </div>
-            <p className={styles.tipMent}>{renderTipMent()} </p>
+            {chargeData && chargeData.lastMonth !== null && (
+              <div className={styles.comment}>
+                <IconComment className={styles.iconComment} />
+                {renderComment()}
+              </div>
+            )}
+            <p className={styles.tipMent}>{renderTipMent()}</p>
           </div>
         </Box>
       </div>
