@@ -8,14 +8,31 @@ interface ChargeData {
   twoMonthsAgo: number | null;
 }
 
-// 각 케이스를 위한 문자열 리터럴 타입 정의
 type DifferenceType = "increase" | "unchanged" | "decrease" | "noLastMonth";
 
 export default function PreCharge() {
   const [chargeData, setChargeData] = useState<ChargeData | null>(null);
   const [differenceType, setDifferenceType] = useState<DifferenceType>("noLastMonth");
+  const [previousMonthLabel, setPreviousMonthLabel] = useState<string>("");
+  const [twoMonthsAgoLabel, setTwoMonthsAgoLabel] = useState<string>("");
 
   useEffect(() => {
+    const now = new Date();
+
+    // 저번달 날짜
+    const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    const lastMonthYear = lastMonthDate.getFullYear();
+    const lastMonth = lastMonthDate.getMonth() + 1;
+    setPreviousMonthLabel(`${lastMonthYear}년 ${lastMonth < 10 ? `0${lastMonth}` : lastMonth}월`); // 09월 처럼 보이게 하기 위해
+
+    // 저저번달 날짜
+    const twoMonthsAgoDate = new Date(now.getFullYear(), now.getMonth() - 2, 1);
+    const twoMonthsAgoYear = twoMonthsAgoDate.getFullYear();
+    const twoMonthsAgoMonth = twoMonthsAgoDate.getMonth() + 1;
+    setTwoMonthsAgoLabel(
+      `${twoMonthsAgoYear}년 ${twoMonthsAgoMonth < 10 ? `0${twoMonthsAgoMonth}` : twoMonthsAgoMonth}월`
+    );
+
     const mockData: ChargeData = {
       lastMonth: 3222,
       twoMonthsAgo: null
@@ -40,7 +57,7 @@ export default function PreCharge() {
 
     switch (differenceType) {
       case "noLastMonth":
-        return <p className={styles.commentText}>00월 전기 요금을 입력해주세요! </p>;
+        return <p className={styles.commentText}>{twoMonthsAgoLabel} 전기 요금을 입력해주세요!</p>;
       case "increase":
         return (
           <p className={styles.commentText}>
@@ -89,7 +106,7 @@ export default function PreCharge() {
       <div className={styles.wrap}>
         <Box>
           <p className={styles.text_normal}>
-            저번달<span className={styles.text_bold}> (00년 00월) </span>의 전기 요금
+            저번달<span className={styles.text_bold}> ({previousMonthLabel}) </span>의 전기 요금
           </p>
           <p className={styles.cost}>
             <span className={styles.costGreen}>
