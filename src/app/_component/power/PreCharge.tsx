@@ -31,8 +31,8 @@ export default function PreCharge() {
     setTwoMonthsAgoLabel(`${twoMonthsAgoMonth}월`);
 
     const mockData: ChargeData = {
-      lastMonth: null,
-      twoMonthsAgo: 3222
+      lastMonth: 3222,
+      twoMonthsAgo: null
     };
 
     setChargeData(mockData);
@@ -60,6 +60,8 @@ export default function PreCharge() {
     const difference = twoMonthsAgo !== null ? lastMonth - twoMonthsAgo : 0; // 전전달 데이터가 null이 아닐 경우만 계산
 
     switch (differenceType) {
+      case "notwoMonthAgo":
+        return <p className={styles.commentText}>{twoMonthsAgoLabel} 전기 요금을 입력해주세요!</p>;
       case "increase":
         return (
           <p className={styles.commentText}>
