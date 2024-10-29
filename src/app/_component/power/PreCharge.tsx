@@ -27,10 +27,9 @@ export default function PreCharge() {
 
     // 저저번달 날짜
     const twoMonthsAgoDate = new Date(now.getFullYear(), now.getMonth() - 2, 1);
-    const twoMonthsAgoYear = twoMonthsAgoDate.getFullYear();
     const twoMonthsAgoMonth = twoMonthsAgoDate.getMonth() + 1;
     setTwoMonthsAgoLabel(
-      `${twoMonthsAgoYear}년 ${twoMonthsAgoMonth < 10 ? `0${twoMonthsAgoMonth}` : twoMonthsAgoMonth}월`
+      `${twoMonthsAgoMonth < 10 ? `0${twoMonthsAgoMonth}` : twoMonthsAgoMonth}월`
     );
 
     const mockData: ChargeData = {

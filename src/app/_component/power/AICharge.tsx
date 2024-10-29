@@ -28,12 +28,11 @@ export default function AICharge() {
 
     // 저번달 날짜
     const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-    const lastMonthYear = lastMonthDate.getFullYear();
     const lastMonth = lastMonthDate.getMonth() + 1;
-    setPreviousMonthLabel(`${lastMonthYear}년 ${lastMonth < 10 ? `0${lastMonth}` : lastMonth}월`);
+    setPreviousMonthLabel(`${lastMonth < 10 ? `0${lastMonth}` : lastMonth}월`);
     const mockData: ChargeData = {
       currentMonth: 3222,
-      lastMonth: 5814
+      lastMonth: null
     };
 
     setChargeData(mockData);
