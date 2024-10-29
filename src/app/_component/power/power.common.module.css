@@ -107,6 +107,10 @@
   color: #ff2727;
   font-weight: 600;
 }
+.commentGreen {
+  color: #1aad0d;
+  font-weight: 600;
+}
 
 .cost {
   padding-left: 2rem;
