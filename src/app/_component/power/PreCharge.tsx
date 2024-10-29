@@ -1,7 +1,9 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import Box from "@/components/Box";
 import styles from "./power.common.module.css";
 import IconComment from "../../../../public/icon/power_comment.svg";
+import { getDateLabel } from "@/./utils/getDateLabels";
 
 interface ChargeData {
   lastMonth: number | null;
@@ -13,23 +15,8 @@ type DifferenceType = "increase" | "unchanged" | "decrease" | "notwoMonthAgo" | 
 export default function PreCharge() {
   const [chargeData, setChargeData] = useState<ChargeData | null>(null);
   const [differenceType, setDifferenceType] = useState<DifferenceType>("notwoMonthAgo");
-  const [previousMonthLabel, setPreviousMonthLabel] = useState<string>("");
-  const [twoMonthsAgoLabel, setTwoMonthsAgoLabel] = useState<string>("");
 
   useEffect(() => {
-    const now = new Date();
-
-    // 저번달 날짜
-    const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-    const lastMonthYear = lastMonthDate.getFullYear();
-    const lastMonth = lastMonthDate.getMonth() + 1;
-    setPreviousMonthLabel(`${lastMonthYear}년 ${lastMonth < 10 ? `0${lastMonth}` : lastMonth}월`); // 09월 처럼 보이게 하기 위해
-
-    // 저저번달 날짜
-    const twoMonthsAgoDate = new Date(now.getFullYear(), now.getMonth() - 2, 1);
-    const twoMonthsAgoMonth = twoMonthsAgoDate.getMonth() + 1;
-    setTwoMonthsAgoLabel(`${twoMonthsAgoMonth}월`);
-
     const mockData: ChargeData = {
       lastMonth: 3222,
       twoMonthsAgo: null
@@ -47,6 +34,9 @@ export default function PreCharge() {
     }
   }, []);
 
+  const lastMonthDate = getDateLabel("last");
+  const twoMonthsDate = getDateLabel("twoMonths");
+
   // 요금 변동 메시지 설정
   const renderComment = () => {
     if (!chargeData) return null;
@@ -57,11 +47,15 @@ export default function PreCharge() {
       return null;
     }
 
-    const difference = twoMonthsAgo !== null ? lastMonth - twoMonthsAgo : 0; // 전전달 데이터가 null이 아닐 경우만 계산
+    const difference = twoMonthsAgo !== null ? lastMonth - twoMonthsAgo : 0;
 
     switch (differenceType) {
       case "notwoMonthAgo":
-        return <p className={styles.commentText}>{twoMonthsAgoLabel} 전기 요금을 입력해주세요!</p>;
+        return (
+          <p className={styles.commentText}>
+            {`${twoMonthsDate.monthLabel}월`} 전기 요금을 입력해주세요!
+          </p>
+        );
       case "increase":
         return (
           <p className={styles.commentText}>
@@ -92,11 +86,11 @@ export default function PreCharge() {
   const renderTipMent = () => {
     switch (differenceType) {
       case "notwoMonthAgo":
-        return <>{twoMonthsAgoLabel} 전기 요금을 입력해 전기 요금을 비교해보세요!</>;
+        return <>{`${twoMonthsDate.monthLabel}월`} 전기 요금을 입력해 전기 요금을 비교해보세요!</>;
       case "noLastMonth":
         return (
           <>
-            {twoMonthsAgoLabel}에 비해 증가한 요금을 알고 싶다면? <br />
+            {`${twoMonthsDate.monthLabel}월`}에 비해 증가한 요금을 알고 싶다면? <br />
             정보를 입력해주세요!
           </>
         );
@@ -132,7 +126,12 @@ export default function PreCharge() {
       <div className={styles.wrap}>
         <Box>
           <p className={styles.text_normal}>
-            저번달<span className={styles.text_bold}> ({previousMonthLabel}) </span>의 전기 요금
+            저번달
+            <span className={styles.text_bold}>
+              {" "}
+              ({`${lastMonthDate.yearLabel}년 ${lastMonthDate.monthLabel}월`}){" "}
+            </span>
+            의 전기 요금
           </p>
           <p className={styles.cost}>
             <span className={styles.costGreen}>

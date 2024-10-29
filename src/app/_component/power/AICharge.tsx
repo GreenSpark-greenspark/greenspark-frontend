@@ -1,7 +1,9 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import Box from "@/components/Box";
 import styles from "./power.common.module.css";
 import IconComment from "../../../../public/icon/power_comment.svg";
+import { getDateLabel } from "@/./utils/getDateLabels";
 
 interface ChargeData {
   currentMonth: number | null;
@@ -13,28 +15,14 @@ type DifferenceType = "increase" | "unchanged" | "decrease" | "noLastMonth" | "n
 export default function AICharge() {
   const [chargeData, setChargeData] = useState<ChargeData | null>(null);
   const [differenceType, setDifferenceType] = useState<DifferenceType>("noLastMonth");
-  const [currentMonthLabel, setCurrentMonthLabel] = useState<string>("");
-  const [previousMonthLabel, setPreviousMonthLabel] = useState<string>("");
+
+  const currentMonthLabel = getDateLabel("current");
+  const lastMonthLabel = getDateLabel("last");
 
   useEffect(() => {
-    const now = new Date();
-
-    // 이번달 날짜
-    const currentMonthDate = new Date(now.getFullYear(), now.getMonth(), 1);
-    const currentMonthYear = currentMonthDate.getFullYear();
-    const currentMonth = currentMonthDate.getMonth() + 1;
-    setCurrentMonthLabel(
-      `${currentMonthYear}년 ${currentMonth < 10 ? `0${currentMonth}` : currentMonth}월`
-    );
-
-    // 저번달 날짜
-    const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-    const lastMonth = lastMonthDate.getMonth() + 1;
-    setPreviousMonthLabel(`${lastMonth}월`);
-
     const mockData: ChargeData = {
       currentMonth: null,
-      lastMonth: null
+      lastMonth: 8522
     };
 
     setChargeData(mockData);
@@ -63,7 +51,11 @@ export default function AICharge() {
 
     switch (differenceType) {
       case "noLastMonth":
-        return <p className={styles.commentText}>{previousMonthLabel} 전기 요금을 입력해주세요!</p>;
+        return (
+          <p className={styles.commentText}>
+            {`${lastMonthLabel.monthLabel}월`} 전기 요금을 입력해주세요!
+          </p>
+        );
       case "increase":
         return (
           <p className={styles.commentText}>
@@ -96,7 +88,12 @@ export default function AICharge() {
       <div className={styles.wrap}>
         <Box>
           <p className={styles.text_normal}>
-            이번달<span className={styles.text_bold}> ({currentMonthLabel}) </span>예상 요금은..
+            이번달
+            <span className={styles.text_bold}>
+              {" "}
+              ({`${currentMonthLabel.yearLabel}년 ${currentMonthLabel.monthLabel}월`}){" "}
+            </span>
+            예상 요금은..
           </p>
           <p className={styles.cost}>
             <span className={styles.costGreen}>
