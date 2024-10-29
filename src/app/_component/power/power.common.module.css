@@ -4,16 +4,18 @@
   justify-items: center;
   align-items: center;
 }
+
 .title {
+  margin-top: 2.5rem;
+  margin-left: 2.3rem;
+  margin-bottom: 0.6rem;
+
   color: #000;
   font-family: Pretendard;
   font-size: 2rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-bottom: 0.6rem;
-  margin-left: 2.3rem;
-  margin-top: 2.5rem;
 }
 
 .powerinput {
@@ -21,37 +23,120 @@
   align-items: center;
   justify-content: space-between;
 }
+
 /* 입력하기, 전체 히스토리 버튼 */
 .btn {
-  width: 100px;
-  height: 24px;
-  border-radius: 20px;
-  background-color: #b6ec94;
-  color: black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
+
+  width: 10rem;
+  height: 2.4rem;
+  border-radius: 2em;
+
+  background-color: #b6ec94;
+  color: black;
+  font-size: 1.4rem;
   font-weight: 400;
+
   border: none;
 }
 
 /* 기본 폰트 */
 .text_normal {
   font-family: Pretendard;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  letter-spacing: 0.14px;
+  letter-spacing: 0.014rem;
 }
+
 .text_bold {
   color: #000;
   font-family: Pretendard;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   letter-spacing: 0.14px;
+}
+
+/* 예상요금, 저번달요금 */
+.compareContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comment {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.iconComment {
+  width: 35rem;
+  height: 3.5rem;
+}
+
+.commentText {
+  position: absolute;
+  top: 64%;
+  left: 50%;
+  width: 30rem;
+  transform: translate(-50%, -50%);
+
+  color: #000;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.commentBlue {
+  color: #039cf5;
+  font-weight: 600;
+}
+
+.commentRed {
+  color: #ff2727;
+  font-weight: 600;
+}
+.commentGreen {
+  color: #1aad0d;
+  font-weight: 600;
+}
+
+.cost {
+  padding-left: 2rem;
+  margin-top: 0.7rem;
+
+  color: #111;
+  text-align: left;
+  font-family: "Pretendard Variable";
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.costGreen {
+  color: #19e407;
+}
+
+.tipMent {
+  width: 25rem;
+  margin-top: 1.5rem;
+
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
