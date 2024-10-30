@@ -1,0 +1,40 @@
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: 50rem;
+}
+.loginMent {
+  color: #929292;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 2rem;
+}
+.loginBtn {
+  background-color: white;
+  width: 18rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  cursor: pointer;
+}
+.googleIcon {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+.googleMent {
+  color: #4a4a4a;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
