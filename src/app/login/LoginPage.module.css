@@ -26,9 +26,11 @@
 
   width: 18rem;
   height: 4rem;
+  border-radius: 0.5em;
 
   background-color: white;
 
+  border: none;
   cursor: pointer;
 }
 
