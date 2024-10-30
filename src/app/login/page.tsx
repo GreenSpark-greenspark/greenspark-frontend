@@ -7,10 +7,10 @@ export default function Login() {
     <>
       <div className={styles.loginContainer}>
         <p className={styles.loginMent}>지금 바로 시작해보세요!</p>
-        <div className={styles.loginBtn}>
+        <button type="button" className={styles.loginBtn}>
           <IconGoogle className={styles.googleIcon} />
           <p className={styles.googleMent}>Google 계정으로 로그인</p>
-        </div>
+        </button>
       </div>
     </>
   );
