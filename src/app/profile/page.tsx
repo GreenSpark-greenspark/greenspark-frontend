@@ -1,28 +1,29 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./Profile.module.css";
-
+import IconLogo from "@/../public/icon/login_logo.svg";
 export default function Profile() {
   // 전기요금 납부일
   const [paymentDay, setPaymentDay] = useState<number>(1);
   // 거주 인원
   const [numResidents, setNumResidents] = useState<number>(1);
 
-  const days = Array.from({ length: 28 }, (_, i) => i + 1);
-  const residents = Array.from({ length: 5 }, (_, i) => i + 1);
+  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+  const residents = Array.from({ length: 9 }, (_, i) => i + 1);
 
   const handlePaymentDayChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPaymentDay(Number(event.target.value));
   };
 
   const handleResidentsChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setNumResidents(Number(event.target.value));
+    const value = event.target.value;
+    setNumResidents(value === "10명 이상" ? 10 : Number(value));
   };
 
   return (
     <>
       <div className={styles.topBar}>
-        <div className={styles.logo}>로고</div>
+        <IconLogo className={styles.logo} />
       </div>
       <div className={styles.bodyWrapper}>
         <div className={styles.bodyContainer}>
@@ -51,7 +52,7 @@ export default function Profile() {
               총
               <select
                 className={styles.dropDown}
-                value={numResidents}
+                value={numResidents === 10 ? "10명 이상" : numResidents}
                 onChange={handleResidentsChange}
               >
                 {residents.map(count => (
@@ -59,6 +60,7 @@ export default function Profile() {
                     {count}명
                   </option>
                 ))}
+                <option value="10명 이상">10명 이상</option>
               </select>
               과 거주 중이에요
             </p>
