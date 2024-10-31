@@ -1,18 +1,60 @@
+.loginPageContainer {
+  width: 100%;
+  height: 100%;
+
+  background-color: #91e26b;
+}
+
+.logoTopContainer {
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 12rem;
+  padding-bottom: 13rem;
+
+  height: 20rem;
+}
+
+.iconLogo {
+  width: 4.5rem;
+  height: 5.7rem;
+  margin-bottom: 1rem;
+}
+
+.textLogo {
+  width: 27rem;
+  height: 5.7rem;
+  margin-top: 2rem;
+}
+
+.logoMent {
+  width: 27rem;
+
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 26px;
+}
+
 .loginContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  top: 50rem;
 }
 
 .loginMent {
   margin-bottom: 2rem;
 
-  color: #929292;
+  color: #f1f3f5;
   text-align: center;
   font-family: Pretendard;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -24,7 +66,7 @@
   justify-content: space-between;
   padding: 0 1rem;
 
-  width: 18rem;
+  width: 20rem;
   height: 4rem;
   border-radius: 0.5em;
 
