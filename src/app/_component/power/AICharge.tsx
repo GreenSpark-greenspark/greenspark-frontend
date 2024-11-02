@@ -66,7 +66,7 @@ export default function AICharge() {
       case "unchanged":
         return (
           <p className={styles.commentText}>
-            전월과 <span className={styles.commentGreen}>같을</span> 것으로 예상돼요!
+            전월과 <span className={styles.commentGreen}>비슷할</span> 것으로 예상돼요!
           </p>
         );
       case "decrease":
