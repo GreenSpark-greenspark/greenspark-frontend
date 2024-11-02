@@ -31,16 +31,18 @@
   justify-content: center;
   align-items: center;
   float: right;
+
   width: 10rem;
   height: 2.4rem;
   border-radius: 2em;
+  border: none;
 
   background-color: #b6ec94;
   color: black;
   font-size: 1.2rem;
   font-weight: 400;
 
-  border: none;
+  cursor: pointer;
 }
 
 /* 기본 폰트 */
@@ -86,9 +88,9 @@
   position: absolute;
   top: 64%;
   left: 50%;
-  width: 30rem;
   transform: translate(-50%, -50%);
 
+  width: 30rem;
   color: #000;
   text-align: center;
   font-family: "Pretendard Variable";
@@ -107,6 +109,7 @@
   color: #ff2727;
   font-weight: 600;
 }
+
 .commentGreen {
   color: #1aad0d;
   font-weight: 600;
@@ -150,35 +153,43 @@
   margin-top: 4rem;
   margin-bottom: 2.8rem;
 }
+
 .coinContainer {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .coin {
   display: flex;
   align-items: center;
   margin-left: 2.3rem;
 }
+
 .coinIcon {
   width: 2rem;
   height: 2rem;
 }
+
 .text_title {
+  margin-bottom: 1.3rem;
+
   color: #000;
   font-family: Pretendard;
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-bottom: 1.3rem;
 }
+
 .appliancsGreen {
   color: #91e26b;
 }
+
 .bodyContainer {
   margin-bottom: 0.8rem;
 }
+
 .powerContent {
   margin-bottom: 1rem;
 }
