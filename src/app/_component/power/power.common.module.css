@@ -30,7 +30,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  float: right;
   width: 10rem;
   height: 2.4rem;
   border-radius: 2em;
@@ -142,6 +142,14 @@
 }
 
 /* 홈 */
+.coinWrap {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 2.8rem;
+}
 .coinContainer {
   display: flex;
   align-items: center;
@@ -163,7 +171,11 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  margin-bottom: 1.3rem;
 }
 .appliancsGreen {
   color: #91e26b;
+}
+.bodyContainer {
+  margin-bottom: 0.8rem;
 }
