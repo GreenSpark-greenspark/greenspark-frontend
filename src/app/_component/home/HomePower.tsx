@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import styles from "../power/power.common.module.css";
 import Box from "@/components/Box";
-import styles from "./power.common.module.css";
 import IconComment from "../../../../public/icon/power_comment.svg";
 import { getDateLabel } from "@/./utils/getDateLabels";
 
@@ -12,7 +12,7 @@ interface ChargeData {
 
 type DifferenceType = "increase" | "unchanged" | "decrease" | "noLastMonth" | "noCurrentMonth";
 
-export default function AICharge() {
+export default function HomePower() {
   const [chargeData, setChargeData] = useState<ChargeData | null>(null);
   const [differenceType, setDifferenceType] = useState<DifferenceType>("noLastMonth");
 
@@ -21,7 +21,7 @@ export default function AICharge() {
 
   useEffect(() => {
     const mockData: ChargeData = {
-      currentMonth: null,
+      currentMonth: 8544,
       lastMonth: 8522
     };
 
@@ -84,29 +84,51 @@ export default function AICharge() {
 
   return (
     <>
-      <p className={styles.title}>AI가 분석하는 이번달 예상요금</p>
       <div className={styles.wrap}>
         <Box>
-          <p className={styles.text_normal}>
-            이번달
-            <span className={styles.text_bold}>
-              {" "}
-              ({`${currentMonthLabel.yearLabel}년 ${currentMonthLabel.monthLabel}월`}){" "}
-            </span>
-            예상 요금은..
-          </p>
-          <p className={styles.cost}>
-            <span className={styles.costGreen}>
-              {chargeData && chargeData.currentMonth !== null
-                ? chargeData.currentMonth.toLocaleString()
-                : "?,???"}
-            </span>{" "}
-            원
-          </p>
-          <div className={styles.comment}>
-            <IconComment className={styles.iconComment} />
-            {renderComment()}
+          <div className={styles.powerContent}>
+            <p className={styles.text_normal}>
+              저번달
+              <span className={styles.text_bold}>
+                {" "}
+                ({`${lastMonthLabel.yearLabel}년 ${lastMonthLabel.monthLabel}월`}){" "}
+              </span>
+              의 전기 요금
+            </p>
+            <p className={styles.cost}>
+              <span className={styles.costGreen}>
+                {chargeData && chargeData.lastMonth !== null
+                  ? chargeData.lastMonth.toLocaleString()
+                  : "?,???"}
+              </span>{" "}
+              원
+            </p>
           </div>
+          <div className={styles.powerContent}>
+            <p className={styles.text_normal}>
+              이번달
+              <span className={styles.text_bold}>
+                {" "}
+                ({`${currentMonthLabel.yearLabel}년 ${currentMonthLabel.monthLabel}월`}){" "}
+              </span>
+              예상 요금은..
+            </p>
+            <p className={styles.cost}>
+              <span className={styles.costGreen}>
+                {chargeData && chargeData.currentMonth !== null
+                  ? chargeData.currentMonth.toLocaleString()
+                  : "?,???"}
+              </span>{" "}
+              원
+            </p>
+            <div className={styles.comment}>
+              <IconComment className={styles.iconComment} />
+              {renderComment()}
+            </div>
+          </div>
+          <button type="button" className={styles.btn}>
+            내 파워 입력하기
+          </button>
         </Box>
       </div>
     </>
