@@ -1,0 +1,238 @@
+.boxContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 1em;
+
+  width: 32rem;
+}
+
+.dropdownButton {
+  min-width: 12rem;
+  width: 12rem;
+  height: 3.8em;
+  border: none;
+  border-radius: 0.5em 0.5em 0 0;
+  border-bottom: 0.1em solid #d7f3c6;
+
+  background: #f8fff3;
+  color: #5e5e5e;
+  font-size: 1.4rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 12rem;
+  max-height: 20rem;
+  overflow-y: auto;
+  border: 0.1em solid #b6ec94;
+  background-color: #fff;
+  border-radius: 0.5em;
+  z-index: 1;
+}
+
+.dropdownOption {
+  padding: 0.6em;
+  font-size: 1.2rem;
+  color: #5e5e5e;
+  cursor: pointer;
+}
+
+.dropdownOption:hover {
+  background-color: #b6ec94;
+}
+
+.dropdownOptionSelected {
+  background-color: #b6ec94;
+  font-weight: 600;
+}
+
+.modelInput {
+  width: 13rem;
+  height: 3.8em;
+  border: none;
+  padding: 0 0.8em;
+
+  font-size: 1.4rem;
+  color: #5e5e5e;
+  background: #fff;
+  outline: none;
+}
+
+/* List */
+.applianceList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2em;
+  margin-top: 1.5em;
+}
+
+.applianceCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 28rem;
+  height: 8.5em;
+  border-radius: 2em;
+  border: 0.15em solid #b8b8b8;
+  cursor: pointer;
+}
+
+.selectedCard {
+  background-color: #f8fff3;
+  border: 0.15em solid #d7f3c6;
+  box-sizing: border-box;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 20rem;
+}
+
+.addButton {
+  width: 27.7rem;
+  height: 3.8rem;
+  border: none;
+  border-radius: 15px;
+  background-color: #c4c4c4;
+  color: #fff;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.activeButton {
+  background-color: #19e407;
+  color: #fff;
+  cursor: pointer;
+}
+
+.searchBtn {
+  background-color: #fff;
+  border: none;
+}
+
+.inputGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.1em solid #ddd;
+}
+
+.checkedIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 1.4em;
+  margin-right: 0.8em;
+  border-radius: 10em;
+}
+
+.selectedCard .checkedIcon {
+  background-color: #19e407;
+  color: #fff;
+}
+
+.applianceCard:not(.selectedCard) .checkedIcon {
+  background-color: #ffffff;
+  color: #b8b8b8;
+  border: 0.1em solid #b8b8b8;
+  box-sizing: border-box;
+}
+
+/* Right */
+.RightContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+  width: 15rem;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-left: 2.1em;
+}
+
+.TextWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+
+.TextContainer {
+  display: flex;
+  align-items: center;
+  gap: 1.4em;
+}
+
+.TextBold {
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: #000;
+}
+
+.TextRegular {
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.014rem;
+  color: #000;
+}
+
+.BtnContainer {
+  display: flex;
+  gap: 0.6em;
+}
+
+.GrayBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2em;
+  padding: 0 0.9rem;
+  height: 1.6em;
+  text-align: center;
+
+  background: #5e5e5e;
+  color: #fff;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.ColorBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2em;
+  padding: 0 1em;
+  height: 1.6em;
+  text-align: center;
+
+  color: #fff;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

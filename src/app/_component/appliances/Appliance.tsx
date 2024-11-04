@@ -4,24 +4,25 @@ import Image from "next/image";
 import airConditioner from "@/../public/img/air-conditioner.png";
 import refrigerator from "@/../public/img/refrigerator.png";
 import washingMachine from "@/../public/img/washing-machine.png";
-import { ApplianceType } from "@/mock/appliances";
 
 export default function Appliance({
   id,
   grade,
-  type
+  type,
+  width = 6.9
 }: {
   id: number;
   grade: number;
-  type: ApplianceType;
+  type: string;
+  width?: number;
 }) {
-  const getImage = (type: "airconditioner" | "refrigerator" | "washingMachine") => {
+  const getImage = (type: string) => {
     switch (type) {
-      case "airconditioner":
+      case "에어컨":
         return airConditioner;
-      case "refrigerator":
+      case "냉장고":
         return refrigerator;
-      case "washingMachine":
+      case "전기세탁기(일반)":
         return washingMachine;
       default:
         return washingMachine;
@@ -29,17 +30,27 @@ export default function Appliance({
   };
 
   return (
-    <div key={id} className={style.CircleContainer}>
-      <div className={style.Circle} style={{ borderColor: getColorFromGrade(grade) }}>
+    <div
+      key={id}
+      className={style.CircleContainer}
+      style={{ width: `${width}rem`, height: `${width + 2}rem` }}
+    >
+      <div
+        className={style.Circle}
+        style={{
+          borderColor: getColorFromGrade(grade),
+          width: `${width}rem`,
+          height: `${width}rem`
+        }}
+      >
         <Image
           src={getImage(type)}
           alt={type}
-          width={25}
+          width={width * 4}
           style={{ objectFit: "cover" }}
           priority={true}
         />
       </div>
-      <div className={style.CircleText}>{grade}등급</div>
     </div>
   );
 }

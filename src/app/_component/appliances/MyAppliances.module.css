@@ -7,6 +7,25 @@
   background-color: #f8fff3;
 }
 
+.GridLayout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.9rem, 1fr));
+  gap: 0.9em 0.6em;
+  justify-items: center;
+  align-content: flex-start;
+}
+
+.LinkContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.8em;
+
+  width: 6.9rem;
+  height: 8.9rem;
+}
+
 .AddCircle {
   display: flex;
   justify-content: center;
@@ -14,15 +33,7 @@
 
   width: 6.9rem;
   height: 6.9rem;
-  border-radius: 200%;
-
+  border-radius: 50%;
   background-color: #d7f3c6;
-}
-
-.GridLayout {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(69px, 1fr));
-  gap: 9px 6px;
-  justify-items: center;
-  align-content: start;
+  box-sizing: border-box;
 }

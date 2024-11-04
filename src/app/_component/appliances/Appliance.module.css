@@ -1,10 +1,12 @@
 .CircleContainer {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8em;
 
-  width: 69px;
-  height: 89px;
+  width: 6.9rem;
+  height: 8.9rem;
 }
 
 .Circle {
@@ -15,17 +17,8 @@
   width: 6.9rem;
   height: 6.9rem;
   border-radius: 200%;
+  box-sizing: border-box;
 
   background-color: white;
-  border: 3px solid #83c63f;
-  box-sizing: border-box;
-}
-
-.CircleText {
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  color: #000;
-  text-align: center;
+  border: 0.3em solid #83c63f;
 }
