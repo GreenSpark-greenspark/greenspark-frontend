@@ -10,6 +10,7 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.75);
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .popup {
@@ -21,6 +22,7 @@
 
   padding: 2em;
   border-radius: 1.5em;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .imageContainer {
@@ -43,12 +45,14 @@
     rgba(178, 178, 178, 0) 100%
   );
   z-index: 1002;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .modelImage {
   position: relative;
   z-index: 1003;
   filter: drop-shadow(0 0.4rem 0.4rem rgba(0, 0, 0, 0.25));
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .modelText {
@@ -78,4 +82,14 @@
   color: #fff;
   font-size: 1.6rem;
   font-weight: 600;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
