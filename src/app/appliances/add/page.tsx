@@ -1,9 +1,5 @@
-import Box from "@/components/Box";
+import ClientComponent from "../../_component/appliances/ClientComponent";
 
 export default function Page() {
-  return (
-    <div>
-      <Box>추가 페이지</Box>
-    </div>
-  );
+  return <ClientComponent />;
 }
