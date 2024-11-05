@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Box from "@/components/Box";
 import styles from "./power.common.module.css";
 import IconComment from "../../../../public/icon/power_comment.svg";
@@ -16,23 +17,48 @@ export default function PreCharge() {
   const [chargeData, setChargeData] = useState<ChargeData | null>(null);
   const [differenceType, setDifferenceType] = useState<DifferenceType>("notwoMonthAgo");
 
+  const [costData, setCostData] = useState([]);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const userId = 1;
+
   useEffect(() => {
-    const mockData: ChargeData = {
-      lastMonth: 3222,
-      twoMonthsAgo: null
+    const fetchCostData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/power/last-month/${userId}`);
+
+        if (response.data.success) {
+          const data = response.data.data;
+
+          setChargeData({
+            lastMonth: data.last_month_cost,
+            twoMonthsAgo: data.month_before_last_cost
+          });
+
+          const lastMonthCost = data.last_month_cost;
+          const twoMonthsAgoCost = data.month_before_last_cost;
+
+          if (lastMonthCost === null) {
+            setDifferenceType("noLastMonth");
+          } else if (twoMonthsAgoCost === null) {
+            setDifferenceType("notwoMonthAgo");
+          } else {
+            const difference = lastMonthCost - twoMonthsAgoCost;
+            setDifferenceType(
+              difference > 0 ? "increase" : difference === 0 ? "unchanged" : "decrease"
+            );
+          }
+
+          setCostData(response.data.data);
+        } else {
+          console.error("API 호출 실패:", response.data.message);
+        }
+      } catch (error) {
+        console.error("API 호출 중 오류 발생:", error);
+      }
     };
 
-    setChargeData(mockData);
-
-    if (mockData.lastMonth === null) {
-      setDifferenceType("noLastMonth");
-    } else if (mockData.twoMonthsAgo === null) {
-      setDifferenceType("notwoMonthAgo");
-    } else {
-      const difference = mockData.lastMonth - mockData.twoMonthsAgo;
-      setDifferenceType(difference > 0 ? "increase" : difference === 0 ? "unchanged" : "decrease");
-    }
-  }, []);
+    fetchCostData();
+  }, [API_URL, userId]);
 
   const lastMonthDate = getDateLabel("last");
   const twoMonthsDate = getDateLabel("twoMonths");

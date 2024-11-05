@@ -4,14 +4,14 @@ import Graph from "./Graph";
 
 const BillGraph = () => {
   const [graphData, setGraphData] = useState([]);
-  const APIURL = process.env.NEXT_PUBLIC_API_URL;
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const userId = 1;
   const display = "bill";
 
   useEffect(() => {
     const fetchGraphData = async () => {
       try {
-        const response = await axios.get(`${APIURL}/power/${userId}?display=${display}`);
+        const response = await axios.get(`${API_URL}/power/${userId}?display=${display}`);
 
         if (response.data.success) {
           setGraphData(response.data.data);
@@ -24,7 +24,7 @@ const BillGraph = () => {
     };
 
     fetchGraphData();
-  }, [APIURL, userId, display]);
+  }, [API_URL, userId, display]);
 
   return <Graph data={graphData} isBillGraph={true} />;
 };
