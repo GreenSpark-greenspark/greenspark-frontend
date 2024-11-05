@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Graph from "./Graph";
-import { powerGraph } from "@/mock/powerGraph";
 
 const UsageGraph = () => {
-  return <Graph data={powerGraph} isBillGraph={false} />;
+  const [graphData, setGraphData] = useState([]);
+  const APIURL = process.env.NEXT_PUBLIC_API_URL;
+  const userId = 1;
+  const display = "usage";
+
+  useEffect(() => {
+    const fetchGraphData = async () => {
+      try {
+        const response = await axios.get(`${APIURL}/power/${userId}?display=${display}`);
+
+        if (response.data.success) {
+          setGraphData(response.data.data);
+        } else {
+          console.error("API 호출 실패:", response.data.message);
+        }
+      } catch (error) {
+        console.error("API 호출 중 오류 발생:", error);
+      }
+    };
+
+    fetchGraphData();
+  }, [APIURL, userId, display]);
+
+  return <Graph data={graphData} isBillGraph={false} />;
 };
 
 export default UsageGraph;
