@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
+import axios from "axios";
 import { useTable, Column, ColumnInstance, HeaderGroup, Row, Cell } from "react-table";
 import styles from "./PowerTable.module.css";
 import IconPlus from "../../../../public/icon/power_plus.svg";
@@ -37,19 +38,32 @@ const getYearsOptions = () => {
 };
 
 const PowerTable: React.FC = () => {
+  const [data, setData] = useState<TableRow[]>([]);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  const userId = 1;
 
   const months = useMemo(getLast36Months, []);
   const yearsOptions = useMemo(getYearsOptions, []); // 드롭다운에 표시할 년도 옵션
 
-  const sampleData: TableRow[] = [
-    { year: 2024, month: 10, cost: 54000, usage_amount: 30 },
-    { year: 2024, month: 9, cost: 45000, usage_amount: 320 },
-    { year: 2024, month: 8, cost: 45000, usage_amount: 320 },
-    { year: 2023, month: 10, cost: 45000, usage_amount: 320 },
-    { year: 2024, month: 8, cost: 43000 }
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/power/history/${userId}`);
+        if (response.data.success) {
+          setData(response.data.data);
+        } else {
+          console.error("API 호출 실패:", response.data.message);
+        }
+      } catch (error) {
+        console.error("API 호출 중 오류 발생:", error);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
 
   // 선택한 년도에 맞게 데이터 필터링
   const fullData: TableRow[] = useMemo(() => {
@@ -58,7 +72,7 @@ const PowerTable: React.FC = () => {
       : months;
 
     return filteredMonths.map(monthData => {
-      const existingData = sampleData.find(
+      const existingData = data.find(
         row => row.year === monthData.year && row.month === monthData.month
       );
       return (
@@ -68,7 +82,7 @@ const PowerTable: React.FC = () => {
         }
       );
     });
-  }, [months, sampleData, selectedYear]);
+  }, [months, data, selectedYear]);
 
   const formatMonth = (month: number) => `${month}월`;
 
