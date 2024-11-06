@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect } from "react";
 import axios from "axios";
-import { useTable, Column, ColumnInstance, HeaderGroup, Row, Cell } from "react-table";
+import { useTable, Column, ColumnInstance, HeaderGroup, Row, Cell, CellProps } from "react-table";
 import PowerPopup from "./Popup";
 import styles from "./PowerTable.module.css";
 import IconPlus from "../../../../public/icon/power_plus.svg";
@@ -106,7 +106,7 @@ const PowerTable: React.FC = () => {
   };
 
   // 테이블에 필요한 컬럼 정의
-  const columns: Column<TableRow>[] = useMemo(
+  const columns = useMemo<Column<TableRow>[]>(
     () => [
       {
         Header: () => (
@@ -148,7 +148,7 @@ const PowerTable: React.FC = () => {
       {
         Header: "전기요금",
         accessor: "cost",
-        Cell: ({ row }: Cell<TableRow>) => {
+        Cell: ({ row }: CellProps<TableRow>) => {
           const { year, month } = row.original;
           return row.values.cost ? (
             `${row.values.cost.toLocaleString()}원`
@@ -165,7 +165,7 @@ const PowerTable: React.FC = () => {
       {
         Header: "전력사용량",
         accessor: "usage_amount",
-        Cell: ({ row }: Cell<TableRow>) => {
+        Cell: ({ row }: CellProps<TableRow>) => {
           const { year, month } = row.original;
           return row.values.usage_amount ? (
             `${row.values.usage_amount.toLocaleString()}kWh`

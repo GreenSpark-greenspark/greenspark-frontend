@@ -226,9 +226,18 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
             <Image
               src={ImgGraph}
               alt="No Data Available"
-              layout="fill"
-              objectFit="cover"
-              style={{ position: "absolute", top: -30, left: 0, zIndex: 1 }}
+              // layout="fill"
+              // objectFit="cover"
+              priority
+              style={{
+                position: "absolute",
+                top: -30,
+                left: 0,
+                zIndex: 1,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover"
+              }}
             />
             <div
               style={{
