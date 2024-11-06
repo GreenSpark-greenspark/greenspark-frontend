@@ -1,6 +1,8 @@
 "use client";
 import "@/styles/globals.css";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import IconPower from "../../public/icon/nav_power.svg";
 import IconBook from "../../public/icon/nav_book.svg";
 import IconAppliance from "../../public/icon/nav_appliance.svg";
@@ -16,15 +18,17 @@ import IconClickMy from "../../public/icon/nav_my_click.svg";
 import styles from "./bottomNav.module.css";
 
 export default function BottomNav() {
+  const router = useRouter();
   const [activeButton, setActiveButton] = useState<string>("home");
 
-  const handleButtonClick = (button: string) => {
+  const handleButtonClick = (button: string, path: string) => {
     setActiveButton(button);
+    router.push(path);
   };
 
   return (
     <div className={styles.navContainer}>
-      <div className={styles.navBtn} onClick={() => handleButtonClick("power")}>
+      <div className={styles.navBtn} onClick={() => handleButtonClick("power", "/power")}>
         {activeButton === "power" ? (
           <IconClickPower className={styles.icon} />
         ) : (
@@ -37,7 +41,7 @@ export default function BottomNav() {
         </p>
       </div>
 
-      <div className={styles.navBtn} onClick={() => handleButtonClick("book")}>
+      <div className={styles.navBtn} onClick={() => handleButtonClick("book", "/login")}>
         {activeButton === "book" ? (
           <IconClickBook className={styles.icon} />
         ) : (
@@ -51,7 +55,7 @@ export default function BottomNav() {
       <div className={styles.menuHomeContainer}>
         <div
           className={`${styles.menuHome} ${activeButton === "home" ? styles.menuHomeActive : ""}`}
-          onClick={() => handleButtonClick("home")}
+          onClick={() => handleButtonClick("home", "/")}
         >
           {activeButton === "home" ? (
             <IconClickHome className={styles.homeIcon} />
@@ -61,20 +65,22 @@ export default function BottomNav() {
         </div>
       </div>
 
-      <div className={styles.navBtn} onClick={() => handleButtonClick("appliance")}>
+      <div className={styles.navBtn} onClick={() => handleButtonClick("appliance", "/appliances")}>
         {activeButton === "appliance" ? (
           <IconClickAppliance className={styles.icon} />
         ) : (
           <IconAppliance className={styles.icon} />
         )}
         <p
-          className={`${styles.menuName} ${activeButton === "appliance" ? styles.menuNameActive : ""}`}
+          className={`${styles.menuName} ${
+            activeButton === "appliance" ? styles.menuNameActive : ""
+          }`}
         >
           가전
         </p>
       </div>
 
-      <div className={styles.navBtn} onClick={() => handleButtonClick("my")}>
+      <div className={styles.navBtn} onClick={() => handleButtonClick("my", "/my")}>
         {activeButton === "my" ? (
           <IconClickMy className={styles.icon} />
         ) : (
