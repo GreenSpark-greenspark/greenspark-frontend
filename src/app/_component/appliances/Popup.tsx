@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./popup.module.css";
+import styles from "./Popup.module.css";
 import Image from "next/image";
 import refrigeratorImage from "@/../public/img/refrigerator.png";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,7 @@ const Popup: React.FC<PopupProps> = ({ modelName, onClose }) => {
   const router = useRouter();
   const onGo = () => {
     onClose();
-    router.push("/appliances"); 
+    router.push("/appliances");
   };
   return (
     <div className={styles.overlay} onClick={onClose}>
