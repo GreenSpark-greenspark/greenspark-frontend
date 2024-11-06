@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import axios from "axios";
 import { useTable, Column, ColumnInstance, HeaderGroup, Row, Cell } from "react-table";
+import PowerPopup from "./Popup";
 import styles from "./PowerTable.module.css";
 import IconPlus from "../../../../public/icon/power_plus.svg";
 import IconDropDown from "../../../../public/icon/power_dropdown.svg";
@@ -41,8 +42,15 @@ const PowerTable: React.FC = () => {
   const [data, setData] = useState<TableRow[]>([]);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+  // 팝업 관련 상태 추가
+  const [popupInfo, setPopupInfo] = useState<{
+    year: number;
+    month: number;
+    type: "cost" | "usage";
+  } | null>(null);
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const userId = 1;
 
   const months = useMemo(getLast36Months, []);
@@ -88,6 +96,15 @@ const PowerTable: React.FC = () => {
 
   const formatYearMonth = (year: number, month: number) => `${year}년 ${formatMonth(month)}`;
 
+  const handleIconClick = (year: number, month: number, type: "cost" | "usage") => {
+    console.log("플러스 아이콘 클릭됨:", { year, month, type }); // 추가
+    setPopupInfo({ year, month, type });
+  };
+
+  const closePopup = () => {
+    setPopupInfo(null);
+  };
+
   // 테이블에 필요한 컬럼 정의
   const columns: Column<TableRow>[] = useMemo(
     () => [
@@ -131,11 +148,15 @@ const PowerTable: React.FC = () => {
       {
         Header: "전기요금",
         accessor: "cost",
-        Cell: ({ value }: Cell<TableRow>) => {
-          return value !== undefined ? (
-            `${value.toLocaleString()}원`
+        Cell: ({ row }: Cell<TableRow>) => {
+          const { year, month } = row.original;
+          return row.values.cost !== undefined ? (
+            `${row.values.cost.toLocaleString()}원`
           ) : (
-            <div className={styles.iconWrapper}>
+            <div
+              className={styles.iconWrapper}
+              onClick={() => handleIconClick(year, month, "cost")}
+            >
               <IconPlus className={styles.plusIcon} />
             </div>
           );
@@ -144,11 +165,15 @@ const PowerTable: React.FC = () => {
       {
         Header: "전력사용량",
         accessor: "usage_amount",
-        Cell: ({ value }: Cell<TableRow>) => {
-          return value !== undefined ? (
-            `${value.toLocaleString()}kWh`
+        Cell: ({ row }: Cell<TableRow>) => {
+          const { year, month } = row.original;
+          return row.values.usage_amount !== undefined ? (
+            `${row.values.usage_amount.toLocaleString()}kWh`
           ) : (
-            <div className={styles.iconWrapper}>
+            <div
+              className={styles.iconWrapper}
+              onClick={() => handleIconClick(year, month, "usage")}
+            >
               <IconPlus className={styles.plusIcon} />
             </div>
           );
@@ -202,7 +227,11 @@ const PowerTable: React.FC = () => {
                         : "";
 
                   return (
-                    <td key={key} className={cellClassName} {...restCellProps}>
+                    <td
+                      key={key}
+                      className={`${styles.tableCell} ${cellClassName}`}
+                      {...restCellProps}
+                    >
                       {cell.render("Cell")}
                     </td>
                   );
@@ -212,6 +241,14 @@ const PowerTable: React.FC = () => {
           })}
         </tbody>
       </table>
+      {popupInfo && (
+        <PowerPopup
+          year={popupInfo.year}
+          month={popupInfo.month}
+          type={popupInfo.type}
+          onClose={closePopup}
+        />
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import ImgGraph from "../../../../public/img/graph-default.png";
 import Image from "next/image";
@@ -87,6 +87,7 @@ interface GraphProps {
 
 const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isLineChartReady, setIsLineChartReady] = useState(false);
 
   useEffect(() => {
     if (scrollContainerRef.current) {
@@ -202,7 +203,11 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
       }
     }
   };
-
+  useEffect(() => {
+    if (scrollContainerRef.current && isLineChartReady) {
+      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
+    }
+  }, [data, isLineChartReady]);
   return (
     <div
       ref={scrollContainerRef}
