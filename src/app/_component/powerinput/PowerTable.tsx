@@ -97,7 +97,7 @@ const PowerTable: React.FC = () => {
   const formatYearMonth = (year: number, month: number) => `${year}년 ${formatMonth(month)}`;
 
   const handleIconClick = (year: number, month: number, type: "cost" | "usage") => {
-    console.log("플러스 아이콘 클릭됨:", { year, month, type }); // 추가
+    console.log("플러스 아이콘 클릭됨:", { year, month, type });
     setPopupInfo({ year, month, type });
   };
 
@@ -150,7 +150,7 @@ const PowerTable: React.FC = () => {
         accessor: "cost",
         Cell: ({ row }: Cell<TableRow>) => {
           const { year, month } = row.original;
-          return row.values.cost !== undefined ? (
+          return row.values.cost ? (
             `${row.values.cost.toLocaleString()}원`
           ) : (
             <div
@@ -167,7 +167,7 @@ const PowerTable: React.FC = () => {
         accessor: "usage_amount",
         Cell: ({ row }: Cell<TableRow>) => {
           const { year, month } = row.original;
-          return row.values.usage_amount !== undefined ? (
+          return row.values.usage_amount ? (
             `${row.values.usage_amount.toLocaleString()}kWh`
           ) : (
             <div
@@ -243,6 +243,7 @@ const PowerTable: React.FC = () => {
       </table>
       {popupInfo && (
         <PowerPopup
+          userId={userId}
           year={popupInfo.year}
           month={popupInfo.month}
           type={popupInfo.type}
