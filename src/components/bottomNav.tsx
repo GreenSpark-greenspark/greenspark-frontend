@@ -1,7 +1,7 @@
 "use client";
 import "@/styles/globals.css";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 import IconPower from "../../public/icon/nav_power.svg";
 import IconBook from "../../public/icon/nav_book.svg";
@@ -19,7 +19,30 @@ import styles from "./bottomNav.module.css";
 
 export default function BottomNav() {
   const router = useRouter();
-  const [activeButton, setActiveButton] = useState<string>("home");
+  const pathname = usePathname(); // 현재 경로
+  const [activeButton, setActiveButton] = useState<string>("");
+
+  useEffect(() => {
+    switch (pathname) {
+      case "/power":
+        setActiveButton("power");
+        break;
+      case "/login":
+        setActiveButton("book");
+        break;
+      case "/":
+        setActiveButton("home");
+        break;
+      case "/appliances":
+        setActiveButton("appliance");
+        break;
+      case "/my":
+        setActiveButton("my");
+        break;
+      default:
+        setActiveButton("home");
+    }
+  }, [pathname]);
 
   const handleButtonClick = (button: string, path: string) => {
     setActiveButton(button);
