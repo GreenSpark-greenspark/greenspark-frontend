@@ -27,7 +27,7 @@ export default function BottomNav() {
       case "/power":
         setActiveButton("power");
         break;
-      case "/login":
+      case "/book":
         setActiveButton("book");
         break;
       case "/":
@@ -64,7 +64,7 @@ export default function BottomNav() {
         </p>
       </div>
 
-      <div className={styles.navBtn} onClick={() => handleButtonClick("book", "/login")}>
+      <div className={styles.navBtn} onClick={() => handleButtonClick("book", "/book")}>
         {activeButton === "book" ? (
           <IconClickBook className={styles.icon} />
         ) : (
