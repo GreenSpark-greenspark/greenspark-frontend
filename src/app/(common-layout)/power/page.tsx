@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 export default function Power() {
   return (
-    <div>
+    <div style={{ height: "100vh", overflowY: "scroll" }}>
       <PagesWrap>
         <PowerInput />
         <AICharge />

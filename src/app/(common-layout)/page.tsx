@@ -7,12 +7,14 @@ import HomeAppliances from "../_component/home/HomeAppliances";
 
 export default function Page() {
   return (
-    <div>
-      <AttendanceCoin />
-      <HomePower />
-      <HomeAppliances />
-      <HomeQuiz />
-      <HomeEncyclopedia />
+    <div style={{ height: "100vh", overflowY: "scroll" }}>
+      <div style={{ paddingBottom: "10rem" }}>
+        <AttendanceCoin />
+        <HomePower />
+        <HomeAppliances />
+        <HomeQuiz />
+        <HomeEncyclopedia />
+      </div>
     </div>
   );
 }
