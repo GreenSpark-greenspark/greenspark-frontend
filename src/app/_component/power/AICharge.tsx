@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+
 import Box from "@/components/Box";
 import styles from "./power.common.module.css";
 import IconComment from "../../../../public/icon/power_comment.svg";
