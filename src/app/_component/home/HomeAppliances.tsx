@@ -25,7 +25,6 @@ export default function HomeAppliances() {
         const response = await axios.get(`${API_URL}/appliances/preview/${userId}`);
         if (response.data.success) {
           setData(response.data.data);
-          console.log(response.data.data);
         } else {
           console.error("API 호출 실패:", response.data.message);
         }
