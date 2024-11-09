@@ -121,12 +121,12 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
             data: thisYearData,
             fill: false,
             borderColor: "#19E407",
-            borderWidth: 2,
-            pointRadius: 2,
+            borderWidth: 3,
+            pointRadius: 5,
             pointBackgroundColor: "#19E407",
-            pointHoverRadius: 8,
+            pointHoverRadius: 9,
             pointHoverBorderColor: "#CBF4B8",
-            pointHoverBorderWidth: 6,
+            pointHoverBorderWidth: 7,
             spanGaps: true
           },
           {
@@ -134,12 +134,12 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
             data: lastYearData,
             fill: false,
             borderColor: "#C4C4C4",
-            borderWidth: 2,
-            pointRadius: 2,
+            borderWidth: 3,
+            pointRadius: 5,
             pointBackgroundColor: "#C4C4C4",
-            pointHoverRadius: 8,
+            pointHoverRadius: 9,
             pointHoverBorderColor: "#E0E0E0",
-            pointHoverBorderWidth: 6,
+            pointHoverBorderWidth: 7,
             spanGaps: true
           }
         ]
@@ -198,7 +198,7 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
       },
       y: {
         ticks: { display: false },
-        grid: { color: "rgba(0, 0, 0, 0.1)", lineWidth: 1 },
+        grid: { display: false },
         border: { display: false }
       }
     }
@@ -218,7 +218,7 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
         position: "relative"
       }}
     >
-      <div style={{ width: noData ? "32rem" : "56rem", height: "13rem" }}>
+      <div style={{ width: noData ? "32rem" : "100rem", height: "13rem" }}>
         {" "}
         <Line data={chartData} options={options} />
         {noData && (
