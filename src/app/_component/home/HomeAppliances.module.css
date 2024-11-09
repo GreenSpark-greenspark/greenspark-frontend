@@ -1,0 +1,48 @@
+.title {
+  margin-top: 2.5rem;
+  margin-left: 2.3rem;
+  margin-bottom: 0.6rem;
+
+  color: #000;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
+.flexLayout {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.LinkContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.AddCircle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 6.9rem;
+  height: 6.9rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 0.3rem solid #5e5e5e;
+  box-sizing: border-box;
+}
+.placeholder {
+  height: 1.2rem;
+}

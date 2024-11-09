@@ -8,7 +8,7 @@ export default function AttendanceCoin() {
       <div className={styles.coinWrap}>
         <Box>
           <div className={styles.coinContainer}>
-            <p className={styles.text_normal}>하루에 한 번씩 코인을 획득하세요!</p>
+            <p className={styles.text_normal}>하루에 한 번씩 포인트를 획득하세요!</p>
             <div className={styles.coin}>
               <Iconcoin className={styles.coinIcon} />
               <p className={styles.text_normal}>50</p>
