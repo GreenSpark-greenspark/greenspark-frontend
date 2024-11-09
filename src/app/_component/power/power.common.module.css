@@ -44,7 +44,26 @@
 
   cursor: pointer;
 }
+.powerBtn {
+  text-align: center;
+  cursor: pointer;
 
+  width: 27.7rem;
+  height: 3.8rem;
+  background-color: #19e407;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.btnWrap {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  margin-top: 3rem;
+}
 /* 기본 폰트 */
 .text_normal {
   font-family: Pretendard;

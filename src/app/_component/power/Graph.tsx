@@ -108,7 +108,7 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
   const noData =
     thisYearData.every(value => value === null) && lastYearData.every(value => value === null);
 
-  const labels = getLast12Months(noData ? 4 : 12); // 데이터가 없을때
+  const labels = getLast12Months(noData ? 9 : 12); // 데이터가 없을때
   const displayedData = noData ? Array(4).fill(null) : { thisYearData, lastYearData };
 
   const chartData: ChartData<"line"> = {
@@ -119,7 +119,8 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
           {
             label: dataSetLabel,
             data: thisYearData,
-            fill: false,
+            fill: true,
+            backgroundColor: "rgba(25, 228, 7, 0.2)",
             borderColor: "#19E407",
             borderWidth: 3,
             pointRadius: 5,
@@ -193,8 +194,7 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
     scales: {
       x: {
         ticks: { font: { size: 10 }, maxRotation: 0, minRotation: 0 },
-        grid: { display: false },
-        border: { color: "#5E5E5E", width: 2 }
+        grid: { display: false }
       },
       y: {
         ticks: { display: false },
@@ -227,12 +227,11 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
               priority
               style={{
                 position: "absolute",
-                top: -30,
+                top: 0,
                 left: 0,
                 zIndex: 1,
                 width: "100%",
-                height: "100%",
-                objectFit: "cover"
+                height: "100%"
               }}
             />
             <div
