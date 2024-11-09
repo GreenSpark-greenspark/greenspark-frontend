@@ -3,8 +3,14 @@ import "@/styles/reset.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import StyledComponentsRegistry from "@/lib/registry";
+import localFont from "next/font/local";
 
-const inter = Inter({ subsets: ["latin"] });
+const pretendard = localFont({
+  src: "../fonts/PretendardVariable.woff2",
+  display: "swap",
+  weight: "45 920",
+  variable: "--font-pretendard"
+});
 
 export const metadata: Metadata = {
   title: "GreenSpark",
@@ -18,8 +24,8 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <html lang="ko">
-        <body className={inter.className}>
+      <html lang="kr" className={pretendard.className}>
+        <body className={pretendard.className}>
           <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         </body>
       </html>

@@ -1,0 +1,19 @@
+.homeButton {
+  position: absolute;
+  bottom: 2.5rem;
+  text-align: center;
+  cursor: pointer;
+
+  width: 27.7rem;
+  height: 3.8rem;
+  background-color: #19e407;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.homeButton:hover {
+  background-color: #28ca19;
+}
