@@ -25,7 +25,7 @@ export default function HomePower() {
   const router = useRouter();
 
   const handleNavigate = () => {
-    router.push("/powerinput");
+    router.push("/power/input");
   };
 
   // api 통신

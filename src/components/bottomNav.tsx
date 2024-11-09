@@ -23,24 +23,18 @@ export default function BottomNav() {
   const [activeButton, setActiveButton] = useState<string>("");
 
   useEffect(() => {
-    switch (pathname) {
-      case "/power":
-        setActiveButton("power");
-        break;
-      case "/book":
-        setActiveButton("book");
-        break;
-      case "/":
-        setActiveButton("home");
-        break;
-      case "/appliances":
-        setActiveButton("appliance");
-        break;
-      case "/my":
-        setActiveButton("my");
-        break;
-      default:
-        setActiveButton("home");
+    if (pathname.startsWith("/power")) {
+      setActiveButton("power");
+    } else if (pathname.startsWith("/book")) {
+      setActiveButton("book");
+    } else if (pathname === "/") {
+      setActiveButton("home");
+    } else if (pathname.startsWith("/appliances")) {
+      setActiveButton("appliance");
+    } else if (pathname.startsWith("/my")) {
+      setActiveButton("my");
+    } else {
+      setActiveButton("home");
     }
   }, [pathname]);
 
