@@ -12,13 +12,13 @@ export default function Appliance({
   width = 6.9
 }: {
   id: number;
-  grade: number;
+  grade: string;
   type: string;
   width?: number;
 }) {
   const getImage = (type: string) => {
     switch (type) {
-      case "에어컨":
+      case "전기진공청소기":
         return airConditioner;
       case "냉장고":
         return refrigerator;
