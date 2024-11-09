@@ -16,7 +16,7 @@ export default function HomeQuiz() {
               <br />
               오늘의 에너지 퀴즈를 풀어보세요.
               <br />
-              정답 하나 당 100코인을 획득할 수 있어요!
+              정답 하나 당 100포인트를 획득할 수 있어요!
             </p>
           </div>
 
