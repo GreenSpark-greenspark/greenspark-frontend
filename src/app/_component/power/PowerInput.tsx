@@ -7,7 +7,7 @@ export default function NowPower() {
   const router = useRouter();
 
   const handleNavigate = () => {
-    router.push("/powerinput");
+    router.push("/power/input");
   };
 
   return (

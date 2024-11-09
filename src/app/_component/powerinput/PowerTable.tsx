@@ -18,7 +18,7 @@ const getLast36Months = () => {
   const months: { year: number; month: number }[] = [];
   const currentDate = new Date();
 
-  for (let i = 0; i < 36; i++) {
+  for (let i = 1; i < 37; i++) {
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
     const year = date.getFullYear();
     const month = date.getMonth() + 1;

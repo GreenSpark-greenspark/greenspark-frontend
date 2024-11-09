@@ -1,5 +1,5 @@
 :root {
-  --background: #F8FFF3;
+  --background: #f8fff3;
   --foreground: #000000;
   --html-background: #e4e4e4;
   --vh: 100%;
@@ -29,4 +29,11 @@ body {
   max-width: 375px;
   width: 100%;
   min-height: 100vh;
+}
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: #a9a9a9;
 }
