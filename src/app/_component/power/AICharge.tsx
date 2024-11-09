@@ -46,6 +46,7 @@ export default function AICharge() {
               difference > 0 ? "increase" : difference === 0 ? "unchanged" : "decrease"
             );
           }
+          console.log(`예상 요금: ${currentMonthCost}`);
         } else {
           console.error("API 호출 실패:", response.data.message);
         }

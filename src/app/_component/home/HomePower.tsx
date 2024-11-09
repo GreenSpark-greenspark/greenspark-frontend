@@ -1,5 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 import styles from "../power/power.common.module.css";
 import Box from "@/components/Box";
 import IconComment from "../../../../public/icon/power_comment.svg";
@@ -19,23 +21,54 @@ export default function HomePower() {
   const currentMonthLabel = getDateLabel("current");
   const lastMonthLabel = getDateLabel("last");
 
+  // 라우터
+  const router = useRouter();
+
+  const handleNavigate = () => {
+    router.push("/powerinput");
+  };
+
+  // api 통신
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const userId = 1;
+
   useEffect(() => {
-    const mockData: ChargeData = {
-      currentMonth: 8544,
-      lastMonth: 8522
+    const fetchCostData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/power/expect/${userId}`);
+
+        if (response.data.success) {
+          const data = response.data.data;
+
+          setChargeData({
+            currentMonth: data.expected_cost,
+            lastMonth: data.last_month_cost
+          });
+
+          const currentMonthCost = data.expected_cost;
+          const lastMonthCost = data.last_month_cost;
+
+          if (currentMonthCost === null) {
+            setDifferenceType("noCurrentMonth");
+          } else if (lastMonthCost === null) {
+            setDifferenceType("noLastMonth");
+          } else {
+            const difference = currentMonthCost - lastMonthCost;
+            setDifferenceType(
+              difference > 0 ? "increase" : difference === 0 ? "unchanged" : "decrease"
+            );
+          }
+          console.log(`예상 요금: ${currentMonthCost}`);
+        } else {
+          console.error("API 호출 실패:", response.data.message);
+        }
+      } catch (error) {
+        console.error("API 호출 중 오류 발생:", error);
+      }
     };
 
-    setChargeData(mockData);
-
-    if (mockData.lastMonth === null) {
-      setDifferenceType("noLastMonth");
-    } else if (mockData.currentMonth === null) {
-      setDifferenceType("noCurrentMonth");
-    } else {
-      const difference = mockData.currentMonth - mockData.lastMonth;
-      setDifferenceType(difference > 0 ? "increase" : difference === 0 ? "unchanged" : "decrease");
-    }
-  }, []);
+    fetchCostData();
+  }, [API_URL, userId]);
 
   // 요금 변동 메시지 설정
   const renderComment = () => {
@@ -84,9 +117,10 @@ export default function HomePower() {
 
   return (
     <>
+      <p className={styles.title}>내 파워</p>
       <div className={styles.wrap}>
         <Box>
-          <div className={styles.powerContent}>
+          <div className={styles.bodyContainer}>
             <p className={styles.text_normal}>
               저번달
               <span className={styles.text_bold}>
@@ -126,7 +160,7 @@ export default function HomePower() {
               {renderComment()}
             </div>
           </div>
-          <button type="button" className={styles.btn}>
+          <button type="button" className={styles.btn} onClick={handleNavigate}>
             내 파워 입력하기
           </button>
         </Box>
