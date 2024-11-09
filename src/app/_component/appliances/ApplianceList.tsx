@@ -9,7 +9,7 @@ interface ApplianceListProps {
     모델명: string;
     업체명: string;
     기자재명칭: string;
-    효율등급: number;
+    효율등급: string;
   }[];
   selectedIndex: number | null;
   setSelectedIndex: (index: number) => void;
@@ -47,7 +47,7 @@ export default function ApplianceList({
               <div className={styles.GrayBtn}>{item.기자재명칭}</div>
               <div
                 className={styles.ColorBtn}
-                style={{ backgroundColor: getColorFromGrade(Number(item.효율등급)) }}
+                style={{ backgroundColor: getColorFromGrade(item.효율등급) }}
               >
                 {item.효율등급}등급
               </div>

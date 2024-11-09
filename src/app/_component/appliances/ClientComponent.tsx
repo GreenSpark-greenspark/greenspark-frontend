@@ -31,8 +31,8 @@ const applianceOptions = [
 ];
 
 const applianceMockData = [
-  { id: 1, 모델명: "TR16SK", 업체명: "LG전자", 기자재명칭: "전기세탁기(일반)", 효율등급: 2 },
-  { id: 2, 모델명: "DOH222DF1", 업체명: "위니아전자", 기자재명칭: "냉장고", 효율등급: 1 }
+  { id: 1, 모델명: "TR16SK", 업체명: "LG전자", 기자재명칭: "전기세탁기(일반)", 효율등급: "2" },
+  { id: 2, 모델명: "DOH222DF1", 업체명: "위니아전자", 기자재명칭: "냉장고", 효율등급: "1" }
 ];
 
 export default function ClientComponent() {

@@ -25,7 +25,7 @@ const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: Top
   return (
     <div className={style.TopWrapper}>
       <div>
-        <div className={style.Circle} style={{ borderColor: getColorFromGrade(Number(효율등급)) }}>
+        <div className={style.Circle} style={{ borderColor: getColorFromGrade(효율등급) }}>
           <Image
             src={getImage(기자재명칭)}
             alt={기자재명칭}
@@ -48,10 +48,7 @@ const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: Top
         </div>
         <div className={style.BtnContainer}>
           <div className={style.GrayBtn}>{기자재명칭}</div>
-          <div
-            className={style.ColorBtn}
-            style={{ backgroundColor: getColorFromGrade(Number(효율등급)) }}
-          >
+          <div className={style.ColorBtn} style={{ backgroundColor: getColorFromGrade(효율등급) }}>
             {효율등급}등급
           </div>
         </div>
