@@ -73,7 +73,7 @@ const createRecent24MonthsData = (data: any[], currentYear: number): DataPoint[]
     const monthDiff = (currentYear - year) * 12 + (currentMonth - month);
 
     if (monthDiff >= 0 && monthDiff < 24) {
-      result[23 - monthDiff] = { value, year, month };
+      result[23 - monthDiff] = { value: value === 0 ? null : value, year, month };
     }
   });
 
@@ -93,7 +93,7 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
     }
-  }, []);
+  }, [data]);
 
   const currentYear = new Date().getFullYear();
   const recent24MonthsData = createRecent24MonthsData(data, currentYear);
@@ -108,8 +108,8 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
   const noData =
     thisYearData.every(value => value === null) && lastYearData.every(value => value === null);
 
-  const labels = getLast12Months(noData ? 7 : 12); // 데이터가 없을때
-  const displayedData = noData ? Array(7).fill(null) : { thisYearData, lastYearData };
+  const labels = getLast12Months(noData ? 4 : 12); // 데이터가 없을때
+  const displayedData = noData ? Array(4).fill(null) : { thisYearData, lastYearData };
 
   const chartData: ChartData<"line"> = {
     labels,
@@ -203,11 +203,7 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
       }
     }
   };
-  useEffect(() => {
-    if (scrollContainerRef.current && isLineChartReady) {
-      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
-    }
-  }, [data, isLineChartReady]);
+
   return (
     <div
       ref={scrollContainerRef}
