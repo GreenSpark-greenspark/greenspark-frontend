@@ -11,7 +11,6 @@
   margin-bottom: 0.6rem;
 
   color: #000;
-  font-family: Pretendard;
   font-size: 2rem;
   font-style: normal;
   font-weight: 600;
@@ -47,7 +46,6 @@
 
 /* 기본 폰트 */
 .text_normal {
-  font-family: Pretendard;
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 400;
@@ -57,7 +55,6 @@
 
 .text_bold {
   color: #000;
-  font-family: Pretendard;
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 600;
@@ -93,7 +90,6 @@
   width: 30rem;
   color: #000;
   text-align: center;
-  font-family: "Pretendard Variable";
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
@@ -121,7 +117,6 @@
 
   color: #111;
   text-align: left;
-  font-family: "Pretendard Variable";
   font-size: 2.5rem;
   font-style: normal;
   font-weight: 600;
@@ -137,7 +132,6 @@
   margin-top: 1.5rem;
 
   color: #000;
-  font-family: "Pretendard Variable";
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
@@ -175,7 +169,6 @@
   margin-bottom: 1.3rem;
 
   color: #000;
-  font-family: Pretendard;
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 600;
