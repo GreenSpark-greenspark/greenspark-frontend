@@ -1,8 +1,3 @@
-.infoIcon {
-  width: 1.3rem;
-  height: 1.3rem;
-  fill: #929292;
-}
 .expectTop {
   display: flex;
   justify-content: space-between;
@@ -26,6 +21,11 @@
   display: flex;
   gap: 0.4rem;
 }
+.infoIcon {
+  width: 1.3rem;
+  height: 1.3rem;
+  fill: #929292;
+}
 .infoText {
   color: #929292;
 
@@ -45,4 +45,88 @@
   height: 11px;
   border-radius: 3px;
   background: #929292;
+}
+/* 차트 */
+.chartContainer {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  align-items: end;
+  margin-top: 5rem;
+}
+.chartUnit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  width: 10rem;
+}
+.chartColor {
+  position: relative;
+  border-radius: 10px;
+  background: var(--highlight-color, #19e407);
+  width: 87px;
+  height: 124px;
+  flex-shrink: 0;
+  margin-top: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.chartBox {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 8rem;
+}
+
+.boxCost {
+  color: var(--Color-2, #111);
+  text-align: center;
+
+  /* Title3 */
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: 10rem;
+}
+.monthLabel {
+  color: var(--Color-3, #5e5e5e);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 3.7rem;
+}
+
+.chartBoxText {
+  color: var(--Color-3, #5e5e5e);
+  text-align: center;
+
+  /* Detail */
+  font-family: Pretendard;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.costBlue {
+  color: var(--Color-9, #039cf5);
+}
+.costText {
+  color: var(--Color-3, #5e5e5e);
+
+  /* Title4 */
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }

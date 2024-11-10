@@ -1,7 +1,7 @@
 import React from "react";
 import InfoIcon from "@/../public/icon/toast_info_icon.svg";
 import styles from "./expectPreCost.module.css";
-
+import ExpectPreChart from "./ExpectPreChart";
 export default function ExpectPreCost() {
   return (
     <>
@@ -21,6 +21,7 @@ export default function ExpectPreCost() {
           <p className={styles.infoText}>납부일 4일</p>
         </div>
       </div>
+      <ExpectPreChart />
     </>
   );
 }
