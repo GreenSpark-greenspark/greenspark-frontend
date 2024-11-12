@@ -56,6 +56,7 @@
   background: #929292;
 }
 
+/* 차트 */
 .chartContainer {
   display: flex;
   gap: 3rem;
@@ -148,6 +149,7 @@
   line-height: normal;
 }
 
+/* 팁 멘트 */
 .tipContainer {
   display: flex;
   align-items: center;

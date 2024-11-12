@@ -95,54 +95,64 @@ export default function ExpectPreChart() {
 
     switch (differenceType) {
       case "noMonths":
-        return <p className={styles.commentText}>정보를 입력해주세요!</p>;
+        return <div className={styles.commentText}>정보를 입력해주세요!</div>;
       case "noLastMonth":
         return (
-          <p className={styles.commentText}>
+          <div className={styles.commentText}>
             {`${lastMonthDate.monthLabel}월`} 정보를 입력해주세요!
-          </p>
+          </div>
         );
       case "notwoMonthAgo":
         return (
-          <p className={styles.commentText}>
+          <div className={styles.commentText}>
             {`${twoMonthsDate.monthLabel}월`} 전기 요금을 입력해주세요!
-          </p>
+          </div>
         );
       case "increase":
         return (
-          <p className={styles.commentText}>
-            {`${twoMonthsDate.monthLabel}월`}에 비해{" "}
-            <span className={styles.costRed}>{Math.abs(difference).toLocaleString()}원</span>{" "}
-            증가했어요!
-            <br />
-            조금 더 전기를 아껴보는 건 어떨까요?
-            <br />
-            에너지 백과를 통해 다양한 팁을 살펴보아요!
-          </p>
+          <div className={styles.commentText}>
+            <div>
+              {`${twoMonthsDate.monthLabel}월`}에 비해{" "}
+              <span className={styles.costRed}>{Math.abs(difference).toLocaleString()}원</span>{" "}
+              증가했어요!
+            </div>
+            <div>
+              조금 더 전기를 아껴보는 건 어떨까요?
+              <br />
+              에너지 백과를 통해 다양한 팁을 살펴보아요!
+            </div>
+          </div>
         );
       case "unchanged":
         return (
-          <p className={styles.commentText}>
-            {`${twoMonthsDate.monthLabel}월`}과 <span className={styles.costGreen}>같은</span> 전기
-            요금이네요!
-            <br />
-            조금 더 아껴서 다음 달에는
-            <br /> 절약해보는 건 어떨까요?
-            <br />
-            에너지 백과를 통해 다양한 팁을 살펴보아요!
-          </p>
+          <div className={styles.commentText}>
+            <div>
+              {`${twoMonthsDate.monthLabel}월`}에 비해{" "}
+              <span className={styles.costGreen}>같은</span> 전기 요금이네요!
+            </div>
+            <div>
+              조금 더 아껴서 다음 달에는
+              <br />
+              에너지 백과를 통해 다양한 팁을 살펴보아요!
+            </div>
+          </div>
         );
       case "decrease":
         return (
-          <p className={styles.commentText}>
-            {`${twoMonthsDate.monthLabel}월`}에 비해{" "}
-            <span className={styles.costBlue}>{Math.abs(difference).toLocaleString()}원</span>{" "}
-            감소했어요!
-            <br />
-            아주 잘하고 있군요!
-            <br /> 앞으로도 그린스파크와 함께 더 나은 <br />
-            전력소비 해보아요!
-          </p>
+          <div className={styles.commentText}>
+            <div>
+              {`${twoMonthsDate.monthLabel}월`}에 비해{" "}
+              <span className={styles.costBlue}>{Math.abs(difference).toLocaleString()}원</span>{" "}
+              감소했어요!
+            </div>
+            <div>
+              아주 잘하고 있군요!
+              <br />
+              앞으로도 그린스파크와 함께 더 나은
+              <br />
+              전력소비 해보아요!
+            </div>
+          </div>
         );
       default:
         return null;
