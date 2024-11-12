@@ -51,11 +51,14 @@ const Popup: React.FC<PowerPopupProps> = ({ userId, year, month, type, onClose }
       if (response.status === 200) {
         setToastMessage("저장되었습니다.");
         onClose();
+
+        // 저장 후 새로고침
+        window.location.reload();
       } else {
         setToastMessage("저장에 실패했습니다. 다시 시도해주세요.");
       }
     } catch (error) {
-      console.log("서버 오류가 발생했습니다.");
+      console.log("서버 오류가 발생했습니다.", error);
     }
   };
 
