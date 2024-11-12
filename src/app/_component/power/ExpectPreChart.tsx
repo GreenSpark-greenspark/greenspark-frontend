@@ -218,6 +218,7 @@ function ExpectPreChart() {
         </div>
         {/* 예상요금 */}
         <div className={styles.chartUnit}>
+          <p className={styles.infoText}>예상요금</p>
           <p
             className={`${styles.boxCost} ${chargeData?.expectedCost === null ? styles.costText : ""}`}
           >
