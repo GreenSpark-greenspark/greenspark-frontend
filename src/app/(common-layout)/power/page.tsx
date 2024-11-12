@@ -2,24 +2,17 @@
 import React from "react";
 
 import PowerInput from "../../_component/power/PowerInput";
-import AICharge from "../../_component/power/AICharge";
+import ExpectPreCost from "../../_component/power/ExpectPreCost";
 import GraphCharge from "../../_component/power/GraphCharge";
-import PreCharge from "../../_component/power/PreCharge";
-import styled from "styled-components";
 
 export default function Power() {
   return (
-    <div style={{ height: "100vh", overflowY: "scroll" }}>
-      <PagesWrap>
-        <PowerInput />
-        <AICharge />
-        <GraphCharge />
-        <PreCharge />
-      </PagesWrap>
+    <div
+      style={{ height: "100vh", overflowY: "scroll", paddingBottom: "10rem", marginTop: "4rem" }}
+    >
+      <GraphCharge />
+      <PowerInput />
+      <ExpectPreCost />
     </div>
   );
 }
-const PagesWrap = styled.div`
-  margin-top: 4rem;
-  padding-bottom: 10rem;
-`;

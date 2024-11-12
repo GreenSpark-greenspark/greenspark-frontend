@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Box from "@/components/Box";
 import styles from "./power.common.module.css";
 import graphStyles from "./graph.common.module.css";
 
@@ -15,9 +14,8 @@ export default function GraphCharge() {
 
   return (
     <>
-      <p className={styles.title}>한눈에 보는 내 파워</p>
       <div className={styles.wrap}>
-        <Box>
+        <div className={graphStyles.graphBox}>
           <div className={graphStyles.topContainer}>
             <div className={graphStyles.btnContainer}>
               <div
@@ -47,7 +45,7 @@ export default function GraphCharge() {
           </div>
           {activeButton === "bill" && <BillGraph />}
           {activeButton === "usage" && <UsageGraph />}
-        </Box>
+        </div>
       </div>
     </>
   );

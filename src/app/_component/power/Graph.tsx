@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
 import ImgGraph from "../../../../public/img/graph-default.png";
 import Image from "next/image";
@@ -58,12 +58,12 @@ const getLast12Months = (monthsToShow = 12): string[] => {
 };
 
 type DataPoint = {
-  value: number;
+  value: number | null;
   year: number;
   month: number;
 };
 
-const createRecent24MonthsData = (data: any[], currentYear: number): DataPoint[] => {
+const createRecent24MonthsData = (data: DataPoint[], currentYear: number): DataPoint[] => {
   const result: DataPoint[] = Array(24).fill({ value: null, year: null, month: null });
   const today = new Date();
   const currentMonth = today.getMonth() + 1;
@@ -73,7 +73,7 @@ const createRecent24MonthsData = (data: any[], currentYear: number): DataPoint[]
     const monthDiff = (currentYear - year) * 12 + (currentMonth - month);
 
     if (monthDiff >= 0 && monthDiff < 24) {
-      result[23 - monthDiff] = { value, year, month };
+      result[23 - monthDiff] = { value: value === 0 ? null : value, year, month };
     }
   });
 
@@ -81,19 +81,18 @@ const createRecent24MonthsData = (data: any[], currentYear: number): DataPoint[]
 };
 
 interface GraphProps {
-  data: any[];
+  data: DataPoint[];
   isBillGraph?: boolean;
 }
 
 const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [isLineChartReady, setIsLineChartReady] = useState(false);
 
   useEffect(() => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
     }
-  }, []);
+  }, [data]);
 
   const currentYear = new Date().getFullYear();
   const recent24MonthsData = createRecent24MonthsData(data, currentYear);
@@ -108,8 +107,8 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
   const noData =
     thisYearData.every(value => value === null) && lastYearData.every(value => value === null);
 
-  const labels = getLast12Months(noData ? 7 : 12); // 데이터가 없을때
-  const displayedData = noData ? Array(7).fill(null) : { thisYearData, lastYearData };
+  const labels = getLast12Months(noData ? 9 : 12); // 데이터가 없을때
+  // const displayedData = noData ? Array(4).fill(null) : { thisYearData, lastYearData };
 
   const chartData: ChartData<"line"> = {
     labels,
@@ -119,14 +118,15 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
           {
             label: dataSetLabel,
             data: thisYearData,
-            fill: false,
+            fill: true,
+            backgroundColor: "rgba(25, 228, 7, 0.2)",
             borderColor: "#19E407",
-            borderWidth: 2,
-            pointRadius: 2,
+            borderWidth: 3,
+            pointRadius: 5,
             pointBackgroundColor: "#19E407",
-            pointHoverRadius: 8,
+            pointHoverRadius: 9,
             pointHoverBorderColor: "#CBF4B8",
-            pointHoverBorderWidth: 6,
+            pointHoverBorderWidth: 7,
             spanGaps: true
           },
           {
@@ -134,12 +134,12 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
             data: lastYearData,
             fill: false,
             borderColor: "#C4C4C4",
-            borderWidth: 2,
-            pointRadius: 2,
+            borderWidth: 3,
+            pointRadius: 5,
             pointBackgroundColor: "#C4C4C4",
-            pointHoverRadius: 8,
+            pointHoverRadius: 9,
             pointHoverBorderColor: "#E0E0E0",
-            pointHoverBorderWidth: 6,
+            pointHoverBorderWidth: 7,
             spanGaps: true
           }
         ]
@@ -185,7 +185,7 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
                 : recent24MonthsData[dataIndex]; // 작년 데이터
 
             const { value } = dataPoint;
-            return `${value.toLocaleString()}${unit}`;
+            return value !== null ? `${value.toLocaleString()}${unit}` : `데이터 없음`;
           }
         }
       }
@@ -193,21 +193,16 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
     scales: {
       x: {
         ticks: { font: { size: 10 }, maxRotation: 0, minRotation: 0 },
-        grid: { display: false },
-        border: { color: "#5E5E5E", width: 2 }
+        grid: { display: false }
       },
       y: {
         ticks: { display: false },
-        grid: { color: "rgba(0, 0, 0, 0.1)", lineWidth: 1 },
+        grid: { display: false },
         border: { display: false }
       }
     }
   };
-  useEffect(() => {
-    if (scrollContainerRef.current && isLineChartReady) {
-      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
-    }
-  }, [data, isLineChartReady]);
+
   return (
     <div
       ref={scrollContainerRef}
@@ -218,25 +213,20 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
         position: "relative"
       }}
     >
-      <div style={{ width: noData ? "32rem" : "56rem", height: "13rem" }}>
-        {" "}
-        <Line data={chartData} options={options} />
-        {noData && (
-          <>
+      <div style={{ width: noData ? "32rem" : "100rem", height: "13rem" }}>
+        {noData ? (
+          <div>
             <Image
               src={ImgGraph}
               alt="No Data Available"
-              // layout="fill"
-              // objectFit="cover"
               priority
               style={{
                 position: "absolute",
-                top: -30,
+                top: 0,
                 left: 0,
                 zIndex: 1,
                 width: "100%",
-                height: "100%",
-                objectFit: "cover"
+                height: "100%"
               }}
             />
             <div
@@ -255,7 +245,9 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
             >
               정보를 입력하면 그래프를 볼 수 있어요!
             </div>
-          </>
+          </div>
+        ) : (
+          <Line data={chartData} options={options} />
         )}
       </div>
     </div>

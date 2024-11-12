@@ -1,0 +1,223 @@
+.expectTop {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 8.7rem;
+  margin: 8.7rem 2rem 0 2rem;
+}
+
+.topTitle {
+  color: #000;
+
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.014rem;
+}
+
+.topLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.infoContianer {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.infoIcon {
+  width: 1.3rem;
+  height: 1.3rem;
+  fill: #929292;
+}
+
+.infoText {
+  color: #929292;
+
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.topRight {
+  display: flex;
+  align-items: center;
+  height: 1.5rem;
+  gap: 0.5rem;
+}
+
+.infoDate {
+  width: 0.5rem;
+  height: 1.1rem;
+  border-radius: 0.3rem;
+  background: #929292;
+}
+
+/* 차트 */
+.chartContainer {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  align-items: end;
+  margin-top: 5rem;
+}
+
+.chartUnit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10rem;
+}
+
+.chartColor {
+  position: relative;
+  border-radius: 1rem;
+  background: #d4ddcf;
+  width: 8.7rem;
+  height: 5.2rem;
+  flex-shrink: 0;
+  margin-top: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.chartBox {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 8rem;
+}
+
+.boxCost {
+  color: #111;
+  text-align: center;
+
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: 10rem;
+}
+
+.monthLabel {
+  color: #5e5e5e;
+  text-align: center;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 3.7rem;
+  height: 1.9rem;
+}
+
+.lastMonthLabel {
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 3.7rem;
+  height: 1.9rem;
+  flex-shrink: 0;
+  border-radius: 3em;
+
+  background: #929292;
+}
+
+.chartBoxText {
+  color: #5e5e5e;
+  text-align: center;
+
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.costBlue {
+  color: #039cf5;
+  font-weight: 600;
+}
+
+.costRed {
+  color: #ff2727;
+  font-weight: 600;
+}
+
+.costGreen {
+  color: #1aad0d;
+  font-weight: 600;
+}
+
+.costText {
+  color: #5e5e5e;
+
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.chartSection0 {
+  width: 8.7rem;
+  height: 5.2rem;
+  border-radius: 1em;
+  background: #d4ddcf;
+}
+.chartSection1 {
+  width: 8.7rem;
+  height: 4rem;
+  border-radius: 1em;
+  background: #d7f3c6;
+}
+.chartSection2 {
+  width: 8.7rem;
+  height: 8rem;
+  border-radius: 1em;
+  background: #b6ec94;
+}
+.chartSection3 {
+  width: 8.7rem;
+  height: 12rem;
+  border-radius: 1em;
+  background: #91e26b;
+}
+.chartSection4 {
+  width: 8.7rem;
+  height: 16rem;
+  border-radius: 1em;
+  background: #19e407;
+}
+/* 팁 멘트 */
+.tipContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.4rem;
+  position: relative;
+}
+
+.tipMent {
+  color: #000;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  position: absolute;
+  top: 2rem;
+  width: 21rem;
+  z-index: 1;
+  height: 5rem;
+  padding: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
