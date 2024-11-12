@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import styles from "./expectPreCost.module.css";
 import { getDateLabel } from "@/utils/getDateLabels";
 import TipMentIcon from "@/../public/icon/power_tipMent_big.svg";
@@ -18,7 +19,7 @@ type DifferenceType =
   | "noLastMonth"
   | "noMonths";
 
-export default function ExpectPreChart() {
+function ExpectPreChart() {
   const [chargeData, setChargeData] = useState<ChargeData>({
     lastMonth: null,
     twoMonthsAgo: null,
@@ -99,59 +100,50 @@ export default function ExpectPreChart() {
       case "noLastMonth":
         return (
           <div className={styles.commentText}>
-            {`${lastMonthDate.monthLabel}월`} 정보를 입력해주세요!
+            {`${lastMonthDate.monthLabel}월 정보를 입력해주세요!`}
           </div>
         );
       case "notwoMonthAgo":
         return (
           <div className={styles.commentText}>
-            {`${twoMonthsDate.monthLabel}월`} 전기 요금을 입력해주세요!
+            {`${twoMonthsDate.monthLabel}월 전기 요금을 입력해주세요!`}
           </div>
         );
       case "increase":
         return (
           <div className={styles.commentText}>
-            <div>
-              {`${twoMonthsDate.monthLabel}월`}에 비해{" "}
-              <span className={styles.costRed}>{Math.abs(difference).toLocaleString()}원</span>{" "}
-              증가했어요!
-            </div>
-            <div>
-              조금 더 전기를 아껴보는 건 어떨까요?
-              <br />
-              에너지 백과를 통해 다양한 팁을 살펴보아요!
-            </div>
+            <span>{`${twoMonthsDate.monthLabel}월에 비해 `}</span>
+            <span className={styles.costRed}>
+              {Math.abs(difference).toLocaleString()}원 증가했어요!
+            </span>
+            <br />
+            <span>조금 더 전기를 아껴보는 건 어떨까요?</span>
+            <br />
+            <span>에너지 백과를 통해 다양한 팁을 살펴보아요!</span>
           </div>
         );
       case "unchanged":
         return (
           <div className={styles.commentText}>
-            <div>
-              {`${twoMonthsDate.monthLabel}월`}에 비해{" "}
-              <span className={styles.costGreen}>같은</span> 전기 요금이네요!
-            </div>
-            <div>
-              조금 더 아껴서 다음 달에는
-              <br />
-              에너지 백과를 통해 다양한 팁을 살펴보아요!
-            </div>
+            <span>{`${twoMonthsDate.monthLabel}월에 비해 `}</span>
+            <span className={styles.costGreen}>같은 전기 요금이네요!</span>
+            <br />
+            <span>조금 더 아껴서 다음 달에는</span>
+            <br />
+            <span>에너지 백과를 통해 다양한 팁을 살펴보아요!</span>
           </div>
         );
       case "decrease":
         return (
           <div className={styles.commentText}>
-            <div>
-              {`${twoMonthsDate.monthLabel}월`}에 비해{" "}
-              <span className={styles.costBlue}>{Math.abs(difference).toLocaleString()}원</span>{" "}
-              감소했어요!
-            </div>
-            <div>
-              아주 잘하고 있군요!
-              <br />
-              앞으로도 그린스파크와 함께 더 나은
-              <br />
-              전력소비 해보아요!
-            </div>
+            <span>{`${twoMonthsDate.monthLabel}월에 비해 `}</span>
+            <span className={styles.costBlue}>
+              {Math.abs(difference).toLocaleString()}원 감소했어요!
+            </span>
+            <br />
+            <span>아주 잘하고 있군요!</span>
+            <br />
+            <span>앞으로도 그린스파크와 함께 더 나은 전력소비 해보아요!</span>
           </div>
         );
       default:
@@ -162,13 +154,17 @@ export default function ExpectPreChart() {
   return (
     <>
       <div className={styles.chartContainer}>
+        {/* 전전월 */}
         <div className={styles.chartUnit}>
-          <p className={styles.boxCost}>{chargeData?.twoMonthsAgo?.toLocaleString() ?? "???"}원</p>
+          <p className={styles.boxCost}>
+            {chargeData?.twoMonthsAgo?.toLocaleString() ?? "?,???"}원
+          </p>
           <div className={styles.chartColor}></div>
           <p className={styles.monthLabel}>{`${twoMonthsDate.monthLabel}월`}</p>
         </div>
+        {/* 전월 */}
         <div className={styles.chartUnit}>
-          <p className={styles.boxCost}>{chargeData?.lastMonth?.toLocaleString() ?? "???"}원</p>
+          <p className={styles.boxCost}>{chargeData?.lastMonth?.toLocaleString() ?? "?,???"}원</p>
           <div className={styles.chartColor}>
             <div className={styles.chartBox}>
               <p className={styles.chartBoxText}>{`${twoMonthsDate.monthLabel}월 대비`}</p>
@@ -191,36 +187,47 @@ export default function ExpectPreChart() {
               </p>
             </div>
           </div>
-          <p className={styles.monthLabel}>{`${lastMonthDate.monthLabel}월`}</p>
+          <p className={styles.lastMonthLabel}>{`${lastMonthDate.monthLabel}월`}</p>
         </div>
+        {/* 예상요금 */}
         <div className={styles.chartUnit}>
           <p className={styles.infoText}>예상요금</p>
-          <p className={styles.boxCost}>{chargeData?.expectedCost?.toLocaleString() ?? "???"}원</p>
+          <p className={styles.boxCost}>
+            {chargeData?.expectedCost?.toLocaleString() ?? "?,???"}원
+          </p>
           <div className={styles.chartColor}>
             <div className={styles.chartBox}>
-              <p className={styles.chartBoxText}>{`${lastMonthDate.monthLabel}월 대비`}</p>
+              <p className={styles.chartBoxText}>
+                {chargeData?.expectedCost === 0
+                  ? "파워 입력 부족"
+                  : `${lastMonthDate.monthLabel}월 대비`}
+              </p>
               <p className={styles.costText}>
-                <span
-                  className={
-                    chargeData?.lastMonth &&
-                    chargeData.expectedCost &&
-                    chargeData.expectedCost > chargeData.lastMonth
-                      ? styles.costRed
-                      : chargeData?.lastMonth &&
-                          chargeData.expectedCost &&
-                          chargeData.expectedCost < chargeData.lastMonth
-                        ? styles.costBlue
-                        : styles.costGreen
-                  }
-                >
-                  {chargeData?.lastMonth && chargeData.expectedCost
-                    ? chargeData.expectedCost === chargeData.lastMonth
-                      ? "동일"
-                      : `${chargeData.expectedCost > chargeData.lastMonth ? "+" : "-"}${Math.abs(
-                          chargeData.expectedCost - chargeData.lastMonth
-                        ).toLocaleString()}원`
-                    : "???"}
-                </span>
+                {chargeData?.expectedCost === 0 ? (
+                  <span className={styles.costRed}>파워 입력 부족</span>
+                ) : (
+                  <span
+                    className={
+                      chargeData?.lastMonth &&
+                      chargeData.expectedCost &&
+                      chargeData.expectedCost > chargeData.lastMonth
+                        ? styles.costRed
+                        : chargeData?.lastMonth &&
+                            chargeData.expectedCost &&
+                            chargeData.expectedCost < chargeData.lastMonth
+                          ? styles.costBlue
+                          : styles.costGreen
+                    }
+                  >
+                    {chargeData?.lastMonth && chargeData.expectedCost
+                      ? chargeData.expectedCost === chargeData.lastMonth
+                        ? "동일"
+                        : `${chargeData.expectedCost > chargeData.lastMonth ? "+" : "-"}${Math.abs(
+                            chargeData.expectedCost - chargeData.lastMonth
+                          ).toLocaleString()}원`
+                      : "?,???"}
+                  </span>
+                )}
               </p>
             </div>
           </div>
@@ -234,3 +241,4 @@ export default function ExpectPreChart() {
     </>
   );
 }
+export default dynamic(() => Promise.resolve(ExpectPreChart), { ssr: false });

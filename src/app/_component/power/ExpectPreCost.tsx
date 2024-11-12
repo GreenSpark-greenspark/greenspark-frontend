@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import InfoIcon from "@/../public/icon/toast_info_icon.svg";
 import styles from "./expectPreCost.module.css";

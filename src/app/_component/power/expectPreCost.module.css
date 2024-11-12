@@ -95,7 +95,7 @@
 }
 
 .boxCost {
-  color: var(--Color-2, #111);
+  color: #111;
   text-align: center;
 
   font-size: 1.6rem;
@@ -113,6 +113,22 @@
   font-weight: 400;
   line-height: normal;
   width: 3.7rem;
+  height: 1.9rem;
+}
+
+.lastMonthLabel {
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 3.7rem;
+  height: 1.9rem;
+  flex-shrink: 0;
+  border-radius: 3em;
+
+  background: #929292;
 }
 
 .chartBoxText {
