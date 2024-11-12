@@ -8,6 +8,8 @@ import IconPlus from "@/../public/icon/power_plus.svg";
 import style from "./MyAppliances.module.css";
 import GradeLabel from "./GradeLabel";
 import { useEffect, useState } from "react";
+import LoadingDots from "@/components/LoadingDots";
+
 interface ApplianceData {
   applianceId: number;
   grade: string;
@@ -17,11 +19,13 @@ interface ApplianceData {
 
 export default function MyAppliances() {
   const [data, setData] = useState<ApplianceData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const userId = 1;
 
   useEffect(() => {
     const fetchCostData = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(`${API_URL}/appliances/${userId}`);
         if (response.data.success) {
@@ -32,11 +36,21 @@ export default function MyAppliances() {
         }
       } catch (error) {
         console.error("API 호출 중 오류 발생:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchCostData();
   }, [API_URL, userId]);
+
+  if (isLoading) {
+    return (
+      <div className={style.LoadingWrapper}>
+        <LoadingDots />
+      </div>
+    );
+  }
 
   return (
     <div className={style.BoxWrapper}>
