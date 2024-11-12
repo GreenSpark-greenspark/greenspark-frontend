@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
 import ImgGraph from "../../../../public/img/graph-default.png";
 import Image from "next/image";
@@ -58,12 +58,12 @@ const getLast12Months = (monthsToShow = 12): string[] => {
 };
 
 type DataPoint = {
-  value: number;
+  value: number | null;
   year: number;
   month: number;
 };
 
-const createRecent24MonthsData = (data: any[], currentYear: number): DataPoint[] => {
+const createRecent24MonthsData = (data: DataPoint[], currentYear: number): DataPoint[] => {
   const result: DataPoint[] = Array(24).fill({ value: null, year: null, month: null });
   const today = new Date();
   const currentMonth = today.getMonth() + 1;
@@ -81,13 +81,12 @@ const createRecent24MonthsData = (data: any[], currentYear: number): DataPoint[]
 };
 
 interface GraphProps {
-  data: any[];
+  data: DataPoint[];
   isBillGraph?: boolean;
 }
 
 const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [isLineChartReady, setIsLineChartReady] = useState(false);
 
   useEffect(() => {
     if (scrollContainerRef.current) {
@@ -109,7 +108,7 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
     thisYearData.every(value => value === null) && lastYearData.every(value => value === null);
 
   const labels = getLast12Months(noData ? 9 : 12); // 데이터가 없을때
-  const displayedData = noData ? Array(4).fill(null) : { thisYearData, lastYearData };
+  // const displayedData = noData ? Array(4).fill(null) : { thisYearData, lastYearData };
 
   const chartData: ChartData<"line"> = {
     labels,
@@ -186,7 +185,7 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
                 : recent24MonthsData[dataIndex]; // 작년 데이터
 
             const { value } = dataPoint;
-            return `${value.toLocaleString()}${unit}`;
+            return value !== null ? `${value.toLocaleString()}${unit}` : `데이터 없음`;
           }
         }
       }
@@ -215,15 +214,11 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
       }}
     >
       <div style={{ width: noData ? "32rem" : "100rem", height: "13rem" }}>
-        {" "}
-        <Line data={chartData} options={options} />
-        {noData && (
-          <>
+        {noData ? (
+          <div>
             <Image
               src={ImgGraph}
               alt="No Data Available"
-              // layout="fill"
-              // objectFit="cover"
               priority
               style={{
                 position: "absolute",
@@ -250,7 +245,9 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
             >
               정보를 입력하면 그래프를 볼 수 있어요!
             </div>
-          </>
+          </div>
+        ) : (
+          <Line data={chartData} options={options} />
         )}
       </div>
     </div>
