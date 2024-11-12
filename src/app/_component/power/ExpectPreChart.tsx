@@ -42,7 +42,6 @@ function ExpectPreChart() {
             lastMonth: last_month_cost === 0 ? null : last_month_cost,
             twoMonthsAgo: month_before_last_cost === 0 ? null : month_before_last_cost
           }));
-
           // differenceType 설정
           if (last_month_cost === 0 && month_before_last_cost === 0) {
             setDifferenceType("noMonths");
@@ -83,6 +82,24 @@ function ExpectPreChart() {
   const lastMonthDate = getDateLabel("last");
   const twoMonthsDate = getDateLabel("twoMonths");
 
+  // 요금에 따라 스타일 설정
+  const getChartColorClass = (cost: number | null) => {
+    switch (true) {
+      case cost === 0:
+        return styles.chartSection0;
+      case cost && cost <= 5000:
+        return styles.chartSection1;
+      case cost && cost <= 10000:
+        return styles.chartSection2;
+      case cost && cost <= 15000:
+        return styles.chartSection3;
+      case cost && cost > 15000:
+        return styles.chartSection4;
+      default:
+        return "";
+    }
+  };
+
   const renderComment = () => {
     if (!chargeData) return null;
 
@@ -112,38 +129,38 @@ function ExpectPreChart() {
       case "increase":
         return (
           <div className={styles.commentText}>
-            <span>{`${twoMonthsDate.monthLabel}월에 비해 `}</span>
-            <span className={styles.costRed}>
-              {Math.abs(difference).toLocaleString()}원 증가했어요!
-            </span>
+            {`${twoMonthsDate.monthLabel}월에 비해 `}
+            <span className={styles.costRed}>{Math.abs(difference).toLocaleString()}원</span>
+            증가했어요!
             <br />
-            <span>조금 더 전기를 아껴보는 건 어떨까요?</span>
+            조금 더 전기를 아껴보는 건 어떨까요?
             <br />
-            <span>에너지 백과를 통해 다양한 팁을 살펴보아요!</span>
+            에너지 백과를 통해 다양한 팁을 살펴보아요!
           </div>
         );
       case "unchanged":
         return (
           <div className={styles.commentText}>
-            <span>{`${twoMonthsDate.monthLabel}월에 비해 `}</span>
+            {`${twoMonthsDate.monthLabel}월에 비해 `}
             <span className={styles.costGreen}>같은 전기 요금이네요!</span>
             <br />
-            <span>조금 더 아껴서 다음 달에는</span>
+            조금 더 아껴서 다음 달에는
             <br />
-            <span>에너지 백과를 통해 다양한 팁을 살펴보아요!</span>
+            에너지 백과를 통해 다양한 팁을 살펴보아요!
           </div>
         );
       case "decrease":
         return (
           <div className={styles.commentText}>
-            <span>{`${twoMonthsDate.monthLabel}월에 비해 `}</span>
-            <span className={styles.costBlue}>
-              {Math.abs(difference).toLocaleString()}원 감소했어요!
-            </span>
+            {`${twoMonthsDate.monthLabel}월에 비해 `}
+            <span className={styles.costBlue}>{Math.abs(difference).toLocaleString()}원 </span>
+            감소했어요!
             <br />
-            <span>아주 잘하고 있군요!</span>
+            아주 잘하고 있군요!
             <br />
-            <span>앞으로도 그린스파크와 함께 더 나은 전력소비 해보아요!</span>
+            앞으로도 그린스파크와 함께 더 나은
+            <br />
+            전력소비 해보아요!
           </div>
         );
       default:
@@ -156,16 +173,24 @@ function ExpectPreChart() {
       <div className={styles.chartContainer}>
         {/* 전전월 */}
         <div className={styles.chartUnit}>
-          <p className={styles.boxCost}>
+          <p
+            className={`${styles.boxCost} ${chargeData?.twoMonthsAgo === null ? styles.costText : ""}`}
+          >
             {chargeData?.twoMonthsAgo?.toLocaleString() ?? "?,???"}원
           </p>
-          <div className={styles.chartColor}></div>
+          <div
+            className={`${styles.chartColor} ${getChartColorClass(chargeData.twoMonthsAgo)}`}
+          ></div>
           <p className={styles.monthLabel}>{`${twoMonthsDate.monthLabel}월`}</p>
         </div>
         {/* 전월 */}
         <div className={styles.chartUnit}>
-          <p className={styles.boxCost}>{chargeData?.lastMonth?.toLocaleString() ?? "?,???"}원</p>
-          <div className={styles.chartColor}>
+          <p
+            className={`${styles.boxCost} ${chargeData?.lastMonth === null ? styles.costText : ""}`}
+          >
+            {chargeData?.lastMonth?.toLocaleString() ?? "?,???"}원
+          </p>
+          <div className={`${styles.chartColor} ${getChartColorClass(chargeData.lastMonth)}`}>
             <div className={styles.chartBox}>
               <p className={styles.chartBoxText}>{`${twoMonthsDate.monthLabel}월 대비`}</p>
               <p className={styles.costText}>
@@ -175,7 +200,9 @@ function ExpectPreChart() {
                       ? styles.costBlue
                       : differenceType === "increase"
                         ? styles.costRed
-                        : styles.costGreen
+                        : differenceType === "unchanged"
+                          ? styles.costGreen
+                          : styles.costText
                   }
                 >
                   {differenceType === "unchanged"
@@ -191,11 +218,12 @@ function ExpectPreChart() {
         </div>
         {/* 예상요금 */}
         <div className={styles.chartUnit}>
-          <p className={styles.infoText}>예상요금</p>
-          <p className={styles.boxCost}>
+          <p
+            className={`${styles.boxCost} ${chargeData?.expectedCost === null ? styles.costText : ""}`}
+          >
             {chargeData?.expectedCost?.toLocaleString() ?? "?,???"}원
           </p>
-          <div className={styles.chartColor}>
+          <div className={`${styles.chartColor} ${getChartColorClass(chargeData.expectedCost)}`}>
             <div className={styles.chartBox}>
               <p className={styles.chartBoxText}>
                 {chargeData?.expectedCost === 0
@@ -204,19 +232,19 @@ function ExpectPreChart() {
               </p>
               <p className={styles.costText}>
                 {chargeData?.expectedCost === 0 ? (
-                  <span className={styles.costRed}>파워 입력 부족</span>
+                  <span className={styles.costText}>파워 입력 부족</span>
                 ) : (
                   <span
                     className={
                       chargeData?.lastMonth &&
                       chargeData.expectedCost &&
-                      chargeData.expectedCost > chargeData.lastMonth
+                      chargeData.expectedCost > chargeData.lastMonth // 모두 존재, 증가
                         ? styles.costRed
                         : chargeData?.lastMonth &&
                             chargeData.expectedCost &&
-                            chargeData.expectedCost < chargeData.lastMonth
+                            chargeData.expectedCost < chargeData.lastMonth // 모두 존재, 감소
                           ? styles.costBlue
-                          : styles.costGreen
+                          : styles.costText // 기본
                     }
                   >
                     {chargeData?.lastMonth && chargeData.expectedCost
@@ -236,9 +264,10 @@ function ExpectPreChart() {
       </div>
       <div className={styles.tipContainer}>
         <TipMentIcon style={{ width: "24.3rem", height: "9.5rem" }} />
-        <p className={styles.tipMent}>{renderComment()}</p>
+        <div className={styles.tipMent}>{renderComment()}</div>
       </div>
     </>
   );
 }
+
 export default dynamic(() => Promise.resolve(ExpectPreChart), { ssr: false });

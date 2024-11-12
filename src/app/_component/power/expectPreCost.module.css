@@ -75,9 +75,9 @@
 .chartColor {
   position: relative;
   border-radius: 1rem;
-  background: #19e407;
+  background: #d4ddcf;
   width: 8.7rem;
-  height: 12.4rem;
+  height: 5.2rem;
   flex-shrink: 0;
   margin-top: 0.6rem;
   margin-bottom: 1rem;
@@ -164,7 +164,36 @@
   font-weight: 600;
   line-height: normal;
 }
-
+.chartSection0 {
+  width: 8.7rem;
+  height: 5.2rem;
+  border-radius: 1em;
+  background: #d4ddcf;
+}
+.chartSection1 {
+  width: 8.7rem;
+  height: 4rem;
+  border-radius: 1em;
+  background: #d7f3c6;
+}
+.chartSection2 {
+  width: 8.7rem;
+  height: 8rem;
+  border-radius: 1em;
+  background: #b6ec94;
+}
+.chartSection3 {
+  width: 8.7rem;
+  height: 12rem;
+  border-radius: 1em;
+  background: #91e26b;
+}
+.chartSection4 {
+  width: 8.7rem;
+  height: 16rem;
+  border-radius: 1em;
+  background: #19e407;
+}
 /* 팁 멘트 */
 .tipContainer {
   display: flex;
