@@ -9,12 +9,22 @@ type PowerPopupProps = {
   year: number;
   month: number;
   type: "cost" | "usage";
+  value?: number;
   onClose: () => void;
+  onSave: (newValue: number) => void;
 };
 
-const Popup: React.FC<PowerPopupProps> = ({ userId, year, month, type, onClose }) => {
-  const [inputValue, setInputValue] = useState("");
-  const [toastMessage, setToastMessage] = useState("");
+const PowerPopup: React.FC<PowerPopupProps> = ({
+  userId,
+  year,
+  month,
+  type,
+  value,
+  onClose,
+  onSave
+}) => {
+  const [inputValue, setInputValue] = useState<string>(value ? value.toString() : "");
+  const [toastMessage, setToastMessage] = useState<string>("");
 
   const typeName = type === "cost" ? "전기요금" : "전력사용량";
   const unit = type === "cost" ? "원" : "Kwh";
@@ -39,29 +49,28 @@ const Popup: React.FC<PowerPopupProps> = ({ userId, year, month, type, onClose }
       return;
     }
 
+    const numericValue = Number(inputValue);
+
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
     const postData =
       type === "cost"
-        ? { year, month, cost: Number(inputValue) }
-        : { year, month, usageAmount: Number(inputValue) };
+        ? { year, month, cost: numericValue }
+        : { year, month, usageAmount: numericValue };
 
     try {
       const response = await axios.post(`${API_URL}/power/${type}/${userId}`, postData);
 
       if (response.status === 200) {
         setToastMessage("저장되었습니다.");
+        onSave(numericValue);
         onClose();
-
-        // 저장 후 새로고침
-        window.location.reload();
       } else {
         setToastMessage("저장에 실패했습니다. 다시 시도해주세요.");
       }
     } catch (error) {
-      console.log("서버 오류가 발생했습니다.", error);
+      console.error("서버 오류가 발생했습니다.", error);
     }
   };
-
   useEffect(() => {
     if (toastMessage) {
       const timer = setTimeout(() => setToastMessage(""), 2000);
@@ -95,4 +104,4 @@ const Popup: React.FC<PowerPopupProps> = ({ userId, year, month, type, onClose }
   );
 };
 
-export default Popup;
+export default PowerPopup;

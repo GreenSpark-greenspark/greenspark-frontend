@@ -48,6 +48,7 @@ const PowerTable: React.FC = () => {
     year: number;
     month: number;
     type: "cost" | "usage";
+    value?: number;
   } | null>(null);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -96,9 +97,19 @@ const PowerTable: React.FC = () => {
 
   const formatYearMonth = (year: number, month: number) => `${year}년 ${formatMonth(month)}`;
 
-  const handleIconClick = (year: number, month: number, type: "cost" | "usage") => {
-    console.log("플러스 아이콘 클릭됨:", { year, month, type });
-    setPopupInfo({ year, month, type });
+  const handleIconClick = (year: number, month: number, type: "cost" | "usage", value?: number) => {
+    setPopupInfo({ year, month, type, value });
+  };
+
+  const handleSave = (year: number, month: number, type: "cost" | "usage", newValue: number) => {
+    setData(prevData =>
+      prevData.map(row => {
+        if (row.year === year && row.month === month) {
+          return type === "cost" ? { ...row, cost: newValue } : { ...row, usage_amount: newValue };
+        }
+        return row;
+      })
+    );
   };
 
   const closePopup = () => {
@@ -151,7 +162,12 @@ const PowerTable: React.FC = () => {
         Cell: ({ row }: CellProps<TableRow>) => {
           const { year, month } = row.original;
           return row.values.cost ? (
-            `${row.values.cost.toLocaleString()}원`
+            <div
+              className={styles.cellWrapper}
+              onClick={() => handleIconClick(year, month, "cost", row.values.cost)}
+            >
+              {`${row.values.cost.toLocaleString()}원`}
+            </div>
           ) : (
             <div
               className={styles.iconWrapper}
@@ -168,7 +184,12 @@ const PowerTable: React.FC = () => {
         Cell: ({ row }: CellProps<TableRow>) => {
           const { year, month } = row.original;
           return row.values.usage_amount ? (
-            `${row.values.usage_amount.toLocaleString()}kWh`
+            <div
+              className={styles.cellWrapper}
+              onClick={() => handleIconClick(year, month, "usage", row.values.usage_amount)}
+            >
+              {`${row.values.usage_amount.toLocaleString()}kWh`}
+            </div>
           ) : (
             <div
               className={styles.iconWrapper}
@@ -247,7 +268,9 @@ const PowerTable: React.FC = () => {
           year={popupInfo.year}
           month={popupInfo.month}
           type={popupInfo.type}
+          value={popupInfo.value} // 기존 값
           onClose={closePopup}
+          onSave={newValue => handleSave(popupInfo.year, popupInfo.month, popupInfo.type, newValue)} // 수정된 값
         />
       )}
     </div>
