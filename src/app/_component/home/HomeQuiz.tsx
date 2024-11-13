@@ -1,8 +1,14 @@
 import React from "react";
+import { useRouter } from "next/navigation";
 import styles from "../power/power.common.module.css";
 import Box from "@/components/Box";
 
 export default function HomeQuiz() {
+  const router = useRouter();
+
+  const handleNavigate = () => {
+    router.push("/book");
+  };
   return (
     <>
       <p className={styles.title}>에너지 퀴즈️</p>
@@ -20,7 +26,7 @@ export default function HomeQuiz() {
             </p>
           </div>
 
-          <button type="button" className={styles.btn}>
+          <button type="button" className={styles.btn} onClick={handleNavigate}>
             퀴즈풀러가기
           </button>
         </Box>
