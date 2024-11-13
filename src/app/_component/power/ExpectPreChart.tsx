@@ -118,38 +118,44 @@ function ExpectPreChart() {
       case "increase":
         return (
           <>
-            {`${twoMonthsDate.monthLabel}월에 비해 `}
-            <span className={styles.costRed}>{Math.abs(difference).toLocaleString()}원 </span>
-            증가했어요!
-            <br />
-            조금 더 전기를 아껴보는 건 어떨까요?
-            <br />
-            에너지 백과를 통해 다양한 팁을 살펴보아요!
+            <p>
+              {`${twoMonthsDate.monthLabel}월에 비해 `}
+              <span className={styles.costRed}>{Math.abs(difference).toLocaleString()}원 </span>
+              증가했어요!
+              <br />
+              조금 더 전기를 아껴보는 건 어떨까요?
+              <br />
+              에너지 백과를 통해 다양한 팁을 살펴보아요!
+            </p>
           </>
         );
       case "unchanged":
         return (
           <>
-            {`${twoMonthsDate.monthLabel}월에 비해 `}
-            <span className={styles.costGreen}>같은 전기 요금이네요!</span>
-            <br />
-            조금 더 아껴서 다음 달에는
-            <br />
-            에너지 백과를 통해 다양한 팁을 살펴보아요!
+            <p>
+              {`${twoMonthsDate.monthLabel}월에 비해 `}
+              <span className={styles.costGreen}>같은 전기 요금이네요!</span>
+              <br />
+              조금 더 아껴서 다음 달에는
+              <br />
+              에너지 백과를 통해 다양한 팁을 살펴보아요!
+            </p>
           </>
         );
       case "decrease":
         return (
           <>
-            {`${twoMonthsDate.monthLabel}월에 비해 `}
-            <span className={styles.costBlue}>{Math.abs(difference).toLocaleString()}원 </span>
-            감소했어요!
-            <br />
-            아주 잘하고 있군요!
-            <br />
-            앞으로도 그린스파크와 함께 더 나은
-            <br />
-            전력소비 해보아요!
+            <p>
+              {`${twoMonthsDate.monthLabel}월에 비해 `}
+              <span className={styles.costBlue}>{Math.abs(difference).toLocaleString()}원 </span>
+              감소했어요!
+              <br />
+              아주 잘하고 있군요!
+              <br />
+              앞으로도 그린스파크와 함께 더 나은
+              <br />
+              전력소비 해보아요!
+            </p>
           </>
         );
       default:
@@ -256,7 +262,7 @@ function ExpectPreChart() {
       </div>
       <div className={styles.tipContainer}>
         <TipMentIcon style={{ width: "24.3rem", height: "9.5rem" }} />
-        <p className={styles.tipMent}>{renderComment()}</p>
+        <div className={styles.tipMent}>{renderComment()}</div>
       </div>
     </>
   );

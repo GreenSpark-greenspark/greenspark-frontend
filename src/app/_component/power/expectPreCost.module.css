@@ -63,6 +63,7 @@
   justify-content: center;
   align-items: end;
   margin-top: 5rem;
+  height: 20rem;
 }
 
 .chartUnit {
@@ -164,36 +165,78 @@
   font-weight: 600;
   line-height: normal;
 }
-.chartSection0 {
-  width: 8.7rem;
-  height: 5.2rem;
-  border-radius: 1em;
-  background: #d4ddcf;
+@keyframes growHeight1 {
+  from {
+    height: 4rem;
+  }
+  to {
+    height: 4rem;
+  }
 }
-.chartSection1 {
+
+@keyframes growHeight2 {
+  from {
+    height: 4rem;
+  }
+  to {
+    height: 8rem;
+  }
+}
+
+@keyframes growHeight3 {
+  from {
+    height: 4rem;
+  }
+  to {
+    height: 12rem;
+  }
+}
+
+@keyframes growHeight4 {
+  from {
+    height: 4rem;
+  }
+  to {
+    height: 16rem;
+  }
+}
+
+.chartSection0 {
   width: 8.7rem;
   height: 4rem;
   border-radius: 1em;
-  background: #d7f3c6;
+  background: #d4ddcf;
+  animation: growHeight1 1s ease-out forwards;
 }
+
+.chartSection1 {
+  width: 8.7rem;
+  border-radius: 1em;
+  background: #d7f3c6;
+  animation: growHeight1 1s ease-out forwards;
+}
+
 .chartSection2 {
   width: 8.7rem;
-  height: 8rem;
   border-radius: 1em;
   background: #b6ec94;
+  animation: growHeight2 1s ease-out forwards;
 }
+
 .chartSection3 {
   width: 8.7rem;
-  height: 12rem;
   border-radius: 1em;
   background: #91e26b;
+  animation: growHeight3 1s ease-out forwards;
 }
+
 .chartSection4 {
   width: 8.7rem;
-  height: 16rem;
   border-radius: 1em;
   background: #19e407;
+  animation: growHeight4 1s ease-out forwards;
 }
+
 /* 팁 멘트 */
 .tipContainer {
   display: flex;
