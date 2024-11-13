@@ -37,3 +37,11 @@
   background-color: #d7f3c6;
   box-sizing: border-box;
 }
+
+.LoadingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 600px;
+}

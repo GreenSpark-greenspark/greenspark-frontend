@@ -1,5 +1,6 @@
 .topContainer {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
 
@@ -38,9 +39,10 @@
 
 .btnContainer {
   display: flex;
-  justify-content: space-between;
-
   width: 14.3rem;
+  gap: 1.7rem;
+  width: 100%;
+  margin-bottom: 2.5rem;
 }
 
 /* 범례 */
@@ -48,8 +50,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
+  align-items: end;
   height: 2.8rem;
+  width: 100%;
 }
 
 .yearUnit {
@@ -61,6 +64,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  width: 5rem;
 }
 
 .greenCircle {
@@ -79,4 +83,8 @@
   margin-right: 0.7em;
 
   background-color: #c4c4c4;
+}
+.graphBox {
+  width: 320px;
+  padding: 1.6em 1.2em;
 }
