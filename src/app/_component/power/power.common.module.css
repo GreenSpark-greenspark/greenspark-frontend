@@ -205,3 +205,10 @@
 .powerContent {
   margin-bottom: 1rem;
 }
+.LoadingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 132px;
+}

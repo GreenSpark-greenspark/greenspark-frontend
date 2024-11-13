@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import styles from "./expectPreCost.module.css";
 import { getDateLabel } from "@/utils/getDateLabels";
 import TipMentIcon from "@/../public/icon/power_tipMent_big.svg";
+import LoadingDots from "@/components/LoadingDots";
 
 interface ChargeData {
   lastMonth: number | null;
@@ -26,12 +27,14 @@ function ExpectPreChart() {
     expectedCost: null
   });
   const [differenceType, setDifferenceType] = useState<DifferenceType>("noMonths");
+  const [isLoading, setIsLoading] = useState(true);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const userId = 1;
 
   useEffect(() => {
     const fetchCostData = async () => {
+      setIsLoading(true);
       try {
         const lastMonthResponse = await axios.get(`${API_URL}/power/last-month/${userId}`);
         if (lastMonthResponse.data.success) {
@@ -76,12 +79,21 @@ function ExpectPreChart() {
         }
       } catch (error) {
         console.error("API 호출 중 오류 발생:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchCostData();
   }, [API_URL, userId]);
 
+  if (isLoading) {
+    return (
+      <div className={styles.LoadingWrapper}>
+        <LoadingDots />
+      </div>
+    );
+  }
   const currentMonthDate = getDateLabel("current");
   const lastMonthDate = getDateLabel("last");
   const twoMonthsDate = getDateLabel("twoMonths");
