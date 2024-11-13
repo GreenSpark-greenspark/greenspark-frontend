@@ -6,12 +6,12 @@ interface BottomViewProps {
 }
 
 const BottomView = ({ ...applianceDetails }: BottomViewProps) => {
-  const excludedKeys = ["업체명칭", "기자재명칭", "모델명", "제조원", "효율등급"];
+  const excludedKeys = ["업체명칭", "기자재명칭", "모델명", "효율등급"];
 
   return (
     <div className={style.container}>
       {Object.entries(applianceDetails)
-        .filter(([key]) => !excludedKeys.includes(key))
+        .filter(([key]) => !excludedKeys.includes(key)) 
         .map(
           ([key, value]) =>
             value !== null && value !== "NULL" && <ItemRow key={key} label={key} value={value} />

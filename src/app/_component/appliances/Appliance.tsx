@@ -1,7 +1,6 @@
 import style from "./Appliance.module.css";
 import { getColorFromGrade } from "@/utils/getColorfromGrade";
 import Image from "next/image";
-import airConditioner from "@/../public/img/air-conditioner.png";
 import refrigerator from "@/../public/img/refrigerator.png";
 import washingMachine from "@/../public/img/washing-machine.png";
 
@@ -9,18 +8,20 @@ export default function Appliance({
   id,
   grade,
   type,
-  width = 6.9
+  width = 6.9,
+  alt
 }: {
   id: number;
   grade: string;
   type: string;
   width?: number;
+  alt?: string;
 }) {
   const getImage = (type: string) => {
     switch (type) {
-      case "전기진공청소기":
-        return airConditioner;
-      case "냉장고":
+      case "전기냉장고":
+        return refrigerator;
+      case "김치냉장고":
         return refrigerator;
       case "전기세탁기(일반)":
         return washingMachine;

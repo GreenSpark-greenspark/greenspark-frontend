@@ -2,6 +2,7 @@ import Image from "next/image";
 import style from "./TopView.module.css";
 import { getColorFromGrade } from "@/utils/getColorfromGrade";
 import washingMachine from "@/../public/img/washing-machine.png";
+import refrigerator from "@/../public/img/refrigerator.png";
 
 interface TopViewProps {
   업체명칭: string;
@@ -15,8 +16,10 @@ const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: Top
     switch (type) {
       case "전기세탁기(일반)":
         return washingMachine;
+      case "전기냉장고":
+        return refrigerator;
       case "김치냉장고":
-        return washingMachine;
+        return refrigerator;
       default:
         return washingMachine;
     }
