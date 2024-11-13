@@ -17,6 +17,7 @@ export default function PreCharge() {
   const [chargeData, setChargeData] = useState<ChargeData | null>(null);
   const [differenceType, setDifferenceType] = useState<DifferenceType>("notwoMonthAgo");
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [costData, setCostData] = useState([]);
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const userId = 1;

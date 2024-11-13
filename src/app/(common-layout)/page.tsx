@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import HomeQuiz from "../_component/home/HomeQuiz";
 import HomeEncyclopedia from "../_component/home/HomeEncyclopedia";
