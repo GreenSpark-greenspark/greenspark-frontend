@@ -10,7 +10,7 @@
 .GridLayout {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(6.9rem, 1fr));
-  gap: 0.9em 0.6em;
+  gap: 18px 6px;
   justify-items: center;
   align-content: flex-start;
 }
