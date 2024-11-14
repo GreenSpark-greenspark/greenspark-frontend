@@ -6,6 +6,7 @@ import { mapApplianceDetails } from "@/utils/renderApplianceDetails";
 import style from "./page.module.css";
 import TopView from "@/app/_component/appliances/[id]/TopView";
 import BottomView from "@/app/_component/appliances/[id]/BottomView";
+import LoadingDots from "@/components/LoadingDots";
 
 export default function AppliancePage({ params }: { params: { id: string | string[] } }) {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -47,7 +48,14 @@ export default function AppliancePage({ params }: { params: { id: string | strin
     fetchApplianceData();
   }, [params.id]);
 
-  if (loading) return <div>로딩 중입니다...</div>;
+  if (loading)
+    return (
+      <div
+        style={{ height: "500px", display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <LoadingDots />
+      </div>
+    );
   if (!applianceDetails) return <p>No data available</p>;
 
   return (

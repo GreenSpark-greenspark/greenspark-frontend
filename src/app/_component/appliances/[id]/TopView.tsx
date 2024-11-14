@@ -10,7 +10,6 @@ interface TopViewProps {
   기자재명칭: string;
   효율등급: string;
 }
-
 const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: TopViewProps) => {
   const getImage = (type: string) => {
     switch (type) {
@@ -51,7 +50,13 @@ const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: Top
         </div>
         <div className={style.BtnContainer}>
           <div className={style.GrayBtn}>{기자재명칭}</div>
-          <div className={style.ColorBtn} style={{ backgroundColor: getColorFromGrade(효율등급) }}>
+          <div
+            className={style.ColorBtn}
+            style={{
+              backgroundColor: getColorFromGrade(효율등급),
+              color: 효율등급 === "3" ? "#929292" : "#fff"
+            }}
+          >
             {효율등급}등급
           </div>
         </div>
