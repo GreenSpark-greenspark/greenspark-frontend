@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import styles from "./expectPreCost.module.css";
 import { getDateLabel } from "@/utils/getDateLabels";
 import TipMentIcon from "@/../public/icon/power_tipMent_big.svg";
+import LoadingDots from "@/components/LoadingDots";
 
 interface ChargeData {
   lastMonth: number | null;
@@ -26,22 +27,28 @@ function ExpectPreChart() {
     expectedCost: null
   });
   const [differenceType, setDifferenceType] = useState<DifferenceType>("noMonths");
+  const [isLoading, setIsLoading] = useState(true);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const userId = 1;
 
   useEffect(() => {
     const fetchCostData = async () => {
+      setIsLoading(true);
       try {
         const lastMonthResponse = await axios.get(`${API_URL}/power/last-month/${userId}`);
         if (lastMonthResponse.data.success) {
           const { last_month_cost, month_before_last_cost } = lastMonthResponse.data.data;
 
-          setChargeData(prevData => ({
-            ...prevData,
+          setChargeData({
             lastMonth: last_month_cost === 0 ? null : last_month_cost,
-            twoMonthsAgo: month_before_last_cost === 0 ? null : month_before_last_cost
-          }));
+            twoMonthsAgo: month_before_last_cost === 0 ? null : month_before_last_cost,
+            expectedCost: null
+          });
+
+          console.log("지난달 요금 (lastMonth):", last_month_cost);
+          console.log("지지난달 요금 (twoMonthsAgo):", month_before_last_cost);
+
           // differenceType 설정
           if (last_month_cost === 0 && month_before_last_cost === 0) {
             setDifferenceType("noMonths");
@@ -49,7 +56,7 @@ function ExpectPreChart() {
             setDifferenceType("noLastMonth");
           } else if (month_before_last_cost === 0) {
             setDifferenceType("notwoMonthAgo");
-          } else {
+          } else if (last_month_cost != null && month_before_last_cost != null) {
             const difference = last_month_cost - month_before_last_cost;
             setDifferenceType(
               difference > 0 ? "increase" : difference === 0 ? "unchanged" : "decrease"
@@ -60,9 +67,9 @@ function ExpectPreChart() {
         }
 
         const expectedCostResponse = await axios.get(`${API_URL}/power/expect/${userId}`);
+
         if (expectedCostResponse.data.success) {
           const { expected_cost } = expectedCostResponse.data.data;
-
           setChargeData(prevData => ({
             ...prevData,
             expectedCost: expected_cost === 0 ? null : expected_cost
@@ -72,12 +79,21 @@ function ExpectPreChart() {
         }
       } catch (error) {
         console.error("API 호출 중 오류 발생:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchCostData();
   }, [API_URL, userId]);
 
+  if (isLoading) {
+    return (
+      <div className={styles.LoadingWrapper}>
+        <LoadingDots />
+      </div>
+    );
+  }
   const currentMonthDate = getDateLabel("current");
   const lastMonthDate = getDateLabel("last");
   const twoMonthsDate = getDateLabel("twoMonths");
@@ -101,70 +117,61 @@ function ExpectPreChart() {
   };
 
   const renderComment = () => {
-    if (!chargeData) return null;
-
     const { lastMonth, twoMonthsAgo } = chargeData;
-
-    if (lastMonth === null) {
-      return null;
-    }
-
-    const difference = twoMonthsAgo !== null ? lastMonth - twoMonthsAgo : 0;
+    const difference = (lastMonth ?? 0) - (twoMonthsAgo ?? 0);
 
     switch (differenceType) {
       case "noMonths":
-        return <div className={styles.commentText}>정보를 입력해주세요!</div>;
+        return <>정보를 입력해주세요!</>;
       case "noLastMonth":
-        return (
-          <div className={styles.commentText}>
-            {`${lastMonthDate.monthLabel}월 정보를 입력해주세요!`}
-          </div>
-        );
+        return <> {`${lastMonthDate.monthLabel}월 정보를 입력해주세요!`}</>;
       case "notwoMonthAgo":
-        return (
-          <div className={styles.commentText}>
-            {`${twoMonthsDate.monthLabel}월 전기 요금을 입력해주세요!`}
-          </div>
-        );
+        return <>{`${twoMonthsDate.monthLabel}월 전기 요금을 입력해주세요!`}</>;
       case "increase":
         return (
-          <div className={styles.commentText}>
-            {`${twoMonthsDate.monthLabel}월에 비해 `}
-            <span className={styles.costRed}>{Math.abs(difference).toLocaleString()}원</span>
-            증가했어요!
-            <br />
-            조금 더 전기를 아껴보는 건 어떨까요?
-            <br />
-            에너지 백과를 통해 다양한 팁을 살펴보아요!
-          </div>
+          <>
+            <p>
+              {`${twoMonthsDate.monthLabel}월에 비해 `}
+              <span className={styles.costRed}>{Math.abs(difference).toLocaleString()}원 </span>
+              증가했어요!
+              <br />
+              조금 더 전기를 아껴보는 건 어떨까요?
+              <br />
+              에너지 백과를 통해 다양한 팁을 살펴보아요!
+            </p>
+          </>
         );
       case "unchanged":
         return (
-          <div className={styles.commentText}>
-            {`${twoMonthsDate.monthLabel}월에 비해 `}
-            <span className={styles.costGreen}>같은 전기 요금이네요!</span>
-            <br />
-            조금 더 아껴서 다음 달에는
-            <br />
-            에너지 백과를 통해 다양한 팁을 살펴보아요!
-          </div>
+          <>
+            <p>
+              {`${twoMonthsDate.monthLabel}월에 비해 `}
+              <span className={styles.costGreen}>같은 전기 요금이네요!</span>
+              <br />
+              조금 더 아껴서 다음 달에는
+              <br />
+              에너지 백과를 통해 다양한 팁을 살펴보아요!
+            </p>
+          </>
         );
       case "decrease":
         return (
-          <div className={styles.commentText}>
-            {`${twoMonthsDate.monthLabel}월에 비해 `}
-            <span className={styles.costBlue}>{Math.abs(difference).toLocaleString()}원 </span>
-            감소했어요!
-            <br />
-            아주 잘하고 있군요!
-            <br />
-            앞으로도 그린스파크와 함께 더 나은
-            <br />
-            전력소비 해보아요!
-          </div>
+          <>
+            <p>
+              {`${twoMonthsDate.monthLabel}월에 비해 `}
+              <span className={styles.costBlue}>{Math.abs(difference).toLocaleString()}원 </span>
+              감소했어요!
+              <br />
+              아주 잘하고 있군요!
+              <br />
+              앞으로도 그린스파크와 함께 더 나은
+              <br />
+              전력소비 해보아요!
+            </p>
+          </>
         );
       default:
-        return null;
+        return <>정보를 입력해주세요!</>;
     }
   };
 
@@ -207,9 +214,11 @@ function ExpectPreChart() {
                 >
                   {differenceType === "unchanged"
                     ? "동일"
-                    : `${differenceType === "decrease" ? "-" : "+"}${Math.abs(
-                        (chargeData?.lastMonth ?? 0) - (chargeData?.twoMonthsAgo ?? 0)
-                      ).toLocaleString()}원`}
+                    : differenceType === "increase" || differenceType === "decrease"
+                      ? `${differenceType === "decrease" ? "-" : "+"}${Math.abs(
+                          (chargeData?.lastMonth ?? 0) - (chargeData?.twoMonthsAgo ?? 0)
+                        ).toLocaleString()}원`
+                      : "?,???원"}
                 </span>
               </p>
             </div>
