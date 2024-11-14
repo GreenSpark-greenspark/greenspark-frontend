@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: 100%;
   background-color: #f8fff3;
 }
@@ -21,16 +20,22 @@
   justify-content: flex-start;
   align-items: center;
   gap: 0.8em;
-
   width: 6.9rem;
   height: 8.9rem;
+  position: relative;
+}
+
+.LinkContainer:last-child::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1.2rem;
 }
 
 .AddCircle {
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: 6.9rem;
   height: 6.9rem;
   border-radius: 50%;
@@ -42,6 +47,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 600px;
 }
