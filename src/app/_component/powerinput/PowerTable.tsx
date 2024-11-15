@@ -211,7 +211,10 @@ const PowerTable: React.FC = () => {
 
   return (
     <div className={styles.tableWrap}>
-      <p className={styles.tableName}>+ 버튼을 눌러 입력할 수 있어요!</p>
+      <p className={styles.tableName}>
+        + 버튼을 눌러 새로운 항목을 추가해 봐요!
+        <br /> 전기요금과 전력사용량 항목을 선택해 수정할 수도 있어요
+      </p>
       <table className={styles.tableContainer} {...getTableProps()}>
         <thead className={styles.tableHead}>
           {headerGroups.map((headerGroup: HeaderGroup<TableRow>) => {

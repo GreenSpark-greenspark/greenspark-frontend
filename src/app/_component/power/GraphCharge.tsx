@@ -14,6 +14,7 @@ export default function GraphCharge() {
 
   return (
     <>
+      <p className={styles.title}>ㅇㅇㅇ님의 파워 분석 리포트</p>
       <div className={styles.wrap}>
         <div className={graphStyles.graphBox}>
           <div className={graphStyles.topContainer}>
