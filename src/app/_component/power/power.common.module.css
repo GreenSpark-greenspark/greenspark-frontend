@@ -32,14 +32,15 @@
   float: right;
 
   width: 12rem;
-  height: 2.4rem;
-  border-radius: 2em;
+  height: 3.2rem;
+  border-radius: 1em;
   border: none;
 
-  background-color: #b6ec94;
-  color: black;
+  background-color: #91e26b;
+  color: #fff;
   font-size: 1.2rem;
-  font-weight: 400;
+  font-weight: 500;
+  box-shadow: 0 0 0.4em 0 #d4ddcf;
 
   cursor: pointer;
 }
@@ -196,11 +197,18 @@
 }
 
 .appliancsGreen {
-  color: #91e26b;
+  color: #19e407;
+  font-weight: 700;
 }
 
 .bodyContainer {
-  margin-bottom: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.prePowerContainer {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f1f3f5;
 }
 
 .powerContent {
@@ -212,4 +220,11 @@
   align-items: center;
 
   height: 132px;
+}
+.quizBold {
+  color: #111;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }

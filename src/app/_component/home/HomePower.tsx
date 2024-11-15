@@ -120,12 +120,12 @@ export default function HomePower() {
       <p className={styles.title}>내 파워</p>
       <div className={styles.wrap}>
         <Box>
-          <div className={styles.bodyContainer}>
+          <div className={styles.prePowerContainer}>
             <p className={styles.text_normal}>
-              저번달
+              지난달
               <span className={styles.text_bold}>
                 {" "}
-                ({`${lastMonthLabel.yearLabel}년 ${lastMonthLabel.monthLabel}월`}){" "}
+                {`${lastMonthLabel.yearLabel.slice(-2)}년 ${lastMonthLabel.monthLabel}월`}
               </span>
               의 전기 요금
             </p>
@@ -140,10 +140,10 @@ export default function HomePower() {
           </div>
           <div className={styles.powerContent}>
             <p className={styles.text_normal}>
-              이번달
+              이번 달
               <span className={styles.text_bold}>
                 {" "}
-                ({`${currentMonthLabel.yearLabel}년 ${currentMonthLabel.monthLabel}월`}){" "}
+                {`${currentMonthLabel.yearLabel.slice(-2)}년 ${currentMonthLabel.monthLabel}월`}
               </span>
               예상 요금은..
             </p>
