@@ -23,13 +23,11 @@ export const getImage = (type: string) => {
       return electricFan;
     case "전기세탁기(일반)":
       return topLoadingWashingMachine;
-    case "전자레인지":
-      return microwaveOven;
-    case "정수기":
+    case "전기냉온수기":
       return waterPurifier;
     case "제습기":
       return dehumidifier;
-    case "청소기":
+    case "전기진공청소기":
       return vacuumCleaner;
     case "텔레비전수상기":
       return television;
@@ -38,6 +36,6 @@ export const getImage = (type: string) => {
     case "전기냉난방기":
       return airConditioner;
     default:
-      return frontLoadingWashingMachine;
+      return microwaveOven;
   }
 };
