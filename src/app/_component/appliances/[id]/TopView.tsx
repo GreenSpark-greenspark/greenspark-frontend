@@ -10,6 +10,7 @@ interface TopViewProps {
   기자재명칭: string;
   효율등급: string;
 }
+
 const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: TopViewProps) => {
   const getImage = (type: string) => {
     switch (type) {
@@ -23,6 +24,8 @@ const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: Top
         return washingMachine;
     }
   };
+
+  const displayName = 기자재명칭 === "공기청정기 (~24.12.31)" ? "공기청정기" : 기자재명칭;
 
   return (
     <div className={style.TopWrapper}>
@@ -49,7 +52,7 @@ const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: Top
           </div>
         </div>
         <div className={style.BtnContainer}>
-          <div className={style.GrayBtn}>{기자재명칭}</div>
+          <div className={style.GrayBtn}>{displayName}</div>
           <div
             className={style.ColorBtn}
             style={{

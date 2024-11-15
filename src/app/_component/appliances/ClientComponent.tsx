@@ -73,11 +73,14 @@ export default function ClientComponent() {
       return;
     }
 
+    const transformedApplianceName =
+      selectedAppliance === "공기청정기" ? `${selectedAppliance} (~24.12.31)` : selectedAppliance;
+
     try {
       const response = await axios.get(`${API_URL}/appliances/search`, {
         params: {
           modelName: modelName,
-          equipmentName: selectedAppliance
+          equipmentName: transformedApplianceName 
         }
       });
 
@@ -119,11 +122,14 @@ export default function ClientComponent() {
     if (selectedIndex !== null) {
       const selectedModel = searchResults[selectedIndex];
 
+      const transformedApplianceName =
+        selectedAppliance === "공기청정기" ? `${selectedAppliance} (~24.12.31)` : selectedAppliance;
+
       try {
         const response = await axios.post(`${API_URL}/appliances/${userId}`, {
           modelTerm: selectedModel.모델명,
           grade: selectedModel.효율등급,
-          matchTerm: selectedModel.기자재명칭,
+          matchTerm: transformedApplianceName, 
           manufacturer: selectedModel.업체명
         });
 

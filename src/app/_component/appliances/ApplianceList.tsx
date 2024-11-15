@@ -17,7 +17,6 @@ interface ApplianceListProps {
   selectedIndex: number | null;
   setSelectedIndex: (index: number) => void;
 }
-
 export default function ApplianceList({
   applianceMockData,
   selectedIndex,
@@ -25,47 +24,56 @@ export default function ApplianceList({
 }: ApplianceListProps) {
   return (
     <div className={styles.applianceList}>
-      {applianceMockData.map((item, index) => (
-        <div
-          key={item.id || index}
-          className={`${styles.applianceCard} ${
-            selectedIndex === index ? styles.selectedCard : ""
-          }`}
-          onClick={() => setSelectedIndex(index)}
-        >
-          <div className={styles.checkedIcon}>
-            {selectedIndex === index ? <CheckIcon fill="#fff" /> : <CheckIcon fill="#888" />}
-          </div>
-          <Appliance
-            id={item.id}
-            grade={item.효율등급}
-            type={item.기자재명칭}
-            width={6.5}
-            alt={`${item.기자재명칭} 이미지`}
-          />
-          <div className={styles.RightContainer}>
-            <div className={styles.TextWrapper}>
-              <div className={styles.TextContainer}>
-                <span className={styles.TextBold}>모델명</span>
-                <span className={styles.TextRegular}>{item.모델명}</span>
+      {applianceMockData.map((item, index) => {
+        const displayName = item.기자재명칭.includes("공기청정기 (~24.12.31)")
+          ? "공기청정기"
+          : item.기자재명칭;
+
+        return (
+          <div
+            key={item.id || index}
+            className={`${styles.applianceCard} ${
+              selectedIndex === index ? styles.selectedCard : ""
+            }`}
+            onClick={() => setSelectedIndex(index)}
+          >
+            <div className={styles.checkedIcon}>
+              {selectedIndex === index ? <CheckIcon fill="#fff" /> : <CheckIcon fill="#888" />}
+            </div>
+            <Appliance
+              id={item.id}
+              grade={item.효율등급}
+              type={item.기자재명칭}
+              width={6.5}
+              alt={`${item.기자재명칭} 이미지`}
+            />
+            <div className={styles.RightContainer}>
+              <div className={styles.TextWrapper}>
+                <div className={styles.TextContainer}>
+                  <span className={styles.TextBold}>모델명</span>
+                  <span className={styles.TextRegular}>{item.모델명}</span>
+                </div>
+                <div className={styles.TextContainer}>
+                  <span className={styles.TextBold}>업체명</span>
+                  <span className={styles.TextRegular}>{item.업체명}</span>
+                </div>
               </div>
-              <div className={styles.TextContainer}>
-                <span className={styles.TextBold}>업체명</span>
-                <span className={styles.TextRegular}>{item.업체명}</span>
+              <div className={styles.BtnContainer}>
+                <div className={styles.GrayBtn}>{displayName}</div>
+                <div
+                  className={styles.ColorBtn}
+                  style={{
+                    backgroundColor: getColorFromGrade(item.효율등급),
+                    color: item.효율등급 === "3" ? "#929292" : "#fff"
+                  }}
+                >
+                  {item.효율등급}등급
+                </div>
               </div>
             </div>
-            <div className={styles.BtnContainer}>
-              <div className={styles.GrayBtn}>{item.기자재명칭}</div>
-              <div
-                className={styles.ColorBtn}
-                style={{ backgroundColor: getColorFromGrade(item.효율등급) }}
-              >
-                {item.효율등급}등급
-              </div>
-            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

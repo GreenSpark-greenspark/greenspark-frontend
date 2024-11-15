@@ -52,7 +52,7 @@ export function mapApplianceDetails(appliance: ApplianceData, applianceType: str
       };
       break;
 
-    case "공기청정기":
+    case "공기청정기 (~24.12.31)":
       uniqueFields = {
         표준사용면적: appliance.STANDARD_CONS_AREA,
         탈취효율: appliance.DEODORIZATION_EFFIC,
@@ -82,7 +82,7 @@ export function mapApplianceDetails(appliance: ApplianceData, applianceType: str
       uniqueFields = {
         화면대각선길이: appliance.DIAGO_LENGTH,
         디스플레이방식: appliance.DISPLAY,
-        소비전력: appliance.CONS_PWR
+        소비전력: appliance.R
       };
       break;
 
@@ -102,6 +102,16 @@ export function mapApplianceDetails(appliance: ApplianceData, applianceType: str
       break;
 
     case "전기냉난방기":
+      uniqueFields = {
+        정격냉방능력: appliance.PROP_COOL_PWR,
+        정격난방능력: appliance.PROP_HEAT_PWR,
+        연간소비전력량: appliance.YEAR_CONS_PWR,
+        냉방기간에너지소비효율: appliance.COOL_EFFIC,
+        시간당소비전력량: appliance.HOUR_CONS_PWR,
+        월간에너지비용: appliance.MON_COST
+      };
+      break;
+    case "전기냉난방기 (~2018.10.01 이전)":
       uniqueFields = {
         정격냉방능력: appliance.PROP_COOL_PWR,
         정격난방능력: appliance.PROP_HEAT_PWR,
