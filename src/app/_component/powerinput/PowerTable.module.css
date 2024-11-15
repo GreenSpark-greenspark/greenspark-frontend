@@ -101,10 +101,13 @@
   height: 1.8rem;
 }
 
+.dropDownIcon.open {
+  transform: rotate(180deg);
+}
 .dropdownMenu {
   width: 10rem;
   position: absolute;
-  top: 6rem;
+  top: 13rem;
   border-radius: 1em;
   border: 0.1em solid #b6ec94;
 
@@ -134,4 +137,10 @@
 .dropdownbtn {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+.dropdownYear {
+  text-align: center;
+  width: 6rem;
+  margin-left: 1rem;
 }

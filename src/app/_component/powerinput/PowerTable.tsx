@@ -123,8 +123,10 @@ const PowerTable: React.FC = () => {
         Header: () => (
           <div className={styles.yearHeader}>
             <span className={styles.dropdownbtn} onClick={() => setIsDropdownOpen(prev => !prev)}>
-              년도
-              <IconDropDown className={styles.dropDownIcon} />
+              <p className={styles.dropdownYear}>{selectedYear ? `${selectedYear}년` : "년도"}</p>
+              <IconDropDown
+                className={`${styles.dropDownIcon} ${isDropdownOpen ? styles.open : ""}`}
+              />{" "}
             </span>
             {isDropdownOpen && (
               <div className={styles.dropdownMenu}>

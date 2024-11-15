@@ -274,7 +274,7 @@ function ExpectPreChart() {
                         : `${chargeData.expectedCost > chargeData.lastMonth ? "+" : "-"}${Math.abs(
                             chargeData.expectedCost - chargeData.lastMonth
                           ).toLocaleString()}원`
-                      : "?,???"}
+                      : "?,???원"}
                   </span>
                 )}
               </p>
