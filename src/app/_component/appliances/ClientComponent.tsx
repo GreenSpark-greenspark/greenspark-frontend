@@ -80,7 +80,7 @@ export default function ClientComponent() {
       const response = await axios.get(`${API_URL}/appliances/search`, {
         params: {
           modelName: modelName,
-          equipmentName: transformedApplianceName 
+          equipmentName: transformedApplianceName
         }
       });
 
@@ -129,13 +129,23 @@ export default function ClientComponent() {
         const response = await axios.post(`${API_URL}/appliances/${userId}`, {
           modelTerm: selectedModel.모델명,
           grade: selectedModel.효율등급,
-          matchTerm: transformedApplianceName, 
+          matchTerm: transformedApplianceName,
           manufacturer: selectedModel.업체명
         });
 
-        if (response.status === 200) {
-          setToastMessage("추가가 성공적으로 완료되었습니다.");
-          setShowToast(true);
+        if (response.status === 200 && response.data.success) {
+          if (response.data.message === "이미 존재하는 가전제품입니다.") {
+            // 이미 추가된 가전제품
+            setToastMessage("이미 추가된 가전제품입니다!");
+            setShowToast(true);
+          } else {
+            // 성공적으로 추가된 경우
+            setToastMessage("가전제품이 성공적으로 추가되었습니다.");
+            setShowToast(true);
+            setSelectedModelName(selectedModel.모델명);
+            setShowPopup(true);
+            setSelectedIndex(null);
+          }
         } else {
           setToastMessage("추가에 실패했습니다. 다시 시도해주세요.");
           setShowToast(true);
@@ -147,9 +157,6 @@ export default function ClientComponent() {
       }
 
       setTimeout(() => setShowToast(false), 3000);
-      setSelectedModelName(selectedModel.모델명);
-      setShowPopup(true);
-      setSelectedIndex(null);
     }
   };
 
@@ -181,7 +188,13 @@ export default function ClientComponent() {
         <AddButton handleAdd={handleAdd} selectedIndex={selectedIndex} />
       </Box>
 
-      {showPopup && <Popup modelName={selectedModelName} onClose={closePopup} />}
+      {showPopup && (
+        <Popup
+          applianceType={selectedAppliance}
+          modelName={selectedModelName}
+          onClose={closePopup}
+        />
+      )}
     </div>
   );
 }

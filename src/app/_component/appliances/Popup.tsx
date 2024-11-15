@@ -1,27 +1,30 @@
 import React from "react";
 import styles from "./Popup.module.css";
 import Image from "next/image";
-import refrigeratorImage from "@/../public/img/refrigerator.png";
 import { useRouter } from "next/navigation";
+import { getImage } from "@/utils/getImage";
 
 interface PopupProps {
   modelName: string;
+  applianceType: string;
   onClose: () => void;
 }
 
-const Popup: React.FC<PopupProps> = ({ modelName, onClose }) => {
+const Popup: React.FC<PopupProps> = ({ modelName, applianceType, onClose }) => {
   const router = useRouter();
+
   const onGo = () => {
     onClose();
     router.push("/appliances");
   };
+
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.popup}>
         <div className={styles.imageContainer}>
           <div className={styles.gradientBackground}></div>
           <Image
-            src={refrigeratorImage} // 모델 이미지
+            src={getImage(applianceType)}
             alt={modelName}
             width={100}
             className={styles.modelImage}
