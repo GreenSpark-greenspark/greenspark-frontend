@@ -41,6 +41,7 @@ yarn start
 ### Library & Framework
 <span><img src="https://img.shields.io/badge/react-2e2e2e?style=for-the-badge&logo=react&logoColor=61DAFB"> 
 <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white"> 
+<img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"> 
 </span>
 
 ### Deploy
