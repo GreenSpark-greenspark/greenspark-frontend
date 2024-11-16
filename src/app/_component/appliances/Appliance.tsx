@@ -1,8 +1,7 @@
 import style from "./Appliance.module.css";
 import { getColorFromGrade } from "@/utils/getColorfromGrade";
 import Image from "next/image";
-import refrigerator from "@/../public/img/refrigerator.png";
-import washingMachine from "@/../public/img/washing-machine.png";
+import { getImage } from "@/utils/getImage";
 
 export default function Appliance({
   id,
@@ -17,19 +16,6 @@ export default function Appliance({
   width?: number;
   alt?: string;
 }) {
-  const getImage = (type: string) => {
-    switch (type) {
-      case "전기냉장고":
-        return refrigerator;
-      case "김치냉장고":
-        return refrigerator;
-      case "전기세탁기(일반)":
-        return washingMachine;
-      default:
-        return washingMachine;
-    }
-  };
-
   return (
     <div
       key={id}
@@ -46,7 +32,7 @@ export default function Appliance({
       >
         <Image
           src={getImage(type)}
-          alt={type}
+          alt={alt || type}
           width={width * 4}
           style={{ objectFit: "cover" }}
           priority={true}

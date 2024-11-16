@@ -30,7 +30,7 @@ export default function MyAppliances() {
         const response = await axios.get(`${API_URL}/appliances/${userId}`);
         if (response.data.success) {
           setData(response.data.data);
-          console.log(response.data.data);
+          // console.log(response.data.data);
         } else {
           console.error("API 호출 실패:", response.data.message);
         }

@@ -1,8 +1,7 @@
 import Image from "next/image";
 import style from "./TopView.module.css";
 import { getColorFromGrade } from "@/utils/getColorfromGrade";
-import washingMachine from "@/../public/img/washing-machine.png";
-import refrigerator from "@/../public/img/refrigerator.png";
+import { getImage } from "@/utils/getImage";
 
 interface TopViewProps {
   업체명칭: string;
@@ -10,26 +9,16 @@ interface TopViewProps {
   기자재명칭: string;
   효율등급: string;
 }
+
 const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: TopViewProps) => {
-  const getImage = (type: string) => {
-    switch (type) {
-      case "전기세탁기(일반)":
-        return washingMachine;
-      case "전기냉장고":
-        return refrigerator;
-      case "김치냉장고":
-        return refrigerator;
-      default:
-        return washingMachine;
-    }
-  };
+  const displayName = 기자재명칭 === "공기청정기 (~24.12.31)" ? "공기청정기" : 기자재명칭;
 
   return (
     <div className={style.TopWrapper}>
       <div>
         <div className={style.Circle} style={{ borderColor: getColorFromGrade(효율등급) }}>
           <Image
-            src={getImage(기자재명칭)}
+            src={getImage(기자재명칭)} 
             alt={기자재명칭}
             width={45}
             style={{ objectFit: "cover" }}
@@ -49,7 +38,7 @@ const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: Top
           </div>
         </div>
         <div className={style.BtnContainer}>
-          <div className={style.GrayBtn}>{기자재명칭}</div>
+          <div className={style.GrayBtn}>{displayName}</div>
           <div
             className={style.ColorBtn}
             style={{
