@@ -35,6 +35,8 @@ export const getImage = (type: string) => {
       return frontLoadingWashingMachine;
     case "전기냉난방기":
       return airConditioner;
+    case "전기냉난방기(~2018.10.01 이전)":
+      return airConditioner;
     default:
       return microwaveOven;
   }
