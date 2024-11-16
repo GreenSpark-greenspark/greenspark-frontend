@@ -1,22 +1,47 @@
-# greenspark-frontend
+# GreenSpark FE 🌱
+![표지](https://github.com/user-attachments/assets/dcbe742f-1a4b-4f95-bc61-f6a4cc5ee51c)
+전기요금 절약으로 지속가능한 도약을 만들어내는 서비스, GreenSpark 프론트엔드 Repository입니다.
+<br>
+## FE를 소개합니다! 🦁
+<div align=center><table>
+        <td align="center"><a href="https://github.com/hyun907"><img src="https://avatars.githubusercontent.com/u/159671505?v=4" width="100px;" alt=""/><br /><sub><b>hyun907</b></sub></a><p>백승현 🐱</p></td>
+        <td align="center"><a href="https://github.com/xionng"><img src="https://avatars.githubusercontent.com/u/105385612?v=4" width="100px;" alt=""/><br /><sub><b>xionng</b></sub></a><p>이시온 🐰</p></td>
+   </tr>
+</table></div>
+<br>
 
-### 🫙 Git Convention
+## STACKS 📚
 
-<details>
-  <summary>commit 규칙</summary>
+### Environment
+<span>
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"></span>
 
-| 태그        | 내용                                                                  |
-| ----------- | --------------------------------------------------------------------- |
-| feat        | 새로운 기능 or 컴포넌트를 추가                                        |
-| style       | 기능에 영향을 주지 않는 커밋, 코드 순서, css등의 포맷에 관한 커밋     |
-| fix         | 버그 수정                                                             |
-| refactor    | 프로덕션 코드 리팩토링                                                |
-| docs        | 문서 수정, 파일 삭제, 파일명 수정                                     |
-| chore       | 빌드 테스트 업데이트, 패키지 매니저 설정, 주석 추가, 자잘한 문서 수정 |
-| code review | 코드 리뷰 반영                                                        |
+### Config
+<img src="https://img.shields.io/badge/yarn-2C8EBB?style=for-the-badge&logo=yarn&logoColor=white"> 
 
-<b>"태그: 커밋 내용"의 형식으로 작성해주세요!</b>
-<br/>
-ex) feat: 로그인 컴포넌트 추가, chore: eslint extension 수정
+### Language
+<img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"> 
 
-</details>
+### Library & Framework
+<span><img src="https://img.shields.io/badge/react-2e2e2e?style=for-the-badge&logo=react&logoColor=61DAFB"> 
+<img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white"> 
+</span>
+
+### Deploy
+<span><img src="https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"></span>
+
+### Communication
+<span>
+<img src="https://img.shields.io/badge/discord-5865F2?style=for-the-badge&logo=discord&logoColor=white">  
+<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
+<img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=notion&logoColor=white"></span>
+
+
+  
+  
+  
+  <br>
+  
+
+ 
