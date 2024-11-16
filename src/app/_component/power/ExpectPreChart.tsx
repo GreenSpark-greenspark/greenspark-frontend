@@ -3,7 +3,8 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import styles from "./expectPreCost.module.css";
 import { getDateLabel } from "@/utils/getDateLabels";
-import TipMentIcon from "@/../public/icon/power_tipMent_big.svg";
+import TipMentIconBig from "@/../public/icon/power_tipMent_big.svg";
+import TipMentIconSmall from "@/../public/icon/power_tipMent_small.svg";
 import LoadingDots from "@/components/LoadingDots";
 
 interface ChargeData {
@@ -124,7 +125,7 @@ function ExpectPreChart() {
       case "noMonths":
         return <>정보를 입력해주세요!</>;
       case "noLastMonth":
-        return <> {`${lastMonthDate.monthLabel}월 정보를 입력해주세요!`}</>;
+        return <> {`${lastMonthDate.monthLabel}월 전기 요금을 입력해주세요!`}</>;
       case "notwoMonthAgo":
         return <>{`${twoMonthsDate.monthLabel}월 전기 요금을 입력해주세요!`}</>;
       case "increase":
@@ -174,7 +175,17 @@ function ExpectPreChart() {
         return <>정보를 입력해주세요!</>;
     }
   };
-
+  //   팁멘트 아이콘
+  const TipMentIcon = () => {
+    if (
+      differenceType === "noMonths" ||
+      differenceType === "noLastMonth" ||
+      differenceType === "notwoMonthAgo"
+    ) {
+      return <TipMentIconSmall style={{ width: "24.3rem", height: "6rem" }} />;
+    }
+    return <TipMentIconBig style={{ width: "24.3rem", height: "9.5rem" }} />;
+  };
   return (
     <>
       <div className={styles.chartContainer}>
@@ -263,7 +274,7 @@ function ExpectPreChart() {
                         : `${chargeData.expectedCost > chargeData.lastMonth ? "+" : "-"}${Math.abs(
                             chargeData.expectedCost - chargeData.lastMonth
                           ).toLocaleString()}원`
-                      : "?,???"}
+                      : "?,???원"}
                   </span>
                 )}
               </p>
@@ -273,8 +284,18 @@ function ExpectPreChart() {
         </div>
       </div>
       <div className={styles.tipContainer}>
-        <TipMentIcon style={{ width: "24.3rem", height: "9.5rem" }} />
-        <div className={styles.tipMent}>{renderComment()}</div>
+        <TipMentIcon />
+        <div
+          className={`${styles.tipMent} ${
+            differenceType === "noMonths" ||
+            differenceType === "noLastMonth" ||
+            differenceType === "notwoMonthAgo"
+              ? styles.tipMentSmall
+              : styles.tipMentBig
+          }`}
+        >
+          {renderComment()}
+        </div>
       </div>
     </>
   );

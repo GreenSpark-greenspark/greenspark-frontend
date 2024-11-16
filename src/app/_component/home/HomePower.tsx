@@ -48,9 +48,9 @@ export default function HomePower() {
           const currentMonthCost = data.expected_cost;
           const lastMonthCost = data.last_month_cost;
 
-          if (currentMonthCost === null) {
+          if (currentMonthCost === null || currentMonthCost === 0) {
             setDifferenceType("noCurrentMonth");
-          } else if (lastMonthCost === null) {
+          } else if (lastMonthCost === null || lastMonthCost === 0) {
             setDifferenceType("noLastMonth");
           } else {
             const difference = currentMonthCost - lastMonthCost;
@@ -58,7 +58,8 @@ export default function HomePower() {
               difference > 0 ? "increase" : difference === 0 ? "unchanged" : "decrease"
             );
           }
-          console.log(`예상 요금: ${currentMonthCost}`);
+
+          // console.log(`예상 요금: ${currentMonthCost}`);
         } else {
           console.error("API 호출 실패:", response.data.message);
         }
@@ -76,11 +77,11 @@ export default function HomePower() {
 
     const { currentMonth, lastMonth } = chargeData;
 
-    if (currentMonth === null) {
+    if (currentMonth === null || currentMonth === 0) {
       return <p className={styles.commentText}>정보를 입력하면 이번 달 요금을 예상해줘요!</p>;
     }
 
-    const difference = lastMonth !== null ? currentMonth - lastMonth : 0; // 저번달 데이터가 null이 아닐 경우만 계산
+    const difference = lastMonth !== null && lastMonth !== 0 ? currentMonth - lastMonth : 0;
 
     switch (differenceType) {
       case "noLastMonth":
@@ -120,18 +121,18 @@ export default function HomePower() {
       <p className={styles.title}>내 파워</p>
       <div className={styles.wrap}>
         <Box>
-          <div className={styles.bodyContainer}>
+          <div className={styles.prePowerContainer}>
             <p className={styles.text_normal}>
-              저번달
+              지난달
               <span className={styles.text_bold}>
                 {" "}
-                ({`${lastMonthLabel.yearLabel}년 ${lastMonthLabel.monthLabel}월`}){" "}
+                {`${lastMonthLabel.yearLabel.slice(-2)}년 ${lastMonthLabel.monthLabel}월`}
               </span>
               의 전기 요금
             </p>
             <p className={styles.cost}>
               <span className={styles.costGreen}>
-                {chargeData && chargeData.lastMonth !== null
+                {chargeData && chargeData.lastMonth !== null && chargeData.lastMonth !== 0
                   ? chargeData.lastMonth.toLocaleString()
                   : "?,???"}
               </span>{" "}
@@ -140,10 +141,10 @@ export default function HomePower() {
           </div>
           <div className={styles.powerContent}>
             <p className={styles.text_normal}>
-              이번달
+              이번 달
               <span className={styles.text_bold}>
                 {" "}
-                ({`${currentMonthLabel.yearLabel}년 ${currentMonthLabel.monthLabel}월`}){" "}
+                {`${currentMonthLabel.yearLabel.slice(-2)}년 ${currentMonthLabel.monthLabel}월 `}
               </span>
               예상 요금은..
             </p>
@@ -151,8 +152,8 @@ export default function HomePower() {
               <span className={styles.costGreen}>
                 {chargeData && chargeData.currentMonth !== null
                   ? chargeData.currentMonth.toLocaleString()
-                  : "?,???"}
-              </span>{" "}
+                  : "?,??? "}
+              </span>
               원
             </p>
             <div className={styles.comment}>

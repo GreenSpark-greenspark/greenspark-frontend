@@ -26,10 +26,9 @@
   border-radius: 1.5em;
   border-collapse: collapse;
   overflow: hidden;
-  border: var(--sds-size-stroke-border) solid #fff;
 
   background-color: white;
-  box-shadow: 0 0.1rem 0.8rem 0 var(--Main-Color, #d7f3c6);
+  box-shadow: 0 0.1rem 0.8rem 0 #d7f3c6;
 }
 
 .tableHead th {
@@ -48,7 +47,7 @@
 }
 
 .tableRow td {
-  height: 15px;
+  height: 1.6rem;
   padding: 0.9em 0;
   border-bottom: 0.1em solid #f1f3f5;
 
@@ -60,7 +59,9 @@
   font-weight: 400;
   line-height: normal;
 
-  justify-content: center;
+  display: table-cell;
+  vertical-align: middle;
+  cursor: pointer;
 }
 
 .yearCell {
@@ -75,8 +76,15 @@
 }
 
 .plusIcon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.iconWrapper {
+  height: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .yearHeader {
@@ -93,10 +101,13 @@
   height: 1.8rem;
 }
 
+.dropDownIcon.open {
+  transform: rotate(180deg);
+}
 .dropdownMenu {
   width: 10rem;
   position: absolute;
-  top: 6rem;
+  top: 13rem;
   border-radius: 1em;
   border: 0.1em solid #b6ec94;
 
@@ -126,10 +137,10 @@
 .dropdownbtn {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
-.iconWrapper {
-  height: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.dropdownYear {
+  text-align: center;
+  width: 6rem;
+  margin-left: 1rem;
 }
