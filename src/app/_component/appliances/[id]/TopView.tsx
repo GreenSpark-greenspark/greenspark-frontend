@@ -11,14 +11,19 @@ interface TopViewProps {
 }
 
 const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: TopViewProps) => {
-  const displayName = 기자재명칭 === "공기청정기 (~24.12.31)" ? "공기청정기" : 기자재명칭;
+  const displayName =
+    기자재명칭 === "공기청정기 (~24.12.31)"
+      ? "공기청정기"
+      : 기자재명칭 === "전기냉난방기(~2018.10.01 이전)"
+        ? "전기냉난방기"
+        : 기자재명칭;
 
   return (
     <div className={style.TopWrapper}>
       <div>
         <div className={style.Circle} style={{ borderColor: getColorFromGrade(효율등급) }}>
           <Image
-            src={getImage(기자재명칭)} 
+            src={getImage(기자재명칭)}
             alt={기자재명칭}
             width={45}
             style={{ objectFit: "cover" }}

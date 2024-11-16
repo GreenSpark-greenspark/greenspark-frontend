@@ -35,6 +35,7 @@ export default function AppliancePage({ params }: { params: { id: string | strin
 
           const mappedDetails = mapApplianceDetails(transformedItem, applianceType);
           setApplianceDetails(mappedDetails);
+          // console.log(transformedItem);
         } else {
           console.error("API 요청 실패:", response.data.message);
         }

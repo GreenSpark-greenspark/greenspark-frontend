@@ -111,7 +111,7 @@ export function mapApplianceDetails(appliance: ApplianceData, applianceType: str
         월간에너지비용: appliance.MON_COST
       };
       break;
-    case "전기냉난방기 (~2018.10.01 이전)":
+    case "전기냉난방기(~2018.10.01 이전)":
       uniqueFields = {
         정격냉방능력: appliance.PROP_COOL_PWR,
         정격난방능력: appliance.PROP_HEAT_PWR,

@@ -135,11 +135,9 @@ export default function ClientComponent() {
 
         if (response.status === 200 && response.data.success) {
           if (response.data.message === "이미 존재하는 가전제품입니다.") {
-            // 이미 추가된 가전제품
             setToastMessage("이미 추가된 가전제품입니다!");
             setShowToast(true);
           } else {
-            // 성공적으로 추가된 경우
             setToastMessage("가전제품이 성공적으로 추가되었습니다.");
             setShowToast(true);
             setSelectedModelName(selectedModel.모델명);
