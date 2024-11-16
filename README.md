@@ -10,6 +10,21 @@
 </table></div>
 <br>
 
+## 💻 Getting Started
+### Installation
+```
+yarn install
+```
+### Develop Mode
+```
+yarn dev
+```
+### Production
+```
+yarn build
+yarn start
+```
+
 ## STACKS 📚
 
 ### Environment
