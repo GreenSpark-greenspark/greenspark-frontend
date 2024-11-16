@@ -1,7 +1,9 @@
 # GreenSpark FE 🌱
-![표지](https://github.com/user-attachments/assets/dcbe742f-1a4b-4f95-bc61-f6a4cc5ee51c)
+<img width="1920" alt="표지" src="https://github.com/user-attachments/assets/b61d9720-5843-4dc8-9abd-44722c896d80">
+
 전기요금 절약으로 지속가능한 도약을 만들어내는 서비스, GreenSpark 프론트엔드 Repository입니다.
 <br>
+
 ## FE를 소개합니다! 🦁
 <div align=center><table>
         <td align="center"><a href="https://github.com/hyun907"><img src="https://avatars.githubusercontent.com/u/159671505?v=4" width="100px;" alt=""/><br /><sub><b>hyun907</b></sub></a><p>백승현 🐱</p></td>
