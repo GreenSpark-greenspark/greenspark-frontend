@@ -27,7 +27,9 @@ export default function ApplianceList({
       {applianceMockData.map((item, index) => {
         const displayName = item.기자재명칭.includes("공기청정기 (~24.12.31)")
           ? "공기청정기"
-          : item.기자재명칭;
+          : item.기자재명칭.includes("전기냉난방기(~2018.10.01 이전)")
+            ? "전기냉난방기"
+            : item.기자재명칭;
 
         return (
           <div
