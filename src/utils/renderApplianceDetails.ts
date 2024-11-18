@@ -44,14 +44,6 @@ export function mapApplianceDetails(appliance: ApplianceData, applianceType: str
       };
       break;
 
-    case "선풍기":
-      uniqueFields = {
-        선풍기날개지름: appliance.FAN_DIAMETER,
-        풍량효율: appliance.EFFIC,
-        최저소비효율기준: appliance.CONS_EFFIC
-      };
-      break;
-
     case "공기청정기 (~24.12.31)":
       uniqueFields = {
         표준사용면적: appliance.STANDARD_CONS_AREA,
