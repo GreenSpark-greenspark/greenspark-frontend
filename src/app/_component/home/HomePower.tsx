@@ -152,8 +152,8 @@ export default function HomePower() {
               <span className={styles.costGreen}>
                 {chargeData && chargeData.currentMonth !== null
                   ? chargeData.currentMonth.toLocaleString()
-                  : "?,??? "}
-              </span>
+                  : "?,???"}
+              </span>{" "}
               원
             </p>
             <div className={styles.comment}>
@@ -162,7 +162,7 @@ export default function HomePower() {
             </div>
           </div>
           <button type="button" className={styles.btn} onClick={handleNavigate}>
-            내 파워 입력하기
+            전기요금 입력
           </button>
         </Box>
       </div>

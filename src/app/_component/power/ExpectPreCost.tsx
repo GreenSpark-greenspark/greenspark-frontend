@@ -8,7 +8,7 @@ export default function ExpectPreCost() {
     <>
       <div className={styles.expectTop}>
         <div className={styles.topLeft}>
-          <p className={styles.topTitle}>아기사자🦁님의 이번 전기요금은...</p>
+          <p className={styles.topTitle}>아기사자🦁님의 다음 전기요금은..</p>
           <div className={styles.infoContianer}>
             <InfoIcon className={styles.infoIcon} />
             <p className={styles.infoText}>

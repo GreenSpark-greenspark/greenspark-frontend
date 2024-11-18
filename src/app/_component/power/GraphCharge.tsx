@@ -5,6 +5,7 @@ import graphStyles from "./graph.common.module.css";
 import BillGraph from "./BillGraph";
 import UsageGraph from "./UsageGraph";
 
+import IconInfo from "@/../public/icon/toast_info_icon.svg";
 export default function GraphCharge() {
   const [activeButton, setActiveButton] = useState<string>("bill");
 
@@ -32,6 +33,10 @@ export default function GraphCharge() {
               >
                 <p>전력사용량</p>
               </div>
+            </div>
+            <div className={graphStyles.infoContainer}>
+              <IconInfo style={{ width: "1.3rem", height: "1.3rem", fill: "#929292" }} />
+              <p>포인트를 터치하면 정확한 요금을 확인할 수 있어요!</p>
             </div>
             <div className={graphStyles.yearContainer}>
               <div className={graphStyles.yearUnit}>
