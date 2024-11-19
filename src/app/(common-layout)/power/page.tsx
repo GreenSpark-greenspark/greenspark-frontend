@@ -7,9 +7,7 @@ import GraphCharge from "../../_component/power/GraphCharge";
 
 export default function Power() {
   return (
-    <div
-      style={{ height: "100vh", overflowY: "scroll", paddingBottom: "10rem", marginTop: "4rem" }}
-    >
+    <div style={{ height: "100vh", paddingBottom: "10rem", marginTop: "4rem" }}>
       <GraphCharge />
       <PowerInput />
       <ExpectPreCost />
