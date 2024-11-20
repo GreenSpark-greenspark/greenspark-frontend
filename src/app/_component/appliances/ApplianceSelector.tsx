@@ -17,7 +17,7 @@ export default function ApplianceSelector({
   return (
     <>
       <button className={styles.dropdownButton} onClick={() => setIsOpen(!isOpen)}>
-        {selectedAppliance || "기자재 명칭 선택"}
+        {selectedAppliance || "기자재 명칭"}
       </button>
       {isOpen && (
         <div className={styles.dropdownMenu}>

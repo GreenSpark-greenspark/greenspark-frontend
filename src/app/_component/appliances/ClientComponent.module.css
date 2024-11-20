@@ -92,7 +92,9 @@
   border-radius: 2em;
   border: 0.15em solid #b8b8b8;
   cursor: pointer;
+  padding-right: 0.1em;
 }
+
 .applianceCard:last-child {
   margin-bottom: 6em;
 }

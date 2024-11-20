@@ -41,7 +41,7 @@ export default function ModelInput({
       )}
       <input
         type="text"
-        placeholder="제품 모델명 검색"
+        placeholder="제품 모델명"
         value={modelName}
         onChange={e => setModelName(e.target.value)}
         className={styles.modelInput}
