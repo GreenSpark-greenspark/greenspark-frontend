@@ -34,7 +34,7 @@
 .dropdownMenu {
   position: absolute;
   top: 110%;
-  left: 0;
+  left: 1em;
   width: 12rem;
   max-height: 20rem;
   overflow-y: auto;

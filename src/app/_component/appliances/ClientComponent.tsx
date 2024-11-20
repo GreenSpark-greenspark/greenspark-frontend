@@ -192,7 +192,7 @@ export default function ClientComponent() {
 
   return (
     <div className={styles.boxContainer}>
-      <Box minHeight="300px" style={{ position: "relative" }}>
+      <Box minHeight="330px" style={{ position: "relative" }}>
         <div className={styles.container}>
           <ApplianceSelector
             selectedAppliance={selectedAppliance}
