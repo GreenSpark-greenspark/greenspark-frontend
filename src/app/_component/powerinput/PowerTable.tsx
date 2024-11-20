@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import axios from "axios";
 import { useTable, Column, ColumnInstance, HeaderGroup, Row, Cell, CellProps } from "react-table";
-import PowerPopup from "./Popup";
+import PowerPopup from "./PowerPopup";
 import styles from "./PowerTable.module.css";
 import IconPlus from "../../../../public/icon/power_plus.svg";
 import IconDropDown from "../../../../public/icon/power_dropdown.svg";
@@ -66,6 +66,7 @@ const PowerTable: React.FC = () => {
         const response = await axios.get(`${API_URL}/power/history/${userId}`);
         if (response.data.success) {
           setData(response.data.data);
+          // console.log(response.data.data);
         } else {
           console.error("API 호출 실패:", response.data.message);
         }
@@ -102,13 +103,12 @@ const PowerTable: React.FC = () => {
   const handleIconClick = (year: number, month: number, type: "cost" | "usage", value?: number) => {
     const mappedKey: PowerRowKeys = type === "cost" ? "cost" : "usage_amount";
 
-    // 최근 값 계산 (0이 아닌 값으로 필터링)
-    const recentValue = data
+    const recentValue = fullData
       .filter(
         row =>
           row[mappedKey] !== undefined && row.year <= year && (row.year < year || row.month < month)
       )
-      .sort((a, b) => b.year - a.year || b.month - a.month) // 최신 값으로 정렬
+      .sort((a, b) => b.year - a.year || b.month - a.month) // 최신 순으로 정렬
       .map(row => row[mappedKey])
       .find(val => val !== undefined);
 
@@ -219,7 +219,7 @@ const PowerTable: React.FC = () => {
         }
       }
     ],
-    [isDropdownOpen, yearsOptions]
+    [isDropdownOpen, yearsOptions, fullData]
   );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable<TableRow>({
@@ -254,10 +254,10 @@ const PowerTable: React.FC = () => {
         <tbody {...getTableBodyProps()}>
           {rows.map((row: Row<TableRow>) => {
             prepareRow(row);
-            const { key, ...restRowProps } = row.getRowProps();
+            const { key, ...rest } = row.getRowProps();
             return (
-              <tr key={key} className={styles.tableRow} {...restRowProps}>
-                {row.cells.map((cell: Cell<TableRow>, cellIndex: number) => {
+              <tr key={key} className={styles.tableRow} {...rest}>
+                {row.cells.map((cell: Cell<TableRow>) => {
                   const { key, ...restCellProps } = cell.getCellProps();
                   return (
                     <td key={key} {...restCellProps}>
@@ -270,7 +270,6 @@ const PowerTable: React.FC = () => {
           })}
         </tbody>
       </table>
-
       {popupInfo && (
         <PowerPopup
           userId={userId}
@@ -281,8 +280,10 @@ const PowerTable: React.FC = () => {
           recentValue={popupInfo.recentValue}
           onClose={closePopup}
           onSave={(newValue: number) => {
-            handleSave(popupInfo.year, popupInfo.month, popupInfo.type, newValue);
-            closePopup();
+            if (popupInfo) {
+              handleSave(popupInfo.year, popupInfo.month, popupInfo.type, newValue);
+              closePopup();
+            }
           }}
         />
       )}

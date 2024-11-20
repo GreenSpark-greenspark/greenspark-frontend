@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "./Popup.module.css";
+import styles from "./PowerPopup.module.css";
 import Toast from "@/components/Toast";
 import IconClose from "@/../public/icon/popup_close.svg";
 
