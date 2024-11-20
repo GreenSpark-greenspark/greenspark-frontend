@@ -10,6 +10,7 @@ import ApplianceSelector from "../../_component/appliances/ApplianceSelector";
 import ModelInput from "../../_component/appliances/ModelInput";
 import ApplianceList from "../../_component/appliances/ApplianceList";
 import AddButton from "../../_component/appliances/AddButton";
+import LoadingDots from "@/components/LoadingDots";
 import { getDisplayName } from "@/utils/getDisplayName";
 
 interface ApplianceItem {
@@ -47,6 +48,7 @@ export default function ClientComponent() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedModelName, setSelectedModelName] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const transformedOptions = applianceOptions.map(option => ({
     original: option,
@@ -93,6 +95,7 @@ export default function ClientComponent() {
       return;
     }
 
+    setIsLoading(true);
     try {
       const response = await axios.get(`${API_URL}/appliances/search`, {
         params: {
@@ -130,9 +133,9 @@ export default function ClientComponent() {
       console.error("검색 중 오류 발생:", error);
       setToastMessage("오류가 발생했습니다. 다시 시도해주세요.");
       setShowToast(true);
+    } finally {
+      setIsLoading(false);
     }
-
-    setTimeout(() => setShowToast(false), 3000);
   };
 
   const handleAdd = async () => {
@@ -205,11 +208,24 @@ export default function ClientComponent() {
             handleSearch={handleSearch}
           />
         </div>
-        <ApplianceList
-          applianceMockData={searchResults}
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-        />
+        {isLoading ? (
+          <div
+            style={{
+              height: "330px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <LoadingDots />
+          </div>
+        ) : (
+          <ApplianceList
+            applianceMockData={searchResults}
+            selectedIndex={selectedIndex}
+            setSelectedIndex={setSelectedIndex}
+          />
+        )}
         {showToast && <Toast message={toastMessage} />}
         <AddButton handleAdd={handleAdd} selectedIndex={selectedIndex} />
       </Box>
