@@ -59,25 +59,20 @@ export default function ClientComponent() {
     option.display.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleSearch = async () => {
-    if (!selectedAppliance && !modelName) {
-      setToastMessage("기자재 명칭과 모델명을 알려주세요!");
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 3000);
-      return;
-    }
+  const showToastMessage = (message: string) => {
+    setToastMessage(message);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
 
+  const handleSearch = async () => {
     if (!selectedAppliance) {
-      setToastMessage("기자재 명칭을 선택해주세요!");
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 3000);
+      showToastMessage("먼저 기자재 명칭을 선택해주세요!");
       return;
     }
 
     if (!modelName) {
-      setToastMessage("제품 모델명을 입력해주세요!");
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 3000);
+      showToastMessage("제품 모델명을 입력해주세요!");
       return;
     }
 
@@ -88,18 +83,11 @@ export default function ClientComponent() {
     const apiApplianceName =
       originalApplianceName === "공기청정기" ? "공기청정기 (~24.12.31)" : originalApplianceName;
 
-    if (!apiApplianceName) {
-      setToastMessage("올바른 기자재 명칭을 선택해주세요!");
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 3000);
-      return;
-    }
-
     setIsLoading(true);
     try {
       const response = await axios.get(`${API_URL}/appliances/search`, {
         params: {
-          modelName: modelName,
+          modelName,
           equipmentName: apiApplianceName
         }
       });
@@ -119,20 +107,16 @@ export default function ClientComponent() {
           }));
 
           setSearchResults(transformedItems);
-          setShowToast(false);
         } else {
-          setToastMessage("검색 결과가 없습니다.");
+          showToastMessage("검색 결과가 없습니다.");
           setSearchResults([]);
-          setShowToast(true);
         }
       } else {
-        setToastMessage("검색에 실패했습니다. 다시 시도해주세요.");
-        setShowToast(true);
+        showToastMessage("검색에 실패했습니다. 다시 시도해주세요.");
       }
     } catch (error) {
       console.error("검색 중 오류 발생:", error);
-      setToastMessage("오류가 발생했습니다. 다시 시도해주세요.");
-      setShowToast(true);
+      showToastMessage("오류가 발생했습니다. 다시 시도해주세요.");
     } finally {
       setIsLoading(false);
     }
@@ -149,13 +133,6 @@ export default function ClientComponent() {
       const apiApplianceName =
         originalApplianceName === "공기청정기" ? "공기청정기 (~24.12.31)" : originalApplianceName;
 
-      if (!apiApplianceName) {
-        setToastMessage("올바른 기자재 명칭을 선택해주세요!");
-        setShowToast(true);
-        setTimeout(() => setShowToast(false), 3000);
-        return;
-      }
-
       try {
         const response = await axios.post(`${API_URL}/appliances/${userId}`, {
           modelTerm: selectedModel.모델명,
@@ -166,26 +143,20 @@ export default function ClientComponent() {
 
         if (response.status === 200 && response.data.success) {
           if (response.data.message === "이미 존재하는 가전제품입니다.") {
-            setToastMessage("이미 추가된 가전제품입니다!");
-            setShowToast(true);
+            showToastMessage("이미 추가된 가전제품입니다!");
           } else {
-            setToastMessage("가전제품이 성공적으로 추가되었습니다.");
-            setShowToast(true);
+            showToastMessage("가전제품이 성공적으로 추가되었습니다.");
             setSelectedModelName(selectedModel.모델명);
             setShowPopup(true);
             setSelectedIndex(null);
           }
         } else {
-          setToastMessage("추가에 실패했습니다. 다시 시도해주세요.");
-          setShowToast(true);
+          showToastMessage("추가에 실패했습니다. 다시 시도해주세요.");
         }
       } catch (error) {
         console.error("추가 요청 중 오류 발생:", error);
-        setToastMessage("오류가 발생했습니다. 다시 시도해주세요.");
-        setShowToast(true);
+        showToastMessage("오류가 발생했습니다. 다시 시도해주세요.");
       }
-
-      setTimeout(() => setShowToast(false), 3000);
     }
   };
 
@@ -206,6 +177,8 @@ export default function ClientComponent() {
             modelName={modelName}
             setModelName={setModelName}
             handleSearch={handleSearch}
+            isApplianceSelected={!!selectedAppliance}
+            showToastMessage={showToastMessage}
           />
         </div>
         {isLoading ? (
@@ -229,7 +202,6 @@ export default function ClientComponent() {
         {showToast && <Toast message={toastMessage} />}
         <AddButton handleAdd={handleAdd} selectedIndex={selectedIndex} />
       </Box>
-
       {showPopup && (
         <Popup
           applianceType={selectedAppliance}
