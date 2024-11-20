@@ -2,11 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10rem;
 }
 
 .container {
   display: flex;
-justify-content: center;
+  justify-content: center;
   align-items: center;
   position: relative;
   gap: 1em;
@@ -87,7 +88,6 @@ justify-content: center;
   align-items: center;
   box-sizing: border-box;
   width: 28rem;
-  height: 8.5em;
   border-radius: 2em;
   border: 0.15em solid #b8b8b8;
   cursor: pointer;
@@ -181,7 +181,9 @@ justify-content: center;
 .TextContainer {
   display: flex;
   align-items: center;
-  gap: 1.4em;
+  gap: 0.4em;
+  flex-wrap: wrap;
+  padding-right: 0.6em;
 }
 
 .TextBold {

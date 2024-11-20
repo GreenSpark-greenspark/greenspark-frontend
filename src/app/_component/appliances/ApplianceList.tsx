@@ -2,6 +2,7 @@ import styles from "./ClientComponent.module.css";
 import CheckIcon from "@/../public/icon/check_icon.svg";
 import Appliance from "@/app/_component/appliances/Appliance";
 import { getColorFromGrade } from "@/utils/getColorfromGrade";
+import { getDisplayName } from "@/utils/getDisplayName";
 
 interface ApplianceItem {
   id: number;
@@ -17,6 +18,7 @@ interface ApplianceListProps {
   selectedIndex: number | null;
   setSelectedIndex: (index: number) => void;
 }
+
 export default function ApplianceList({
   applianceMockData,
   selectedIndex,
@@ -25,11 +27,7 @@ export default function ApplianceList({
   return (
     <div className={styles.applianceList}>
       {applianceMockData.map((item, index) => {
-        const displayName = item.기자재명칭.includes("공기청정기 (~24.12.31)")
-          ? "공기청정기"
-          : item.기자재명칭.includes("전기냉난방기(~2018.10.01 이전)")
-            ? "전기냉난방기"
-            : item.기자재명칭;
+        const displayName = getDisplayName(item.기자재명칭);
 
         return (
           <div
@@ -47,7 +45,7 @@ export default function ApplianceList({
               grade={item.효율등급}
               type={item.기자재명칭}
               width={6.5}
-              alt={`${item.기자재명칭} 이미지`}
+              alt={`${displayName} 이미지`} 
             />
             <div className={styles.RightContainer}>
               <div className={styles.TextWrapper}>
@@ -61,7 +59,7 @@ export default function ApplianceList({
                 </div>
               </div>
               <div className={styles.BtnContainer}>
-                <div className={styles.GrayBtn}>{displayName}</div>
+                <div className={styles.GrayBtn}>{displayName}</div> 
                 <div
                   className={styles.ColorBtn}
                   style={{

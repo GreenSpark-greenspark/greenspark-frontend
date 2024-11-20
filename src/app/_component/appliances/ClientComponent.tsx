@@ -10,6 +10,7 @@ import ApplianceSelector from "../../_component/appliances/ApplianceSelector";
 import ModelInput from "../../_component/appliances/ModelInput";
 import ApplianceList from "../../_component/appliances/ApplianceList";
 import AddButton from "../../_component/appliances/AddButton";
+import { getDisplayName } from "@/utils/getDisplayName";
 
 interface ApplianceItem {
   id: number;
@@ -47,9 +48,15 @@ export default function ClientComponent() {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedModelName, setSelectedModelName] = useState<string>("");
 
-  const filteredOptions = applianceOptions.filter(option =>
-    option.toLowerCase().includes(searchTerm.toLowerCase())
+  const transformedOptions = applianceOptions.map(option => ({
+    original: option,
+    display: getDisplayName(option)
+  }));
+
+  const filteredOptions = transformedOptions.filter(option =>
+    option.display.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   const handleSearch = async () => {
     if (!selectedAppliance && !modelName) {
       setToastMessage("기자재 명칭과 모델명을 알려주세요!");
@@ -72,14 +79,25 @@ export default function ClientComponent() {
       return;
     }
 
-    const transformedApplianceName =
-      selectedAppliance === "공기청정기" ? `${selectedAppliance} (~24.12.31)` : selectedAppliance;
+    const originalApplianceName = transformedOptions.find(
+      option => option.display === selectedAppliance
+    )?.original;
+
+    const apiApplianceName =
+      originalApplianceName === "공기청정기" ? "공기청정기 (~24.12.31)" : originalApplianceName;
+
+    if (!apiApplianceName) {
+      setToastMessage("올바른 기자재 명칭을 선택해주세요!");
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+      return;
+    }
 
     try {
       const response = await axios.get(`${API_URL}/appliances/search`, {
         params: {
           modelName: modelName,
-          equipmentName: transformedApplianceName
+          equipmentName: apiApplianceName
         }
       });
 
@@ -121,14 +139,25 @@ export default function ClientComponent() {
     if (selectedIndex !== null) {
       const selectedModel = searchResults[selectedIndex];
 
-      const transformedApplianceName =
-        selectedAppliance === "공기청정기" ? `${selectedAppliance} (~24.12.31)` : selectedAppliance;
+      const originalApplianceName = transformedOptions.find(
+        option => option.display === selectedAppliance
+      )?.original;
+
+      const apiApplianceName =
+        originalApplianceName === "공기청정기" ? "공기청정기 (~24.12.31)" : originalApplianceName;
+
+      if (!apiApplianceName) {
+        setToastMessage("올바른 기자재 명칭을 선택해주세요!");
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+        return;
+      }
 
       try {
         const response = await axios.post(`${API_URL}/appliances/${userId}`, {
           modelTerm: selectedModel.모델명,
           grade: selectedModel.효율등급,
-          matchTerm: transformedApplianceName,
+          matchTerm: apiApplianceName,
           manufacturer: selectedModel.업체명
         });
 
@@ -168,7 +197,7 @@ export default function ClientComponent() {
           <ApplianceSelector
             selectedAppliance={selectedAppliance}
             setSelectedAppliance={setSelectedAppliance}
-            filteredOptions={filteredOptions}
+            filteredOptions={filteredOptions.map(option => option.display)}
           />
           <ModelInput
             modelName={modelName}
