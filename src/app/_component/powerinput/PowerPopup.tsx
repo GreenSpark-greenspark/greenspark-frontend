@@ -134,6 +134,8 @@ const PowerPopup: React.FC<PowerPopupProps> = ({
         <div className={styles.overlay}>
           <div className={styles.popup}>
             <div className={styles.popupBox}>
+              <IconClose className={styles.iconClose} onClick={onClose} />
+
               <p className={styles.popupTitle}>
                 지난 달과 차이가 커요! <br />
                 정확히 입력했나요?
