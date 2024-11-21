@@ -37,3 +37,10 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #a9a9a9;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}
