@@ -1,4 +1,4 @@
-import TopBar from "@/components/TopBar";
+import TopBarToHome from "@/components/TopBarToHome";
 
 export default function Layout({
   children
@@ -7,7 +7,7 @@ export default function Layout({
 }>) {
   return (
     <>
-      <TopBar text={"내 가전제품"} />
+      <TopBarToHome text={"내 가전제품"} />
       {children}
     </>
   );

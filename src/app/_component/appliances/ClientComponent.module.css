@@ -202,6 +202,7 @@
 }
 
 .TextRegular {
+  width: 140px;
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
