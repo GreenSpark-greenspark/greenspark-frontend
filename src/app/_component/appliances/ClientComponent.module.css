@@ -2,11 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10rem;
+  position: relative;
 }
 
 .container {
   display: flex;
-justify-content: center;
+  justify-content: center;
   align-items: center;
   position: relative;
   gap: 1em;
@@ -32,7 +34,7 @@ justify-content: center;
 .dropdownMenu {
   position: absolute;
   top: 110%;
-  left: 0;
+  left: 1em;
   width: 12rem;
   max-height: 20rem;
   overflow-y: auto;
@@ -87,12 +89,15 @@ justify-content: center;
   align-items: center;
   box-sizing: border-box;
   width: 28rem;
-  height: 8.5em;
   border-radius: 2em;
   border: 0.15em solid #b8b8b8;
   cursor: pointer;
+  padding-right: 0.1em;
 }
 
+.applianceCard:last-child {
+  margin-bottom: 6em;
+}
 .selectedCard {
   background-color: #f8fff3;
   border: 0.15em solid #d7f3c6;
@@ -104,10 +109,11 @@ justify-content: center;
   justify-content: center;
   align-items: flex-end;
   width: 100%;
-  height: 20rem;
 }
 
 .addButton {
+  position: absolute;
+  bottom: 1em;
   width: 27.7rem;
   height: 3.8rem;
   border: none;
@@ -128,6 +134,7 @@ justify-content: center;
 .searchBtn {
   background-color: #fff;
   border: none;
+  cursor: pointer;
 }
 
 .inputGroup {
@@ -181,7 +188,9 @@ justify-content: center;
 .TextContainer {
   display: flex;
   align-items: center;
-  gap: 1.4em;
+  gap: 0.4em;
+  flex-wrap: wrap;
+  padding-right: 0.6em;
 }
 
 .TextBold {
@@ -193,6 +202,7 @@ justify-content: center;
 }
 
 .TextRegular {
+  width: 140px;
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;

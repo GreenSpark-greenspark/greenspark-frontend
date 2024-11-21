@@ -2,6 +2,7 @@ import Image from "next/image";
 import style from "./TopView.module.css";
 import { getColorFromGrade } from "@/utils/getColorfromGrade";
 import { getImage } from "@/utils/getImage";
+import { getDisplayName } from "@/utils/getDisplayName";
 
 interface TopViewProps {
   업체명칭: string;
@@ -11,12 +12,7 @@ interface TopViewProps {
 }
 
 const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: TopViewProps) => {
-  const displayName =
-    기자재명칭 === "공기청정기 (~24.12.31)"
-      ? "공기청정기"
-      : 기자재명칭 === "전기냉난방기(~2018.10.01 이전)"
-        ? "전기냉난방기"
-        : 기자재명칭;
+  const displayName = getDisplayName(기자재명칭);
 
   return (
     <div className={style.TopWrapper}>

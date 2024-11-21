@@ -1,8 +1,6 @@
 import airPurifier from "@/../public/img/appliances/airPurifier.png";
 import kimchiRefrigerator from "@/../public/img/appliances/kimchiRefrigerator.png";
-import electricFan from "@/../public/img/appliances/electricFan.png";
 import topLoadingWashingMachine from "@/../public/img/appliances/topLoadingWashingMachine.png";
-import microwaveOven from "@/../public/img/appliances/microwaveOven.png";
 import waterPurifier from "@/../public/img/appliances/waterPurifier.png";
 import dehumidifier from "@/../public/img/appliances/dehumidifier.png";
 import vacuumCleaner from "@/../public/img/appliances/vacuumCleaner.png";
@@ -19,8 +17,6 @@ export const getImage = (type: string) => {
       return kimchiRefrigerator;
     case "전기냉장고":
       return refrigerator;
-    case "선풍기":
-      return electricFan;
     case "전기세탁기(일반)":
       return topLoadingWashingMachine;
     case "전기냉온수기":
@@ -38,6 +34,6 @@ export const getImage = (type: string) => {
     case "전기냉난방기(~2018.10.01 이전)":
       return airConditioner;
     default:
-      return microwaveOven;
+      return topLoadingWashingMachine;
   }
 };
