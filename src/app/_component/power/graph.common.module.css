@@ -88,3 +88,19 @@
   width: 320px;
   padding: 1.6em 1.2em;
 }
+
+.infoContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 2.4rem;
+}
+
+.infoContainer p {
+  color: #929292;
+
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}

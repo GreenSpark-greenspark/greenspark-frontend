@@ -12,7 +12,7 @@ export default function NowPower() {
   return (
     <div className={styles.btnWrap}>
       <button className={styles.powerBtn} onClick={handleNavigate}>
-        파워 입력하기
+        내 전기요금 입력하기
       </button>
     </div>
   );

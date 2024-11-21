@@ -11,6 +11,7 @@ interface ChargeData {
   lastMonth: number | null;
   twoMonthsAgo: number | null;
   expectedCost: number | null;
+  threeMonthsAgo: number | null;
 }
 
 type DifferenceType =
@@ -25,7 +26,8 @@ function ExpectPreChart() {
   const [chargeData, setChargeData] = useState<ChargeData>({
     lastMonth: null,
     twoMonthsAgo: null,
-    expectedCost: null
+    expectedCost: null,
+    threeMonthsAgo: null
   });
   const [differenceType, setDifferenceType] = useState<DifferenceType>("noMonths");
   const [isLoading, setIsLoading] = useState(true);
@@ -37,49 +39,37 @@ function ExpectPreChart() {
     const fetchCostData = async () => {
       setIsLoading(true);
       try {
-        const lastMonthResponse = await axios.get(`${API_URL}/power/last-month/${userId}`);
-        if (lastMonthResponse.data.success) {
-          const { last_month_cost, month_before_last_cost } = lastMonthResponse.data.data;
+        const response = await axios.get(`${API_URL}/power/expect/${userId}`);
+        if (response.data.success) {
+          const { expected_cost, last_month_cost, two_month_ago_cost, three_months_ago_cost } =
+            response.data.data;
 
           setChargeData({
             lastMonth: last_month_cost === 0 ? null : last_month_cost,
-            twoMonthsAgo: month_before_last_cost === 0 ? null : month_before_last_cost,
-            expectedCost: null
+            twoMonthsAgo: two_month_ago_cost === 0 ? null : two_month_ago_cost,
+            threeMonthsAgo: three_months_ago_cost === 0 ? null : three_months_ago_cost,
+            expectedCost: expected_cost === 0 ? null : expected_cost
           });
 
           console.log("지난달 요금 (lastMonth):", last_month_cost);
-          console.log("지지난달 요금 (twoMonthsAgo):", month_before_last_cost);
+          console.log("지지난달 요금 (twoMonthsAgo):", two_month_ago_cost);
 
           // differenceType 설정
-          if (last_month_cost === 0 && month_before_last_cost === 0) {
+          if (last_month_cost === 0 && two_month_ago_cost === 0) {
             setDifferenceType("noMonths");
           } else if (last_month_cost === 0) {
             setDifferenceType("noLastMonth");
-          } else if (month_before_last_cost === 0) {
+          } else if (two_month_ago_cost === 0) {
             setDifferenceType("notwoMonthAgo");
-          } else if (last_month_cost != null && month_before_last_cost != null) {
-            const difference = last_month_cost - month_before_last_cost;
+          } else if (last_month_cost != null && two_month_ago_cost != null) {
+            const difference = last_month_cost - two_month_ago_cost;
             setDifferenceType(
               difference > 0 ? "increase" : difference === 0 ? "unchanged" : "decrease"
             );
           }
         } else {
-          console.error("전월 요금 데이터 API 호출 실패:", lastMonthResponse.data.message);
+          console.error("전월 요금 데이터 API 호출 실패:", response.data.message);
         }
-
-        const expectedCostResponse = await axios.get(`${API_URL}/power/expect/${userId}`);
-
-        if (expectedCostResponse.data.success) {
-          const { expected_cost } = expectedCostResponse.data.data;
-          setChargeData(prevData => ({
-            ...prevData,
-            expectedCost: expected_cost === 0 ? null : expected_cost
-          }));
-        } else {
-          console.error("예상 요금 API 호출 실패:", expectedCostResponse.data.message);
-        }
-      } catch (error) {
-        console.error("API 호출 중 오류 발생:", error);
       } finally {
         setIsLoading(false);
       }

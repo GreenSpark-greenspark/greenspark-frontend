@@ -8,10 +8,11 @@
   min-height: 472px;
 
   background-color: #f8fff3;
+  position: relative;
 }
 
 .tableName {
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 
   color: #929292;
   text-align: center;
@@ -19,13 +20,20 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: #f8fff3;
+  padding-bottom: 2rem;
+  width: 33rem;
 }
 
 .tableContainer {
   width: 31.8rem;
   border-radius: 1.5em;
   border-collapse: collapse;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   background-color: white;
   box-shadow: 0 0.1rem 0.8rem 0 #d7f3c6;
@@ -44,6 +52,9 @@
   line-height: normal;
 
   justify-content: center;
+  position: sticky;
+  top: 4.4rem;
+  z-index: 10;
 }
 
 .tableRow td {
@@ -107,7 +118,7 @@
 .dropdownMenu {
   width: 10rem;
   position: absolute;
-  top: 13rem;
+  top: 3.5rem;
   border-radius: 1em;
   border: 0.1em solid #b6ec94;
 

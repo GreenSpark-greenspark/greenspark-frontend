@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import axios from "axios";
 import { useTable, Column, ColumnInstance, HeaderGroup, Row, Cell, CellProps } from "react-table";
-import PowerPopup from "./Popup";
+import PowerPopup from "./PowerPopup";
 import styles from "./PowerTable.module.css";
 import IconPlus from "../../../../public/icon/power_plus.svg";
 import IconDropDown from "../../../../public/icon/power_dropdown.svg";
@@ -12,6 +12,8 @@ type TableRow = {
   cost?: number;
   usage_amount?: number;
 };
+
+type PowerRowKeys = "cost" | "usage_amount";
 
 // 최근 36개월 계산
 const getLast36Months = () => {
@@ -49,13 +51,14 @@ const PowerTable: React.FC = () => {
     month: number;
     type: "cost" | "usage";
     value?: number;
+    recentValue?: number;
   } | null>(null);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const userId = 1;
 
   const months = useMemo(getLast36Months, []);
-  const yearsOptions = useMemo(getYearsOptions, []); // 드롭다운에 표시할 년도 옵션
+  const yearsOptions = useMemo(getYearsOptions, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,6 +66,7 @@ const PowerTable: React.FC = () => {
         const response = await axios.get(`${API_URL}/power/history/${userId}`);
         if (response.data.success) {
           setData(response.data.data);
+          // console.log(response.data.data);
         } else {
           console.error("API 호출 실패:", response.data.message);
         }
@@ -74,7 +78,6 @@ const PowerTable: React.FC = () => {
     fetchData();
   }, [userId]);
 
-  // 선택한 년도에 맞게 데이터 필터링
   const fullData: TableRow[] = useMemo(() => {
     const filteredMonths = selectedYear
       ? months.filter(monthData => monthData.year === selectedYear)
@@ -98,7 +101,33 @@ const PowerTable: React.FC = () => {
   const formatYearMonth = (year: number, month: number) => `${year}년 ${formatMonth(month)}`;
 
   const handleIconClick = (year: number, month: number, type: "cost" | "usage", value?: number) => {
-    setPopupInfo({ year, month, type, value });
+    const mappedKey: PowerRowKeys = type === "cost" ? "cost" : "usage_amount";
+
+    // 현재 값의 뒤에서부터 탐색
+    const recentValueFromPast = fullData
+      .filter(
+        row =>
+          row[mappedKey] !== undefined &&
+          row[mappedKey] !== 0 &&
+          (row.year < year || (row.year === year && row.month < month))
+      )
+      .sort((a, b) => b.year - a.year || b.month - a.month) // 최신 순으로 정렬
+      .map(row => row[mappedKey])
+      .find(val => val !== undefined);
+
+    // 다시 처음부터 탐색
+    const recentValueFromStart =
+      recentValueFromPast ??
+      fullData
+        .filter(row => row[mappedKey] !== undefined && row[mappedKey] !== 0)
+        .sort((a, b) => b.year - a.year || b.month - a.month)
+        .map(row => row[mappedKey])
+        .find(val => val !== undefined);
+
+    const valueToUse = recentValueFromStart !== undefined ? recentValueFromStart : 0;
+
+    setPopupInfo({ year, month, type, value, recentValue: valueToUse });
+    console.log("powerTable", type, value, valueToUse);
   };
 
   const handleSave = (year: number, month: number, type: "cost" | "usage", newValue: number) => {
@@ -116,7 +145,6 @@ const PowerTable: React.FC = () => {
     setPopupInfo(null);
   };
 
-  // 테이블에 필요한 컬럼 정의
   const columns = useMemo<Column<TableRow>[]>(
     () => [
       {
@@ -203,7 +231,7 @@ const PowerTable: React.FC = () => {
         }
       }
     ],
-    [isDropdownOpen, yearsOptions]
+    [isDropdownOpen, yearsOptions, fullData]
   );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable<TableRow>({
@@ -238,26 +266,13 @@ const PowerTable: React.FC = () => {
         <tbody {...getTableBodyProps()}>
           {rows.map((row: Row<TableRow>) => {
             prepareRow(row);
-            const { key, ...restRowProps } = row.getRowProps();
+            const { key, ...rest } = row.getRowProps();
             return (
-              <tr key={key} className={styles.tableRow} {...restRowProps}>
-                {row.cells.map((cell: Cell<TableRow>, cellIndex: number) => {
+              <tr key={key} className={styles.tableRow} {...rest}>
+                {row.cells.map((cell: Cell<TableRow>) => {
                   const { key, ...restCellProps } = cell.getCellProps();
-
-                  // 년도 셀
-                  const cellClassName =
-                    cell.column.id === "yearMonth"
-                      ? styles.yearCell
-                      : cellIndex === 1
-                        ? styles.costUsageDivider // 전기요금 셀에만 좌측에 줄을 추가
-                        : "";
-
                   return (
-                    <td
-                      key={key}
-                      className={`${styles.tableCell} ${cellClassName}`}
-                      {...restCellProps}
-                    >
+                    <td key={key} {...restCellProps}>
                       {cell.render("Cell")}
                     </td>
                   );
@@ -273,9 +288,15 @@ const PowerTable: React.FC = () => {
           year={popupInfo.year}
           month={popupInfo.month}
           type={popupInfo.type}
-          value={popupInfo.value} // 기존 값
+          value={popupInfo.value}
+          recentValue={popupInfo.recentValue}
           onClose={closePopup}
-          onSave={newValue => handleSave(popupInfo.year, popupInfo.month, popupInfo.type, newValue)} // 수정된 값
+          onSave={(newValue: number) => {
+            if (popupInfo) {
+              handleSave(popupInfo.year, popupInfo.month, popupInfo.type, newValue);
+              closePopup();
+            }
+          }}
         />
       )}
     </div>
