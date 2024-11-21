@@ -103,16 +103,28 @@ const PowerTable: React.FC = () => {
   const handleIconClick = (year: number, month: number, type: "cost" | "usage", value?: number) => {
     const mappedKey: PowerRowKeys = type === "cost" ? "cost" : "usage_amount";
 
-    const recentValue = fullData
+    // 현재 값의 뒤에서부터 탐색
+    const recentValueFromPast = fullData
       .filter(
         row =>
-          row[mappedKey] !== undefined && row.year <= year && (row.year < year || row.month < month)
+          row[mappedKey] !== undefined &&
+          row[mappedKey] !== 0 &&
+          (row.year < year || (row.year === year && row.month < month))
       )
       .sort((a, b) => b.year - a.year || b.month - a.month) // 최신 순으로 정렬
       .map(row => row[mappedKey])
       .find(val => val !== undefined);
 
-    const valueToUse = recentValue !== undefined ? recentValue : 0;
+    // 다시 처음부터 탐색
+    const recentValueFromStart =
+      recentValueFromPast ??
+      fullData
+        .filter(row => row[mappedKey] !== undefined && row[mappedKey] !== 0)
+        .sort((a, b) => b.year - a.year || b.month - a.month)
+        .map(row => row[mappedKey])
+        .find(val => val !== undefined);
+
+    const valueToUse = recentValueFromStart !== undefined ? recentValueFromStart : 0;
 
     setPopupInfo({ year, month, type, value, recentValue: valueToUse });
     console.log("powerTable", type, value, valueToUse);
