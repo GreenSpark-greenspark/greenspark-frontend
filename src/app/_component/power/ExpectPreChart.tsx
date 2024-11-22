@@ -88,6 +88,7 @@ function ExpectPreChart() {
   const currentMonthDate = getDateLabel("current");
   const lastMonthDate = getDateLabel("last");
   const twoMonthsDate = getDateLabel("twoMonths");
+  const threeMonthsDate = getDateLabel("threeMonths");
 
   // 요금에 따라 스타일 설정
   const getChartColorClass = (cost: number | null) => {
@@ -186,9 +187,32 @@ function ExpectPreChart() {
           >
             {chargeData?.twoMonthsAgo?.toLocaleString() ?? "?,???"}원
           </p>
-          <div
-            className={`${styles.chartColor} ${getChartColorClass(chargeData.twoMonthsAgo)}`}
-          ></div>
+          <div className={`${styles.chartColor} ${getChartColorClass(chargeData.lastMonth)}`}>
+            <div className={styles.chartBox}>
+              <p className={styles.chartBoxText}>{`${threeMonthsDate.monthLabel}월 대비`}</p>
+              <p className={styles.costText}>
+                <span
+                  className={
+                    differenceType === "decrease"
+                      ? styles.costBlue
+                      : differenceType === "increase"
+                        ? styles.costRed
+                        : differenceType === "unchanged"
+                          ? styles.costGreen
+                          : styles.costText
+                  }
+                >
+                  {differenceType === "unchanged"
+                    ? "동일"
+                    : differenceType === "increase" || differenceType === "decrease"
+                      ? `${differenceType === "decrease" ? "-" : "+"}${Math.abs(
+                          (chargeData?.lastMonth ?? 0) - (chargeData?.twoMonthsAgo ?? 0)
+                        ).toLocaleString()}원`
+                      : "?,???원"}
+                </span>
+              </p>
+            </div>
+          </div>
           <p className={styles.monthLabel}>{`${twoMonthsDate.monthLabel}월`}</p>
         </div>
         {/* 전월 */}
@@ -224,7 +248,7 @@ function ExpectPreChart() {
               </p>
             </div>
           </div>
-          <p className={styles.lastMonthLabel}>{`${lastMonthDate.monthLabel}월`}</p>
+          <p className={styles.monthLabelClick}>{`${lastMonthDate.monthLabel}월`}</p>
         </div>
         {/* 예상요금 */}
         <div className={styles.chartUnit}>

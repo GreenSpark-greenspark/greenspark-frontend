@@ -117,7 +117,7 @@
   height: 1.9rem;
 }
 
-.lastMonthLabel {
+.monthLabelClick {
   color: #ffffff;
 
   display: flex;
