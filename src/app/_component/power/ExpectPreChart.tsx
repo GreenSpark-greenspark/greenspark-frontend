@@ -193,22 +193,24 @@ function ExpectPreChart() {
               <p className={styles.costText}>
                 <span
                   className={
-                    differenceType === "decrease"
-                      ? styles.costBlue
-                      : differenceType === "increase"
-                        ? styles.costRed
-                        : differenceType === "unchanged"
-                          ? styles.costGreen
-                          : styles.costText
+                    chargeData?.threeMonthsAgo &&
+                    chargeData.twoMonthsAgo &&
+                    chargeData.twoMonthsAgo > chargeData.threeMonthsAgo // 모두 존재, 증가
+                      ? styles.costRed
+                      : chargeData?.threeMonthsAgo &&
+                          chargeData.twoMonthsAgo &&
+                          chargeData.twoMonthsAgo < chargeData.threeMonthsAgo // 모두 존재, 감소
+                        ? styles.costBlue
+                        : styles.costText // 기본
                   }
                 >
-                  {differenceType === "unchanged"
-                    ? "동일"
-                    : differenceType === "increase" || differenceType === "decrease"
-                      ? `${differenceType === "decrease" ? "-" : "+"}${Math.abs(
-                          (chargeData?.lastMonth ?? 0) - (chargeData?.twoMonthsAgo ?? 0)
+                  {chargeData?.threeMonthsAgo && chargeData.twoMonthsAgo
+                    ? chargeData.expectedCost === chargeData.threeMonthsAgo
+                      ? "동일"
+                      : `${chargeData.twoMonthsAgo > chargeData.threeMonthsAgo ? "+" : "-"}${Math.abs(
+                          chargeData.twoMonthsAgo - chargeData.threeMonthsAgo
                         ).toLocaleString()}원`
-                      : "?,???원"}
+                    : "?,???원"}
                 </span>
               </p>
             </div>
@@ -228,22 +230,24 @@ function ExpectPreChart() {
               <p className={styles.costText}>
                 <span
                   className={
-                    differenceType === "decrease"
-                      ? styles.costBlue
-                      : differenceType === "increase"
-                        ? styles.costRed
-                        : differenceType === "unchanged"
-                          ? styles.costGreen
-                          : styles.costText
+                    chargeData?.twoMonthsAgo &&
+                    chargeData.lastMonth &&
+                    chargeData.lastMonth > chargeData.twoMonthsAgo // 모두 존재, 증가
+                      ? styles.costRed
+                      : chargeData?.twoMonthsAgo &&
+                          chargeData.lastMonth &&
+                          chargeData.lastMonth < chargeData.twoMonthsAgo // 모두 존재, 감소
+                        ? styles.costBlue
+                        : styles.costText // 기본
                   }
                 >
-                  {differenceType === "unchanged"
-                    ? "동일"
-                    : differenceType === "increase" || differenceType === "decrease"
-                      ? `${differenceType === "decrease" ? "-" : "+"}${Math.abs(
-                          (chargeData?.lastMonth ?? 0) - (chargeData?.twoMonthsAgo ?? 0)
+                  {chargeData?.twoMonthsAgo && chargeData.lastMonth
+                    ? chargeData.expectedCost === chargeData.twoMonthsAgo
+                      ? "동일"
+                      : `${chargeData.lastMonth > chargeData.twoMonthsAgo ? "+" : "-"}${Math.abs(
+                          chargeData.lastMonth - chargeData.twoMonthsAgo
                         ).toLocaleString()}원`
-                      : "?,???원"}
+                    : "?,???원"}
                 </span>
               </p>
             </div>
