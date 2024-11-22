@@ -15,7 +15,7 @@ const Popup: React.FC<PopupProps> = ({ modelName, applianceType, onClose }) => {
 
   const onGo = () => {
     onClose();
-    router.push("/appliances");
+    router.push("/list");
   };
 
   return (
