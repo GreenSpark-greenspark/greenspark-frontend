@@ -29,8 +29,8 @@ export default function BottomNav() {
       setActiveButton("book");
     } else if (pathname === "/") {
       setActiveButton("home");
-    } else if (pathname.startsWith("/appliances")) {
-      setActiveButton("appliance");
+    } else if (pathname.startsWith("/list")) {
+      setActiveButton("list");
     } else if (pathname.startsWith("/my")) {
       setActiveButton("my");
     } else {
@@ -82,15 +82,15 @@ export default function BottomNav() {
         </div>
       </div>
 
-      <div className={styles.navBtn} onClick={() => handleButtonClick("appliance", "/appliances")}>
-        {activeButton === "appliance" ? (
+      <div className={styles.navBtn} onClick={() => handleButtonClick("list", "/list")}>
+        {activeButton === "list" ? (
           <IconClickAppliance className={styles.icon} />
         ) : (
           <IconAppliance className={styles.icon} />
         )}
         <p
           className={`${styles.menuName} ${
-            activeButton === "appliance" ? styles.menuNameActive : ""
+            activeButton === "list" ? styles.menuNameActive : ""
           }`}
         >
           가전
