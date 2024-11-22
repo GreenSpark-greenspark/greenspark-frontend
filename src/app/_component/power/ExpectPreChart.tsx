@@ -18,8 +18,8 @@ type DifferenceType =
   | "increase"
   | "unchanged"
   | "decrease"
-  | "notwoMonthAgo"
-  | "noLastMonth"
+  | "noPreMonth"
+  | "noCurrentMonth"
   | "noMonths";
 
 function ExpectPreChart() {
@@ -50,23 +50,6 @@ function ExpectPreChart() {
             threeMonthsAgo: three_months_ago_cost === 0 ? null : three_months_ago_cost,
             expectedCost: expected_cost === 0 ? null : expected_cost
           });
-
-          console.log("지난달 요금 (lastMonth):", last_month_cost);
-          console.log("지지난달 요금 (twoMonthsAgo):", two_month_ago_cost);
-
-          // differenceType 설정
-          if (last_month_cost === 0 && two_month_ago_cost === 0) {
-            setDifferenceType("noMonths");
-          } else if (last_month_cost === 0) {
-            setDifferenceType("noLastMonth");
-          } else if (two_month_ago_cost === 0) {
-            setDifferenceType("notwoMonthAgo");
-          } else if (last_month_cost != null && two_month_ago_cost != null) {
-            const difference = last_month_cost - two_month_ago_cost;
-            setDifferenceType(
-              difference > 0 ? "increase" : difference === 0 ? "unchanged" : "decrease"
-            );
-          }
         } else {
           console.error("전월 요금 데이터 API 호출 실패:", response.data.message);
         }
@@ -78,18 +61,13 @@ function ExpectPreChart() {
     fetchCostData();
   }, [API_URL, userId]);
 
-  if (isLoading) {
-    return (
-      <div className={styles.LoadingWrapper}>
-        <LoadingDots />
-      </div>
-    );
-  }
-  const currentMonthDate = getDateLabel("current");
-  const lastMonthDate = getDateLabel("last");
-  const twoMonthsDate = getDateLabel("twoMonths");
-  const threeMonthsDate = getDateLabel("threeMonths");
-
+  const determineDifferenceType = (pre: number | null, current: number | null): DifferenceType => {
+    if (pre === null && current === null) return "noMonths";
+    if (pre === null) return "noPreMonth";
+    if (current === null) return "noCurrentMonth";
+    const difference = current - pre;
+    return difference > 0 ? "increase" : difference === 0 ? "unchanged" : "decrease";
+  };
   // 요금에 따라 스타일 설정
   const getChartColorClass = (cost: number | null) => {
     switch (true) {
@@ -107,24 +85,82 @@ function ExpectPreChart() {
         return "";
     }
   };
+  // 클릭 시 실행
+  const [preCost, setPreCost] = useState<number | null>(null);
+  const [currentCost, setCurrentCost] = useState<number | null>(null);
+
+  const [preMonthLabel, setPreMonthLabel] = useState("");
+  const [currentMonthLabel, setCurrentMonthLabel] = useState("");
+  const handleChartClick = (type: "twoMonth" | "lastMonth" | "currentMonth") => {
+    let pre: number | null;
+    let current: number | null;
+
+    switch (type) {
+      case "twoMonth":
+        pre = chargeData.threeMonthsAgo;
+        current = chargeData.twoMonthsAgo;
+        setPreMonthLabel(getDateLabel("threeMonths").monthLabel);
+        setCurrentMonthLabel(getDateLabel("twoMonths").monthLabel);
+        break;
+      case "lastMonth":
+        pre = chargeData.twoMonthsAgo;
+        current = chargeData.lastMonth;
+        setPreMonthLabel(getDateLabel("twoMonths").monthLabel);
+        setCurrentMonthLabel(getDateLabel("last").monthLabel);
+        break;
+      case "currentMonth":
+        pre = chargeData.lastMonth;
+        current = chargeData.expectedCost;
+        setPreMonthLabel(getDateLabel("last").monthLabel);
+        setCurrentMonthLabel(getDateLabel("current").monthLabel);
+        break;
+      default:
+        pre = null;
+        current = null;
+    }
+
+    setPreCost(pre);
+    setCurrentCost(current);
+    setDifferenceType(determineDifferenceType(pre, current));
+  };
+
+  if (isLoading) {
+    return (
+      <div className={styles.LoadingWrapper}>
+        <LoadingDots />
+      </div>
+    );
+  }
+
+  const currentMonthDate = getDateLabel("current");
+  const lastMonthDate = getDateLabel("last");
+  const twoMonthsDate = getDateLabel("twoMonths");
+  const threeMonthsDate = getDateLabel("threeMonths");
+
+  // 차이 계산
+  const calculateDifference = () => {
+    if (preCost != null && currentCost != null) {
+      return currentCost - preCost;
+    }
+    return null;
+  };
+
+  const difference = calculateDifference();
 
   const renderComment = () => {
-    const { lastMonth, twoMonthsAgo } = chargeData;
-    const difference = (lastMonth ?? 0) - (twoMonthsAgo ?? 0);
-
     switch (differenceType) {
       case "noMonths":
         return <>정보를 입력해주세요!</>;
-      case "noLastMonth":
-        return <> {`${lastMonthDate.monthLabel}월 전기 요금을 입력해주세요!`}</>;
-      case "notwoMonthAgo":
-        return <>{`${twoMonthsDate.monthLabel}월 전기 요금을 입력해주세요!`}</>;
+      case "noPreMonth":
+        return <>{`${preMonthLabel}월 전기 요금을 입력해주세요!`}</>;
+      case "noCurrentMonth":
+        return <>{`${currentMonthLabel}월 전기 요금을 입력해주세요!`}</>;
       case "increase":
         return (
           <>
             <p>
-              {`${twoMonthsDate.monthLabel}월에 비해 `}
-              <span className={styles.costRed}>{Math.abs(difference).toLocaleString()}원 </span>
+              {`${preMonthLabel}월에 비해 `}
+              <span className={styles.costRed}>{Math.abs(difference!).toLocaleString()}원 </span>
               증가했어요!
               <br />
               조금 더 전기를 아껴보는 건 어떨까요?
@@ -137,12 +173,12 @@ function ExpectPreChart() {
         return (
           <>
             <p>
-              {`${twoMonthsDate.monthLabel}월에 비해 `}
-              <span className={styles.costGreen}>같은 전기 요금이네요!</span>
+              {`${preMonthLabel}월과 `}
+              <span className={styles.costGreen}>같은</span> 전기사용량이네요!
               <br />
-              조금 더 아껴서 다음 달에는
-              <br />
-              에너지 백과를 통해 다양한 팁을 살펴보아요!
+              조금 더 아껴서 다음 달에는 <br />
+              절약해보는 건 어떨까요?
+              <br /> 에너지 백과를 통해 다양한 팁을 살펴보아요!
             </p>
           </>
         );
@@ -150,15 +186,14 @@ function ExpectPreChart() {
         return (
           <>
             <p>
-              {`${twoMonthsDate.monthLabel}월에 비해 `}
-              <span className={styles.costBlue}>{Math.abs(difference).toLocaleString()}원 </span>
+              {`${preMonthLabel}월에 비해 `}
+              <span className={styles.costBlue}>{Math.abs(difference!).toLocaleString()}원 </span>
               감소했어요!
               <br />
               아주 잘하고 있군요!
               <br />
               앞으로도 그린스파크와 함께 더 나은
-              <br />
-              전력소비 해보아요!
+              <br /> 전력소비 해보아요!
             </p>
           </>
         );
@@ -170,8 +205,8 @@ function ExpectPreChart() {
   const TipMentIcon = () => {
     if (
       differenceType === "noMonths" ||
-      differenceType === "noLastMonth" ||
-      differenceType === "notwoMonthAgo"
+      differenceType === "noPreMonth" ||
+      differenceType === "noCurrentMonth"
     ) {
       return <TipMentIconSmall style={{ width: "24.3rem", height: "6rem" }} />;
     }
@@ -181,13 +216,13 @@ function ExpectPreChart() {
     <>
       <div className={styles.chartContainer}>
         {/* 전전월 */}
-        <div className={styles.chartUnit}>
+        <div className={styles.chartUnit} onClick={() => handleChartClick("twoMonth")}>
           <p
             className={`${styles.boxCost} ${chargeData?.twoMonthsAgo === null ? styles.costText : ""}`}
           >
             {chargeData?.twoMonthsAgo?.toLocaleString() ?? "?,???"}원
           </p>
-          <div className={`${styles.chartColor} ${getChartColorClass(chargeData.lastMonth)}`}>
+          <div className={`${styles.chartColor} ${getChartColorClass(chargeData.twoMonthsAgo)}`}>
             <div className={styles.chartBox}>
               <p className={styles.chartBoxText}>{`${threeMonthsDate.monthLabel}월 대비`}</p>
               <p className={styles.costText}>
@@ -218,7 +253,7 @@ function ExpectPreChart() {
           <p className={styles.monthLabel}>{`${twoMonthsDate.monthLabel}월`}</p>
         </div>
         {/* 전월 */}
-        <div className={styles.chartUnit}>
+        <div className={styles.chartUnit} onClick={() => handleChartClick("lastMonth")}>
           <p
             className={`${styles.boxCost} ${chargeData?.lastMonth === null ? styles.costText : ""}`}
           >
@@ -242,7 +277,7 @@ function ExpectPreChart() {
                   }
                 >
                   {chargeData?.twoMonthsAgo && chargeData.lastMonth
-                    ? chargeData.expectedCost === chargeData.twoMonthsAgo
+                    ? chargeData.lastMonth === chargeData.twoMonthsAgo
                       ? "동일"
                       : `${chargeData.lastMonth > chargeData.twoMonthsAgo ? "+" : "-"}${Math.abs(
                           chargeData.lastMonth - chargeData.twoMonthsAgo
@@ -255,7 +290,7 @@ function ExpectPreChart() {
           <p className={styles.monthLabelClick}>{`${lastMonthDate.monthLabel}월`}</p>
         </div>
         {/* 예상요금 */}
-        <div className={styles.chartUnit}>
+        <div className={styles.chartUnit} onClick={() => handleChartClick("currentMonth")}>
           <p className={styles.infoText}>예상요금</p>
           <p
             className={`${styles.boxCost} ${chargeData?.expectedCost === null ? styles.costText : ""}`}
@@ -306,8 +341,8 @@ function ExpectPreChart() {
         <div
           className={`${styles.tipMent} ${
             differenceType === "noMonths" ||
-            differenceType === "noLastMonth" ||
-            differenceType === "notwoMonthAgo"
+            differenceType === "noCurrentMonth" ||
+            differenceType === "noPreMonth"
               ? styles.tipMentSmall
               : styles.tipMentBig
           }`}
