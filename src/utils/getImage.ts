@@ -13,6 +13,8 @@ export const getImage = (type: string) => {
   switch (type) {
     case "공기청정기 (~24.12.31)":
       return airPurifier;
+    case "공기청정기":
+      return airPurifier;
     case "김치냉장고":
       return kimchiRefrigerator;
     case "전기냉장고":

@@ -26,7 +26,7 @@ const Popup: React.FC<PopupProps> = ({ modelName, applianceType, onClose }) => {
           <Image
             src={getImage(applianceType)}
             alt={modelName}
-            width={100}
+            width={180}
             className={styles.modelImage}
           />
         </div>

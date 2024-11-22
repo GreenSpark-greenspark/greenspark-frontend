@@ -33,7 +33,7 @@ export default function Appliance({
         <Image
           src={getImage(type)}
           alt={alt || type}
-          width={width * 4}
+          width={50}
           style={{ objectFit: "cover" }}
           priority={true}
         />
