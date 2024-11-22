@@ -204,7 +204,9 @@ export default function ClientComponent() {
       </Box>
       {showPopup && (
         <Popup
-          applianceType={selectedAppliance}
+          applianceType={
+            transformedOptions.find(option => option.display === selectedAppliance)?.original || ""
+          }
           modelName={selectedModelName}
           onClose={closePopup}
         />

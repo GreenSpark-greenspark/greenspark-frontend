@@ -21,7 +21,7 @@ const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: Top
           <Image
             src={getImage(기자재명칭)}
             alt={기자재명칭}
-            width={45}
+            width={75}
             style={{ objectFit: "cover" }}
             priority={true}
           />
