@@ -150,11 +150,19 @@ function ExpectPreChart() {
   const renderComment = () => {
     switch (differenceType) {
       case "noMonths":
-        return <>정보를 입력해주세요!</>;
+        return <>파워를 입력해주세요!</>;
       case "noPreMonth":
-        return <>{`${preMonthLabel}월 전기 요금을 입력해주세요!`}</>;
+        return (
+          <>
+            <p>
+              {`${currentMonthLabel}월 요금은 `}
+              <span className={styles.costText}>{currentCost}원이에요!</span>
+              <br /> 전달 파워를 입력하면 <br />더 많은 정보를 보여드릴게요!
+            </p>
+          </>
+        );
       case "noCurrentMonth":
-        return <>{`${currentMonthLabel}월 전기 요금을 입력해주세요!`}</>;
+        return <>{`${currentMonthLabel}월 파워를 입력해주세요!`}</>;
       case "increase":
         return (
           <>
@@ -203,11 +211,7 @@ function ExpectPreChart() {
   };
   //   팁멘트 아이콘
   const TipMentIcon = () => {
-    if (
-      differenceType === "noMonths" ||
-      differenceType === "noPreMonth" ||
-      differenceType === "noCurrentMonth"
-    ) {
+    if (differenceType === "noMonths" || differenceType === "noCurrentMonth") {
       return <TipMentIconSmall style={{ width: "24.3rem", height: "6rem" }} />;
     }
     return <TipMentIconBig style={{ width: "24.3rem", height: "9.5rem" }} />;
@@ -340,9 +344,7 @@ function ExpectPreChart() {
         <TipMentIcon />
         <div
           className={`${styles.tipMent} ${
-            differenceType === "noMonths" ||
-            differenceType === "noCurrentMonth" ||
-            differenceType === "noPreMonth"
+            differenceType === "noMonths" || differenceType === "noCurrentMonth"
               ? styles.tipMentSmall
               : styles.tipMentBig
           }`}
