@@ -64,7 +64,7 @@ export default function AppliancePage({ params }: { params: { id: string | strin
 
   return (
     <div className={style.BoxWrapper}>
-      <Box minHeight="452px">
+      <Box minHeight="400px">
         <div className={style.ViewWrapper}>
           <TopView {...applianceDetails} />
           <BottomView {...applianceDetails} />
