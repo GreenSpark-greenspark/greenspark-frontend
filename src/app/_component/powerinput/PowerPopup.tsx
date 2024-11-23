@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "./PowerPopup.module.css";
 import Toast from "@/components/Toast";
 import IconClose from "@/../public/icon/popup_close.svg";
+import InputBottomSheet from "./InputBottomSheet";
 
 type PowerPopupProps = {
   userId: number;
@@ -21,14 +22,14 @@ const PowerPopup: React.FC<PowerPopupProps> = ({
   month,
   type,
   value = 0,
-  recentValue = 0, // 최근 값 초기화
+  recentValue = 0,
   onClose,
   onSave
 }) => {
   const [inputValue, setInputValue] = useState<string>(value ? value.toString() : "");
   const [toastMessage, setToastMessage] = useState<string>("");
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
-  const [numericInputValue, setNumericInputValue] = useState<number | null>(null); // 숫자 변환된 입력값
+  const [numericInputValue, setNumericInputValue] = useState<number | null>(null);
 
   const typeName = type === "cost" ? "전기요금" : "전력사용량";
   const unit = type === "cost" ? "원" : "kWh";
@@ -37,7 +38,6 @@ const PowerPopup: React.FC<PowerPopupProps> = ({
     ? `${styles.submitBtn} ${styles.submitBtnGreen}`
     : styles.submitBtn;
 
-  // 숫자 유효성 검사
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value && !/^\d+$/.test(value)) {
@@ -54,9 +54,8 @@ const PowerPopup: React.FC<PowerPopupProps> = ({
     }
 
     const numericValue = Number(inputValue);
-    setNumericInputValue(numericValue); // 입력값 저장
+    setNumericInputValue(numericValue);
 
-    // 최근 값이 0이 아니고, 3배 초과인지
     if (recentValue > 0 && numericValue > recentValue * 3) {
       setShowConfirmation(true);
     } else {
@@ -96,7 +95,7 @@ const PowerPopup: React.FC<PowerPopupProps> = ({
 
   const handleReEnter = () => {
     setShowConfirmation(false);
-    setInputValue(numericInputValue?.toString() || ""); // 기존 입력값으로 되돌리기
+    setInputValue(numericInputValue?.toString() || "");
   };
 
   useEffect(() => {
@@ -131,26 +130,11 @@ const PowerPopup: React.FC<PowerPopupProps> = ({
       </div>
 
       {showConfirmation && (
-        <div className={styles.overlay}>
-          <div className={styles.popup}>
-            <div className={styles.popupBox}>
-              <IconClose className={styles.iconClose} onClick={onClose} />
-
-              <p className={styles.popupTitle}>
-                지난 달과 차이가 커요! <br />
-                정확히 입력했나요?
-              </p>
-              <div className={styles.confirmationBtnContainer}>
-                <button className={styles.confirmBtn} onClick={handleConfirmSave}>
-                  이대로 입력하기
-                </button>
-                <button className={styles.reenterBtn} onClick={handleReEnter}>
-                  다시 입력하기
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <InputBottomSheet
+          onClose={() => setShowConfirmation(false)}
+          onConfirmSave={handleConfirmSave}
+          onReEnter={handleReEnter}
+        />
       )}
     </>
   );
