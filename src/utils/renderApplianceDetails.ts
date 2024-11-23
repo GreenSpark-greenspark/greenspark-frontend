@@ -64,7 +64,7 @@ export function mapApplianceDetails(appliance: ApplianceData, applianceType: str
     case "전기냉온수기":
       uniqueFields = {
         월간소비전력량: appliance.MONTH_CONS_PWR,
-        냉수저장탱크용량: appliance.COLD_WATER_CAPA,
+        냉수저장탱크용량: appliance.COLD_CAPA,
         온수저장탱크용량: appliance.WARM_CAPA,
         소비효율등급부여지표: appliance.R
       };
