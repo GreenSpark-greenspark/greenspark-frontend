@@ -86,15 +86,38 @@ function ExpectPreChart() {
         return "";
     }
   };
+
+  // 팁멘트 꼬리
+  const [tailPosition, setTailPosition] = useState<number>(120); // 초기 값: 가운데
+  const updateTailPosition = (type: "twoMonth" | "lastMonth" | "currentMonth") => {
+    switch (type) {
+      case "twoMonth":
+        setTailPosition(30);
+        break;
+      case "lastMonth":
+        setTailPosition(120);
+        break;
+      case "currentMonth":
+        setTailPosition(210);
+        break;
+      default:
+        setTailPosition(120);
+    }
+  };
+
   // 클릭 시 실행
   const [preCost, setPreCost] = useState<number | null>(null);
   const [currentCost, setCurrentCost] = useState<number | null>(null);
 
   const [preMonthLabel, setPreMonthLabel] = useState("");
   const [currentMonthLabel, setCurrentMonthLabel] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
+
   const handleChartClick = (type: "twoMonth" | "lastMonth" | "currentMonth") => {
     let pre: number | null;
     let current: number | null;
+
+    updateTailPosition(type);
 
     switch (type) {
       case "twoMonth":
@@ -103,6 +126,8 @@ function ExpectPreChart() {
         setCommentType("general");
         setPreMonthLabel(getDateLabel("threeMonths").monthLabel);
         setCurrentMonthLabel(getDateLabel("twoMonths").monthLabel);
+        setSelectedMonth("twoMonths");
+
         break;
       case "lastMonth":
         pre = chargeData.twoMonthsAgo;
@@ -110,6 +135,8 @@ function ExpectPreChart() {
         setCommentType("general");
         setPreMonthLabel(getDateLabel("twoMonths").monthLabel);
         setCurrentMonthLabel(getDateLabel("last").monthLabel);
+        setSelectedMonth("lastMonth");
+
         break;
       case "currentMonth":
         pre = chargeData.lastMonth;
@@ -117,6 +144,7 @@ function ExpectPreChart() {
         setCommentType("expect");
         setPreMonthLabel(getDateLabel("last").monthLabel);
         setCurrentMonthLabel(getDateLabel("current").monthLabel);
+        setSelectedMonth("currentMonth");
         break;
       default:
         pre = null;
@@ -287,13 +315,25 @@ function ExpectPreChart() {
     }
   };
 
+  const SpeechBalloon: React.FC<{ tailX: number }> = ({ tailX }) => (
+    <svg
+      width="243"
+      height="95"
+      viewBox="0 0 243 95"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect y="12" width="243" height="83" rx="10" fill="#F1F3F5" />
+
+      <path d={`M${tailX} 0 L${tailX + 8.227} 12 H${tailX - 8.227} L${tailX} 0Z`} fill="#F1F3F5" />
+    </svg>
+  );
+
   //   팁멘트 아이콘
   const TipMentIcon = () => {
-    if (differenceType === "noMonths" || differenceType === "noCurrentMonth") {
-      return <TipMentIconSmall style={{ width: "24.3rem", height: "6rem" }} />;
-    }
-    return <TipMentIconBig style={{ width: "24.3rem", height: "9.5rem" }} />;
+    return <SpeechBalloon tailX={tailPosition} />;
   };
+
   return (
     <>
       <div className={styles.chartContainer}>
@@ -332,7 +372,11 @@ function ExpectPreChart() {
               </p>
             </div>
           </div>
-          <p className={styles.monthLabel}>{`${twoMonthsDate.monthLabel}월`}</p>
+          <p
+            className={`${styles.monthLabel} ${selectedMonth === "twoMonths" ? styles.monthLabelClick : ""}`}
+          >
+            {`${twoMonthsDate.monthLabel}월`}
+          </p>{" "}
         </div>
         {/* 전월 */}
         <div className={styles.chartUnit} onClick={() => handleChartClick("lastMonth")}>
@@ -369,7 +413,11 @@ function ExpectPreChart() {
               </p>
             </div>
           </div>
-          <p className={styles.monthLabelClick}>{`${lastMonthDate.monthLabel}월`}</p>
+          <p
+            className={`${styles.monthLabel} ${selectedMonth === "lastMonth" ? styles.monthLabelClick : ""}`}
+          >
+            {`${lastMonthDate.monthLabel}월`}
+          </p>{" "}
         </div>
         {/* 예상요금 */}
         <div className={styles.chartUnit} onClick={() => handleChartClick("currentMonth")}>
@@ -415,7 +463,11 @@ function ExpectPreChart() {
               </p>
             </div>
           </div>
-          <p className={styles.monthLabel}>{`${currentMonthDate.monthLabel}월`}</p>
+          <p
+            className={`${styles.monthLabel} ${selectedMonth === "currentMonth" ? styles.monthLabelClick : ""}`}
+          >
+            {`${currentMonthDate.monthLabel}월`}
+          </p>{" "}
         </div>
       </div>
       <div className={styles.tipContainer}>
