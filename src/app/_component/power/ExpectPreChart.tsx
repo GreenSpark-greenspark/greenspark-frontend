@@ -192,7 +192,7 @@ function ExpectPreChart() {
         <>
           <p>
             {`${currentMonthLabel}월 요금은 `}
-            <span className={styles.costText}>{currentCost?.toLocaleString()}원이에요!</span>
+            <span className={styles.costText}>{currentCost?.toLocaleString()}원</span>이에요!
             <br />
             전달 파워를 입력하면 <br />더 많은 정보를 보여드릴게요!
           </p>
@@ -203,7 +203,7 @@ function ExpectPreChart() {
         <>
           <p>
             {`${preMonthLabel}월에 비해 `}
-            <span className={styles.costRed}>{difference?.toLocaleString()}원 증가했어요!</span>
+            <span className={styles.costRed}>{difference?.toLocaleString()}원 </span>증가했어요!
             <br />
             조금 더 전기를 아껴보는 건 어떨까요?
             <br />
@@ -244,8 +244,8 @@ function ExpectPreChart() {
         <>
           <p>
             {" "}
-            예상요금은{" "}
-            <span className={styles.costText}>{currentCost?.toLocaleString()}원이에요!</span>
+            예상요금은 <span className={styles.costText}>{currentCost?.toLocaleString()}원</span>
+            이에요!
             <br />
             {preMonthLabel}월 파워를 입력하면
             <br /> 더 정확한 예측을 할 수 있어요!
@@ -262,9 +262,8 @@ function ExpectPreChart() {
         <>
           <p>
             {`${preMonthLabel}월에 비해 `}
-            <span className={styles.costRed}>
-              {difference?.toLocaleString()}원 증가할 것 같군요.
-            </span>
+            <span className={styles.costRed}>{difference?.toLocaleString()}원 </span>증가할 것
+            같군요.
             <br />
             조금 더 전기를 아껴보는 건 어떨까요?
             <br />
