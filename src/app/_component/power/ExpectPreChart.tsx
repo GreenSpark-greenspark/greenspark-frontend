@@ -31,6 +31,7 @@ function ExpectPreChart() {
   });
   const [differenceType, setDifferenceType] = useState<DifferenceType>("noMonths");
   const [isLoading, setIsLoading] = useState(true);
+  const [commentType, setCommentType] = useState<"general" | "expect">("general");
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const userId = 1;
@@ -99,18 +100,21 @@ function ExpectPreChart() {
       case "twoMonth":
         pre = chargeData.threeMonthsAgo;
         current = chargeData.twoMonthsAgo;
+        setCommentType("general");
         setPreMonthLabel(getDateLabel("threeMonths").monthLabel);
         setCurrentMonthLabel(getDateLabel("twoMonths").monthLabel);
         break;
       case "lastMonth":
         pre = chargeData.twoMonthsAgo;
         current = chargeData.lastMonth;
+        setCommentType("general");
         setPreMonthLabel(getDateLabel("twoMonths").monthLabel);
         setCurrentMonthLabel(getDateLabel("last").monthLabel);
         break;
       case "currentMonth":
         pre = chargeData.lastMonth;
         current = chargeData.expectedCost;
+        setCommentType("expect");
         setPreMonthLabel(getDateLabel("last").monthLabel);
         setCurrentMonthLabel(getDateLabel("current").monthLabel);
         break;
@@ -147,68 +151,142 @@ function ExpectPreChart() {
 
   const difference = calculateDifference();
 
-  const renderComment = () => {
+  const commentTexts = {
+    general: {
+      noMonths: <>파워를 입력해주세요!</>,
+      noPreMonth: (
+        <>
+          <p>
+            {`${currentMonthLabel}월 요금은 `}
+            <span className={styles.costText}>{currentCost?.toLocaleString()}원이에요!</span>
+            <br />
+            전달 파워를 입력하면 더 많은 정보를 보여드릴게요!
+          </p>
+        </>
+      ),
+      noCurrentMonth: <>{`${currentMonthLabel}월 파워를 입력해주세요!`}</>,
+      increase: (
+        <>
+          <p>
+            {`${preMonthLabel}월에 비해 `}
+            <span className={styles.costRed}>{difference?.toLocaleString()}원 증가했어요!</span>
+            <br />
+            조금 더 전기를 아껴보는 건 어떨까요?
+            <br />
+            에너지 백과를 통해 다양한 팁을 살펴보아요!
+          </p>
+        </>
+      ),
+      unchanged: (
+        <>
+          <p>
+            {`${preMonthLabel}월과 `}
+            <span className={styles.costGreen}>같은</span> 전기사용량이네요!
+            <br />
+            조금 더 아껴서 다음 달에는 <br />
+            절약해보는 건 어떨까요?
+            <br /> 에너지 백과를 통해 다양한 팁을 살펴보아요!
+          </p>
+        </>
+      ),
+      decrease: (
+        <>
+          <p>
+            {`${preMonthLabel}월에 비해 `}
+            <span className={styles.costBlue}>{Math.abs(difference!).toLocaleString()}원 </span>
+            감소했어요!
+            <br />
+            아주 잘하고 있군요!
+            <br />
+            앞으로도 그린스파크와 함께 더 나은
+            <br /> 전력소비 해보아요!
+          </p>
+        </>
+      )
+    },
+    expect: {
+      noMonths: <>예상 요금을 입력해주세요!</>,
+      noPreMonth: (
+        <>
+          <p>
+            {" "}
+            예상요금은{" "}
+            <span className={styles.costText}>{currentCost?.toLocaleString()}원이에요!</span>
+            <br />
+            {preMonthLabel}월 파워를 입력하면
+            <br /> 더 정확한 예측을 할 수 있어요!
+          </p>
+        </>
+      ),
+      noCurrentMonth: (
+        <>
+          <p>파워를 입력하면 예상 요금을 알 수 있어요</p>
+        </>
+      ),
+
+      increase: (
+        <>
+          <p>
+            {`${preMonthLabel}월에 비해 `}
+            <span className={styles.costRed}>
+              {difference?.toLocaleString()}원 증가할 것 같군요.
+            </span>
+            <br />
+            조금 더 전기를 아껴보는 건 어떨까요?
+            <br />
+            에너지 백과를 통해 다양한 팁을 살펴보아요!
+          </p>
+        </>
+      ),
+      unchanged: (
+        <>
+          <p>
+            {`${preMonthLabel}월과 전기사용량이 `}
+            <span className={styles.costGreen}>같을</span> 예정이에요!
+            <br />
+            조금 더 아껴서 다음 달에는 <br />
+            절약해보는 건 어떨까요?
+            <br /> 에너지 백과를 통해 다양한 팁을 살펴보아요!
+          </p>
+        </>
+      ),
+      decrease: (
+        <>
+          <p>
+            {`${preMonthLabel}월에 비해 `}
+            <span className={styles.costBlue}>{Math.abs(difference!).toLocaleString()}원 </span>
+            감소할 것 같아요!
+            <br />
+            아주 잘하고 있군요!
+            <br />
+            앞으로도 그린스파크와 함께 더 나은
+            <br /> 전력소비 해보아요!
+          </p>
+        </>
+      )
+    }
+  };
+
+  const generateComment = () => {
+    const texts = commentTexts[commentType];
     switch (differenceType) {
       case "noMonths":
-        return <>파워를 입력해주세요!</>;
+        return texts.noMonths;
       case "noPreMonth":
-        return (
-          <>
-            <p>
-              {`${currentMonthLabel}월 요금은 `}
-              <span className={styles.costText}>{currentCost}원이에요!</span>
-              <br /> 전달 파워를 입력하면 <br />더 많은 정보를 보여드릴게요!
-            </p>
-          </>
-        );
+        return texts.noPreMonth;
       case "noCurrentMonth":
-        return <>{`${currentMonthLabel}월 파워를 입력해주세요!`}</>;
+        return texts.noCurrentMonth;
       case "increase":
-        return (
-          <>
-            <p>
-              {`${preMonthLabel}월에 비해 `}
-              <span className={styles.costRed}>{Math.abs(difference!).toLocaleString()}원 </span>
-              증가했어요!
-              <br />
-              조금 더 전기를 아껴보는 건 어떨까요?
-              <br />
-              에너지 백과를 통해 다양한 팁을 살펴보아요!
-            </p>
-          </>
-        );
-      case "unchanged":
-        return (
-          <>
-            <p>
-              {`${preMonthLabel}월과 `}
-              <span className={styles.costGreen}>같은</span> 전기사용량이네요!
-              <br />
-              조금 더 아껴서 다음 달에는 <br />
-              절약해보는 건 어떨까요?
-              <br /> 에너지 백과를 통해 다양한 팁을 살펴보아요!
-            </p>
-          </>
-        );
+        return texts.increase;
       case "decrease":
-        return (
-          <>
-            <p>
-              {`${preMonthLabel}월에 비해 `}
-              <span className={styles.costBlue}>{Math.abs(difference!).toLocaleString()}원 </span>
-              감소했어요!
-              <br />
-              아주 잘하고 있군요!
-              <br />
-              앞으로도 그린스파크와 함께 더 나은
-              <br /> 전력소비 해보아요!
-            </p>
-          </>
-        );
+        return texts.decrease;
+      case "unchanged":
+        return texts.unchanged; //
       default:
         return <>정보를 입력해주세요!</>;
     }
   };
+
   //   팁멘트 아이콘
   const TipMentIcon = () => {
     if (differenceType === "noMonths" || differenceType === "noCurrentMonth") {
@@ -349,7 +427,7 @@ function ExpectPreChart() {
               : styles.tipMentBig
           }`}
         >
-          {renderComment()}
+          {generateComment()}
         </div>
       </div>
     </>
