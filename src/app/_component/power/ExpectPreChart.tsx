@@ -61,6 +61,12 @@ function ExpectPreChart() {
 
     fetchCostData();
   }, [API_URL, userId]);
+  // 데이터 로드 후 실행되도록(팁 멘트 디폴트)
+  useEffect(() => {
+    if (!isLoading && chargeData.lastMonth !== null) {
+      handleChartClick("lastMonth");
+    }
+  }, [isLoading, chargeData]);
 
   const determineDifferenceType = (pre: number | null, current: number | null): DifferenceType => {
     if (pre === null && current === null) return "noMonths";
@@ -188,7 +194,7 @@ function ExpectPreChart() {
             {`${currentMonthLabel}월 요금은 `}
             <span className={styles.costText}>{currentCost?.toLocaleString()}원이에요!</span>
             <br />
-            전달 파워를 입력하면 더 많은 정보를 보여드릴게요!
+            전달 파워를 입력하면 <br />더 많은 정보를 보여드릴게요!
           </p>
         </>
       ),
