@@ -30,12 +30,12 @@ const TopView = ({ 업체명칭, 기자재명칭, 모델명, 효율등급 }: Top
       <div className={style.RightContainer}>
         <div className={style.TextWrapper}>
           <div className={style.TextContainer}>
-            <span className={style.TextBold}>모델명</span>
-            <span className={style.TextRegular}>{모델명}</span>
+            <div className={style.TextBold}>모델명</div>
+            <div className={style.TextRegular}>{모델명}</div>
           </div>
           <div className={style.TextContainer}>
-            <span className={style.TextBold}>업체명</span>
-            <span className={style.TextRegular}>{업체명칭}</span>
+            <div className={style.TextBold}>업체명</div>
+            <div className={style.TextRegular}>{업체명칭}</div>
           </div>
         </div>
         <div className={style.BtnContainer}>
