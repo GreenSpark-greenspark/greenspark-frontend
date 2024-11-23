@@ -1,3 +1,4 @@
+/* 바텀시트 공통 스타일 */
 .overlay {
   position: fixed;
   bottom: 0;
@@ -45,17 +46,38 @@
   text-align: center;
 }
 
+.sheetTitle {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* 버튼 관련*/
 .btnContainer {
   display: flex;
   flex-direction: column;
 
   gap: 0.6rem;
   margin-top: 2rem;
-}
-
-.sheetTitle {
-  font-size: 2rem;
-  font-weight: 600;
 }
 
 .confirmBtn,
@@ -78,24 +100,4 @@
 
 .reenterBtn {
   background-color: #19e407;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(100%);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
 }
