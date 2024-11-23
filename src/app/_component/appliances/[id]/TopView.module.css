@@ -42,6 +42,7 @@
   font-weight: 600;
   line-height: normal;
   color: #000;
+  white-space: nowrap;
 }
 
 .TextRegular {
@@ -51,6 +52,8 @@
   line-height: normal;
   letter-spacing: 0.014rem;
   color: #000;
+  word-break: break-all;
+  width: 130px;
 }
 
 .BtnContainer {

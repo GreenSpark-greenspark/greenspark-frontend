@@ -23,7 +23,6 @@ export default function AppliancePage({ params }: { params: { id: string | strin
         if (response.data.success) {
           const parsedData = JSON.parse(response.data.data);
           const decodedData = decodeHtmlEntities(parsedData);
-          console.log(decodedData);
           const items = decodedData.items;
 
           const applianceType = items[0].MACH_TERM || "Unknown";
@@ -65,7 +64,7 @@ export default function AppliancePage({ params }: { params: { id: string | strin
 
   return (
     <div className={style.BoxWrapper}>
-      <Box minHeight="452px">
+      <Box minHeight="400px">
         <div className={style.ViewWrapper}>
           <TopView {...applianceDetails} />
           <BottomView {...applianceDetails} />

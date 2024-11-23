@@ -7,11 +7,9 @@ interface ItemRowProps {
 }
 
 const ItemRow = ({ label, value }: ItemRowProps) => {
-    
   return (
     <div className={style.row}>
       <div className={style.key}>{label}</div>
-      <div className={style.separator}></div>
       <div className={style.value}>{value}</div>
     </div>
   );

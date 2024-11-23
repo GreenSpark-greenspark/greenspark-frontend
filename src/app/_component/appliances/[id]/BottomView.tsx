@@ -11,10 +11,16 @@ const BottomView = ({ ...applianceDetails }: BottomViewProps) => {
   return (
     <div className={style.container}>
       {Object.entries(applianceDetails)
-        .filter(([key]) => !excludedKeys.includes(key)) 
+        .filter(([key]) => !excludedKeys.includes(key))
         .map(
-          ([key, value]) =>
-            value !== null && value !== "NULL" && <ItemRow key={key} label={key} value={value} />
+          ([key, value], index) =>
+            value !== null &&
+            value !== "NULL" && (
+              <div key={key + index}>
+                <ItemRow key={key} label={key} value={value} />
+                <ItemRow key={key + "empty" + index} label={""} value={""} />{" "}
+              </div>
+            )
         )}
     </div>
   );

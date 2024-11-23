@@ -2,14 +2,14 @@
   display: flex;
   align-items: center;
 
-  height: 4rem;
   margin: 0;
   width: 31.8rem;
+  min-height: 20px;
 }
 
 .key {
-  width: 20rem;
-  padding-left: 1em;
+  width: 18rem;
+  padding-left: 0.7em;
 
   color: #5e5e5e;
   text-align: left;
@@ -19,18 +19,21 @@
   line-height: normal;
 }
 
-.separator {
+/* .separator {
   width: 0.2rem;
   height: 100%;
   margin-right: 2em;
 
   background-color: #f1f3f5;
-}
+} */
 
 .value {
   width: 10.4rem;
+  padding-left: 1.5rem;
+  min-height: 20px;
   color: #000;
   text-align: center;
   font-size: 1.4rem;
   font-weight: 700;
+  border-left: #f1f3f5 solid 1px;
 }
