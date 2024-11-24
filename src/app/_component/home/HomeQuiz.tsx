@@ -7,7 +7,7 @@ export default function HomeQuiz() {
   const router = useRouter();
 
   const handleNavigate = () => {
-    router.push("/book");
+    router.push("/quiz");
   };
   return (
     <>

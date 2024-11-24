@@ -1,0 +1,107 @@
+.boxContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10rem;
+  position: relative;
+}
+.quizContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 4rem 0 2.7rem 0;
+}
+.quizBoxContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.quizBtnClose,
+.quizBtnOpen {
+  width: 23rem;
+  height: 90px;
+  flex-shrink: 0;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+}
+.quizBtnOpen {
+  background: var(--Base-Color, #f8fff3);
+
+  box-shadow: 0px 1px 8px 0px var(--Main-Color, #d7f3c6);
+  color: #000;
+}
+.quizBtnClose {
+  background: var(--Color-5, #f1f3f5);
+  color: #929292;
+}
+
+.expBtn {
+  width: 58px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: none;
+  background: var(--Point-Color, #91e26b);
+
+  /* btn */
+  box-shadow: 0px 0px 4px 0px var(--Color-8, #d4ddcf);
+  color: #fff;
+  text-align: center;
+
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.quizBtnLeft {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+/* 텍스트 */
+.quizTitle {
+  color: #000;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.quizNormal {
+  /* color: #000; */
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.quizMentNormal {
+  color: #000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%;
+}
+.bold6 {
+  font-weight: 600;
+}
+.bold7 {
+  font-weight: 700;
+}
+.bold8 {
+  font-weight: 800;
+}
+/* 아이콘 */
+.iconPower {
+  width: 1.3rem;
+  height: 2.2rem;
+}
+.iconArrow {
+  width: 0.7rem;
+  height: 1.4rem;
+  transform: rotate(180deg);
+  margin-left: 4.5rem;
+}
