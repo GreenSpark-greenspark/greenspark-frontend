@@ -4,7 +4,7 @@ export interface GetDateLabel {
   dateLabel: Date;
 }
 
-export function getDateLabel(type: "current" | "last" | "twoMonths"): GetDateLabel {
+export function getDateLabel(type: "current" | "last" | "twoMonths" | "threeMonths"): GetDateLabel {
   const now = new Date();
   let monthLabel = "";
   let yearLabel = "";
@@ -19,6 +19,12 @@ export function getDateLabel(type: "current" | "last" | "twoMonths"): GetDateLab
 
     case "twoMonths":
       dateLabel = new Date(now.getFullYear(), now.getMonth() - 2, 1);
+      yearLabel = dateLabel.getFullYear().toString();
+      monthLabel = (dateLabel.getMonth() + 1).toString();
+      break;
+
+    case "threeMonths":
+      dateLabel = new Date(now.getFullYear(), now.getMonth() - 3, 1);
       yearLabel = dateLabel.getFullYear().toString();
       monthLabel = (dateLabel.getMonth() + 1).toString();
       break;

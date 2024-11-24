@@ -1,0 +1,103 @@
+/* 바텀시트 공통 스타일 */
+.overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+  z-index: 2000;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.bottomSheet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 32rem;
+  height: 18rem;
+  border-radius: 3.2rem 3.2rem 0 0;
+
+  background-color: white;
+  padding: 2rem;
+
+  transition: transform 0.2s ease-out;
+}
+
+.bottomBar {
+  width: 8rem;
+  height: 1rem;
+  border-radius: 1rem;
+  margin: 0 auto 1.5rem;
+
+  background-color: #d7f3c6;
+
+  cursor: pointer;
+}
+
+.sheetContent {
+  text-align: center;
+}
+
+.sheetTitle {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* 버튼 관련*/
+.btnContainer {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+
+.confirmBtn,
+.reenterBtn {
+  width: 27.7rem;
+  height: 3.8rem;
+  border: none;
+  border-radius: 1.5rem;
+
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.confirmBtn {
+  background-color: #c4c4c4;
+}
+
+.reenterBtn {
+  background-color: #19e407;
+}

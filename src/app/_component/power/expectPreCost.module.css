@@ -71,6 +71,7 @@
   flex-direction: column;
   align-items: center;
   width: 10rem;
+  cursor: pointer;
 }
 
 .chartColor {
@@ -117,7 +118,7 @@
   height: 1.9rem;
 }
 
-.lastMonthLabel {
+.monthLabelClick {
   color: #ffffff;
 
   display: flex;
