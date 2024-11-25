@@ -1,16 +1,27 @@
-"use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Box from "@/components/Box";
 import styles from "./QuizSubmit.module.css";
 import IconMent from "@/../public/icon/quiz_ment.svg";
 import IconChoice from "@/../public/icon/quiz_check.svg";
 import IconChoiceClick from "@/../public/icon/quiz_check_active.svg";
 
-export default function QuizSubmit() {
+interface QuizSubmitProps {
+  id: string;
+}
+
+export default function QuizSubmit({ id }: QuizSubmitProps) {
+  const router = useRouter();
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
 
   const handleAnswerClick = (index: number) => {
     setSelectedAnswer(index);
+  };
+
+  const handleAnswerSubmit = () => {
+    if (selectedAnswer !== null) {
+      router.push(`/quiz/${id}/answer/`);
+    }
   };
 
   return (
@@ -18,7 +29,7 @@ export default function QuizSubmit() {
       <Box minHeight="330px">
         <div className={styles.iconMentContainer}>
           <IconMent style={{ width: "3.2rem", height: "2.4rem" }} />
-          <p>Q1</p>
+          <p>Q{id}</p>
         </div>
         <div className={styles.quizBoxContainer}>
           <p className={styles.quizTitle}>
@@ -50,6 +61,7 @@ export default function QuizSubmit() {
           <button
             className={selectedAnswer !== null ? styles.submitBtnClick : styles.submitBtn}
             disabled={selectedAnswer === null}
+            onClick={handleAnswerSubmit}
           >
             제출하기
           </button>

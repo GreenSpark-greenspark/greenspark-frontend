@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+
 import Box from "@/components/Box";
 import styles from "./QuizAnswer.module.css";
 import IconMent from "@/../public/icon/quiz_ment.svg";
@@ -7,17 +8,19 @@ import IconCorrect from "@/../public/icon/quiz_correct.svg";
 import IconWrong from "@/../public/icon/quiz_wrong.svg";
 
 interface QuizData {
-  questionId: number;
+  // questionId: number;
   isCorrect: boolean;
   question: string;
   correctAnswer: string;
   selectedAnswer: string;
   explanation: string;
 }
-
-export default function QuizAnswer() {
+interface QuizAnswerProps {
+  id: string;
+}
+export default function QuizAnswer({ id }: QuizAnswerProps) {
   const mockData: QuizData = {
-    questionId: 1,
+    // questionId: 1,
     isCorrect: true,
     question: "가정에서 에너지를 절약하기 위한 올바른 방법은 무엇인가요?",
     correctAnswer: "전등을 LED로 교체하기",
@@ -34,7 +37,7 @@ export default function QuizAnswer() {
         <div className={styles.quizBoxContainer}>
           <div className={styles.iconMentContainer}>
             <IconMent style={{ width: "3.2rem", height: "2.4rem" }} />
-            <p>Q{quizData.questionId}</p>
+            <p>Q{id}</p>
           </div>
 
           {quizData.isCorrect ? (
