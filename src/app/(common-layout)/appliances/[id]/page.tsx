@@ -9,6 +9,7 @@ import style from "./page.module.css";
 import TopView from "@/app/_component/appliances/[id]/TopView";
 import BottomView from "@/app/_component/appliances/[id]/BottomView";
 import LoadingDots from "@/components/LoadingDots";
+import DeleteBtn from "@/app/_component/appliances/[id]/DeleteBtn";
 
 export default function AppliancePage({ params }: { params: { id: string | string[] } }) {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -69,6 +70,7 @@ export default function AppliancePage({ params }: { params: { id: string | strin
           <TopView {...applianceDetails} />
           <BottomView {...applianceDetails} />
         </div>
+        <DeleteBtn applianceId={params.id} />
       </Box>
     </div>
   );
