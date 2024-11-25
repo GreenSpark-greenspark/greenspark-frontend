@@ -1,10 +1,17 @@
 "use client";
+import { useRouter } from "next/navigation";
 import Box from "@/components/Box";
 import styles from "./QuizMain.module.css";
 import IconPower from "@/../public/icon/quiz_power.svg";
 import IconArrow from "@/../public/icon/arrow_left.svg";
 
 export default function QuizMain() {
+  const router = useRouter();
+
+  const handleQuizClick = (questionId: number) => {
+    router.push(`/quiz/${questionId}`);
+  };
+
   return (
     <div className={styles.boxContainer}>
       <Box minHeight="330px">
@@ -14,15 +21,16 @@ export default function QuizMain() {
           </p>
           <div className={styles.quizContainer}>
             {/* 첫 번째 */}
-            <div className={styles.quizBtnOpen}>
+            <div className={styles.quizBtnOpen} onClick={() => handleQuizClick(1)}>
               <div className={styles.quizBtnLeft}>
                 <IconPower className={styles.iconPower} />
                 <p className={styles.quizNormal}>첫 번째 퀴즈</p>
               </div>
               <IconArrow className={styles.iconArrow} />
             </div>
+
             {/* 두 번째 */}
-            <div className={styles.quizBtnClose}>
+            <div className={styles.quizBtnClose} onClick={() => handleQuizClick(2)}>
               <div className={styles.quizBtnLeft}>
                 <IconPower className={styles.iconPower} />
                 <p className={styles.quizNormal}>두 번째 퀴즈</p>
@@ -30,6 +38,7 @@ export default function QuizMain() {
               <button className={styles.expBtn}>해설보기</button>
             </div>
           </div>
+
           <p className={styles.quizMentNormal}>
             매일 2개씩 오픈되는
             <br />
