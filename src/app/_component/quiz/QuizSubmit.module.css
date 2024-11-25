@@ -86,8 +86,6 @@
   font-size: 16px;
   font-weight: 400;
   box-shadow: 0 0 0.4em 0 #d4ddcf;
-
-  cursor: pointer;
 }
 .submitBtnClick {
   display: flex;
