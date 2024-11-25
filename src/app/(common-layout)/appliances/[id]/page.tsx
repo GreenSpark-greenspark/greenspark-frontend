@@ -70,7 +70,7 @@ export default function AppliancePage({ params }: { params: { id: string | strin
           <TopView {...applianceDetails} />
           <BottomView {...applianceDetails} />
         </div>
-        <DeleteBtn />
+        <DeleteBtn applianceId={params.id} />
       </Box>
     </div>
   );
