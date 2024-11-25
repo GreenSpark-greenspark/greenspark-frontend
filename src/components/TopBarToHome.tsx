@@ -11,7 +11,7 @@ interface TopBarProps {
 export default function TopBar({ text }: TopBarProps) {
   const router = useRouter();
   const handleBack = () => {
-    router.push("/");
+    router.push("/main");
   };
 
   return (

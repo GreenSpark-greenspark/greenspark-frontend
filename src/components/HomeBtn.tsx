@@ -7,7 +7,7 @@ const HomeBtn = () => {
   const router = useRouter();
 
   const goToHome = () => {
-    router.push("/");
+    router.push("/main");
   };
 
   return (

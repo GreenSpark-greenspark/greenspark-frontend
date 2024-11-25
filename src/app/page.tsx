@@ -1,9 +1,9 @@
 import React from "react";
-import IconGoogle from "@/../public/icon/login_google.svg";
 import IconLogo from "@/../public/icon/login_logo.svg";
 import TextLogo from "@/../public/icon/login_textLogo.svg";
 
 import styles from "./LoginPage.module.css";
+import LoginBtn from "./_component/login/LoginBtn";
 
 export default function Login() {
   return (
@@ -22,10 +22,7 @@ export default function Login() {
         </div>
         <div className={styles.loginContainer}>
           <p className={styles.loginMent}>지금 바로 시작해보세요!</p>
-          <button type="button" className={styles.loginBtn}>
-            <IconGoogle className={styles.googleIcon} />
-            <p className={styles.googleMent}>Google 계정으로 로그인</p>
-          </button>
+          <LoginBtn />
         </div>
       </div>
     </>
