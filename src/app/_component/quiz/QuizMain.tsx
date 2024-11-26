@@ -11,8 +11,8 @@ export default function QuizMain() {
   const router = useRouter();
 
   const [quizStatus, setQuizStatus] = useState({
-    quiz1: true,
-    quiz2: false
+    quiz1: false,
+    quiz2: true
   });
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);

@@ -2,9 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10rem;
   position: relative;
+  margin-bottom: 10rem;
 }
+
 .quizBoxContainer {
   display: flex;
   flex-direction: column;
@@ -12,10 +13,12 @@
   gap: 3rem;
   margin-top: 1.5rem;
 }
+
 .iconMentContainer {
   position: relative;
   margin: 2rem 0 0 3.2rem;
 }
+
 .iconMentContainer p {
   position: absolute;
   top: 0;
@@ -23,88 +26,88 @@
   text-align: center;
   line-height: 1.8rem;
 }
-.answerBtn {
-  width: 255px;
-  height: 37px;
-  flex-shrink: 0;
-  border-radius: 20px;
-  background: var(--Color-5, #f1f3f5);
-  border: 2px solid #f1f3f5;
 
-  display: flex;
-  align-items: center;
-}
-.answerBtnClick {
-  width: 255px;
-  height: 37px;
+.answerBtn {
+  width: 25.5rem;
+  height: 3.7rem;
   flex-shrink: 0;
-  border-radius: 20px;
-  border: 2px solid var(--Point-Color, #91e26b);
-  background: var(--Main-Color, #d7f3c6);
+  border-radius: 2rem;
+  border: 0.2rem solid #f1f3f5;
+  background: #f1f3f5;
   display: flex;
   align-items: center;
 }
+
+.answerBtnClick {
+  width: 25.5rem;
+  height: 3.7rem;
+  flex-shrink: 0;
+  border-radius: 2rem;
+  border: 0.2rem solid #91e26b;
+  background: #d7f3c6;
+  display: flex;
+  align-items: center;
+}
+
 .answerContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.8rem;
 }
+
 .quizTitle {
   color: #000;
-
-  font-size: 18px;
+  font-size: 1.8rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   width: 22rem;
 }
+
 .answerText {
-  color: var(--Color-2, #111);
+  color: #111;
   text-align: center;
-  font-size: 15px;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   width: 20rem;
 }
+
 .submitBtn {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   float: right;
-
   width: 27.7rem;
   height: 3.8rem;
   border-radius: 1em;
   border: none;
-
   background-color: #f1f3f5;
   color: #929292;
   text-align: center;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 400;
   box-shadow: 0 0 0.4em 0 #d4ddcf;
 }
+
 .submitBtnClick {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   float: right;
-
   width: 27.7rem;
   height: 3.8rem;
   border-radius: 1em;
   border: none;
-
   background-color: #19e407;
   color: #fff;
   text-align: center;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 400;
   box-shadow: 0 0 0.4em 0 #d4ddcf;
-
   cursor: pointer;
 }

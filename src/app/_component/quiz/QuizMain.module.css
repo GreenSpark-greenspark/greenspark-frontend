@@ -1,105 +1,114 @@
+/* 전체 박스 컨테이너 */
 .boxContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10rem;
   position: relative;
+  margin-bottom: 10rem;
 }
+
+/* 퀴즈 관련 컨테이너 */
 .quizContainer {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   margin: 4rem 0 2.7rem 0;
 }
+
 .quizBoxContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+/* 퀴즈 버튼 스타일 */
 .quizBtnClose,
 .quizBtnOpen {
   width: 23rem;
-  height: 90px;
+  height: 9rem;
   flex-shrink: 0;
-  border-radius: 18px;
+  border-radius: 1.8rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 3rem;
 }
-.quizBtnOpen {
-  background: var(--Base-Color, #f8fff3);
 
-  box-shadow: 0px 1px 8px 0px var(--Main-Color, #d7f3c6);
+.quizBtnOpen {
+  background: #f8fff3;
+  box-shadow: 0px 0.1rem 0.8rem 0px #d7f3c6;
   color: #000;
   cursor: pointer;
 }
+
 .quizBtnClose {
-  background: var(--Color-5, #f1f3f5);
+  background: #f1f3f5;
   color: #929292;
 }
 
+/* 퀴즈 설명 버튼 */
 .expBtn {
-  width: 58px;
-  height: 32px;
+  width: 5.8rem;
+  height: 3.2rem;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 1rem;
   border: none;
-  background: var(--Point-Color, #91e26b);
-
-  box-shadow: 0px 0px 4px 0px var(--Color-8, #d4ddcf);
+  background: #91e26b;
+  box-shadow: 0px 0px 0.4rem 0px #d4ddcf;
   color: #fff;
   text-align: center;
-
-  font-size: 10px;
-  font-style: normal;
+  font-size: 1rem;
   font-weight: 500;
-  line-height: normal;
   cursor: pointer;
 }
+
+/* 퀴즈 버튼 왼쪽 정렬 */
 .quizBtnLeft {
   display: flex;
   align-items: center;
   gap: 3rem;
 }
-/* 텍스트 */
+
+/* 텍스트 스타일 */
 .quizTitle {
   color: #000;
-
-  font-size: 16px;
-  font-style: normal;
+  font-size: 1.6rem;
   font-weight: 500;
   line-height: normal;
 }
-.quizNormal {
-  /* color: #000; */
 
-  font-size: 18px;
-  font-style: normal;
+.quizNormal {
+  font-size: 1.8rem;
   font-weight: 600;
   line-height: normal;
 }
+
 .quizMentNormal {
   color: #000;
-  font-size: 14px;
-  font-style: normal;
+  font-size: 1.4rem;
   font-weight: 500;
   line-height: 130%;
 }
+
+/* 폰트 두께 (Bold) */
 .bold6 {
   font-weight: 600;
 }
+
 .bold7 {
   font-weight: 700;
 }
+
 .bold8 {
   font-weight: 800;
 }
-/* 아이콘 */
+
+/* 아이콘 스타일 */
 .iconPower {
   width: 1.3rem;
   height: 2.2rem;
 }
+
 .iconArrow {
   width: 0.7rem;
   height: 1.4rem;

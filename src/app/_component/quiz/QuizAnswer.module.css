@@ -2,37 +2,46 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10rem;
   position: relative;
+
+  margin-bottom: 10rem;
 }
+
 .quizBoxContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .iconMentContainer {
   position: relative;
 }
+
 .iconMentContainer p {
   position: absolute;
   top: 0;
+
   width: 3rem;
   text-align: center;
   line-height: 1.8rem;
 }
+
 .answerContainer {
-  margin: 2rem 0 1.7rem 0;
   width: 23rem;
+  margin: 2rem 0 1.7rem 0;
 
   text-align: right;
 }
+
 /* 텍스트 */
 .textGreen {
   color: #91e26b;
 }
+
 .textRed {
   color: #ff2727;
 }
+
 .correctTitle {
   color: #000;
 
@@ -40,9 +49,12 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin: 0.6rem 0 0.3rem 0rem;
+  margin: 0.6rem 0 0.3rem 0;
 }
+
 .quizTitle {
+  width: 23rem;
+
   color: #000;
 
   font-size: 14px;
@@ -50,8 +62,8 @@
   font-weight: 700;
   line-height: normal;
   letter-spacing: 0.14px;
-  width: 23rem;
 }
+
 .quizPoint {
   color: #000;
 
@@ -60,6 +72,7 @@
   font-weight: 500;
   line-height: normal;
 }
+
 .quizAnswer {
   color: #000;
 
@@ -68,12 +81,16 @@
   font-weight: 500;
   line-height: normal;
 }
+
 .iconCorrect {
   width: 10rem;
   height: 10rem;
   margin: 1.5rem 0 3.6rem 0;
 }
+
 .expTitle {
+  width: 23rem;
+
   color: #000;
 
   font-size: 14px;
@@ -81,27 +98,31 @@
   font-weight: 700;
   line-height: normal;
   letter-spacing: 0.14px;
-  width: 23rem;
   text-align: center;
 }
+
 .expBox {
-  width: 23rem;
-  min-height: 5rem;
-  flex-shrink: 0;
-  background-color: #f1f3f5;
-  border-radius: 1.5rem;
-  padding: 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 23rem;
+  min-height: 5rem;
+  flex-shrink: 0;
+  border-radius: 1.5rem;
+
+  background-color: #f1f3f5;
+  padding: 1.2rem;
 }
+
 .expBody {
+  width: 22rem;
+  margin-top: 1rem;
+
   color: #000;
 
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  width: 22rem;
-  margin-top: 1rem;
 }

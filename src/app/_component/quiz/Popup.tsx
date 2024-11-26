@@ -44,11 +44,11 @@ const Popup: React.FC<PopupProps> = ({ onClose, questionId }: PopupProps) => {
 
             <div className={styles.answerContainer}>
               <p className={styles.quizAnswer}>
-                <span className={styles.textGreen}>정답</span>: {quizData.correctAnswer}
+                <span className={styles.textGreen}>정답 </span>: {quizData.correctAnswer}
               </p>
               {!quizData.isCorrect && (
                 <p className={styles.quizAnswer}>
-                  <span className={styles.textRed}>오답</span>: {quizData.selectedAnswer}
+                  <span className={styles.textRed}>오답 </span>: {quizData.selectedAnswer}
                 </p>
               )}
             </div>
