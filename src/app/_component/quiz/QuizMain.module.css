@@ -46,7 +46,7 @@
   color: #929292;
 }
 
-/* 퀴즈 설명 버튼 */
+/* 퀴즈 해설 버튼 */
 .expBtn {
   width: 5.8rem;
   height: 3.2rem;
@@ -103,6 +103,11 @@
   font-weight: 800;
 }
 
+.boldGreen {
+  font-weight: 700;
+  color: #19e407;
+}
+
 /* 아이콘 스타일 */
 .iconPower {
   width: 1.3rem;
@@ -114,4 +119,8 @@
   height: 1.4rem;
   transform: rotate(180deg);
   margin-left: 4.5rem;
+}
+
+.quizMent {
+  text-align: center;
 }

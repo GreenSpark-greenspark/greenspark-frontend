@@ -12,7 +12,7 @@ export default function QuizMain() {
 
   const [quizStatus, setQuizStatus] = useState({
     quiz1: false,
-    quiz2: true
+    quiz2: false
   });
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -29,14 +29,40 @@ export default function QuizMain() {
     router.push(`/quiz/${questionId}`);
   };
 
-  let quizMent;
-  if (!quizStatus.quiz1 && !quizStatus.quiz2) {
-    quizMent = "매일 2개씩 오픈되는 오늘의 에너지 퀴즈를 풀어보세요.";
-  } else if (quizStatus.quiz1 && quizStatus.quiz2) {
-    quizMent = "오늘의 모든 퀴즈를 완료했습니다! 내일 다시 도전해보세요.";
-  } else {
-    quizMent = "남은 퀴즈를 풀고 더 많은 포인트를 획득하세요!";
-  }
+  const getQuizMent = () => {
+    if (!quizStatus.quiz1 && !quizStatus.quiz2) {
+      return (
+        <>
+          <p className={styles.quizMentNormal}>
+            <span className={styles.bold7}>매일 2개</span>씩 오픈되는 <br />
+            오늘의 에너지 퀴즈를 풀어보세요.
+          </p>
+          <br />
+          <p className={styles.quizMentNormal}>
+            정답 하나 당 <span className={styles.boldGreen}>100포인트</span>를 획득할 수 있어요!
+          </p>
+        </>
+      );
+    } else if (quizStatus.quiz1 && quizStatus.quiz2) {
+      return (
+        <p className={styles.quizMentNormal}>
+          오늘의 퀴즈는 종료되었지만
+          <br />
+          <span className={styles.bold7}>오늘의 퀴즈 해설</span>을 볼 수 있어요
+          <br />
+          ‘해설 보기’를 눌러보세요!
+        </p>
+      );
+    } else {
+      return (
+        <p className={styles.quizMentNormal}>
+          오늘 <span className={styles.bold7}>1개</span>의 퀴즈가 남았어요!
+          <br />
+          오늘의 퀴즈를 완료해봐요 :)
+        </p>
+      );
+    }
+  };
 
   return (
     <div className={styles.boxContainer}>
@@ -83,7 +109,7 @@ export default function QuizMain() {
             </div>
           </div>
 
-          <p className={styles.quizMentNormal}>{quizMent}</p>
+          <div className={styles.quizMent}>{getQuizMent()}</div>
         </div>
       </Box>
 
