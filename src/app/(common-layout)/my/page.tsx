@@ -15,7 +15,7 @@ const Page = () => {
           <Image src={ErrorImg} alt="Error Image" width={122} style={{ marginTop: 10 }} priority />
         </div>
         <div className={style.description}>공사중입니다!</div>
-        <div className={style.description}>2차 발표 때 만나요!</div>
+        <div className={style.description}>최종 발표 때 만나요!</div>
       </div>
     </div>
   );
