@@ -1,4 +1,4 @@
-import TopBarToHome from "@/components/TopBarToHome";
+import TopBar from "@/components/TopBar";
 
 export default function Layout({
   children
@@ -7,7 +7,7 @@ export default function Layout({
 }>) {
   return (
     <>
-      <TopBarToHome text={"에너지 퀴즈"} />
+      <TopBar text={"에너지 퀴즈"} />
       {children}
     </>
   );
