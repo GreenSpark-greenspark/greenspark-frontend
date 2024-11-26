@@ -1,11 +1,13 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import Box from "@/components/Box";
 import styles from "./QuizAnswer.module.css";
 import IconMent from "@/../public/icon/quiz_ment.svg";
 import IconCorrect from "@/../public/icon/quiz_correct.svg";
 import IconWrong from "@/../public/icon/quiz_wrong.svg";
+import IconArrow from "@/../public/icon/arrow_left.svg";
 
 interface QuizData {
   // questionId: number;
@@ -30,6 +32,11 @@ export default function QuizAnswer({ id }: QuizAnswerProps) {
   };
 
   const [quizData] = useState<QuizData>(mockData);
+
+  const router = useRouter();
+  const goToQuizHome = () => {
+    router.push(`/quiz`);
+  };
 
   return (
     <div className={styles.boxContainer}>
@@ -76,6 +83,10 @@ export default function QuizAnswer({ id }: QuizAnswerProps) {
           <div className={styles.expBox}>
             <p className={styles.expTitle}>해설</p>
             <p className={styles.expBody}>{quizData.explanation}</p>
+          </div>
+          <div className={styles.homeBtn} onClick={() => goToQuizHome()}>
+            <p>퀴즈 홈으로 가기</p>
+            <IconArrow className={styles.iconArrow} />
           </div>
         </div>
       </Box>

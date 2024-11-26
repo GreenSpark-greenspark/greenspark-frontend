@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useQuiz } from "@/context/QuizContext";
 import Box from "@/components/Box";
 import Popup from "./Popup";
 import styles from "./QuizMain.module.css";
@@ -9,11 +10,11 @@ import IconArrow from "@/../public/icon/arrow_left.svg";
 
 export default function QuizMain() {
   const router = useRouter();
-
-  const [quizStatus, setQuizStatus] = useState({
-    quiz1: false,
-    quiz2: false
-  });
+  const { quizStatus } = useQuiz();
+  // const [quizStatus, setQuizStatus] = useState({
+  //   quiz1: false,
+  //   quiz2: false
+  // });
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentQuestionId, setCurrentQuestionId] = useState<number | null>(null);

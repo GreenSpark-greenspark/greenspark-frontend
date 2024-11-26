@@ -57,17 +57,17 @@
 
   color: #000;
 
-  font-size: 14px;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  letter-spacing: 0.14px;
+  letter-spacing: 0.014rem;
 }
 
 .quizPoint {
   color: #000;
 
-  font-size: 14px;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -76,7 +76,7 @@
 .quizAnswer {
   color: #000;
 
-  font-size: 14px;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -93,11 +93,11 @@
 
   color: #000;
 
-  font-size: 14px;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  letter-spacing: 0.14px;
+  letter-spacing: 0.014rem;
   text-align: center;
 }
 
@@ -125,4 +125,27 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+
+.iconArrow {
+  width: 0.5rem;
+  height: 1.4rem;
+  transform: rotate(180deg);
+}
+
+.homeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 8rem;
+  margin-left: 15rem;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+.homeBtn p {
+  color: #000;
+
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
 }
