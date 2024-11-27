@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useQuiz } from "@/context/QuizContext";
 import Box from "@/components/Box";
 import styles from "./QuizSubmit.module.css";
 import IconMent from "@/../public/icon/quiz_ment.svg";
@@ -15,7 +14,6 @@ interface QuizSubmitProps {
 export default function QuizSubmit({ id }: QuizSubmitProps) {
   const router = useRouter();
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const { updateQuizStatus } = useQuiz();
 
   const handleAnswerClick = (index: number) => {
     setSelectedAnswer(index);
@@ -23,7 +21,6 @@ export default function QuizSubmit({ id }: QuizSubmitProps) {
 
   const handleAnswerSubmit = () => {
     if (selectedAnswer !== null) {
-      updateQuizStatus(`quiz${id}`);
       router.push(`/quiz/${id}/answer/`);
     }
   };
