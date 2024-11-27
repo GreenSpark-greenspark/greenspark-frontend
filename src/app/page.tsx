@@ -3,7 +3,7 @@ import IconLogo from "@/../public/icon/login_logo.svg";
 import TextLogo from "@/../public/icon/login_textLogo.svg";
 
 import styles from "./LoginPage.module.css";
-import LoginBtn from "./_component/login/LoginBtn";
+import LoginBtn from "@/app/_component/login/LoginBtn";
 
 export default function Login() {
   return (
