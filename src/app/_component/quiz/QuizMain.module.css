@@ -1,0 +1,126 @@
+/* 전체 박스 컨테이너 */
+.boxContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10rem;
+}
+
+/* 퀴즈 관련 컨테이너 */
+.quizContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 4rem 0 2.7rem 0;
+}
+
+.quizBoxContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 퀴즈 버튼 스타일 */
+.quizBtnClose,
+.quizBtnOpen {
+  width: 23rem;
+  height: 9rem;
+  flex-shrink: 0;
+  border-radius: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+}
+
+.quizBtnOpen {
+  background: #f8fff3;
+  box-shadow: 0px 0.1rem 0.8rem 0px #d7f3c6;
+  color: #000;
+  cursor: pointer;
+}
+
+.quizBtnClose {
+  background: #f1f3f5;
+  color: #929292;
+}
+
+/* 퀴즈 해설 버튼 */
+.expBtn {
+  width: 5.8rem;
+  height: 3.2rem;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  border: none;
+  background: #91e26b;
+  box-shadow: 0px 0px 0.4rem 0px #d4ddcf;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* 퀴즈 버튼 왼쪽 정렬 */
+.quizBtnLeft {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* 텍스트 스타일 */
+.quizTitle {
+  color: #000;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.quizNormal {
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.quizMentNormal {
+  color: #000;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+/* 폰트 두께 (Bold) */
+.bold6 {
+  font-weight: 600;
+}
+
+.bold7 {
+  font-weight: 700;
+}
+
+.bold8 {
+  font-weight: 800;
+}
+
+.boldGreen {
+  font-weight: 700;
+  color: #19e407;
+}
+
+/* 아이콘 스타일 */
+.iconPower {
+  width: 1.3rem;
+  height: 2.2rem;
+}
+
+.iconArrow {
+  width: 0.7rem;
+  height: 1.4rem;
+  transform: rotate(180deg);
+  margin-left: 4.5rem;
+}
+
+.quizMent {
+  text-align: center;
+}
