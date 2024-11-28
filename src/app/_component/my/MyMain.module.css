@@ -1,0 +1,123 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+}
+.topContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 2px solid #f1f3f5;
+  width: 27rem;
+  padding: 2rem;
+}
+.topContainer p {
+  color: #000;
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 0.8rem;
+}
+.infoBtn,
+.logoutBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 6.3rem;
+  height: 2.4rem;
+  border-radius: 2em;
+
+  text-align: center;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  cursor: pointer;
+}
+.logoutBtn {
+  background: #f8fff3;
+  border: 1px solid #d7f3c6;
+
+  color: #5e5e5e;
+}
+.infoBtn {
+  border: 1px solid #91e26b;
+  background: #d7f3c6;
+  color: #111;
+}
+.btnContainer {
+  display: flex;
+  gap: 1.7rem;
+  margin-top: 1.8rem;
+}
+.iconArrow {
+  width: 0.5rem;
+  height: 0.9rem;
+  transform: rotate(180deg);
+  margin-left: 1rem;
+}
+.iconPoint {
+  width: 1.2rem;
+  height: 1.2rem;
+  transform: rotate(180deg);
+  margin-left: 0.5rem;
+}
+.alignDiv {
+  display: flex;
+  align-items: center;
+}
+.bodyTopContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  margin-top: 3.6rem;
+}
+.bodyPoint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 26rem;
+}
+.textTitle {
+  color: var(--Color-3, #5e5e5e);
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.14px;
+}
+.textPoint {
+  color: var(--Color-3, #5e5e5e);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.gradeBoxContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+.gradeName {
+  color: #929292;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.gradeBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-right: 2px solid #f1f3f5;
+  height: 3rem;
+  gap: 1.5rem;
+}
