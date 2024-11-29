@@ -1,14 +1,22 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import ProfileImg from "@/../public/img/my_profile.png";
 import IconArrow from "@/../public/icon/arrow_left.svg";
-import IconPoint from "@/../public/icon/coin.svg";
+import IconPoint from "@/../public/icon/point_icon.svg";
 import { getColorFromGrade } from "@/utils/getColorfromGrade";
 
 import styles from "./MyMain.module.css";
 
 export default function MyMain() {
+  const router = useRouter();
+  const goToPoint = () => {
+    router.push(`/my/point`);
+  };
+  const goToEdit = () => {
+    router.push(`/my/info`);
+  };
   return (
     <>
       <div className={styles.pageContainer}>
@@ -16,14 +24,20 @@ export default function MyMain() {
           <Image src={ProfileImg} alt="프로필 이미지" width={77} />
           <p>홍길동 님</p>
           <div className={styles.btnContainer}>
-            <button className={styles.infoBtn}>내 정보 수정</button>
+            <button className={styles.infoBtn} onClick={() => goToEdit()}>
+              내 정보 수정
+            </button>
             <button className={styles.logoutBtn}>로그아웃</button>
           </div>
         </div>
 
         <div className={styles.bodyTopContainer}>
           <div className={styles.bodyPoint}>
-            <div className={styles.alignDiv} style={{ cursor: "pointer" }}>
+            <div
+              className={styles.alignDiv}
+              style={{ cursor: "pointer" }}
+              onClick={() => goToPoint()}
+            >
               <p className={styles.textTitle}>보유 포인트</p>
               <IconArrow className={styles.iconArrow} />
             </div>
