@@ -23,8 +23,8 @@ export default function PointMain() {
             <p>1,450</p> <IconPoint className={styles.iconPoint} />
           </div>
         </div>
-        <div className={styles.btnContainer} onClick={() => goToShop()}>
-          <div className={styles.goToBtn}>
+        <div className={styles.btnContainer}>
+          <div className={styles.goToBtn} onClick={() => goToShop()}>
             <p>포인트 사용하여 기프티콘 사러가기</p>
             <IconArrow className={styles.iconArrow} />
           </div>
