@@ -1,0 +1,93 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  width: 100%;
+  min-height: 100%;
+  padding-bottom: 10rem;
+}
+.topContainer {
+  width: 28rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem;
+}
+
+.textPoint {
+  color: #000;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.iconPointSmall {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-left: 0.5rem;
+}
+.iconPoint {
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-left: 0.5rem;
+}
+.pointTitle {
+  color: #000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.menuContainer {
+  display: flex;
+  gap: 1.4rem;
+  width: 30rem;
+  border-bottom: 2px solid #f1f3f5;
+  padding: 1rem 0;
+  justify-content: center;
+  align-items: center;
+}
+.giftLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  justify-content: center;
+}
+.giftShopText {
+  color: var(--Color-4, #929292);
+  font-family: Pretendard;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.giftMenuText {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.pointContainer {
+  display: flex;
+  align-items: center;
+}
+.purchaseBtn {
+  width: 7rem;
+  height: 3.2rem;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  border: none;
+  background: #91e26b;
+  box-shadow: 0px 0px 0.4rem 0px #d4ddcf;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
