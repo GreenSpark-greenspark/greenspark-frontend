@@ -12,6 +12,7 @@ import ApplianceList from "../../_component/appliances/ApplianceList";
 import AddButton from "../../_component/appliances/AddButton";
 import LoadingDots from "@/components/LoadingDots";
 import { getDisplayName } from "@/utils/getDisplayName";
+import { apiWrapper } from "@/utils/api";
 
 interface ApplianceItem {
   id: number;
@@ -33,8 +34,6 @@ const applianceOptions = [
   "전기냉장고",
   "전기냉난방기"
 ];
-
-const userId = 1;
 
 export default function ClientComponent() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -134,12 +133,20 @@ export default function ClientComponent() {
         originalApplianceName === "공기청정기" ? "공기청정기 (~24.12.31)" : originalApplianceName;
 
       try {
-        const response = await axios.post(`${API_URL}/appliances/${userId}`, {
-          modelTerm: selectedModel.모델명,
-          grade: selectedModel.효율등급,
-          matchTerm: apiApplianceName,
-          manufacturer: selectedModel.업체명
-        });
+        const response = await apiWrapper(
+          () =>
+            axios.post(
+              `${API_URL}/appliances`,
+              {
+                modelTerm: selectedModel.모델명,
+                grade: selectedModel.효율등급,
+                matchTerm: apiApplianceName,
+                manufacturer: selectedModel.업체명
+              },
+              { withCredentials: true }
+            ),
+          API_URL
+        );
 
         if (response.status === 200 && response.data.success) {
           if (response.data.message === "이미 존재하는 가전제품입니다.") {

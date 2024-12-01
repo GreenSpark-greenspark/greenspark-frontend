@@ -32,3 +32,21 @@ export const reissueToken = async (apiUrl: string | undefined): Promise<boolean>
     return false;
   }
 };
+
+export const apiWrapper = async (apiCall: () => Promise<any>, apiUrl: string | undefined) => {
+  if (!apiUrl) {
+    console.error("API URL이 정의되지 않았습니다. 환경변수를 확인하세요.");
+    throw new Error("API URL is undefined. Please check your environment variables.");
+  }
+
+  try {
+    const tokenReissued = await reissueToken(apiUrl);
+    if (!tokenReissued) {
+      throw new Error("토큰 갱신에 실패했습니다.");
+    }
+    return await apiCall();
+  } catch (error) {
+    console.error("API 호출 중 오류 발생:", error);
+    throw error;
+  }
+};

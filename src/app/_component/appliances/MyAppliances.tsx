@@ -9,6 +9,8 @@ import style from "./MyAppliances.module.css";
 import GradeLabel from "./GradeLabel";
 import { useEffect, useState } from "react";
 import LoadingDots from "@/components/LoadingDots";
+import { useRouter } from "next/navigation";
+import { apiWrapper } from "@/utils/api";
 
 interface ApplianceData {
   applianceId: number;
@@ -21,28 +23,37 @@ export default function MyAppliances() {
   const [data, setData] = useState<ApplianceData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const userId = 1;
+  const router = useRouter();
+
+  const fetchAppliances = async (): Promise<ApplianceData[]> => {
+    return apiWrapper(async () => {
+      const response = await axios.get(`${API_URL}/appliances`, { withCredentials: true });
+      if (response.data.success) {
+        console.log("데이터 로드 성공:", response.data.data);
+        return response.data.data;
+      } else {
+        console.error("API 호출 실패:", response.data.message);
+        throw new Error("Failed to fetch appliances");
+      }
+    }, API_URL);
+  };
 
   useEffect(() => {
-    const fetchCostData = async () => {
+    const fetchData = async () => {
       setIsLoading(true);
+
       try {
-        const response = await axios.get(`${API_URL}/appliances/${userId}`);
-        if (response.data.success) {
-          setData(response.data.data);
-          // console.log(response.data.data);
-        } else {
-          console.error("API 호출 실패:", response.data.message);
-        }
+        const appliances = await fetchAppliances();
+        setData(appliances);
       } catch (error) {
-        console.error("API 호출 중 오류 발생:", error);
+        console.error("데이터 로드 실패.", error);
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchCostData();
-  }, [API_URL, userId]);
+    fetchData();
+  }, [API_URL]);
 
   if (isLoading) {
     return (
@@ -64,7 +75,6 @@ export default function MyAppliances() {
               </div>
             </Link>
           ))}
-
           <Link href={`/appliances/add`}>
             <div className={style.LinkContainer}>
               <div className={style.AddCircle}>
