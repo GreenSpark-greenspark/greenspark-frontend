@@ -7,7 +7,6 @@ import styles from "./power.common.module.css";
 const BillGraph = () => {
   const [graphData, setGraphData] = useState([]);
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const userId = 1;
   const display = "bill";
 
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +15,10 @@ const BillGraph = () => {
     const fetchGraphData = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`${API_URL}/power/${userId}?display=${display}`);
+        const response = await axios.get(`${API_URL}/power`, {
+          params: { display },
+          withCredentials: true
+        });
 
         if (response.data.success) {
           setGraphData(response.data.data);
@@ -31,7 +33,8 @@ const BillGraph = () => {
     };
 
     fetchGraphData();
-  }, [API_URL, userId, display]);
+  }, [API_URL, display]);
+
   if (isLoading) {
     return (
       <div className={styles.LoadingWrapper}>
@@ -39,6 +42,7 @@ const BillGraph = () => {
       </div>
     );
   }
+
   return <Graph data={graphData} isBillGraph={true} />;
 };
 

@@ -9,7 +9,6 @@ import style from "./MyAppliances.module.css";
 import GradeLabel from "./GradeLabel";
 import { useEffect, useState } from "react";
 import LoadingDots from "@/components/LoadingDots";
-import { useRouter } from "next/navigation";
 import { apiWrapper } from "@/utils/api";
 
 interface ApplianceData {
@@ -23,7 +22,6 @@ export default function MyAppliances() {
   const [data, setData] = useState<ApplianceData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const router = useRouter();
 
   const fetchAppliances = async (): Promise<ApplianceData[]> => {
     return apiWrapper(async () => {

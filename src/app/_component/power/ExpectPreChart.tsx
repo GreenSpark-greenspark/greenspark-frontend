@@ -34,13 +34,15 @@ function ExpectPreChart() {
   const [commentType, setCommentType] = useState<"general" | "expect">("general");
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const userId = 1;
 
   useEffect(() => {
     const fetchCostData = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`${API_URL}/power/expect/${userId}`);
+        const response = await axios.get(`${API_URL}/power/expect`, {
+          withCredentials: true
+        });
+
         if (response.data.success) {
           const { expected_cost, last_month_cost, two_month_ago_cost, three_months_ago_cost } =
             response.data.data;
@@ -54,13 +56,16 @@ function ExpectPreChart() {
         } else {
           console.error("전월 요금 데이터 API 호출 실패:", response.data.message);
         }
+      } catch (error) {
+        console.error("API 호출 중 오류 발생:", error);
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchCostData();
-  }, [API_URL, userId]);
+  }, [API_URL]);
+
   // 데이터 로드 후 실행되도록(팁 멘트 디폴트)
   useEffect(() => {
     if (!isLoading && chargeData.lastMonth !== null) {

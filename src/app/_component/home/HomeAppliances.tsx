@@ -7,6 +7,7 @@ import Link from "next/link";
 import Appliance from "../appliances/Appliance";
 import GradeLabel from "../appliances/GradeLabel";
 import IconPlus from "@/../public/icon/home_plus.svg";
+
 interface ApplianceData {
   applianceId: number;
   grade: string;
@@ -17,12 +18,14 @@ interface ApplianceData {
 export default function HomeAppliances() {
   const [data, setData] = useState<ApplianceData[]>([]);
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const userId = 1;
 
   useEffect(() => {
     const fetchCostData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/appliances/preview/${userId}`);
+        const response = await axios.get(`${API_URL}/appliances/preview`, {
+          withCredentials: true
+        });
+
         if (response.data.success) {
           setData(response.data.data);
         } else {
@@ -34,7 +37,7 @@ export default function HomeAppliances() {
     };
 
     fetchCostData();
-  }, [API_URL, userId]);
+  }, [API_URL]);
 
   return (
     <>

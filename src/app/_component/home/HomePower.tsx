@@ -35,7 +35,7 @@ export default function HomePower() {
   useEffect(() => {
     const fetchCostData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/power/expect/${userId}`);
+        const response = await axios.get(`${API_URL}/power/expect`, { withCredentials: true });
 
         if (response.data.success) {
           const data = response.data.data;

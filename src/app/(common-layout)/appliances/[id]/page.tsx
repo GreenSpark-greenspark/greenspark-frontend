@@ -10,6 +10,7 @@ import TopView from "@/app/_component/appliances/[id]/TopView";
 import BottomView from "@/app/_component/appliances/[id]/BottomView";
 import LoadingDots from "@/components/LoadingDots";
 import DeleteBtn from "@/app/_component/appliances/[id]/DeleteBtn";
+import { apiWrapper } from "@/utils/api";
 
 export default function AppliancePage({ params }: { params: { id: string | string[] } }) {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -19,22 +20,28 @@ export default function AppliancePage({ params }: { params: { id: string | strin
   useEffect(() => {
     const fetchApplianceData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/appliances/detail/${params.id}`);
+        const response = await apiWrapper(
+          () =>
+            axios.get(`${API_URL}/appliances/detail/${params.id}`, {
+              withCredentials: true
+            }),
+          API_URL
+        );
 
         if (response.data.success) {
           const parsedData = JSON.parse(response.data.data);
           const decodedData = decodeHtmlEntities(parsedData);
           const items = decodedData.items;
 
-          const applianceType = items[0].MACH_TERM || "Unknown";
+          const applianceType = items[0]?.MACH_TERM || "Unknown";
 
           const transformedItem = {
-            업체명칭: items[0].ENTE_TERM,
-            기자재명칭: items[0].MACH_TERM,
-            모델명: items[0].MODEL_TERM,
-            구모델명: items[0].OLDX_MODEL_TERM,
-            제조원: items[0].MANUFAC_MAN_TERM,
-            효율등급: items[0].GRADE,
+            업체명칭: items[0]?.ENTE_TERM,
+            기자재명칭: items[0]?.MACH_TERM,
+            모델명: items[0]?.MODEL_TERM,
+            구모델명: items[0]?.OLDX_MODEL_TERM,
+            제조원: items[0]?.MANUFAC_MAN_TERM,
+            효율등급: items[0]?.GRADE,
             ...items[0]
           };
 
