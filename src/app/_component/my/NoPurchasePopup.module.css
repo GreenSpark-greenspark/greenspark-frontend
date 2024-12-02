@@ -1,0 +1,108 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  z-index: 1001;
+
+  padding: 2em;
+  border-radius: 1.5em;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.popupBox {
+  width: 31.8rem;
+  height: 20rem;
+  border-radius: 1.5em;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.topContainer h1 {
+  color: #000;
+  text-align: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 0.7rem;
+}
+.topContainer p {
+  color: #000;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.pointMent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin: 3.5rem 0 1.4rem 0;
+}
+.textPoint {
+  color: #000;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.iconPointSmall {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-left: 0.5rem;
+}
+.pointContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.submitBtn {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1003;
+
+  width: 27.7rem;
+  height: 3.8rem;
+  border: none;
+  border-radius: 1.5rem;
+  background-color: #19e407;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

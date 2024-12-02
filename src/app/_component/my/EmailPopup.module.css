@@ -1,0 +1,97 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  text-align: center;
+
+  padding: 2em;
+  border-radius: 1.5em;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.imageContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4.6em;
+  color: #fff;
+}
+.imageContainer h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 2rem 0 5rem 0;
+}
+.bottomContainer {
+  position: relative;
+}
+.pointMent {
+  position: fixed;
+  bottom: 8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin: 3.5rem 0 1.4rem 0;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.iconPointSmall {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-left: 0.5rem;
+}
+.pointContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goToButton {
+  position: fixed;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1003;
+  cursor: pointer;
+
+  width: 27.7rem;
+  height: 3.8rem;
+  border: none;
+  border-radius: 15px;
+
+  background-color: #19e407;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import ProfileImg from "@/../public/img/my_profile.png";
 import IconArrow from "@/../public/icon/arrow_left.svg";
 import IconPoint from "@/../public/icon/point_icon.svg";
 import { getColorFromGrade } from "@/utils/getColorfromGrade";
-
+import LogoutPopup from "./LogoutPopup";
 import styles from "./MyMain.module.css";
 
 export default function MyMain() {
@@ -17,6 +17,11 @@ export default function MyMain() {
   const goToEdit = () => {
     router.push(`/my/info`);
   };
+
+  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
+  const openLogoutPopup = () => setIsPopupOpen(true);
+  const closeLogoutPopup = () => setIsPopupOpen(false);
+
   return (
     <>
       <div className={styles.pageContainer}>
@@ -27,7 +32,9 @@ export default function MyMain() {
             <button className={styles.infoBtn} onClick={() => goToEdit()}>
               내 정보 수정
             </button>
-            <button className={styles.logoutBtn}>로그아웃</button>
+            <button className={styles.logoutBtn} onClick={openLogoutPopup}>
+              로그아웃
+            </button>
           </div>
         </div>
 
@@ -87,6 +94,8 @@ export default function MyMain() {
           </div>
         </div>
       </div>
+
+      {isPopupOpen && <LogoutPopup onClose={closeLogoutPopup} />}
     </>
   );
 }
