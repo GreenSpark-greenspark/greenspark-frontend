@@ -27,7 +27,7 @@ export default function BottomNav() {
       setActiveButton("power");
     } else if (pathname.startsWith("/book")) {
       setActiveButton("book");
-    } else if (pathname === "/") {
+    } else if (pathname === "/main") {
       setActiveButton("home");
     } else if (pathname.startsWith("/list")) {
       setActiveButton("list");
@@ -72,7 +72,7 @@ export default function BottomNav() {
       <div className={styles.menuHomeContainer}>
         <div
           className={`${styles.menuHome} ${activeButton === "home" ? styles.menuHomeActive : ""}`}
-          onClick={() => handleButtonClick("home", "/")}
+          onClick={() => handleButtonClick("home", "/main")}
         >
           {activeButton === "home" ? (
             <IconClickHome className={styles.homeIcon} />
@@ -88,11 +88,7 @@ export default function BottomNav() {
         ) : (
           <IconAppliance className={styles.icon} />
         )}
-        <p
-          className={`${styles.menuName} ${
-            activeButton === "list" ? styles.menuNameActive : ""
-          }`}
-        >
+        <p className={`${styles.menuName} ${activeButton === "list" ? styles.menuNameActive : ""}`}>
           가전
         </p>
       </div>

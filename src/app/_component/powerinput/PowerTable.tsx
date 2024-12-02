@@ -5,6 +5,7 @@ import PowerPopup from "./PowerPopup";
 import styles from "./PowerTable.module.css";
 import IconPlus from "../../../../public/icon/power_plus.svg";
 import IconDropDown from "../../../../public/icon/power_dropdown.svg";
+import { apiWrapper } from "@/utils/api";
 
 type TableRow = {
   year: number;
@@ -55,7 +56,6 @@ const PowerTable: React.FC = () => {
   } | null>(null);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const userId = 1;
 
   const months = useMemo(getLast36Months, []);
   const yearsOptions = useMemo(getYearsOptions, []);
@@ -63,10 +63,16 @@ const PowerTable: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/power/history/${userId}`);
+        const response = await apiWrapper(
+          () =>
+            axios.get(`${API_URL}/power/history`, {
+              withCredentials: true 
+            }),
+          API_URL
+        );
+
         if (response.data.success) {
           setData(response.data.data);
-          // console.log(response.data.data);
         } else {
           console.error("API 호출 실패:", response.data.message);
         }
@@ -76,7 +82,7 @@ const PowerTable: React.FC = () => {
     };
 
     fetchData();
-  }, [userId]);
+  }, [API_URL]);
 
   const fullData: TableRow[] = useMemo(() => {
     const filteredMonths = selectedYear
@@ -154,7 +160,7 @@ const PowerTable: React.FC = () => {
               <p className={styles.dropdownYear}>{selectedYear ? `${selectedYear}년` : "년도"}</p>
               <IconDropDown
                 className={`${styles.dropDownIcon} ${isDropdownOpen ? styles.open : ""}`}
-              />{" "}
+              />
             </span>
             {isDropdownOpen && (
               <div className={styles.dropdownMenu}>
@@ -284,7 +290,7 @@ const PowerTable: React.FC = () => {
       </table>
       {popupInfo && (
         <PowerPopup
-          userId={userId}
+          // userId={userId}
           year={popupInfo.year}
           month={popupInfo.month}
           type={popupInfo.type}

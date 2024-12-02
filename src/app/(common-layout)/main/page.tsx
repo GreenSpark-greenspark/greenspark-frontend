@@ -1,13 +1,14 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { apiWrapper } from "@/utils/api";
+import AttendanceCoin from "../../_component/home/AttendanceCoin";
+import HomePower from "../../_component/home/HomePower";
+import HomeAppliances from "../../_component/home/HomeAppliances";
+import HomeQuiz from "../../_component/home/HomeQuiz";
+import HomeEncyclopedia from "../../_component/home/HomeEncyclopedia";
 
-import PowerInput from "../../_component/power/PowerInput";
-import ExpectPreCost from "../../_component/power/ExpectPreCost";
-import GraphCharge from "../../_component/power/GraphCharge";
-
-export default function Power() {
+export default function Page() {
   const [tokenRenewed, setTokenRenewed] = useState(false);
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -30,16 +31,20 @@ export default function Power() {
   }, [API_URL]);
 
   return (
-    <div style={{ height: "100vh", paddingBottom: "10rem", marginTop: "4rem" }}>
-      {tokenRenewed ? (
-        <>
-          <GraphCharge />
-          <PowerInput />
-          <ExpectPreCost />
-        </>
-      ) : (
-        <p>토큰 갱신 중...</p>
-      )}
+    <div style={{ height: "100vh" }}>
+      <div style={{ paddingBottom: "10rem" }}>
+        {tokenRenewed ? (
+          <>
+            <AttendanceCoin />
+            <HomePower />
+            <HomeAppliances />
+            <HomeQuiz />
+            <HomeEncyclopedia />
+          </>
+        ) : (
+          <p>토큰 갱신 중...</p>
+        )}
+      </div>
     </div>
   );
 }

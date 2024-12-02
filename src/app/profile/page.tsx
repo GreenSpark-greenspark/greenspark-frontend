@@ -2,7 +2,12 @@
 import React, { useState } from "react";
 import styles from "./Profile.module.css";
 import IconLogo from "@/../public/icon/login_logo.svg";
+import { useRouter } from "next/navigation";
 export default function Profile() {
+  const router = useRouter();
+  const goHome = () => {
+    router.push("/main");
+  };
   // 전기요금 납부일
   const [paymentDay, setPaymentDay] = useState<number>(1);
   // 거주 인원
@@ -66,7 +71,7 @@ export default function Profile() {
             </p>
           </div>
         </div>
-        <div className={styles.btnWrap}>
+        <div className={styles.btnWrap} onClick={goHome}>
           <button type="button" className={styles.homeBtn}>
             그린스파크 바로가기
           </button>

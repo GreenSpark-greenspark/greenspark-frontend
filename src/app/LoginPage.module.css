@@ -57,33 +57,3 @@
   font-weight: 600;
   line-height: normal;
 }
-
-.loginBtn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1rem;
-
-  width: 20rem;
-  height: 4rem;
-  border-radius: 0.5em;
-
-  background-color: white;
-
-  border: none;
-  cursor: pointer;
-}
-
-.googleIcon {
-  width: 1.8rem;
-  height: 1.8rem;
-}
-
-.googleMent {
-  color: #4a4a4a;
-  text-align: center;
-  font-size: 1.4rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}

@@ -18,12 +18,13 @@ export default function AICharge() {
   const [differenceType, setDifferenceType] = useState<DifferenceType>("noLastMonth");
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const userId = 1;
 
   useEffect(() => {
     const fetchCostData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/power/expect/${userId}`);
+        const response = await axios.get(`${API_URL}/power/expect`, {
+          withCredentials: true
+        });
 
         if (response.data.success) {
           const data = response.data.data;
@@ -56,7 +57,7 @@ export default function AICharge() {
     };
 
     fetchCostData();
-  }, [API_URL, userId]);
+  }, [API_URL]);
 
   const currentMonthLabel = getDateLabel("current");
   const lastMonthLabel = getDateLabel("last");

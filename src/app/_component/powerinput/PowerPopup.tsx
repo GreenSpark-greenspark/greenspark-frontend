@@ -4,9 +4,10 @@ import styles from "./PowerPopup.module.css";
 import Toast from "@/components/Toast";
 import IconClose from "@/../public/icon/popup_close.svg";
 import InputBottomSheet from "./InputBottomSheet";
+import { apiWrapper } from "@/utils/api";
 
 type PowerPopupProps = {
-  userId: number;
+  // userId: number;
   year: number;
   month: number;
   type: "cost" | "usage";
@@ -17,7 +18,7 @@ type PowerPopupProps = {
 };
 
 const PowerPopup: React.FC<PowerPopupProps> = ({
-  userId,
+  // userId,
   year,
   month,
   type,
@@ -78,7 +79,13 @@ const PowerPopup: React.FC<PowerPopupProps> = ({
         : { year, month, usageAmount: numericValue };
 
     try {
-      const response = await axios.post(`${API_URL}/power/${type}/${userId}`, postData);
+      const response = await apiWrapper(
+        () =>
+          axios.post(`${API_URL}/power/${type}`, postData, {
+            withCredentials: true 
+          }),
+        API_URL
+      );
 
       if (response.status === 200) {
         setToastMessage("저장되었습니다.");
