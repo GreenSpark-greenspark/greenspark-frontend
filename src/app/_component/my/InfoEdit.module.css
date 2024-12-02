@@ -1,23 +1,28 @@
 .bodyWrapper {
-  width: 100%;
-  height: 100%;
-  padding-bottom: 7rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 100%;
+  height: 100%;
+  padding-bottom: 7rem;
   margin-top: 1rem;
 }
 
 .bodyContainer {
   display: flex;
   flex-direction: column;
+
   gap: 3rem;
 }
+
 .boxContainer {
   display: flex;
   flex-direction: column;
+
   padding: 3rem 0;
 }
+
 .optionMent {
   margin: 1em 3em;
 
@@ -41,16 +46,15 @@
 .dropDown {
   flex-shrink: 0;
   text-align: center;
+  cursor: pointer;
   margin: 0 1rem;
 
   width: 9.3rem;
   height: 2.8rem;
-  border-radius: 2em;
+  border-radius: 2rem;
+  border: 0.2rem solid #b6ec94;
 
-  border: 2px solid var(--Color, #b6ec94);
   color: #333;
-
-  cursor: pointer;
 }
 
 .placeholder {
@@ -64,6 +68,7 @@
 .btnWrap {
   display: flex;
   justify-content: center;
+
   margin-top: 4rem;
   width: 100%;
 }
@@ -76,22 +81,24 @@
   width: 27rem;
   height: 3.8rem;
   border-radius: 1.5rem;
+  border: none;
 
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-
-  border: none;
 }
+
 .inactiveBtn {
   background-color: #f1f3f5;
+
   color: #929292;
 }
 
 .activeBtn {
   background-color: #19e407;
-  color: #fff;
   cursor: pointer;
-  box-shadow: 0px 0px 4px 0px #d4ddcf;
+  box-shadow: 0 0 0.4rem 0 #d4ddcf;
+
+  color: #fff;
 }

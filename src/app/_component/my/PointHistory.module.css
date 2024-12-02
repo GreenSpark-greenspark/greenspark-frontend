@@ -2,29 +2,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff;
   width: 100%;
   min-height: 100%;
+  background-color: #fff;
 }
+
 .topContainer {
-  width: 100%;
-  margin: 4.3rem 20rem 2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 15rem;
   gap: 1.7rem;
+  margin: 4.3rem 20rem 2rem 0;
+  width: 15rem;
 }
 
 .textPoint {
-  color: #000;
-  font-size: 25px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #000;
+  font-size: 2.5rem;
+  font-weight: 600;
 }
 
 .iconPoint {
@@ -32,18 +30,19 @@
   height: 1.7rem;
   margin-left: 0.5rem;
 }
+
 .dropDown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-shrink: 0;
   text-align: center;
   margin: 0 1rem;
-
   width: 9.3rem;
   height: 2.8rem;
   border-radius: 2em;
-
-  border: 2px solid var(--Color, #b6ec94);
+  border: 2px solid #b6ec94;
   color: #333;
-
   cursor: pointer;
 }
 
@@ -54,20 +53,24 @@
 .selected {
   background: #b6ec94;
 }
+
 .historyWrap {
   padding-bottom: 10rem;
 }
+
 .historyContainer {
-  width: 27rem;
   display: flex;
   justify-content: space-between;
   padding: 2rem 0.5rem;
-  border-bottom: 2px solid #f1f3f5;
+  width: 27rem;
+  border-bottom: 0.2rem solid #f1f3f5;
 }
+
 .pointLeftContainer {
   display: flex;
   gap: 1rem;
 }
+
 .pointRightContainer {
   display: flex;
   flex-direction: column;
@@ -75,30 +78,30 @@
   width: 8rem;
   margin-top: 1rem;
 }
+
 .textPointSmall {
-  color: #929292;
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
   display: flex;
   align-items: center;
-}
-.textPointMiddle {
-  color: #000;
-  font-size: 14px;
-  font-style: normal;
+  color: #929292;
+  font-size: 1rem;
   font-weight: 600;
-  line-height: normal;
+}
+
+.textPointMiddle {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #000;
+  font-size: 1.4rem;
+  font-weight: 600;
 }
+
 .iconPointMiddle {
   width: 1.3rem;
   height: 1.3rem;
   margin-left: 0.3rem;
 }
+
 .iconPointSmall {
   width: 0.8rem;
   height: 0.8rem;

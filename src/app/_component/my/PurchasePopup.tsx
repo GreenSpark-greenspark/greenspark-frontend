@@ -43,7 +43,7 @@ const PurchasePopup: React.FC<PurchasePopupProps> = ({
           <div className={styles.popup} onClick={e => e.stopPropagation()}>
             <div className={styles.popupBox}>
               <Image src={MenuImg} alt="기프티콘 이미지" width={55} />
-              <p>{menuName}</p>
+              <p className={styles.giftMenuText}>{menuName}</p>
               <div className={styles.pointContainer}>
                 <p className={styles.giftMenuText}>{price.toLocaleString()}</p>
                 <IconPoint className={styles.iconPointSmall} />
