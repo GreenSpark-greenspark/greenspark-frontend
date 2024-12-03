@@ -1,0 +1,109 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+  background-color: #fff;
+}
+
+.topContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.7rem;
+  margin: 4.3rem 20rem 2rem 0;
+  width: 15rem;
+}
+
+.textPoint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.iconPoint {
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-left: 0.5rem;
+}
+
+.dropDown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  text-align: center;
+  margin: 0 1rem;
+  width: 9.3rem;
+  height: 2.8rem;
+  border-radius: 2em;
+  border: 2px solid #b6ec94;
+  color: #333;
+  cursor: pointer;
+}
+
+.placeholder {
+  background-color: #fff;
+}
+
+.selected {
+  background: #b6ec94;
+}
+
+.historyWrap {
+  padding-bottom: 10rem;
+}
+
+.historyContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 0.5rem;
+  width: 27rem;
+  border-bottom: 0.2rem solid #f1f3f5;
+}
+
+.pointLeftContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.pointRightContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 8rem;
+  margin-top: 1rem;
+}
+
+.textPointSmall {
+  display: flex;
+  align-items: center;
+  color: #929292;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.textPointMiddle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.iconPointMiddle {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-left: 0.3rem;
+}
+
+.iconPointSmall {
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-left: 0.3rem;
+}
