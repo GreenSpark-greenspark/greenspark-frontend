@@ -93,7 +93,7 @@ export default function BottomNav() {
         </p>
       </div>
 
-      <div className={styles.navBtn} onClick={() => handleButtonClick("my", "/my")}>
+      <div className={styles.navBtn} onClick={() => handleButtonClick("my", "/my/main")}>
         {activeButton === "my" ? (
           <IconClickMy className={styles.icon} />
         ) : (
