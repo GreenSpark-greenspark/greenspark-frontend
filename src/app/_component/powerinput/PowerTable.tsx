@@ -66,7 +66,7 @@ const PowerTable: React.FC = () => {
         const response = await apiWrapper(
           () =>
             axios.get(`${API_URL}/power/history`, {
-              withCredentials: true 
+              withCredentials: true
             }),
           API_URL
         );
@@ -137,14 +137,30 @@ const PowerTable: React.FC = () => {
   };
 
   const handleSave = (year: number, month: number, type: "cost" | "usage", newValue: number) => {
-    setData(prevData =>
-      prevData.map(row => {
-        if (row.year === year && row.month === month) {
-          return type === "cost" ? { ...row, cost: newValue } : { ...row, usage_amount: newValue };
-        }
-        return row;
-      })
-    );
+    setData(prevData => {
+      // 기존에 존재하는 데이터인지 확인
+      const rowExists = prevData.some(row => row.year === year && row.month === month);
+
+      if (rowExists) {
+        // 기존 데이터 수정
+        return prevData.map(row => {
+          if (row.year === year && row.month === month) {
+            return type === "cost"
+              ? { ...row, cost: newValue }
+              : { ...row, usage_amount: newValue };
+          }
+          return row;
+        });
+      } else {
+        // 새로운 데이터 추가
+        const newRow: TableRow = {
+          year,
+          month,
+          ...(type === "cost" ? { cost: newValue } : { usage_amount: newValue })
+        };
+        return [...prevData, newRow];
+      }
+    });
   };
 
   const closePopup = () => {
