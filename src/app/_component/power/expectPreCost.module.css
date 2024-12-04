@@ -246,16 +246,14 @@
   margin-top: 1.4rem;
   position: relative;
 }
-
-.tipMentBig {
+.tipMent {
   color: #000;
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.4;
 
   position: absolute;
-  top: 2rem;
   width: 21rem;
   z-index: 1;
   height: 5rem;
@@ -265,23 +263,11 @@
   align-items: center;
   justify-content: center;
 }
+.tipMentBig {
+  top: 2rem;
+}
 .tipMentSmall {
-  color: #000;
-  font-size: 1.2rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-
-  position: absolute;
-  top: 0.2rem;
-  width: 21rem;
-  z-index: 1;
-  height: 5rem;
-  padding: 1rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 0.1rem;
 }
 .LoadingWrapper {
   display: flex;

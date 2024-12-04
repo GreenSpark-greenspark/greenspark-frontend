@@ -30,7 +30,6 @@ export default function HomePower() {
 
   // api 통신
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const userId = 1;
 
   useEffect(() => {
     const fetchCostData = async () => {
@@ -69,7 +68,7 @@ export default function HomePower() {
     };
 
     fetchCostData();
-  }, [API_URL, userId]);
+  }, [API_URL]);
 
   // 요금 변동 메시지 설정
   const renderComment = () => {
@@ -150,12 +149,13 @@ export default function HomePower() {
             </p>
             <p className={styles.cost}>
               <span className={styles.costGreen}>
-                {chargeData && chargeData.currentMonth !== null
+                {chargeData && chargeData.currentMonth !== null && chargeData.currentMonth !== 0
                   ? chargeData.currentMonth.toLocaleString()
                   : "?,???"}
               </span>{" "}
               원
             </p>
+
             <div className={styles.comment}>
               <IconComment className={styles.iconComment} />
               {renderComment()}

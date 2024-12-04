@@ -67,11 +67,13 @@ function ExpectPreChart() {
   }, [API_URL]);
 
   // 데이터 로드 후 실행되도록(팁 멘트 디폴트)
+  const [selectedMonth, setSelectedMonth] = useState("lastMonth");
+
   useEffect(() => {
-    if (!isLoading && chargeData.lastMonth !== null) {
+    if (selectedMonth === "lastMonth" && !isLoading) {
       handleChartClick("lastMonth");
     }
-  }, [isLoading, chargeData]);
+  }, [isLoading]);
 
   const determineDifferenceType = (pre: number | null, current: number | null): DifferenceType => {
     if (pre === null && current === null) return "noMonths";
@@ -122,7 +124,6 @@ function ExpectPreChart() {
 
   const [preMonthLabel, setPreMonthLabel] = useState("");
   const [currentMonthLabel, setCurrentMonthLabel] = useState("");
-  const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
 
   const handleChartClick = (type: "twoMonth" | "lastMonth" | "currentMonth") => {
     let pre: number | null;
@@ -137,7 +138,7 @@ function ExpectPreChart() {
         setCommentType("general");
         setPreMonthLabel(getDateLabel("threeMonths").monthLabel);
         setCurrentMonthLabel(getDateLabel("twoMonths").monthLabel);
-        setSelectedMonth("twoMonths");
+        setSelectedMonth("twoMonth");
 
         break;
       case "lastMonth":
@@ -325,23 +326,24 @@ function ExpectPreChart() {
     }
   };
 
-  const SpeechBalloon: React.FC<{ tailX: number }> = ({ tailX }) => (
+  const SpeechBalloon: React.FC<{ tailX: number; height: number }> = ({ tailX, height }) => (
     <svg
       width="243"
-      height="95"
-      viewBox="0 0 243 95"
+      height={height}
+      viewBox={`0 0 243 ${height}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect y="12" width="243" height="83" rx="10" fill="#F1F3F5" />
-
+      <rect y="12" width="243" height={height - 12} rx="10" fill="#F1F3F5" />
       <path d={`M${tailX} 0 L${tailX + 8.227} 12 H${tailX - 8.227} L${tailX} 0Z`} fill="#F1F3F5" />
     </svg>
   );
 
+  const tipHeight = differenceType === "noMonths" || differenceType === "noCurrentMonth" ? 56 : 95;
+
   //   팁멘트 아이콘
   const TipMentIcon = () => {
-    return <SpeechBalloon tailX={tailPosition} />;
+    return <SpeechBalloon tailX={tailPosition} height={tipHeight} />;
   };
 
   return (
@@ -349,9 +351,7 @@ function ExpectPreChart() {
       <div className={styles.chartContainer}>
         {/* 전전월 */}
         <div className={styles.chartUnit} onClick={() => handleChartClick("twoMonth")}>
-          <p
-            className={`${styles.boxCost} ${chargeData?.twoMonthsAgo === null ? styles.costText : ""}`}
-          >
+          <p className={styles.boxCost}>
             {chargeData?.twoMonthsAgo?.toLocaleString() ?? "?,???"}원
           </p>
           <div className={`${styles.chartColor} ${getChartColorClass(chargeData.twoMonthsAgo)}`}>
@@ -383,18 +383,14 @@ function ExpectPreChart() {
             </div>
           </div>
           <p
-            className={`${styles.monthLabel} ${selectedMonth === "twoMonths" ? styles.monthLabelClick : ""}`}
+            className={`${styles.monthLabel} ${selectedMonth === "twoMonth" ? styles.monthLabelClick : ""}`}
           >
             {`${twoMonthsDate.monthLabel}월`}
           </p>{" "}
         </div>
         {/* 전월 */}
         <div className={styles.chartUnit} onClick={() => handleChartClick("lastMonth")}>
-          <p
-            className={`${styles.boxCost} ${chargeData?.lastMonth === null ? styles.costText : ""}`}
-          >
-            {chargeData?.lastMonth?.toLocaleString() ?? "?,???"}원
-          </p>
+          <p className={styles.boxCost}>{chargeData?.lastMonth?.toLocaleString() ?? "?,???"}원</p>
           <div className={`${styles.chartColor} ${getChartColorClass(chargeData.lastMonth)}`}>
             <div className={styles.chartBox}>
               <p className={styles.chartBoxText}>{`${twoMonthsDate.monthLabel}월 대비`}</p>
@@ -432,9 +428,7 @@ function ExpectPreChart() {
         {/* 예상요금 */}
         <div className={styles.chartUnit} onClick={() => handleChartClick("currentMonth")}>
           <p className={styles.infoText}>예상요금</p>
-          <p
-            className={`${styles.boxCost} ${chargeData?.expectedCost === null ? styles.costText : ""}`}
-          >
+          <p className={styles.boxCost}>
             {chargeData?.expectedCost?.toLocaleString() ?? "?,???"}원
           </p>
           <div className={`${styles.chartColor} ${getChartColorClass(chargeData.expectedCost)}`}>
