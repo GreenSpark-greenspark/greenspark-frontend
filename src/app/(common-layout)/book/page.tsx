@@ -1,21 +1,32 @@
 import React from "react";
-import Image from "next/image";
-import Image404 from "@/../public/404/404.png";
-import ErrorImg from "@/../public/404/error.png";
-import IconWarning from "@/../public/404/warningIcon.svg";
 import style from "./page.module.css";
+import Box from "@/components/Box";
+import { bookList } from "@/mock/bookList";
+import Link from "next/link";
+import { getImage } from "@/utils/getImage";
+import Image from "next/image";
 
 const Page = () => {
   return (
     <div className={style.pageWrap}>
       <div className={style.boxContainer}>
-        <div className={style.imgContainer}>
-          <IconWarning width={80} height={80} />
-          <Image src={Image404} alt="404 Error" width={211} priority />
-          <Image src={ErrorImg} alt="Error Image" width={122} style={{ marginTop: 10 }} priority />
-        </div>
-        <div className={style.description}>공사중입니다!</div>
-        <div className={style.description}>최종 발표 때 만나요!</div>
+        {bookList
+          ? bookList.map(item => (
+              <Link href={`/book/${item.id}`}>
+                <Box key={item.id}>
+                  <div className={style.card}>
+                    <div className={style.imgWrapper}>
+                      <Image src={getImage(item.name)} alt={item.name} width={93} />
+                    </div>
+                    <div className={style.rightSection}>
+                      <div className={style.itemName}>{item.name}</div>
+                      <button className={style.tipBtn}>꿀팁 보러가기</button>
+                    </div>
+                  </div>
+                </Box>
+              </Link>
+            ))
+          : ""}
       </div>
     </div>
   );
