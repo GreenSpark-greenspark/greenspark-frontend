@@ -67,7 +67,7 @@
   border: none;
   border-radius: 10px;
   background: #91e26b;
-  box-shadow: 0px 0px 4px 0px var(--Color-8, #d4ddcf);
+  box-shadow: 0px 0px 4px 0px #d4ddcf;
 
   color: #fff;
   text-align: center;
