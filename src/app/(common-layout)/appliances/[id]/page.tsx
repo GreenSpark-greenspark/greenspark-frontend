@@ -16,7 +16,8 @@ import MemoBtn from "@/app/_component/appliances/[id]/MemoBtn";
 export default function AppliancePage({ params }: { params: { id: string | string[] } }) {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const [applianceDetails, setApplianceDetails] = useState<any>(null);
-  const [memo, setMemo] = useState<string | null>(null); 
+  const [memo, setMemo] = useState<string | null>(null);
+  const [hasMemo, setHasMemo] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const fetchApplianceData = async () => {
@@ -30,7 +31,7 @@ export default function AppliancePage({ params }: { params: { id: string | strin
       );
 
       if (response.data.success) {
-        const parsedData = JSON.parse(response.data.data); 
+        const parsedData = JSON.parse(response.data.data);
         const decodedData = decodeHtmlEntities(parsedData);
         const items = decodedData.items || [];
         const memoData = decodedData.memos || null;
@@ -49,7 +50,10 @@ export default function AppliancePage({ params }: { params: { id: string | strin
 
         const mappedDetails = mapApplianceDetails(transformedItem, applianceType);
         setApplianceDetails(mappedDetails);
-        setMemo(memoData[0]?.content || null);
+
+        const memoContent = memoData[0]?.content || null;
+        setMemo(memoContent);
+        setHasMemo(!!memoContent);
       } else {
         console.error("API 요청 실패:", response.data.message);
       }
@@ -66,6 +70,7 @@ export default function AppliancePage({ params }: { params: { id: string | strin
 
   const handleMemoAdded = (newMemo: string) => {
     setMemo(newMemo);
+    setHasMemo(!!newMemo);
   };
 
   if (loading)
@@ -91,7 +96,7 @@ export default function AppliancePage({ params }: { params: { id: string | strin
         </div>
         <div className={style.BtnWrapper}>
           <DeleteBtn applianceId={params.id} />
-          <MemoBtn applianceId={params.id} onMemoAdded={handleMemoAdded} />
+          <MemoBtn applianceId={params.id} hasMemo={hasMemo} onMemoAdded={handleMemoAdded} />
         </div>
       </Box>
     </div>

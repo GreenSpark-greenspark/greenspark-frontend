@@ -8,14 +8,15 @@ import IconClose from "@/../public/icon/popup_close.svg";
 
 interface MemoBtnProps {
   applianceId: string | string[];
+  hasMemo: boolean; // 메모 세션 여부
   onMemoAdded?: (memoContent: string) => void; // 부모 컴포넌트에 메모 추가 알림
 }
 
-const MemoBtn = ({ applianceId, onMemoAdded }: MemoBtnProps) => {
+const MemoBtn = ({ applianceId, hasMemo, onMemoAdded }: MemoBtnProps) => {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const MAX_CHAR_COUNT = 50;
   const [showPopup, setShowPopup] = useState(false);
-  const [closing, setClosing] = useState(false); 
+  const [closing, setClosing] = useState(false);
   const [memoContent, setMemoContent] = useState("");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -33,9 +34,8 @@ const MemoBtn = ({ applianceId, onMemoAdded }: MemoBtnProps) => {
 
       if (res.status === 200) {
         setToastMessage("메모가 성공적으로 등록되었습니다.");
-        onMemoAdded?.(memoContent);
+        onMemoAdded?.(memoContent); // 부모 컴포넌트에 새 메모 알림
         closePopup();
-        setMemoContent("");
         setTimeout(() => setToastMessage(null), 3000);
       } else {
         console.error("메모 실패:", res.data);
@@ -67,7 +67,7 @@ const MemoBtn = ({ applianceId, onMemoAdded }: MemoBtnProps) => {
     <div className={style.memoBtnWrapper}>
       {toastMessage && <Toast message={toastMessage} />}
       <button className={style.memoBtn} onClick={() => setShowPopup(true)}>
-        메모 추가하기
+        {hasMemo ? "메모 수정하기" : "메모 추가하기"}
       </button>
       {showPopup && (
         <div className={style.overlay} onClick={closePopup}>
@@ -78,11 +78,9 @@ const MemoBtn = ({ applianceId, onMemoAdded }: MemoBtnProps) => {
             <div className={style.cancelBtn} onClick={closePopup}>
               <IconClose width={"16px"} height={"16px"} />
             </div>
-            <div className={style.popupTitle}>메모를 입력해주세요!</div>
-            <div className={style.popupSubTitle}>
-              제품의 사용기한, 마지막 수리의 정보를 기록해보세요!
+            <div className={style.popupTitle}>
+              {hasMemo ? "메모를 수정해주세요!" : "메모를 입력해주세요!"}
             </div>
-
             <textarea
               className={style.textarea}
               value={memoContent}
