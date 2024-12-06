@@ -173,7 +173,7 @@ export default function ClientComponent() {
 
   return (
     <div className={styles.boxContainer}>
-      <Box minHeight="330px">
+      <Box minHeight="200">
         <div className={styles.container}>
           <ApplianceSelector
             selectedAppliance={selectedAppliance}
@@ -209,6 +209,7 @@ export default function ClientComponent() {
         {showToast && <Toast message={toastMessage} />}
         <AddButton handleAdd={handleAdd} selectedIndex={selectedIndex} />
       </Box>
+      <div className={styles.margin}></div>
       {showPopup && (
         <Popup
           applianceType={
