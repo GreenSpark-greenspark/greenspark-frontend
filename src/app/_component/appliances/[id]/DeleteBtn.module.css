@@ -1,6 +1,12 @@
+.deleteBtnWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .deleteBtn {
-  width: 11rem;
-  height: 3.1rem;
+  width: 11em;
+  height: 3.2rem;
   border: none;
   border-radius: 10px;
   background: #b8c7b0;
@@ -17,5 +23,87 @@
 }
 
 .deleteBtn:hover {
-  background-color: #a3b798;
+  background-color: #a7ba9c;
+}
+
+.bottomSheetOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 1001;
+}
+
+.bottomSheet {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1002;
+  width: 100%;
+  max-width: 400px;
+  height: 26em;
+  background: #fff;
+  border-radius: 32px 32px 0 0;
+  padding: 16px;
+  box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.3s ease-out;
+}
+
+.handleBar {
+  width: 70px;
+  height: 10px;
+  background-color: #d7f3c6;
+  border-radius: 100px;
+}
+
+.confirmText {
+  color: #000;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+  margin-bottom: 3em;
+}
+
+.cancelBtn,
+.confirmBtn {
+  width: 277px;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.cancelBtn {
+  background-color: #f1f3f5;
+  color: #929292;
+  border: none;
+}
+
+.cancelBtn:hover {
+  background-color: #e5eaef;
+}
+
+.confirmBtn {
+  background-color: #19e407;
+  color: #fff;
+  border: none;
+}
+
+.confirmBtn:hover {
+  background-color: #18d207;
 }
