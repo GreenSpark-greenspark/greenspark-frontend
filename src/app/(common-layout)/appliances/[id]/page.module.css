@@ -25,3 +25,43 @@
   align-items: center;
   gap: 1.2em;
 }
+
+/* 메모 */
+.memoSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.memoTitle {
+  display: flex;
+  align-items: center;
+  margin-left: 1.68em;
+  margin-bottom: 0.5em;
+}
+
+.memoItem {
+  display: flex;
+  align-items: center;
+  padding: 0 1.4em;
+  margin-bottom: 2.4em;
+  width: 80%;
+  min-height: 4.1em;
+  border-radius: 10px;
+  background: #f1f3f5;
+
+  color: #000;
+  font-family: Pretendard;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.noMemos {
+  color: #666;
+  font-size: 14px;
+  text-align: center;
+}
