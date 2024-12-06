@@ -1,17 +1,28 @@
 "use client";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "next/navigation";
 import QuizSubmit from "@/app/_component/quiz/QuizSubmit";
+import { QuizProvider } from "@/context/QuizContext";
 
 export default function Page() {
   const { questionId } = useParams();
-  const [id, setId] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const quizIdParam = searchParams.get("quizId");
 
-  useEffect(() => {
-    if (questionId) {
-      setId(Array.isArray(questionId) ? questionId[0] : questionId);
-    }
-  }, [questionId]);
+  const questionIdNumber = Array.isArray(questionId)
+    ? parseInt(questionId[0])
+    : parseInt(questionId);
 
-  return <>{id ? <QuizSubmit id={id} /> : <p>Loading...</p>} </>;
+  const quizId = quizIdParam ? parseInt(quizIdParam) : null;
+
+  return (
+    <>
+      <QuizProvider>
+        {quizId && questionIdNumber ? (
+          <QuizSubmit questionId={questionIdNumber} quizId={quizId} />
+        ) : (
+          <p>Loading...</p>
+        )}
+      </QuizProvider>
+    </>
+  );
 }

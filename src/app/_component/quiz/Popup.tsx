@@ -1,35 +1,22 @@
 import React from "react";
-import { useState } from "react";
 import styles from "./Popup.module.css";
 import IconClose from "@/../public/icon/popup_close.svg";
 import IconMent from "@/../public/icon/quiz_ment.svg";
 
-interface PopupProps {
-  onClose: () => void;
-  questionId: number | null;
-}
-interface QuizData {
-  // questionId: number;
-  isCorrect: boolean;
+export interface QuizData {
+  quizId: number;
   question: string;
-  correctAnswer: string;
-  selectedAnswer: string;
   explanation: string;
+  answer: string;
 }
 
-const Popup: React.FC<PopupProps> = ({ onClose, questionId }: PopupProps) => {
-  const mockData: QuizData = {
-    // questionId: 1,
-    isCorrect: true,
-    question: "가정에서 에너지를 절약하기 위한 올바른 방법은 무엇인가요?",
-    correctAnswer: "전등을 LED로 교체하기",
-    selectedAnswer: "에어컨을 밤새 켜두기",
-    explanation:
-      "LED 전등은 백열등보다 훨씬 적은 전력을 소비하고 수명이 길어요! 환경에도 좋고 비용도 절약할 수 있는 방법이에요!"
-  };
+interface PopupProps {
+  quizData: QuizData;
+  questionId: number;
+  onClose: () => void;
+}
 
-  const [quizData] = useState<QuizData>(mockData);
-
+const Popup: React.FC<PopupProps> = ({ quizData, questionId, onClose }) => {
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.popup}>
@@ -44,13 +31,8 @@ const Popup: React.FC<PopupProps> = ({ onClose, questionId }: PopupProps) => {
 
             <div className={styles.answerContainer}>
               <p className={styles.quizAnswer}>
-                <span className={styles.textGreen}>정답 </span>: {quizData.correctAnswer}
+                <span className={styles.textGreen}>정답 </span>: {quizData.answer}
               </p>
-              {!quizData.isCorrect && (
-                <p className={styles.quizAnswer}>
-                  <span className={styles.textRed}>오답 </span>: {quizData.selectedAnswer}
-                </p>
-              )}
             </div>
 
             <div className={styles.expBox}>

@@ -1,7 +1,6 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-
+import { useEffect } from "react";
+import { useQuizContext } from "@/context/QuizContext";
 import Box from "@/components/Box";
 import styles from "./QuizAnswer.module.css";
 import IconMent from "@/../public/icon/quiz_ment.svg";
@@ -9,33 +8,29 @@ import IconCorrect from "@/../public/icon/quiz_correct.svg";
 import IconWrong from "@/../public/icon/quiz_wrong.svg";
 import IconArrow from "@/../public/icon/arrow_left.svg";
 
-interface QuizData {
-  // questionId: number;
-  isCorrect: boolean;
-  question: string;
-  correctAnswer: string;
-  selectedAnswer: string;
-  explanation: string;
-}
 interface QuizAnswerProps {
   id: string;
 }
+
 export default function QuizAnswer({ id }: QuizAnswerProps) {
-  const mockData: QuizData = {
-    // questionId: 1,
-    isCorrect: true,
-    question: "가정에서 에너지를 절약하기 위한 올바른 방법은 무엇인가요?",
-    correctAnswer: "전등을 LED로 교체하기",
-    selectedAnswer: "에어컨을 밤새 켜두기",
-    explanation:
-      "LED 전등은 백열등보다 훨씬 적은 전력을 소비하고 수명이 길어요! 환경에도 좋고 비용도 절약할 수 있는 방법이에요!"
-  };
+  const { question, userAnswer, correctAnswer, explanation, isCorrect } = useQuizContext();
 
-  const [quizData] = useState<QuizData>(mockData);
+  useEffect(() => {
+    console.log("QuizAnswer Context Data:", {
+      question,
+      userAnswer,
+      correctAnswer,
+      explanation,
+      isCorrect
+    });
+  }, [question, userAnswer, correctAnswer, explanation, isCorrect]);
 
-  const router = useRouter();
+  if (!question || !userAnswer || !correctAnswer || !explanation || !isCorrect) {
+    return <p>로딩 중...</p>;
+  }
+
   const goToQuizHome = () => {
-    router.push(`/quiz`);
+    window.history.back();
   };
 
   return (
@@ -47,7 +42,7 @@ export default function QuizAnswer({ id }: QuizAnswerProps) {
             <p>Q{id}</p>
           </div>
 
-          {quizData.isCorrect ? (
+          {isCorrect === "true" ? (
             <>
               <p className={styles.correctTitle}>
                 <span className={styles.textGreen}>정답</span>이에요!
@@ -67,24 +62,24 @@ export default function QuizAnswer({ id }: QuizAnswerProps) {
             </>
           )}
 
-          <p className={styles.quizTitle}>{quizData.question}</p>
+          <p className={styles.quizTitle}>{question}</p>
 
           <div className={styles.answerContainer}>
             <p className={styles.quizAnswer}>
-              <span className={styles.textGreen}>정답 </span>: {quizData.correctAnswer}
+              <span className={styles.textGreen}>정답 </span>: {correctAnswer}
             </p>
-            {!quizData.isCorrect && (
+            {isCorrect === "false" && (
               <p className={styles.quizAnswer}>
-                <span className={styles.textRed}>오답 </span>: {quizData.selectedAnswer}
+                <span className={styles.textRed}>오답 </span>: {userAnswer}
               </p>
             )}
           </div>
 
           <div className={styles.expBox}>
             <p className={styles.expTitle}>해설</p>
-            <p className={styles.expBody}>{quizData.explanation}</p>
+            <p className={styles.expBody}>{explanation}</p>
           </div>
-          <div className={styles.homeBtn} onClick={() => goToQuizHome()}>
+          <div className={styles.homeBtn} onClick={goToQuizHome}>
             <p>퀴즈 홈으로 가기</p>
             <IconArrow className={styles.iconArrow} />
           </div>
