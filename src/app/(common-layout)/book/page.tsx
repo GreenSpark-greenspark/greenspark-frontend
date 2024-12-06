@@ -15,7 +15,9 @@ const Page = () => {
               <Link href={`/book/${item.id}`}>
                 <Box key={item.id}>
                   <div className={style.card}>
-                    <Image src={getImage(item.name)} alt={item.name} width={93} />
+                    <div className={style.imgWrapper}>
+                      <Image src={getImage(item.name)} alt={item.name} width={93} />
+                    </div>
                     <div className={style.rightSection}>
                       <div className={style.itemName}>{item.name}</div>
                       <button className={style.tipBtn}>꿀팁 보러가기</button>

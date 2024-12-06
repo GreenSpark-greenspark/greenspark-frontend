@@ -21,6 +21,13 @@
   align-items: center;
 }
 
+.imgWrapper {
+  width: 93px;
+  height: 93px;
+  overflow: hidden;
+  border-radius: 1.5em;
+}
+
 .description {
   text-align: center;
 

@@ -9,6 +9,7 @@ import frontLoadingWashingMachine from "@/../public/img/appliances/frontLoadingW
 import airConditioner from "@/../public/img/appliances/airConditioner.png";
 import refrigerator from "@/../public/img/appliances/refrigerator.png";
 import logo from "@/../public/img/book_logo.png";
+import lion from "@/../public/img/likelionssu.png";
 
 export const getImage = (type: string) => {
   switch (type) {
@@ -54,7 +55,7 @@ export const getImage = (type: string) => {
     case "기타":
       return logo;
     case "회고":
-      return logo;
+      return lion;
     default:
       return logo;
   }
