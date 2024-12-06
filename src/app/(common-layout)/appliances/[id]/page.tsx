@@ -11,6 +11,7 @@ import BottomView from "@/app/_component/appliances/[id]/BottomView";
 import LoadingDots from "@/components/LoadingDots";
 import DeleteBtn from "@/app/_component/appliances/[id]/DeleteBtn";
 import { apiWrapper } from "@/utils/api";
+import MemoBtn from "@/app/_component/appliances/[id]/MemoBtn";
 
 export default function AppliancePage({ params }: { params: { id: string | string[] } }) {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -77,7 +78,10 @@ export default function AppliancePage({ params }: { params: { id: string | strin
           <TopView {...applianceDetails} />
           <BottomView {...applianceDetails} />
         </div>
-        <DeleteBtn applianceId={params.id} />
+        <div className={style.BtnWrapper}>
+          <DeleteBtn applianceId={params.id} />
+          <MemoBtn applianceId={params.id} />
+        </div>
       </Box>
     </div>
   );

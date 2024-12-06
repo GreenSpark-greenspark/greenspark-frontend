@@ -10,7 +10,6 @@ interface DeleteBtnProps {
 
 const DeleteBtn = ({ applianceId }: DeleteBtnProps) => {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const userId = 1;
   const router = useRouter();
 
   const onDelete = async () => {
@@ -36,7 +35,7 @@ const DeleteBtn = ({ applianceId }: DeleteBtnProps) => {
   return (
     <div className={style.deleteBtnWrapper}>
       <button className={style.deleteBtn} onClick={onDelete}>
-        삭제하기
+        제품 삭제하기
       </button>
     </div>
   );
