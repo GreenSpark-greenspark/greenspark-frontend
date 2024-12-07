@@ -15,6 +15,9 @@ const ItemRow = ({ label, value }: ItemRowProps) => {
           <InfoIcon />
         </div>
       )}
+      {label == "" && (
+        <div className={style.emptyDiv}/>
+      )}
       <div className={style.key}>{label}</div>
       <div className={style.value}>{value}</div>
     </div>

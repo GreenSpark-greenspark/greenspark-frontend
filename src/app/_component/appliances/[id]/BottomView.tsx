@@ -7,21 +7,20 @@ interface BottomViewProps {
 
 const BottomView = ({ ...applianceDetails }: BottomViewProps) => {
   const excludedKeys = ["업체명칭", "기자재명칭", "모델명", "효율등급"];
+  const entries = Object.entries(applianceDetails)
+    .filter(([key]) => !excludedKeys.includes(key))
+    .filter(([key, value]) => value !== null && value !== "NULL");
 
   return (
     <div className={style.container}>
-      {Object.entries(applianceDetails)
-        .filter(([key]) => !excludedKeys.includes(key))
-        .map(
-          ([key, value], index) =>
-            value !== null &&
-            value !== "NULL" && (
-              <div key={key + index}>
-                <ItemRow key={key} label={key} value={value} />
-                <ItemRow key={key + "empty" + index} label={""} value={""} />{" "}
-              </div>
-            )
-        )}
+      {entries.map(([key, value], index) => (
+        <div key={key + index}>
+          <ItemRow label={key} value={value} />
+          {index !== entries.length - 1 && (
+            <ItemRow key={key + "empty" + index} label={""} value={""} />
+          )}
+        </div>
+      ))}
     </div>
   );
 };

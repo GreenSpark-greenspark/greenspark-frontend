@@ -39,7 +39,15 @@
 }
 
 .iconWrapper svg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 1.8rem;
   height: 1.8rem;
   fill: #ff0000; /* 원하는 색으로 변경 */
+}
+
+.emptyDiv {
+  width: 1.8rem;
+  height: 1.8rem;
 }
