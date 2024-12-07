@@ -2,7 +2,6 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import QuizAnswer from "@/app/_component/quiz/QuizAnswer";
-import { QuizProvider } from "@/context/QuizContext";
 
 export default function Page() {
   const { questionId } = useParams();
@@ -14,9 +13,5 @@ export default function Page() {
     }
   }, [questionId]);
 
-  return (
-    <>
-      <QuizProvider>{id ? <QuizAnswer id={id} /> : <p>Loading...</p>}</QuizProvider>
-    </>
-  );
+  return <>{id ? <QuizAnswer id={id} /> : <p>Loading...</p>}</>;
 }

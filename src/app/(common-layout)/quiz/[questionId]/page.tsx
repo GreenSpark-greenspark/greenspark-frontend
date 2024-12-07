@@ -1,7 +1,6 @@
 "use client";
 import { useParams, useSearchParams } from "next/navigation";
 import QuizSubmit from "@/app/_component/quiz/QuizSubmit";
-import { QuizProvider } from "@/context/QuizContext";
 
 export default function Page() {
   const { questionId } = useParams();
@@ -16,13 +15,11 @@ export default function Page() {
 
   return (
     <>
-      <QuizProvider>
-        {quizId && questionIdNumber ? (
-          <QuizSubmit questionId={questionIdNumber} quizId={quizId} />
-        ) : (
-          <p>Loading...</p>
-        )}
-      </QuizProvider>
+      {quizId && questionIdNumber ? (
+        <QuizSubmit questionId={questionIdNumber} quizId={quizId} />
+      ) : (
+        <p>Loading...</p>
+      )}
     </>
   );
 }

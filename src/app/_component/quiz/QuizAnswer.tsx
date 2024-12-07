@@ -1,12 +1,13 @@
 "use client";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useQuizContext } from "@/context/QuizContext";
+import axios from "axios";
 import Box from "@/components/Box";
 import styles from "./QuizAnswer.module.css";
 import IconMent from "@/../public/icon/quiz_ment.svg";
 import IconCorrect from "@/../public/icon/quiz_correct.svg";
 import IconWrong from "@/../public/icon/quiz_wrong.svg";
-import IconArrow from "@/../public/icon/arrow_left.svg";
 
 interface QuizAnswerProps {
   id: string;
@@ -23,14 +24,39 @@ export default function QuizAnswer({ id }: QuizAnswerProps) {
       explanation,
       isCorrect
     });
-  }, [question, userAnswer, correctAnswer, explanation, isCorrect]);
+
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+    if (isCorrect === "true") {
+      const updatePoint = async () => {
+        try {
+          const response = await axios.post(
+            `${API_URL}/point/update`,
+            {
+              pointAmount: 100,
+              event: "오늘의 퀴즈 완료"
+            },
+            {
+              withCredentials: true
+            }
+          );
+          console.log("포인트 업데이트 성공:", response.data);
+        } catch (error) {
+          console.error("포인트 업데이트 실패:", error);
+        }
+      };
+
+      updatePoint();
+    }
+  }, [isCorrect]);
 
   if (!question || !userAnswer || !correctAnswer || !explanation || !isCorrect) {
     return <p>로딩 중...</p>;
   }
 
+  const router = useRouter();
   const goToQuizHome = () => {
-    window.history.back();
+    router.push(`/quiz`);
   };
 
   return (
@@ -81,7 +107,6 @@ export default function QuizAnswer({ id }: QuizAnswerProps) {
           </div>
           <div className={styles.homeBtn} onClick={goToQuizHome}>
             <p>퀴즈 홈으로 가기</p>
-            <IconArrow className={styles.iconArrow} />
           </div>
         </div>
       </Box>
