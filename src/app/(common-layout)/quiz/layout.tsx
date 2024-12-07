@@ -12,7 +12,7 @@ export default function Layout({
     <>
       <QuizProvider>
         <TopBar text={"에너지 퀴즈"} />
-        {children}{" "}
+        {children}
       </QuizProvider>
     </>
   );
