@@ -36,6 +36,7 @@
   background: #f1f3f5;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .answerBtnClick {
@@ -47,6 +48,7 @@
   background: #d7f3c6;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .answerContainer {

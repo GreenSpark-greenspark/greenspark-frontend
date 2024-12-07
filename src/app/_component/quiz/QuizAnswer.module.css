@@ -124,7 +124,7 @@
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
-  line-height: normal;
+  line-height: 1.5;
 }
 
 .iconArrow {
@@ -135,17 +135,20 @@
 
 .homeBtn {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  width: 8rem;
-  margin-left: 15rem;
-  margin-top: 1rem;
+  float: right;
+  width: 27.7rem;
+  height: 3.8rem;
+  border-radius: 1em;
+  border: none;
+  background-color: #19e407;
+  color: #fff;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 400;
+  box-shadow: 0 0 0.4em 0 #d4ddcf;
   cursor: pointer;
-}
-.homeBtn p {
-  color: #000;
-
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 600;
+  margin-top: 4rem;
 }

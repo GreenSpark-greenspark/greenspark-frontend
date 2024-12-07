@@ -13,5 +13,5 @@ export default function Page() {
     }
   }, [questionId]);
 
-  return <>{id ? <QuizAnswer id={id} /> : <p>Loading...</p>} </>;
+  return <>{id ? <QuizAnswer id={id} /> : <p>Loading...</p>}</>;
 }
