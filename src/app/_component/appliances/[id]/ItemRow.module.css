@@ -1,7 +1,6 @@
 .row {
   display: flex;
   align-items: center;
-
   margin: 0;
   width: 31.8rem;
   min-height: 20px;
@@ -10,22 +9,12 @@
 .key {
   width: 18rem;
   padding-left: 0.7em;
-
   color: #5e5e5e;
   text-align: left;
   font-size: 1.4rem;
-
   font-weight: 400;
   line-height: normal;
 }
-
-/* .separator {
-  width: 0.2rem;
-  height: 100%;
-  margin-right: 2em;
-
-  background-color: #f1f3f5;
-} */
 
 .value {
   width: 10.4rem;
@@ -44,7 +33,6 @@
   align-items: center;
   width: 1.8rem;
   height: 1.8rem;
-  fill: #ff0000; /* 원하는 색으로 변경 */
 }
 
 .emptyDiv {
