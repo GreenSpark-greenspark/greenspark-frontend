@@ -123,10 +123,10 @@ const DeleteBtn = ({ applianceId }: DeleteBtnProps) => {
             </p>
             <div className={style.actions}>
               <button className={style.confirmBtn} onClick={onDelete}>
-                진행하기
+                삭제하기
               </button>
               <button className={style.cancelBtn} onClick={closeBottomSheet}>
-                취소하기
+                나중에 하기
               </button>
             </div>
           </div>

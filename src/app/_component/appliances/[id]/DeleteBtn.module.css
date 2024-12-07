@@ -124,6 +124,12 @@
   border-radius: 8px;
 
   font-size: 1.6rem;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -142,8 +148,9 @@
 
 .confirmBtn {
   background-color: #19e407;
-  color: #fff;
   border: none;
+
+  color: #fff;
 }
 
 .confirmBtn:hover {
