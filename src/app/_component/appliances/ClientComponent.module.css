@@ -12,6 +12,7 @@
   justify-content: space-between;
 
   min-height: 330px;
+}
 
 .margin {
   width: 100px;
@@ -108,7 +109,7 @@
 .applianceCard:last-child {
   margin-bottom: 3em;
 }
-  
+
 .selectedCard {
   background-color: #f8fff3;
   border: 0.15em solid #d7f3c6;
