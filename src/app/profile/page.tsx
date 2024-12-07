@@ -3,10 +3,29 @@ import React, { useState } from "react";
 import styles from "./Profile.module.css";
 import IconLogo from "@/../public/icon/login_logo.svg";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 export default function Profile() {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
-  const goHome = () => {
-    router.push("/main");
+  const goHome = async () => {
+    try {
+      const res = await axios.post(
+        `${API_URL}/users/info`,
+        {
+          householdMembers: numResidents,
+          electricityDueDate: paymentDay
+        },
+        { withCredentials: true }
+      );
+      if (res.data.success) {
+        console.log("유저 정보 입력 성공");
+        router.push("/main");
+      } else {
+        console.log("API 호출 실패:", res.data.message);
+      }
+    } catch (error) {
+      console.log("네트워킹 오류", error);
+    }
   };
   // 전기요금 납부일
   const [paymentDay, setPaymentDay] = useState<number>(1);
