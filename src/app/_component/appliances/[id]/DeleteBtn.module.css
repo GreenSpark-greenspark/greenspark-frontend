@@ -7,11 +7,12 @@
 .deleteBtn {
   width: 11em;
   height: 3.2rem;
+
   border: none;
   border-radius: 10px;
+
   background: #b8c7b0;
-  box-shadow: 0px 0px 4px 0px #d4ddcf;
-  cursor: pointer;
+  box-shadow: 0px 0px 0.4rem 0px #d4ddcf;
 
   color: #fff;
   text-align: center;
@@ -20,23 +21,31 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .deleteBtn:hover {
   background-color: #a7ba9c;
 }
 
-.bottomSheetOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  z-index: 1001;
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
 }
 
 .bottomSheet {
@@ -44,25 +53,53 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  z-index: 1002;
+
   width: 100%;
-  max-width: 400px;
   height: 26em;
+  padding: 1.6em;
+
   background: #fff;
   border-radius: 32px 32px 0 0;
-  padding: 16px;
-  box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px -0.4rem 1rem rgba(0, 0, 0, 0.1);
+
+  z-index: 1002;
   animation: slideUp 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+
+.bottomSheet.close {
+  animation: slideDown 0.3s ease-in;
+  transition: transform 0.3s ease-in;
+}
+
+.bottomSheetOverlay {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  z-index: 1001;
 }
 
 .handleBar {
-  width: 70px;
-  height: 10px;
+  width: 7rem;
+  height: 1rem;
+  margin-bottom: 1.6em;
+
   background-color: #d7f3c6;
   border-radius: 100px;
 }
 
 .confirmText {
+  margin-bottom: 1.5em;
+
   color: #000;
   text-align: center;
   font-family: Pretendard;
@@ -75,23 +112,28 @@
 .actions {
   display: flex;
   flex-direction: column;
+
   gap: 1.2em;
   margin-bottom: 3em;
 }
 
 .cancelBtn,
 .confirmBtn {
-  width: 277px;
-  height: 40px;
+  width: 30rem;
+  height: 4rem;
   border-radius: 8px;
-  font-size: 16px;
+
+  font-size: 1.6rem;
+
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .cancelBtn {
-  background-color: #f1f3f5;
-  color: #929292;
   border: none;
+  background-color: #f1f3f5;
+
+  color: #929292;
 }
 
 .cancelBtn:hover {
@@ -106,4 +148,14 @@
 
 .confirmBtn:hover {
   background-color: #18d207;
+}
+
+.cancelBtn:focus,
+.confirmBtn:focus {
+  outline: none;
+}
+
+.cancelBtn:active,
+.confirmBtn:active {
+  transform: scale(0.97);
 }

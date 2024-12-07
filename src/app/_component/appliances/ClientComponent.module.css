@@ -1,9 +1,18 @@
 .boxContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-bottom: 10rem;
   position: relative;
+}
+
+.boxLayout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-height: 330px;
 }
 
 .container {
@@ -12,8 +21,6 @@
   align-items: center;
   position: relative;
   gap: 1em;
-
-  width: 32rem;
 }
 
 .dropdownButton {
@@ -96,7 +103,7 @@
 }
 
 .applianceCard:last-child {
-  margin-bottom: 6em;
+  margin-bottom: 3em;
 }
 .selectedCard {
   background-color: #f8fff3;
@@ -112,8 +119,6 @@
 }
 
 .addButton {
-  position: absolute;
-  bottom: 1em;
   width: 27.7rem;
   height: 3.8rem;
   border: none;
@@ -247,4 +252,8 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.margin {
+  height: 100px;
 }
