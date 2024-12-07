@@ -37,3 +37,9 @@
   font-weight: 700;
   border-left: #f1f3f5 solid 1px;
 }
+
+.iconWrapper svg {
+  width: 1.8rem;
+  height: 1.8rem;
+  fill: #ff0000; /* 원하는 색으로 변경 */
+}

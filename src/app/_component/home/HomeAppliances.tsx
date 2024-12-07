@@ -47,7 +47,7 @@ export default function HomeAppliances() {
           <div className={style.flexLayout}>
             <div className={style.flexLayout}>
               {data.map(item => (
-                <Link href={`/appliances/${item.applianceId}`} key={item.applianceId}>
+                <Link href={`list/appliances/${item.applianceId}`} key={item.applianceId}>
                   <div className={style.LinkContainer}>
                     <Appliance id={item.applianceId} grade={item.grade} type={item.matchTerm} />
                     <GradeLabel grade={item.grade} />
