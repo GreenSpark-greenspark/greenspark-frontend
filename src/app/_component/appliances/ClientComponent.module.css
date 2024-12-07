@@ -6,6 +6,13 @@
   position: relative;
 }
 
+.boxLayout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-height: 330px;
+
 .margin {
   width: 100px;
   height: 100px;
@@ -17,8 +24,6 @@
   align-items: center;
   position: relative;
   gap: 1em;
-
-  width: 32rem;
 }
 
 .dropdownButton {
@@ -100,6 +105,10 @@
   padding-right: 0.1em;
 }
 
+.applianceCard:last-child {
+  margin-bottom: 3em;
+}
+  
 .selectedCard {
   background-color: #f8fff3;
   border: 0.15em solid #d7f3c6;
@@ -117,6 +126,7 @@
 .addButton {
   position: absolute;
   bottom: 8em;
+
   width: 27.7rem;
   height: 3.8rem;
   border: none;
@@ -250,4 +260,8 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.margin {
+  height: 100px;
 }

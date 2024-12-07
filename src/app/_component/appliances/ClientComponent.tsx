@@ -173,6 +173,21 @@ export default function ClientComponent() {
 
   return (
     <div className={styles.boxContainer}>
+      <Box minHeight="330px">
+        <div className={styles.boxLayout}>
+          <div className={styles.container}>
+            <ApplianceSelector
+              selectedAppliance={selectedAppliance}
+              setSelectedAppliance={setSelectedAppliance}
+              filteredOptions={filteredOptions.map(option => option.display)}
+            />
+            <ModelInput
+              modelName={modelName}
+              setModelName={setModelName}
+              handleSearch={handleSearch}
+              isApplianceSelected={!!selectedAppliance}
+              showToastMessage={showToastMessage}
+            />
       <Box minHeight="200">
         <div className={styles.container}>
           <ApplianceSelector
@@ -199,15 +214,27 @@ export default function ClientComponent() {
           >
             <LoadingDots />
           </div>
-        ) : (
-          <ApplianceList
-            applianceMockData={searchResults}
-            selectedIndex={selectedIndex}
-            setSelectedIndex={setSelectedIndex}
-          />
-        )}
-        {showToast && <Toast message={toastMessage} />}
-        <AddButton handleAdd={handleAdd} selectedIndex={selectedIndex} />
+          {isLoading ? (
+            <div
+              style={{
+                height: "330px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <LoadingDots />
+            </div>
+          ) : (
+            <ApplianceList
+              applianceMockData={searchResults}
+              selectedIndex={selectedIndex}
+              setSelectedIndex={setSelectedIndex}
+            />
+          )}
+          {showToast && <Toast message={toastMessage} />}
+          <AddButton handleAdd={handleAdd} selectedIndex={selectedIndex} />
+        </div>
       </Box>
       <div className={styles.margin}></div>
       {showPopup && (
