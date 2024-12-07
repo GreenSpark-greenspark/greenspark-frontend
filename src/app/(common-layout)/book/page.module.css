@@ -1,19 +1,17 @@
 .pageWrap {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   position: relative;
-
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .boxContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 1.7em;
+  padding-bottom: 10em;
 }
 
 .imgContainer {
@@ -23,6 +21,13 @@
   align-items: center;
 }
 
+.imgWrapper {
+  width: 93px;
+  height: 93px;
+  overflow: hidden;
+  border-radius: 1.5em;
+}
+
 .description {
   text-align: center;
 
@@ -30,5 +35,45 @@
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 600;
+  line-height: normal;
+}
+
+/* card */
+.card {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.itemName {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.tipBtn {
+  margin-top: 2.6em;
+  width: 110px;
+  height: 32px;
+  border: none;
+  border-radius: 10px;
+  background: #91e26b;
+  box-shadow: 0px 0px 4px 0px #d4ddcf;
+
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
   line-height: normal;
 }
