@@ -1,6 +1,7 @@
 import style from "./BottomView.module.css";
 import ItemRow from "./ItemRow";
 import { useState } from "react";
+import { tooltips } from "@/mock/toolTip";
 
 interface BottomViewProps {
   [key: string]: any;
@@ -21,13 +22,16 @@ const BottomView = ({ ...applianceDetails }: BottomViewProps) => {
   return (
     <div className={style.container}>
       {entries.map(([key, value], index) => (
-        <div key={key + index}>
+        <div key={key + index} className={style.itemWrapper}>
           <ItemRow
             label={key}
             value={value}
             isSelected={selectedKey === key}
             onIconClick={() => handleIconClick(key)}
           />
+          {selectedKey === key && tooltips[key] && (
+            <div className={style.tooltip}>{tooltips[key]}</div>
+          )}
           {index !== entries.length - 1 && (
             <ItemRow key={key + "empty" + index} label={""} value={""} />
           )}
