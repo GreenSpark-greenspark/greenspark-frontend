@@ -1,6 +1,6 @@
 import style from "./BottomView.module.css";
 import ItemRow from "./ItemRow";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { tooltips } from "@/mock/toolTip";
 
 interface BottomViewProps {
@@ -9,6 +9,7 @@ interface BottomViewProps {
 
 const BottomView = ({ ...applianceDetails }: BottomViewProps) => {
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
 
   const excludedKeys = ["업체명칭", "기자재명칭", "모델명", "효율등급"];
   const entries = Object.entries(applianceDetails)
@@ -18,6 +19,14 @@ const BottomView = ({ ...applianceDetails }: BottomViewProps) => {
   const handleIconClick = (key: string) => {
     setSelectedKey(selectedKey === key ? null : key);
   };
+
+  useEffect(() => {
+    if (selectedKey) {
+      setTooltipVisible(true);
+    } else {
+      setTooltipVisible(false);
+    }
+  }, [selectedKey]);
 
   return (
     <div className={style.container}>
@@ -30,7 +39,9 @@ const BottomView = ({ ...applianceDetails }: BottomViewProps) => {
             onIconClick={() => handleIconClick(key)}
           />
           {selectedKey === key && tooltips[key] && (
-            <div className={style.tooltip}>{tooltips[key]}</div>
+            <div className={`${style.tooltip} ${tooltipVisible ? style.show : ""}`}>
+              {tooltips[key]}
+            </div>
           )}
           {index !== entries.length - 1 && (
             <ItemRow key={key + "empty" + index} label={""} value={""} />
