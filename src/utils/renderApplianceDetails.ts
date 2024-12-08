@@ -56,7 +56,7 @@ export function mapApplianceDetails(appliance: ApplianceData, applianceType: str
     case "김치냉장고":
       uniqueFields = {
         김치저장실유효내용적: appliance.KIMCHI_AVAIL_CAPA,
-        월산_소비전력량: appliance.MONTH_CONS_PWR,
+        월산소비전력량: appliance.MONTH_CONS_PWR,
         소비자효율등급지표: appliance.R
       };
       break;
