@@ -78,6 +78,9 @@ export default function MyAppliances() {
               <div className={style.AddCircle}>
                 <IconPlus width={"2.4rem"} height={"2.4rem"} />
               </div>
+              <div className={style.lastLabel}>
+                <GradeLabel grade={""} />
+              </div>
             </div>
           </Link>
         </div>
