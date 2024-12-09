@@ -52,7 +52,6 @@ export default function MyMain() {
         });
         if (response.data && response.data.success) {
           setName(response.data.data.name);
-          console.log(response.data.data.name);
         } else {
           console.error("사용자 이름이 유효하지 않습니다.");
         }
@@ -90,7 +89,7 @@ export default function MyMain() {
             >
               <p className={styles.textTitle}>보유 포인트 </p>
 
-              <div className={styles.alignDiv} style={{ marginLeft: "2rem" }}>
+              <div className={styles.alignDiv} style={{ marginLeft: "13rem" }}>
                 <p className={styles.textPoint}>{point.toLocaleString()}</p>
                 <IconPoint className={styles.iconPoint} />
               </div>
