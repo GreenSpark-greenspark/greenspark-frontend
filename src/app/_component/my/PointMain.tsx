@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import styles from "./PointMain.module.css";
 import IconPoint from "@/../public/icon/point_icon.svg";
@@ -14,13 +15,34 @@ export default function PointMain() {
   const goToShop = () => {
     router.push(`/my/shop`);
   };
+  const [point, setPoint] = useState<number>(0);
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  useEffect(() => {
+    const fetchPoints = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/point`, {
+          withCredentials: true
+        });
+        if (response.data && response.data.success) {
+          setPoint(response.data.data);
+        } else {
+          console.error("포인트 데이터가 유효하지 않습니다.");
+        }
+      } catch (error) {
+        console.error("포인트 데이터 가져오기 실패:", error);
+      }
+    };
+    fetchPoints();
+  }, []);
   return (
     <>
       <div className={styles.pageContainer}>
         <div className={styles.topContainer}>
           <p className={styles.pointTitle}>사용 가능 포인트</p>
           <div className={styles.textPoint}>
-            <p>1,450</p> <IconPoint className={styles.iconPoint} />
+            <p>{point.toLocaleString()}</p> <IconPoint className={styles.iconPoint} />
           </div>
         </div>
         <div className={styles.btnContainer}>
