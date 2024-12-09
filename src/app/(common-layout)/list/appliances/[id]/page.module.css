@@ -9,13 +9,30 @@
   margin-top: 1.2rem;
 }
 
+.Box {
+  width: 340px;
+  min-height: 400px;
+  padding: 0.3em;
+
+  background-color: #ffffff;
+  border-radius: 1.5em;
+  box-shadow: 0em 0.1em 0.8em 0em #d7f3c6;
+
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.BoxPadding {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1.6em 1.2em;
+}
 .ViewWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 1rem;
-  min-height: 400px;
 }
 
 .BtnWrapper {
@@ -68,4 +85,22 @@
 .margin {
   width: 10rem;
   height: 10rem;
+}
+
+.changeGradeWrapper {
+  width: 28.9rem;
+  margin-bottom: 2.9rem;
+  padding: 0.6rem 0.8rem;
+
+  border-radius: 20px;
+  background: #f1f3f5;
+
+  color: #5e5e5e;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.14px;
 }
