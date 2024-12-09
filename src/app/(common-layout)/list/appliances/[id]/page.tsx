@@ -11,11 +11,12 @@ import LoadingDots from "@/components/LoadingDots";
 import DeleteBtn from "@/app/_component/appliances/[id]/DeleteBtn";
 import { apiWrapper } from "@/utils/api";
 import MemoBtn from "@/app/_component/appliances/[id]/MemoBtn";
-import { getGradientFromGrade } from "@/utils/getColorfromGrade"; // 이 부분 추가
+import { getGradientFromGrade } from "@/utils/getColorfromGrade";
 
 export default function AppliancePage({ params }: { params: { id: string | string[] } }) {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const [applianceDetails, setApplianceDetails] = useState<any>(null);
+  const [previousGrade, setPreviousGrade] = useState<string | null>(null); // 이전 효율 등급
   const [memo, setMemo] = useState<string | null>(null);
   const [hasMemo, setHasMemo] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -45,8 +46,11 @@ export default function AppliancePage({ params }: { params: { id: string | strin
           구모델명: items[0]?.OLDX_MODEL_TERM,
           제조원: items[0]?.MANUFAC_MAN_TERM,
           효율등급: items[0]?.GRADE,
+          updated: items[0]?.updated,
+          applianceId: items[0]?.applianceId,
           ...items[0]
         };
+        console.log(items[0].updated);
 
         const mappedDetails = mapApplianceDetails(transformedItem, applianceType);
         setApplianceDetails(mappedDetails);
@@ -55,6 +59,33 @@ export default function AppliancePage({ params }: { params: { id: string | strin
         const memoContent = memoData[0]?.content || null;
         setMemo(memoContent);
         setHasMemo(!!memoContent);
+
+        // updated가 true일 때 이전 효율 등급 가져오기
+        if (items[0]?.updated) {
+          const historyResponse = await axios.get(`${API_URL}/appliances/history`, {
+            withCredentials: true
+          });
+
+          if (historyResponse.data.success) {
+            // historyResponse.data.data가 배열인지 확인 후 find 호출
+            const historyData = historyResponse.data.data;
+
+            if (Array.isArray(historyData)) {
+              const historyItem = historyData.find(
+                (item: { applianceId: string }) => item.applianceId === params.id
+              );
+
+              if (historyItem) {
+                const { previousGrade } = historyItem;
+                setPreviousGrade(previousGrade); // 이전 효율 등급
+              }
+            } else {
+              console.error("History API의 데이터가 배열이 아닙니다.");
+            }
+          } else {
+            console.error("History API 호출 실패:", historyResponse.data.message);
+          }
+        }
       } else {
         console.error("API 요청 실패:", response.data.message);
       }
@@ -82,9 +113,12 @@ export default function AppliancePage({ params }: { params: { id: string | strin
         <LoadingDots />
       </div>
     );
-  if (!applianceDetails) return <p>No data available</p>;
+  if (!applianceDetails) return <p>데이터가 없습니다.</p>;
 
-  const gradient = getGradientFromGrade(applianceDetails.효율등급);
+  // 그라디언트를 적용할지 여부를 확인: updated가 true일 때만 적용
+  const shouldApplyGradient =
+    applianceDetails.updated && previousGrade && applianceDetails.효율등급 !== previousGrade;
+  const gradient = shouldApplyGradient ? getGradientFromGrade(applianceDetails.효율등급) : null;
 
   return (
     <div className={style.BoxWrapper}>
@@ -98,9 +132,11 @@ export default function AppliancePage({ params }: { params: { id: string | strin
       >
         <div className={style.BoxPadding}>
           <div className={style.ViewWrapper}>
-            <div
-              className={style.changeGradeWrapper}
-            >{`에너지효율등급이 3 → ${applianceDetails.효율등급} 등급으로 변경되었어요!`}</div>
+            {applianceDetails.updated && previousGrade && (
+              <div className={style.changeGradeWrapper}>
+                {`에너지효율등급이 ${previousGrade} → ${applianceDetails.효율등급} 등급으로 변경되었어요!`}
+              </div>
+            )}
             <TopView {...applianceDetails} />
             <BottomView {...applianceDetails} />
           </div>
