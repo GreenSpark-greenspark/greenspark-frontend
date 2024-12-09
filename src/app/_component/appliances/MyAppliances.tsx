@@ -15,7 +15,7 @@ interface ApplianceData {
   applianceId: number;
   grade: string;
   matchTerm: string;
-  updated?: boolean;
+  updated: boolean;
 }
 
 export default function MyAppliances() {
@@ -68,7 +68,11 @@ export default function MyAppliances() {
           {data.map(item => (
             <Link href={`list/appliances/${item.applianceId}`} key={item.applianceId}>
               <div className={style.LinkContainer}>
-                <div className={style.alarm}></div>
+                {item.updated ? (
+                  <div className={style.alarm}></div>
+                ) : (
+                  <div className={style.lastAlarm}></div>
+                )}
                 <Appliance id={item.applianceId} grade={item.grade} type={item.matchTerm} />
                 <GradeLabel grade={item.grade} />
               </div>
