@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Box from "@/components/Box";
 import { mapApplianceDetails } from "@/utils/renderApplianceDetails";
 import { decodeHtmlEntities } from "@/utils/decodeHtmlEntities";
 import style from "./page.module.css";
@@ -12,6 +11,7 @@ import LoadingDots from "@/components/LoadingDots";
 import DeleteBtn from "@/app/_component/appliances/[id]/DeleteBtn";
 import { apiWrapper } from "@/utils/api";
 import MemoBtn from "@/app/_component/appliances/[id]/MemoBtn";
+import { getGradientFromGrade } from "@/utils/getColorfromGrade"; // 이 부분 추가
 
 export default function AppliancePage({ params }: { params: { id: string | string[] } }) {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -84,14 +84,23 @@ export default function AppliancePage({ params }: { params: { id: string | strin
     );
   if (!applianceDetails) return <p>No data available</p>;
 
+  const gradient = getGradientFromGrade(applianceDetails.효율등급);
+
   return (
     <div className={style.BoxWrapper}>
-      <div className={style.Box}>
+      <div
+        className={style.Box}
+        style={{
+          backgroundImage: gradient
+            ? `linear-gradient(#fff, #fff), linear-gradient(${gradient.first} 0%, ${gradient.second} 50%, ${gradient.third} 100%)`
+            : "none"
+        }}
+      >
         <div className={style.BoxPadding}>
           <div className={style.ViewWrapper}>
             <div
               className={style.changeGradeWrapper}
-            >{`에너지효율등급이 3 → 1 등급으로 변경되었어요!`}</div>
+            >{`에너지효율등급이 3 → ${applianceDetails.효율등급} 등급으로 변경되었어요!`}</div>
             <TopView {...applianceDetails} />
             <BottomView {...applianceDetails} />
           </div>
