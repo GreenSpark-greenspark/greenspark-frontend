@@ -88,18 +88,23 @@ export default function MyMain() {
               style={{ cursor: "pointer" }}
               onClick={() => goToPoint()}
             >
-              <p className={styles.textTitle}>보유 포인트</p>
+              <p className={styles.textTitle}>보유 포인트 </p>
+
+              <div className={styles.alignDiv} style={{ marginLeft: "2rem" }}>
+                <p className={styles.textPoint}>{point.toLocaleString()}</p>
+                <IconPoint className={styles.iconPoint} />
+              </div>
               <IconArrow className={styles.iconArrow} />
             </div>
-            <div className={styles.alignDiv}>
+            {/* <div className={styles.alignDiv}>
               <p className={styles.textPoint}>{point.toLocaleString()}</p>
               <IconPoint className={styles.iconPoint} />
-            </div>
+            </div> */}
           </div>
           <div className={styles.bodyPoint}>
             <div className={styles.alignDiv}>
               <p className={styles.textTitle}>내 가전제품</p>
-              <IconArrow className={styles.iconArrow} />
+              {/* <IconArrow className={styles.iconArrow} /> */}
             </div>
           </div>
         </div>
