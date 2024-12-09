@@ -68,6 +68,7 @@ export default function MyAppliances() {
           {data.map(item => (
             <Link href={`list/appliances/${item.applianceId}`} key={item.applianceId}>
               <div className={style.LinkContainer}>
+                <div className={style.alarm}></div>
                 <Appliance id={item.applianceId} grade={item.grade} type={item.matchTerm} />
                 <GradeLabel grade={item.grade} />
               </div>
@@ -75,6 +76,7 @@ export default function MyAppliances() {
           ))}
           <Link href={`list/appliances/add`}>
             <div className={style.LinkContainer}>
+              <div className={style.lastAlarm}></div>
               <div className={style.AddCircle}>
                 <IconPlus width={"2.4rem"} height={"2.4rem"} />
               </div>
