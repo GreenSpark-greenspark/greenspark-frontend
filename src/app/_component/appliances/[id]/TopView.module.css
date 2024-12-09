@@ -2,6 +2,8 @@
   display: flex;
   align-items: center;
   gap: 2.7em;
+
+  margin-bottom: 4.2em;
 }
 
 .Circle {

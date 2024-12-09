@@ -50,6 +50,7 @@ export default function AppliancePage({ params }: { params: { id: string | strin
 
         const mappedDetails = mapApplianceDetails(transformedItem, applianceType);
         setApplianceDetails(mappedDetails);
+        console.log(mappedDetails);
 
         const memoContent = memoData[0]?.content || null;
         setMemo(memoContent);
@@ -85,21 +86,26 @@ export default function AppliancePage({ params }: { params: { id: string | strin
 
   return (
     <div className={style.BoxWrapper}>
-      <Box minHeight="400px">
-        <div className={style.ViewWrapper}>
-          <TopView {...applianceDetails} />
-          <BottomView {...applianceDetails} />
+      <div className={style.Box}>
+        <div className={style.BoxPadding}>
+          <div className={style.ViewWrapper}>
+            <div
+              className={style.changeGradeWrapper}
+            >{`에너지효율등급이 3 → 1 등급으로 변경되었어요!`}</div>
+            <TopView {...applianceDetails} />
+            <BottomView {...applianceDetails} />
+          </div>
+          {memo ? <div className={style.memoTitle}>메모</div> : ""}
+          <div className={style.memoSection}>
+            {memo ? <div className={style.memoItem}>{memo}</div> : ""}
+          </div>
+          <div className={style.BtnWrapper}>
+            <DeleteBtn applianceId={params.id} />
+            <MemoBtn applianceId={params.id} hasMemo={hasMemo} onMemoAdded={handleMemoAdded} />
+          </div>
         </div>
-        {memo ? <div className={style.memoTitle}>메모</div> : ""}
-        <div className={style.memoSection}>
-          {memo ? <div className={style.memoItem}>{memo}</div> : ""}
-        </div>
-        <div className={style.BtnWrapper}>
-          <DeleteBtn applianceId={params.id} />
-          <MemoBtn applianceId={params.id} hasMemo={hasMemo} onMemoAdded={handleMemoAdded} />
-        </div>
-      </Box>
-      <div className={style.margin}/>
+      </div>
+      <div className={style.margin} />
     </div>
   );
 }
