@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import ProfileImg from "@/../public/img/my_profile.png";
@@ -11,23 +12,65 @@ import styles from "./MyMain.module.css";
 
 export default function MyMain() {
   const router = useRouter();
+
   const goToPoint = () => {
     router.push(`/my/point`);
   };
+
   const goToEdit = () => {
     router.push(`/my/info`);
   };
 
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
+  const [point, setPoint] = useState<number>(0);
+  const [name, setName] = useState<string>("ㅇㅇ");
   const openLogoutPopup = () => setIsPopupOpen(true);
   const closeLogoutPopup = () => setIsPopupOpen(false);
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  useEffect(() => {
+    const fetchPoints = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/point`, {
+          withCredentials: true
+        });
+        if (response.data && response.data.success) {
+          setPoint(response.data.data);
+        } else {
+          console.error("포인트 데이터가 유효하지 않습니다.");
+        }
+      } catch (error) {
+        console.error("포인트 데이터 가져오기 실패:", error);
+      }
+    };
+
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/users/my`, {
+          withCredentials: true
+        });
+        if (response.data && response.data.success) {
+          setName(response.data.data.name);
+          console.log(response.data.data.name);
+        } else {
+          console.error("사용자 이름이 유효하지 않습니다.");
+        }
+      } catch (error) {
+        console.error("사용자 이름 가져오기 실패:", error);
+      }
+    };
+
+    fetchPoints();
+    fetchUserInfo();
+  }, []);
 
   return (
     <>
       <div className={styles.pageContainer}>
         <div className={styles.topContainer}>
           <Image src={ProfileImg} alt="프로필 이미지" width={77} />
-          <p>홍길동 님</p>
+          <p>{name} 님</p>
           <div className={styles.btnContainer}>
             <button className={styles.infoBtn} onClick={() => goToEdit()}>
               내 정보 수정
@@ -49,7 +92,7 @@ export default function MyMain() {
               <IconArrow className={styles.iconArrow} />
             </div>
             <div className={styles.alignDiv}>
-              <p className={styles.textPoint}>1,450</p>
+              <p className={styles.textPoint}>{point.toLocaleString()}</p>
               <IconPoint className={styles.iconPoint} />
             </div>
           </div>
