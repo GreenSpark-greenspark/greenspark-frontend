@@ -66,14 +66,14 @@ export default function MyAppliances() {
       <Box minHeight="452px">
         <div className={style.GridLayout}>
           {data.map(item => (
-            <Link href={`/appliances/${item.applianceId}`} key={item.applianceId}>
+            <Link href={`list/appliances/${item.applianceId}`} key={item.applianceId}>
               <div className={style.LinkContainer}>
                 <Appliance id={item.applianceId} grade={item.grade} type={item.matchTerm} />
                 <GradeLabel grade={item.grade} />
               </div>
             </Link>
           ))}
-          <Link href={`/appliances/add`}>
+          <Link href={`list/appliances/add`}>
             <div className={style.LinkContainer}>
               <div className={style.AddCircle}>
                 <IconPlus width={"2.4rem"} height={"2.4rem"} />

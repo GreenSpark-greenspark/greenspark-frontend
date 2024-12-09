@@ -99,6 +99,7 @@ export default function AppliancePage({ params }: { params: { id: string | strin
           <MemoBtn applianceId={params.id} hasMemo={hasMemo} onMemoAdded={handleMemoAdded} />
         </div>
       </Box>
+      <div className={style.margin}/>
     </div>
   );
 }
