@@ -174,7 +174,7 @@ export default function InfoEdit() {
         {toastMessage && <Toast message={toastMessage} />}
       </div>
       {showResetPopup && <ResetPopup onClose={handleClosePopup} />}
-      {showResetBottomSheet && <ResetBottomSheet onClose={handleCloseBottomSheet} />}{" "}
+      {showResetBottomSheet && <ResetBottomSheet onClose={handleCloseBottomSheet} />}
     </>
   );
 }

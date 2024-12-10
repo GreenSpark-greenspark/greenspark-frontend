@@ -26,7 +26,6 @@ const Page = () => {
   }, [API_URL]);
   return (
     <div style={{ height: "100vh" }}>
-      {" "}
       {tokenRenewed ? (
         <>
           <PointShop />

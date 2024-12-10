@@ -79,7 +79,7 @@ export default function PointHistory() {
             <div className={styles.textPoint}>
               <p>{point.toLocaleString()}</p> <IconPoint className={styles.iconPoint} />
             </div>
-          </div>{" "}
+          </div>
         </div>
         <div className={styles.historyWrap}>
           {pointHistory.map((item, index) => (
@@ -95,7 +95,7 @@ export default function PointHistory() {
               </div>
               <div className={styles.pointRightContainer}>
                 <div className={styles.textPointMiddle}>
-                  <p>{item.point_amount > 0 ? `+ ${item.point_amount}` : item.point_amount}</p>
+                  <p>{item.point_amount > 0 ? `+${item.point_amount}` : item.point_amount}</p>
                   <IconPoint className={styles.iconPointMiddle} />
                 </div>
                 <div className={styles.textPointSmall}>

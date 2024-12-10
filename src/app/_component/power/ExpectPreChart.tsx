@@ -249,7 +249,6 @@ function ExpectPreChart() {
       noPreMonth: (
         <>
           <p>
-            {" "}
             예상요금은 <span className={styles.costText}>{currentCost?.toLocaleString()}원</span>
             이에요!
             <br />
@@ -386,7 +385,7 @@ function ExpectPreChart() {
             className={`${styles.monthLabel} ${selectedMonth === "twoMonth" ? styles.monthLabelClick : ""}`}
           >
             {`${twoMonthsDate.monthLabel}월`}
-          </p>{" "}
+          </p>
         </div>
         {/* 전월 */}
         <div className={styles.chartUnit} onClick={() => handleChartClick("lastMonth")}>
@@ -423,7 +422,7 @@ function ExpectPreChart() {
             className={`${styles.monthLabel} ${selectedMonth === "lastMonth" ? styles.monthLabelClick : ""}`}
           >
             {`${lastMonthDate.monthLabel}월`}
-          </p>{" "}
+          </p>
         </div>
         {/* 예상요금 */}
         <div className={styles.chartUnit} onClick={() => handleChartClick("currentMonth")}>
@@ -471,7 +470,7 @@ function ExpectPreChart() {
             className={`${styles.monthLabel} ${selectedMonth === "currentMonth" ? styles.monthLabelClick : ""}`}
           >
             {`${currentMonthDate.monthLabel}월`}
-          </p>{" "}
+          </p>
         </div>
       </div>
       <div className={styles.tipContainer}>

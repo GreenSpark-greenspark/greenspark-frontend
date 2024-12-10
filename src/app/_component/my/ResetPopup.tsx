@@ -49,7 +49,7 @@ const ResetPopup: React.FC<ResetPopupProps> = ({ onClose }) => {
         <div className={styles.overlay} onClick={onClose}>
           <div className={styles.popup} onClick={e => e.stopPropagation()}>
             <div className={styles.popupBox}>
-              <IconWarn style={{ width: "5.1rem", height: "5.1rem" }} />{" "}
+              <IconWarn style={{ width: "5.1rem", height: "5.1rem" }} />
               <p className={styles.warningMent}>한 번 삭제된 데이터는 복구할 수 없습니다.</p>
               <p className={styles.resetMent}>초기화 하시겠어요?</p>
               {errorMessage && <p className={styles.error}>{errorMessage}</p>}
