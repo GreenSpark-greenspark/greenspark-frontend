@@ -48,13 +48,18 @@
 .menuContainer {
   display: flex;
   gap: 1.4rem;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 30rem;
   border-bottom: 2px solid #f1f3f5;
   padding: 1rem 0;
 }
 
+.leftContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 .giftLeft {
   display: flex;
   flex-direction: column;
