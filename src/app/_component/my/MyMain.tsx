@@ -21,6 +21,10 @@ export default function MyMain() {
     router.push(`/my/info`);
   };
 
+  const goToAppliance = () => {
+    router.push(`/list`);
+  };
+
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [point, setPoint] = useState<number>(0);
   const [name, setName] = useState<string>("ㅇㅇ");
@@ -118,23 +122,21 @@ export default function MyMain() {
 
         <div className={styles.bodyTopContainer}>
           <div className={styles.bodyPoint}>
-            <div
-              className={styles.alignDiv}
-              style={{ cursor: "pointer" }}
-              onClick={() => goToPoint()}
-            >
+            <div className={styles.alignDiv} onClick={() => goToPoint()}>
               <p className={styles.textTitle}>보유 포인트 </p>
-
-              <div className={styles.alignDiv} style={{ marginLeft: "13rem" }}>
-                <p className={styles.textPoint}>{point.toLocaleString()}</p>
-                <IconPoint className={styles.iconPoint} />
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <div className={styles.pointContainer}>
+                  <p className={styles.textPoint}>{point.toLocaleString()}</p>
+                  <IconPoint className={styles.iconPoint} />
+                </div>
+                <IconArrow className={styles.iconArrow} />
               </div>
-              <IconArrow className={styles.iconArrow} />
             </div>
           </div>
           <div className={styles.bodyPoint}>
-            <div className={styles.alignDiv}>
+            <div className={styles.alignDiv} onClick={() => goToAppliance()}>
               <p className={styles.textTitle}>내 가전제품</p>
+              <IconArrow className={styles.iconArrow} />
             </div>
           </div>
         </div>

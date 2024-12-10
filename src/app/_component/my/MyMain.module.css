@@ -84,10 +84,16 @@
 
   margin-left: 0.5rem;
 }
-
+.pointContainer {
+  display: flex;
+  align-items: center;
+}
 .alignDiv {
   display: flex;
   align-items: center;
+  width: 26rem;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
 .bodyTopContainer {
@@ -130,7 +136,7 @@
   display: flex;
   align-items: center;
 
-  margin-top: 1.5rem;
+  margin-top: 3rem;
 }
 
 .gradeName {
