@@ -67,10 +67,13 @@
 
 .btnWrap {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 
   margin-top: 4rem;
+  padding-bottom: 10rem;
   width: 100%;
+  gap: 2rem;
 }
 
 .homeBtn {
@@ -101,4 +104,18 @@
   box-shadow: 0 0 0.4rem 0 #d4ddcf;
 
   color: #fff;
+}
+.resetBtn {
+  color: #5e5e5e;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  border-bottom: 1.5px solid #91e26b;
+
+  padding: 0.5rem;
+  height: 1rem;
+  width: 4.5rem;
+  cursor: pointer;
 }

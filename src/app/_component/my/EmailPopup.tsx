@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styles from "./EmailPopup.module.css";
 import Image from "next/image";
 import IconPoint from "@/../public/icon/point_icon.svg";
@@ -6,10 +8,32 @@ import MenuImg from "@/../public/img/gift_img.png";
 
 interface EmailPopupProps {
   onClose: () => void;
-  availablePoints: number;
 }
 
-const EmailPopup: React.FC<EmailPopupProps> = ({ onClose, availablePoints }) => {
+const EmailPopup: React.FC<EmailPopupProps> = ({ onClose }) => {
+  const [point, setPoint] = useState<number>(0);
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  useEffect(() => {
+    const fetchPoints = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/point`, {
+          withCredentials: true
+        });
+        if (response.data && response.data.success) {
+          setPoint(response.data.data);
+        } else {
+          console.error("포인트 데이터가 유효하지 않습니다.");
+        }
+      } catch (error) {
+        console.error("포인트 데이터 가져오기 실패:", error);
+      }
+    };
+
+    fetchPoints();
+  }, []);
+
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.popup}>
@@ -27,7 +51,7 @@ const EmailPopup: React.FC<EmailPopupProps> = ({ onClose, availablePoints }) => 
           <div className={styles.pointMent}>
             <p>현재 포인트</p>
             <div className={styles.pointContainer}>
-              <p className={styles.giftMenuText}>{availablePoints.toLocaleString()}</p>
+              <p className={styles.giftMenuText}>{point.toLocaleString()}</p>
               <IconPoint className={styles.iconPointSmall} />
             </div>
           </div>

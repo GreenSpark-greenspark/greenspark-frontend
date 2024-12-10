@@ -1,12 +1,14 @@
+"use client";
 import React, { useState } from "react";
+import axios from "axios";
 import Image from "next/image";
 import styles from "./PurchasePopup.module.css";
-import MenuImg from "@/../public/img/gift_img.png";
 import IconPoint from "@/../public/icon/point_icon.svg";
 import EmailPopup from "./EmailPopup";
 import NoPurchasePopup from "./NoPurchasePopup";
 
 interface PurchasePopupProps {
+  imgurl: string;
   menuName: string;
   price: number;
   availablePoints: number;
@@ -16,16 +18,43 @@ interface PurchasePopupProps {
 type PopupType = "main" | "email" | "noPoints";
 
 const PurchasePopup: React.FC<PurchasePopupProps> = ({
+  imgurl,
   menuName,
   price,
   availablePoints,
   onClose
 }) => {
-  const [currentPopup, setCurrentPopup] = useState<PopupType>("main"); // 다음 팝업으로 넘어가면 하위 팝업은 닫음
+  const [currentPopup, setCurrentPopup] = useState<PopupType>("main");
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  const handlePurchaseClick = () => {
+  const updatePoint = async () => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/point/update`,
+        {
+          pointAmount: -price,
+          event: "기프티콘 구매"
+        },
+        {
+          withCredentials: true
+        }
+      );
+      console.log("포인트 업데이트 성공:", response.data);
+      return response.data.success;
+    } catch (error) {
+      console.error("포인트 업데이트 실패:", error);
+      return false;
+    }
+  };
+
+  const handlePurchaseClick = async () => {
     if (availablePoints >= price) {
-      setCurrentPopup("email");
+      const isSuccess = await updatePoint();
+      if (isSuccess) {
+        setCurrentPopup("email");
+      } else {
+        setCurrentPopup("noPoints");
+      }
     } else {
       setCurrentPopup("noPoints");
     }
@@ -42,7 +71,7 @@ const PurchasePopup: React.FC<PurchasePopupProps> = ({
         <div className={styles.overlay} onClick={onClose}>
           <div className={styles.popup} onClick={e => e.stopPropagation()}>
             <div className={styles.popupBox}>
-              <Image src={MenuImg} alt="기프티콘 이미지" width={55} />
+              <Image src={imgurl} alt={menuName} width={45} height={45} />
               <p className={styles.giftMenuText}>{menuName}</p>
               <div className={styles.pointContainer}>
                 <p className={styles.giftMenuText}>{price.toLocaleString()}</p>
@@ -62,9 +91,7 @@ const PurchasePopup: React.FC<PurchasePopupProps> = ({
         </div>
       )}
 
-      {currentPopup === "email" && (
-        <EmailPopup availablePoints={availablePoints} onClose={closeAllPopups} />
-      )}
+      {currentPopup === "email" && <EmailPopup onClose={closeAllPopups} />}
 
       {currentPopup === "noPoints" && (
         <NoPurchasePopup availablePoints={availablePoints} onClose={closeAllPopups} />

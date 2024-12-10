@@ -18,6 +18,9 @@ const nextConfig = {
     });
 
     return config;
+  },
+  images: {
+    domains: ["img1.kakaocdn.net"]
   }
 };
 
