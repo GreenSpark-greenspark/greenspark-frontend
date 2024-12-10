@@ -27,7 +27,7 @@ export default function MyMain() {
 
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [point, setPoint] = useState<number>(0);
-  const [name, setName] = useState<string>("ㅇㅇ");
+  const [name, setName] = useState<string>("사자");
   const [gradeCounts, setGradeCounts] = useState({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 });
 
   const openLogoutPopup = () => setIsPopupOpen(true);
