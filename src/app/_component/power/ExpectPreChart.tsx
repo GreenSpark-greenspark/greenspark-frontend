@@ -22,7 +22,11 @@ type DifferenceType =
   | "noCurrentMonth"
   | "noMonths";
 
-function ExpectPreChart() {
+interface ExpectPreChartProps {
+  member: string;
+}
+
+const ExpectPreChart: React.FC<ExpectPreChartProps> = ({ member }) => {
   const [chargeData, setChargeData] = useState<ChargeData>({
     lastMonth: null,
     twoMonthsAgo: null,
@@ -53,6 +57,7 @@ function ExpectPreChart() {
             threeMonthsAgo: three_months_ago_cost === 0 ? null : three_months_ago_cost,
             expectedCost: expected_cost === 0 ? null : expected_cost
           });
+          console.log(member);
         } else {
           console.error("전월 요금 데이터 API 호출 실패:", response.data.message);
         }
@@ -487,6 +492,6 @@ function ExpectPreChart() {
       </div>
     </>
   );
-}
+};
 
 export default dynamic(() => Promise.resolve(ExpectPreChart), { ssr: false });
