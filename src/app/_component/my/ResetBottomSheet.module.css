@@ -29,6 +29,7 @@
   padding: 2rem;
 
   transition: transform 0.2s ease-out;
+  animation: slideUp 0.2s ease-in-out;
 }
 
 .bottomBar {
@@ -61,16 +62,6 @@
 
   to {
     transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
   }
 }
 
