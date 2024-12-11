@@ -182,8 +182,9 @@
 }
 
 .coinIcon {
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.5rem;
 }
 
 .text_title {
@@ -203,6 +204,7 @@
 
 .bodyContainer {
   margin-bottom: 1.5rem;
+  padding: 1rem;
 }
 
 .prePowerContainer {
