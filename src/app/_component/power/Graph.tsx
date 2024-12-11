@@ -198,7 +198,8 @@ const Graph: React.FC<GraphProps> = ({ data, isBillGraph = true }) => {
       y: {
         ticks: { display: false },
         grid: { display: false },
-        border: { display: false }
+        border: { display: false },
+        beginAtZero: true
       }
     }
   };
