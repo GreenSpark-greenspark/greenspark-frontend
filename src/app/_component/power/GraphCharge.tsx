@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styles from "./power.common.module.css";
 import graphStyles from "./graph.common.module.css";
 
@@ -8,14 +10,34 @@ import UsageGraph from "./UsageGraph";
 import IconInfo from "@/../public/icon/toast_info_icon.svg";
 export default function GraphCharge() {
   const [activeButton, setActiveButton] = useState<string>("bill");
+  const [name, setName] = useState<string>("사자");
 
   const handleButtonClick = (button: string) => {
     setActiveButton(button);
   };
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/users/my`, {
+          withCredentials: true
+        });
+        if (response.data && response.data.success) {
+          setName(response.data.data.name);
+        } else {
+          console.error("사용자 이름이 유효하지 않습니다.");
+        }
+      } catch (error) {
+        console.error("사용자 이름 가져오기 실패:", error);
+      }
+    };
+
+    fetchUserInfo();
+  }, []);
   return (
     <>
-      <p className={styles.title}>아기사자🦁님의 파워 분석 리포트</p>
+      <p className={styles.title}>{name}님의 파워 분석 리포트</p>
       <div className={styles.wrap}>
         <div className={graphStyles.graphBox}>
           <div className={graphStyles.topContainer}>

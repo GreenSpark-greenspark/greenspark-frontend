@@ -22,7 +22,11 @@ type DifferenceType =
   | "noCurrentMonth"
   | "noMonths";
 
-function ExpectPreChart() {
+interface ExpectPreChartProps {
+  member: string;
+}
+
+const ExpectPreChart: React.FC<ExpectPreChartProps> = ({ member }) => {
   const [chargeData, setChargeData] = useState<ChargeData>({
     lastMonth: null,
     twoMonthsAgo: null,
@@ -53,6 +57,7 @@ function ExpectPreChart() {
             threeMonthsAgo: three_months_ago_cost === 0 ? null : three_months_ago_cost,
             expectedCost: expected_cost === 0 ? null : expected_cost
           });
+          console.log(member);
         } else {
           console.error("전월 요금 데이터 API 호출 실패:", response.data.message);
         }
@@ -82,18 +87,31 @@ function ExpectPreChart() {
     const difference = current - pre;
     return difference > 0 ? "increase" : difference === 0 ? "unchanged" : "decrease";
   };
+
   // 요금에 따라 스타일 설정
+  const ranges: Record<string, number[]> = {
+    "1": [0, 12000, 15000, 30000],
+    "2": [0, 15000, 25000, 35000],
+    "3": [0, 20000, 30000, 40000],
+    "4": [0, 25000, 35000, 45000],
+    "5": [0, 30000, 40000, 50000],
+    "6": [0, 35000, 45000, 55000],
+    default: [0, 40000, 50000, 60000]
+  };
+
   const getChartColorClass = (cost: number | null) => {
+    if (cost === null) return "";
+
+    const range = ranges[member.toString()] || ranges.default;
+
     switch (true) {
-      case cost === 0:
-        return styles.chartSection0;
-      case cost && cost <= 5000:
+      case cost <= range[1]:
         return styles.chartSection1;
-      case cost && cost <= 10000:
+      case cost <= range[2]:
         return styles.chartSection2;
-      case cost && cost <= 15000:
+      case cost <= range[3]:
         return styles.chartSection3;
-      case cost && cost > 15000:
+      case cost > range[3]:
         return styles.chartSection4;
       default:
         return "";
@@ -487,6 +505,6 @@ function ExpectPreChart() {
       </div>
     </>
   );
-}
+};
 
 export default dynamic(() => Promise.resolve(ExpectPreChart), { ssr: false });
