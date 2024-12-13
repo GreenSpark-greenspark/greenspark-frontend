@@ -47,7 +47,7 @@
   font-size: 2rem;
   font-weight: 600;
 
-  margin-bottom: 0.7rem;
+  margin-bottom: 1.2rem;
 }
 
 .topContainer p {
@@ -63,12 +63,19 @@
   justify-content: center;
   gap: 2rem;
 
-  margin: 3.5rem 0 1.4rem 0;
+  margin: 1.2rem 0 3.5rem 0;
 }
 
+.pointMent p {
+  color: #5e5e5e;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
 .textPoint {
   color: #000;
-  font-size: 25px;
+  font-size: 2.5rem;
   font-weight: 600;
 
   display: flex;
@@ -89,6 +96,13 @@
   justify-content: center;
 }
 
+.pointContainer p {
+  color: #000;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
 .submitBtn {
   position: absolute;
   bottom: 3rem;

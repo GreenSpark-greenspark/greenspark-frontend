@@ -10,6 +10,7 @@ import NoPurchasePopup from "./NoPurchasePopup";
 interface PurchasePopupProps {
   imgurl: string;
   menuName: string;
+  shop: string;
   price: number;
   availablePoints: number;
   onClose: () => void;
@@ -20,6 +21,8 @@ type PopupType = "main" | "email" | "noPoints";
 const PurchasePopup: React.FC<PurchasePopupProps> = ({
   imgurl,
   menuName,
+
+  shop,
   price,
   availablePoints,
   onClose
@@ -91,7 +94,9 @@ const PurchasePopup: React.FC<PurchasePopupProps> = ({
         </div>
       )}
 
-      {currentPopup === "email" && <EmailPopup onClose={closeAllPopups} />}
+      {currentPopup === "email" && (
+        <EmailPopup imgurl={imgurl} menuName={menuName} shop={shop} onClose={closeAllPopups} />
+      )}
 
       {currentPopup === "noPoints" && (
         <NoPurchasePopup availablePoints={availablePoints} onClose={closeAllPopups} />

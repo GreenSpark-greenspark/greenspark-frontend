@@ -77,6 +77,7 @@ export default function PointShop() {
         <PurchasePopup
           imgurl={selectedGift.url}
           menuName={selectedGift.메뉴이름}
+          shop={selectedGift.판매처}
           price={parseInt(selectedGift.가격, 10)}
           availablePoints={point}
           onClose={closePopup}

@@ -15,19 +15,19 @@ const NoPurchasePopup: React.FC<NoPurchasePopupProps> = ({ onClose, availablePoi
         <div className={styles.popup}>
           <div className={styles.popupBox} onClick={e => e.stopPropagation()}>
             <div className={styles.topContainer}>
-              <h1>보유하신 포인트가 부족합니다 :(</h1>
-              <p>포인트를 더 많이 모아 구매해보세요!</p>
+              <h1>포인트가 부족해요 :(</h1>
+              <p>포인트를 더 모아 구매해보세요!</p>
             </div>
             <div className={styles.pointMent}>
               <p>현재 포인트</p>
               <div className={styles.pointContainer}>
-                <p className={styles.giftMenuText}>{availablePoints.toLocaleString()}</p>
+                <p>{availablePoints.toLocaleString()}</p>
                 <IconPoint className={styles.iconPointSmall} />
               </div>
             </div>
 
             <button className={styles.submitBtn} onClick={onClose}>
-              확인
+              닫기
             </button>
           </div>
         </div>

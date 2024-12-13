@@ -28,6 +28,18 @@
   animation: fadeIn 0.5s ease-in-out;
 }
 
+.popupBox {
+  width: 31.8rem;
+  height: 40rem;
+  border-radius: 1.5em;
+
+  background-color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .imageContainer {
   position: relative;
   display: flex;
@@ -35,34 +47,53 @@
   align-items: center;
   justify-content: center;
 
-  margin-bottom: 4.6rem;
-  color: #fff;
+  margin-bottom: 2rem;
+  color: #111;
 }
 
 .imageContainer h1 {
-  font-size: 1.8rem;
+  color: #000;
+  text-align: center;
+
+  font-size: 20px;
+  font-style: normal;
   font-weight: 600;
-
-  margin: 2rem 0 5rem 0;
+  line-height: normal;
+  margin: 0.5rem 0 1.5rem 0;
 }
+.imageContainer h2 {
+  color: #929292;
+  text-align: center;
 
-.bottomContainer {
-  position: relative;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
-
 .pointMent {
-  position: fixed;
-  bottom: 8rem;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2rem;
 
-  margin: 3.5rem 0 1.4rem 0;
-  color: #fff;
+  margin-bottom: 6rem;
+}
+
+.pointMent p {
+  color: #5e5e5e;
   font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.textPoint {
+  color: #000;
+  font-size: 2.5rem;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .iconPointSmall {
@@ -78,13 +109,19 @@
   justify-content: center;
 }
 
-.goToButton {
-  position: fixed;
-  bottom: 4rem;
+.pointContainer p {
+  color: #000;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.submitBtn {
+  position: absolute;
+  bottom: 3rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1003;
-  cursor: pointer;
 
   width: 27.7rem;
   height: 3.8rem;
@@ -96,9 +133,10 @@
   font-size: 1.6rem;
   font-weight: 600;
 
+  cursor: pointer;
+
   animation: fadeIn 0.5s ease-in-out;
 }
-
 @keyframes fadeIn {
   0% {
     opacity: 0;
