@@ -137,7 +137,11 @@ export default function AppliancePage({ params }: { params: { id: string | strin
                 {`에너지효율등급이 ${previousGrade} → ${applianceDetails.효율등급} 등급으로 변경되었어요!`}
               </div>
             )}
-            <TopView {...applianceDetails} />
+            <TopView
+              {...applianceDetails}
+              updated={applianceDetails.updated}
+              previousGrade={previousGrade}
+            />
             <BottomView {...applianceDetails} />
           </div>
           {memo ? <div className={style.memoTitle}>메모</div> : ""}

@@ -15,11 +15,20 @@
   text-align: center;
 }
 
-.IconWrapper {
+.ArrowWrapper {
   display: flex;
   align-items: center;
   position: absolute;
   left: 27px;
+
+  cursor: pointer;
+}
+
+.AlarmWrapper {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 27px;
 
   cursor: pointer;
 }

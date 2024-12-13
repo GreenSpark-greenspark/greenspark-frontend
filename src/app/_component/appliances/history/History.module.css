@@ -1,0 +1,80 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 1.8rem;
+}
+
+.hr {
+  width: 32rem;
+  height: 0.2rem;
+
+  background-color: #f1f3f5;
+}
+
+.section {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.1rem;
+
+  width: 32rem;
+  padding: 1.5rem;
+}
+
+.imgWrapper {
+  display: flex;
+  width: 5.7rem;
+  height: 5.7rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  color: #000;
+  font-family: Pretendard;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.title {
+  font-size: 1.4rem;
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 1.6rem;
+}
+
+.textBold {
+  font-weight: 700;
+}
+
+.dateText {
+  color: #5e5e5e;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.noHistory {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 80vh;
+
+  color:  #5e5e5e;
+  font-family: Pretendard;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
