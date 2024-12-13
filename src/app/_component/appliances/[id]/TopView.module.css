@@ -20,6 +20,20 @@
   border: 0.3em solid #83c63f;
 }
 
+.UpdatedCircle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 10rem;
+  height: 10rem;
+  padding: 0.3rem;
+  border-radius: 200%;
+
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
 .RightContainer {
   display: flex;
   flex-direction: column;
