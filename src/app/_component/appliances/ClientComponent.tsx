@@ -9,7 +9,7 @@ import Popup from "../../_component/appliances/Popup";
 import ApplianceSelector from "../../_component/appliances/ApplianceSelector";
 import ModelInput from "../../_component/appliances/ModelInput";
 import ApplianceList from "../../_component/appliances/ApplianceList";
-import AddButton from "../../_component/appliances/AddButton";
+import AddButton from "../appliances/AddButton";
 import LoadingDots from "@/components/LoadingDots";
 import { getDisplayName } from "@/utils/getDisplayName";
 import { apiWrapper } from "@/utils/api";

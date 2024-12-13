@@ -55,7 +55,7 @@ export default function HomeAppliances() {
                 </Link>
               ))}
             </div>
-            <Link href={`/appliances/add`}>
+            <Link href={`list/appliances/add`}>
               <div className={style.LinkContainer}>
                 <div className={style.AddCircle}>
                   <IconPlus width={"1.2rem"} height={"1.2rem"} />
