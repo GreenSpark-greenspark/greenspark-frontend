@@ -13,6 +13,7 @@ import AddButton from "../appliances/AddButton";
 import LoadingDots from "@/components/LoadingDots";
 import { getDisplayName } from "@/utils/getDisplayName";
 import { apiWrapper } from "@/utils/api";
+import ToolTip from "./ToolTip";
 
 interface ApplianceItem {
   id: number;
