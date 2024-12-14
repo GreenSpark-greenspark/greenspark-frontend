@@ -13,7 +13,7 @@ export default function PointMain() {
     router.push(`/my/history`);
   };
   const goToShop = () => {
-    router.push(`/my/shop`);
+    router.push(`/shop/list`);
   };
   const [point, setPoint] = useState<number>(0);
 

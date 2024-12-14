@@ -21,7 +21,6 @@ type PopupType = "main" | "email" | "noPoints";
 const PurchasePopup: React.FC<PurchasePopupProps> = ({
   imgurl,
   menuName,
-
   shop,
   price,
   availablePoints,

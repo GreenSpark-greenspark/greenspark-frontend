@@ -1,28 +1,19 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+
 import Image from "next/image";
 import styles from "./PointShop.module.css";
 import IconPoint from "@/../public/icon/point_icon.svg";
-import PurchasePopup from "./PurchasePopup";
 import { gift } from "@/mock/gift";
 
 export default function PointShop() {
-  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
-  const [selectedGift, setSelectedGift] = useState<any>(null);
   const [point, setPoint] = useState<number>(0);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  const openPopup = (gift: any) => {
-    setSelectedGift(gift);
-    setIsPopupOpen(true);
-  };
-
-  const closePopup = async () => {
-    setIsPopupOpen(false);
-    await fetchPoints();
-  };
+  const router = useRouter();
 
   const fetchPoints = async () => {
     try {
@@ -39,6 +30,10 @@ export default function PointShop() {
     }
   };
 
+  const handlePurchase = (id: number) => {
+    router.push(`/shop/${id}`);
+  };
+
   useEffect(() => {
     fetchPoints();
   }, []);
@@ -53,7 +48,7 @@ export default function PointShop() {
           </div>
         </div>
         {gift.map(item => (
-          <div key={item.메뉴이름} className={styles.menuContainer}>
+          <div key={item.id} className={styles.menuContainer}>
             <div className={styles.leftContainer}>
               <Image src={item.url} alt={item.메뉴이름} width={45} height={45} />
               <div className={styles.giftLeft}>
@@ -66,23 +61,12 @@ export default function PointShop() {
               </div>
             </div>
 
-            <button className={styles.purchaseBtn} onClick={() => openPopup(item)}>
+            <button className={styles.purchaseBtn} onClick={() => handlePurchase(item.id)}>
               구매하기
             </button>
           </div>
         ))}
       </div>
-
-      {isPopupOpen && selectedGift && (
-        <PurchasePopup
-          imgurl={selectedGift.url}
-          menuName={selectedGift.메뉴이름}
-          shop={selectedGift.판매처}
-          price={parseInt(selectedGift.가격, 10)}
-          availablePoints={point}
-          onClose={closePopup}
-        />
-      )}
     </>
   );
 }
