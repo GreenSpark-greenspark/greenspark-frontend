@@ -37,7 +37,6 @@
   gap: 0.8rem;
 
   color: #000;
-  font-family: Pretendard;
   font-style: normal;
   font-weight: 500;
 }
@@ -57,7 +56,6 @@
 
 .dateText {
   color: #5e5e5e;
-  font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
@@ -71,8 +69,7 @@
 
   height: 80vh;
 
-  color:  #5e5e5e;
-  font-family: Pretendard;
+  color: #5e5e5e;
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;

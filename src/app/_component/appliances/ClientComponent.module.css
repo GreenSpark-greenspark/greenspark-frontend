@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 
   min-height: 330px;
 }
@@ -118,16 +119,14 @@
 
 .buttonWrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   width: 100%;
-  height: 100px;
+  height: 70px;
 }
 
 .addButton {
-  position: absolute;
-  bottom: 8em;
-
   width: 27.7rem;
   height: 3.8rem;
   border: none;
