@@ -31,7 +31,7 @@
 
 .popupBox {
   width: 31.8rem;
-  height: 20rem;
+  height: 32rem;
   border-radius: 1.5em;
 
   background-color: #fff;
@@ -51,19 +51,30 @@
 }
 
 .topContainer p {
-  color: #000;
+  color: var(--Color-4, #929292);
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 16px;
+  font-style: normal;
   font-weight: 500;
+  line-height: normal;
+  margin-bottom: 3rem;
 }
 
+.topContainer ul {
+  color: var(--Color-6, #c4c4c4);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  list-style-type: none;
+}
 .pointMent {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2rem;
 
-  margin: 1.2rem 0 3.5rem 0;
+  margin: 3rem 0 3.5rem 0;
 }
 
 .pointMent p {
