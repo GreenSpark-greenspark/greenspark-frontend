@@ -44,28 +44,36 @@ export default function PointShop() {
         <div className={styles.topContainer}>
           <p className={styles.pointTitle}>사용 가능 포인트</p>
           <div className={styles.textPoint}>
-            <p>{point.toLocaleString()}</p> <IconPoint className={styles.iconPoint} />
+            <p>{point.toLocaleString()}</p>
+            <IconPoint className={styles.iconPoint} />
           </div>
         </div>
-        {gift.map(item => (
-          <div key={item.id} className={styles.menuContainer}>
-            <div className={styles.leftContainer}>
-              <Image src={item.url} alt={item.메뉴이름} width={45} height={45} />
-              <div className={styles.giftLeft}>
-                <p className={styles.giftShopText}>{item.판매처}</p>
-                <p className={styles.giftMenuText}>{item.메뉴이름}</p>
-                <div className={styles.pointContainer}>
-                  <p className={styles.giftMenuText}>{parseInt(item.가격, 10).toLocaleString()}</p>
-                  <IconPoint className={styles.iconPointSmall} />
+
+        <div className={styles.menuContainer}>
+          {gift.map(item => (
+            <div key={item.id} className={styles.menuItem} onClick={() => handlePurchase(item.id)}>
+              <div className={styles.leftContainer}>
+                <Image
+                  src={item.url}
+                  alt={item.메뉴이름}
+                  width={140}
+                  height={140}
+                  style={{ borderRadius: "10px" }}
+                />
+                <div className={styles.giftLeft}>
+                  <p className={styles.giftShopText}>{item.판매처}</p>
+                  <p className={styles.giftMenuText}>{item.메뉴이름}</p>
+                  <div className={styles.pointContainer}>
+                    <p className={styles.giftMenuText}>
+                      {parseInt(item.가격, 10).toLocaleString()}
+                    </p>
+                    <IconPoint className={styles.iconPointSmall} />
+                  </div>
                 </div>
               </div>
             </div>
-
-            <button className={styles.purchaseBtn} onClick={() => handlePurchase(item.id)}>
-              구매하기
-            </button>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </>
   );

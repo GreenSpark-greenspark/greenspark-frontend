@@ -47,24 +47,35 @@
 
 .menuContainer {
   display: flex;
+  flex-wrap: wrap;
   gap: 1.4rem;
-  justify-content: space-between;
-  align-items: center;
-  width: 30rem;
-  border-bottom: 2px solid #f1f3f5;
-  padding: 1rem 0;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.menuContainer > div {
+  flex: 0 1 calc(50% - 1rem);
+  max-width: calc(50% - 1rem);
+  box-sizing: border-box;
+  margin-bottom: 1rem;
 }
 
 .leftContainer {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 1rem;
+  width: 16.8rem;
 }
 .giftLeft {
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
   justify-content: center;
+  width: 12rem;
 }
 
 .giftShopText {
@@ -76,7 +87,7 @@
 
 .giftMenuText {
   color: #000;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 500;
   line-height: normal;
 }

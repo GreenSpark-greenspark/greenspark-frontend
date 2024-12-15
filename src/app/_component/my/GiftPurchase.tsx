@@ -80,8 +80,8 @@ export default function GiftPurchase({ id }: GiftPurchaseProps) {
           <Image
             src={selectedGift.url}
             alt={selectedGift.메뉴이름}
-            width={230}
-            height={230}
+            width={375}
+            height={375}
             className={styles.giftImage}
           />
           <div className={styles.giftLeft}>
