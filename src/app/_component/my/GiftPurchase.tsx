@@ -4,8 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import styles from "./GiftPurchase.module.css";
 import IconPoint from "@/../public/icon/point_icon.svg";
-import EmailPopup from "./EmailPopup";
-import NoPurchasePopup from "./NoPurchasePopup";
+import PurchasePopup from "./PurchasePopup";
 import { gift } from "@/mock/gift";
 import { getNoticeByBrand } from "@/mock/commonNotice";
 
@@ -14,29 +13,21 @@ interface GiftPurchaseProps {
 }
 
 export default function GiftPurchase({ id }: GiftPurchaseProps) {
-  const [currentPopup, setCurrentPopup] = useState<"main" | "email" | "noPoints">("main");
+  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [selectedGift, setSelectedGift] = useState<any | null>(null);
   const [point, setPoint] = useState<number>(0);
   const [brandNotice, setBrandNotice] = useState<any | null>(null);
 
+  const openPopup = (gift: any) => {
+    setSelectedGift(gift);
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = async () => {
+    setIsPopupOpen(false);
+    await fetchPoints();
+  };
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-  const handlePurchaseClick = async () => {
-    if (point >= parseInt(selectedGift.가격, 10)) {
-      const isSuccess = await updatePoint();
-      if (isSuccess) {
-        setCurrentPopup("email");
-      } else {
-        setCurrentPopup("noPoints");
-      }
-    } else {
-      setCurrentPopup("noPoints");
-    }
-  };
-
-  const closeAllPopups = () => {
-    setCurrentPopup("main");
-  };
 
   // 상품 정보
   const fetchGiftById = (giftId: number) => {
@@ -55,26 +46,6 @@ export default function GiftPurchase({ id }: GiftPurchaseProps) {
       console.error("공통 상세정보를 불러오지 못했습니다:", notice.error);
     } else {
       setBrandNotice(notice);
-    }
-  };
-
-  const updatePoint = async () => {
-    try {
-      const response = await axios.post(
-        `${API_URL}/point/update`,
-        {
-          pointAmount: selectedGift.가격,
-          event: "기프티콘 구매"
-        },
-        {
-          withCredentials: true
-        }
-      );
-      console.log("포인트 업데이트 성공:", response.data);
-      return response.data.success;
-    } catch (error) {
-      console.error("포인트 업데이트 실패:", error);
-      return false;
     }
   };
 
@@ -109,8 +80,8 @@ export default function GiftPurchase({ id }: GiftPurchaseProps) {
           <Image
             src={selectedGift.url}
             alt={selectedGift.메뉴이름}
-            width={370}
-            height={370}
+            width={230}
+            height={230}
             className={styles.giftImage}
           />
           <div className={styles.giftLeft}>
@@ -206,21 +177,19 @@ export default function GiftPurchase({ id }: GiftPurchaseProps) {
         <button className={styles.purchaseBtn}>구매하기</button>
       </div>
 
-      <button className={styles.purchaseBtn} onClick={handlePurchaseClick}>
+      <button className={styles.purchaseBtn} onClick={() => openPopup(selectedGift)}>
         구매하기
       </button>
 
-      {currentPopup === "email" && (
-        <EmailPopup
+      {isPopupOpen && selectedGift && (
+        <PurchasePopup
           imgurl={selectedGift.url}
           menuName={selectedGift.메뉴이름}
           shop={selectedGift.판매처}
-          onClose={closeAllPopups}
+          price={parseInt(selectedGift.가격, 10)}
+          availablePoints={point}
+          onClose={closePopup}
         />
-      )}
-
-      {currentPopup === "noPoints" && (
-        <NoPurchasePopup availablePoints={point} onClose={closeAllPopups} />
       )}
     </>
   );
