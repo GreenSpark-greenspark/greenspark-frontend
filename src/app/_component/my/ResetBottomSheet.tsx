@@ -31,15 +31,22 @@ const ResetBottomSheet: React.FC<ResetBottomSheetProps> = ({ onClose }) => {
       setCurrentY(0);
     }
   };
+  const handleOverlayClick = () => {
+    onClose();
+  };
 
+  const handleBottomSheetClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
   return (
-    <div className={styles.overlay}>
+    <div className={styles.overlay} onClick={handleOverlayClick}>
       <div
         className={styles.bottomSheet}
         style={{ transform: `translateY(${currentY}px)` }} // 이동 거리 적용
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onClick={handleBottomSheetClick}
       >
         <div className={styles.bottomBar}></div>
         <div className={styles.sheetContent}>
