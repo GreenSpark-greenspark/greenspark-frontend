@@ -4,13 +4,15 @@ import axios from "axios";
 import styles from "./EmailPopup.module.css";
 import Image from "next/image";
 import IconPoint from "@/../public/icon/point_icon.svg";
-import MenuImg from "@/../public/img/gift_img.png";
 
 interface EmailPopupProps {
+  imgurl: string;
+  menuName: string;
+  shop: string;
   onClose: () => void;
 }
 
-const EmailPopup: React.FC<EmailPopupProps> = ({ onClose }) => {
+const EmailPopup: React.FC<EmailPopupProps> = ({ imgurl, menuName, shop, onClose }) => {
   const [point, setPoint] = useState<number>(0);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -37,26 +39,34 @@ const EmailPopup: React.FC<EmailPopupProps> = ({ onClose }) => {
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.popup}>
-        <div className={styles.imageContainer}>
-          <Image src={MenuImg} alt="기프티콘 이미지" width={85} style={{ marginBottom: "1rem" }} />
-          <h1>메뉴이름</h1>
+        <div className={styles.popupBox} onClick={e => e.stopPropagation()}>
+          <div className={styles.imageContainer}>
+            <Image
+              src={imgurl}
+              alt="기프티콘 이미지"
+              width={150}
+              height={150}
+              style={{ marginBottom: "1rem" }}
+            />
+            <h2>{shop}</h2>
+            <h1>{menuName}</h1>
 
-          <p style={{ fontSize: "1.6rem", fontWeight: "500" }}>
-            등록하신 이메일로
-            <br />
-            기프티콘을 전송했어요!
-          </p>
-        </div>
-        <div className={styles.bottomContainer}>
+            <p style={{ fontSize: "1.4rem", fontWeight: "500", color: "#5E5E5E" }}>
+              등록하신 <span style={{ color: "#19E407" }}>이메일</span>로
+              <br />
+              기프티콘을 전송했어요!
+            </p>
+          </div>
           <div className={styles.pointMent}>
-            <p>현재 포인트</p>
+            <p>남은 포인트</p>
             <div className={styles.pointContainer}>
-              <p className={styles.giftMenuText}>{point.toLocaleString()}</p>
+              <p>{point.toLocaleString()}</p>
               <IconPoint className={styles.iconPointSmall} />
             </div>
           </div>
-          <button className={styles.goToButton} onClick={onClose}>
-            확인
+
+          <button className={styles.submitBtn} onClick={onClose}>
+            닫기
           </button>
         </div>
       </div>

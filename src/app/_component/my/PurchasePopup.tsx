@@ -10,6 +10,7 @@ import NoPurchasePopup from "./NoPurchasePopup";
 interface PurchasePopupProps {
   imgurl: string;
   menuName: string;
+  shop: string;
   price: number;
   availablePoints: number;
   onClose: () => void;
@@ -20,11 +21,41 @@ type PopupType = "main" | "email" | "noPoints";
 const PurchasePopup: React.FC<PurchasePopupProps> = ({
   imgurl,
   menuName,
+  shop,
   price,
   availablePoints,
   onClose
 }) => {
   const [currentPopup, setCurrentPopup] = useState<PopupType>("main");
+
+  // 바텀시트
+  const [startY, setStartY] = useState<number>(0);
+  const [currentY, setCurrentY] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setStartY(e.touches[0].clientY);
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const deltaY = e.touches[0].clientY - startY; // 이동 거리 계산
+    if (deltaY > 0) setCurrentY(deltaY); //아래로 이동 (양수 값만 적용)
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    if (currentY > 100) {
+      // 100px 이상 이동 시 바텀시트 닫기
+
+      onClose();
+    } else {
+      setCurrentY(0);
+    }
+  };
+
+  // 포인트 업데이트
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const updatePoint = async () => {
@@ -47,6 +78,7 @@ const PurchasePopup: React.FC<PurchasePopupProps> = ({
     }
   };
 
+  // 구매 버튼 클릭
   const handlePurchaseClick = async () => {
     if (availablePoints >= price) {
       const isSuccess = await updatePoint();
@@ -68,22 +100,30 @@ const PurchasePopup: React.FC<PurchasePopupProps> = ({
   return (
     <>
       {currentPopup === "main" && (
-        <div className={styles.overlay} onClick={onClose}>
-          <div className={styles.popup} onClick={e => e.stopPropagation()}>
-            <div className={styles.popupBox}>
-              <Image src={imgurl} alt={menuName} width={45} height={45} />
-              <p className={styles.giftMenuText}>{menuName}</p>
+        <div className={styles.overlay}>
+          <div
+            className={styles.bottomSheet}
+            style={{ transform: `translateY(${currentY}px)` }} // 이동 거리 적용
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div className={styles.bottomBar}></div>
+            <div className={styles.sheetContent}>
+              <p className={styles.sheetTitle}>제품을 구매하시겠어요?</p>
+              <h1>{price.toLocaleString()} 포인트가 차감될 예정이에요!</h1>
               <div className={styles.pointContainer}>
-                <p className={styles.giftMenuText}>{price.toLocaleString()}</p>
+                <p className={styles.availablePoint}>보유 포인트</p>
+                <p className={styles.giftMenuText}>{availablePoints.toLocaleString()}</p>
                 <IconPoint className={styles.iconPointSmall} />
               </div>
-              <p className={styles.buyMent}>구매하시겠습니까?</p>
+
               <div className={styles.btnContainer}>
-                <button className={styles.closeBtn} onClick={onClose}>
-                  취소하기
-                </button>
                 <button className={styles.confirmBtn} onClick={handlePurchaseClick}>
-                  구매하기
+                  구매할래요
+                </button>
+                <button className={styles.cancelBtn} onClick={onClose}>
+                  나중에 할래요
                 </button>
               </div>
             </div>
@@ -91,7 +131,9 @@ const PurchasePopup: React.FC<PurchasePopupProps> = ({
         </div>
       )}
 
-      {currentPopup === "email" && <EmailPopup onClose={closeAllPopups} />}
+      {currentPopup === "email" && (
+        <EmailPopup imgurl={imgurl} menuName={menuName} shop={shop} onClose={closeAllPopups} />
+      )}
 
       {currentPopup === "noPoints" && (
         <NoPurchasePopup availablePoints={availablePoints} onClose={closeAllPopups} />

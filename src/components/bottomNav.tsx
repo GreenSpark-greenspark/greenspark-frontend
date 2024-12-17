@@ -33,6 +33,8 @@ export default function BottomNav() {
       setActiveButton("list");
     } else if (pathname.startsWith("/my")) {
       setActiveButton("my");
+    } else if (pathname.startsWith("/shop")) {
+      setActiveButton("my");
     } else {
       setActiveButton("home");
     }

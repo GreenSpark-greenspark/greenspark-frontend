@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import StyledComponentsRegistry from "@/lib/registry";
 import localFont from "next/font/local";
+import ScrollReset from "@/components/ScrollReset";
 
 const pretendard = localFont({
   src: "../fonts/PretendardVariable.woff2",
@@ -23,12 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <html lang="kr" className={pretendard.className}>
-        <body className={pretendard.className}>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        </body>
-      </html>
-    </>
+    <html lang="kr" className={pretendard.className}>
+      <body className={pretendard.className}>
+        <StyledComponentsRegistry>
+          <ScrollReset />
+          {children}
+        </StyledComponentsRegistry>
+      </body>
+    </html>
   );
 }
