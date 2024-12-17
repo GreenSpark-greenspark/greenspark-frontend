@@ -1,0 +1,44 @@
+.btn {
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.coinWrap {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 2.8rem;
+}
+
+.coinContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coin {
+  display: flex;
+  align-items: center;
+  margin-left: 2.3rem;
+}
+
+.coinIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.text_normal {
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.014rem;
+}
