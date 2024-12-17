@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
 import styles from "./PurchasePopup.module.css";
@@ -29,34 +29,65 @@ const PurchasePopup: React.FC<PurchasePopupProps> = ({
   const [currentPopup, setCurrentPopup] = useState<PopupType>("main");
 
   // 바텀시트
-  const [startY, setStartY] = useState<number>(0);
-  const [currentY, setCurrentY] = useState<number>(0);
-  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [showBottomSheet, setShowBottomSheet] = useState(true);
+  const bottomSheetRef = useRef<HTMLDivElement | null>(null);
+
+  const [startY, setStartY] = useState(0);
+  const [currentY, setCurrentY] = useState(0);
+  const [dragging, setDragging] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    if (showBottomSheet) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showBottomSheet]);
+
+  const closeBottomSheet = () => {
+    setIsTransitioning(true);
+    setCurrentY(1000);
+    setTimeout(() => {
+      setIsTransitioning(false);
+      setShowBottomSheet(false);
+      onClose();
+    }, 300);
+  };
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setStartY(e.touches[0].clientY);
-    setIsDragging(true);
+    setIsTransitioning(false);
+    setDragging(true);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    const deltaY = e.touches[0].clientY - startY; // 이동 거리 계산
-    if (deltaY > 0) setCurrentY(deltaY); //아래로 이동 (양수 값만 적용)
+    if (dragging) {
+      const deltaY = e.touches[0].clientY - startY;
+      if (deltaY > 0) {
+        setCurrentY(deltaY);
+      }
+    }
   };
 
   const handleTouchEnd = () => {
-    setIsDragging(false);
-    if (currentY > 100) {
-      // 100px 이상 이동 시 바텀시트 닫기
+    setDragging(false);
 
-      onClose();
+    if (currentY > 100) {
+      closeBottomSheet();
     } else {
+      setIsTransitioning(true);
       setCurrentY(0);
+      setTimeout(() => setIsTransitioning(false), 300);
     }
   };
 
   const handleOverlayClick = () => {
-    onClose();
+    closeBottomSheet();
   };
 
   const handleBottomSheetClick = (e: React.MouseEvent) => {
@@ -107,45 +138,53 @@ const PurchasePopup: React.FC<PurchasePopupProps> = ({
 
   return (
     <>
-      {currentPopup === "main" && (
-        <div className={styles.overlay} onClick={handleOverlayClick}>
-          <div
-            className={styles.bottomSheet}
-            style={{ transform: `translateY(${currentY}px)` }} // 이동 거리 적용
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-            onClick={handleBottomSheetClick}
-          >
-            <div className={styles.bottomBar}></div>
-            <div className={styles.sheetContent}>
-              <p className={styles.sheetTitle}>제품을 구매하시겠어요?</p>
-              <h1>{price.toLocaleString("ko-KR")} 포인트가 차감될 예정이에요!</h1>
-              <div className={styles.pointContainer}>
-                <p className={styles.availablePoint}>보유 포인트</p>
-                <p className={styles.giftMenuText}>{availablePoints.toLocaleString()}</p>
-                <IconPoint className={styles.iconPointSmall} />
-              </div>
+      {showBottomSheet && (
+        <>
+          {currentPopup === "main" && (
+            <div className={styles.overlay} onClick={handleOverlayClick}>
+              <div
+                className={styles.bottomSheet}
+                ref={bottomSheetRef}
+                style={{
+                  transform: `translateY(${currentY}px)`,
+                  transition: isTransitioning ? "transform 0.3s ease-out" : "none"
+                }}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                onClick={handleBottomSheetClick}
+              >
+                <div className={styles.bottomBar}></div>
+                <div className={styles.sheetContent}>
+                  <p className={styles.sheetTitle}>제품을 구매하시겠어요?</p>
+                  <h1>{price.toLocaleString("ko-KR")} 포인트가 차감될 예정이에요!</h1>
+                  <div className={styles.pointContainer}>
+                    <p className={styles.availablePoint}>보유 포인트</p>
+                    <p className={styles.giftMenuText}>{availablePoints.toLocaleString()}</p>
+                    <IconPoint className={styles.iconPointSmall} />
+                  </div>
 
-              <div className={styles.btnContainer}>
-                <button className={styles.confirmBtn} onClick={handlePurchaseClick}>
-                  구매할래요
-                </button>
-                <button className={styles.cancelBtn} onClick={onClose}>
-                  나중에 할래요
-                </button>
+                  <div className={styles.btnContainer}>
+                    <button className={styles.confirmBtn} onClick={handlePurchaseClick}>
+                      구매할래요
+                    </button>
+                    <button className={styles.cancelBtn} onClick={onClose}>
+                      나중에 할래요
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          )}
 
-      {currentPopup === "email" && (
-        <EmailPopup imgurl={imgurl} menuName={menuName} shop={shop} onClose={closeAllPopups} />
-      )}
+          {currentPopup === "email" && (
+            <EmailPopup imgurl={imgurl} menuName={menuName} shop={shop} onClose={closeAllPopups} />
+          )}
 
-      {currentPopup === "noPoints" && (
-        <NoPurchasePopup availablePoints={availablePoints} onClose={closeAllPopups} />
+          {currentPopup === "noPoints" && (
+            <NoPurchasePopup availablePoints={availablePoints} onClose={closeAllPopups} />
+          )}
+        </>
       )}
     </>
   );
