@@ -168,7 +168,7 @@ export default function InfoEdit() {
           </button>
 
           <div className={styles.resetBtn} onClick={handleResetClick}>
-            초기화하기
+          기존 전기요금 초기화 하기
           </div>
         </div>
         {toastMessage && <Toast message={toastMessage} />}

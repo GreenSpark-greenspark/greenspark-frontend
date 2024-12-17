@@ -55,6 +55,8 @@
   border: 0.2rem solid #b6ec94;
 
   color: #333;
+
+  text-align-last: center;
 }
 
 .placeholder {
@@ -106,6 +108,10 @@
   color: #fff;
 }
 .resetBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   color: #5e5e5e;
   font-size: 1rem;
   font-style: normal;
@@ -116,6 +122,6 @@
 
   padding: 0.5rem;
   height: 1rem;
-  width: 4.5rem;
+
   cursor: pointer;
 }
