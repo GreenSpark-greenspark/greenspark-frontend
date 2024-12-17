@@ -120,7 +120,7 @@ const PurchasePopup: React.FC<PurchasePopupProps> = ({
             <div className={styles.bottomBar}></div>
             <div className={styles.sheetContent}>
               <p className={styles.sheetTitle}>제품을 구매하시겠어요?</p>
-              <h1>{price.toLocaleString()} 포인트가 차감될 예정이에요!</h1>
+              <h1>{price.toLocaleString("ko-KR")} 포인트가 차감될 예정이에요!</h1>
               <div className={styles.pointContainer}>
                 <p className={styles.availablePoint}>보유 포인트</p>
                 <p className={styles.giftMenuText}>{availablePoints.toLocaleString()}</p>
