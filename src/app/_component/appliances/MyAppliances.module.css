@@ -7,18 +7,16 @@
   margin-bottom: 10rem;
 }
 
-.GridLayout {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(69px, 1fr));
-  gap: 18px 6px;
-  justify-items: center;
-  align-content: flex-start;
+.FlexLayout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 14px;
 }
 
 .LinkContainer {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   gap: 8px;
   width: 69px;
@@ -30,14 +28,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: 6.9rem;
   height: 6.9rem;
   max-height: 6.9rem;
   min-height: 6.9rem;
   border-radius: 200%;
   box-sizing: border-box;
-
   background-color: #d7f3c6;
 }
 
@@ -56,12 +52,10 @@
   position: absolute;
   top: 0.3em;
   right: -0.2em;
-
   min-width: 1.6em;
   min-height: 1.6em;
   max-width: 1.6em;
   max-height: 1.6em;
-
   border-radius: 50%;
   border: 0.2em solid #fff;
   background-color: #19e407;
@@ -70,16 +64,13 @@
 
 .lastAlarm {
   visibility: hidden;
-
   position: absolute;
   top: -0.3em;
   right: -0.2em;
-
   min-width: 1.6em;
   min-height: 1.6em;
   max-width: 1.6em;
   max-height: 1.6em;
-
   border-radius: 50%;
   border: 0.2em solid #fff;
   background-color: #19e407;
