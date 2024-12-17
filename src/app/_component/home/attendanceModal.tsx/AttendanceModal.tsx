@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
 import styles from "./AttendanceModal.module.css";
 import PointIcon from "@/../public/icon/point_symbol.svg";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 interface AttendanceModalProps {
   click: boolean;
@@ -8,11 +11,35 @@ interface AttendanceModalProps {
 }
 
 export default function AttendanceModal({ click, onClick }: AttendanceModalProps) {
-  if (click) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const [point, setPoint] = useState(0);
+
+  useEffect(() => {
+    if (click) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [click]);
+
+  useEffect(() => {
+    const fetchPoint = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/point`, { withCredentials: true });
+        if (res.data.success === true) {
+          setPoint(res.data.data);
+        }
+      } catch (error) {
+        console.log("오류 발생:", error);
+      }
+    };
+    fetchPoint();
+  }, [click]);
+
   return (
     <div className={styles.popupWrapper}>
       <div className={styles.popup}>
@@ -28,7 +55,7 @@ export default function AttendanceModal({ click, onClick }: AttendanceModalProps
         </div>
         <div className={styles.confirmWrapper}>
           <div className={styles.currentPoint}>
-            현재 <span className={styles.textBold}>1450</span> <PointIcon />
+            현재 <span className={styles.textBold}>{point}</span> <PointIcon />
           </div>
           <button className={styles.confirmBtn} onClick={onClick}>
             확인

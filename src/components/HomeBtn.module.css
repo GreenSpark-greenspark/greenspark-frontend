@@ -12,6 +12,7 @@
   border-radius: 15px;
   font-size: 1.6rem;
   font-weight: 600;
+  font-family: var(--font-pretendard);
 }
 
 .homeButton:hover {

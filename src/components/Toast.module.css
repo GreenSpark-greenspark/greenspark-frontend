@@ -34,6 +34,8 @@
   border-radius: 1.5em;
 
   background: rgba(94, 94, 94, 0.85);
+
+  font-family: var(--font-pretendard);
   color: #fff;
   font-size: 1.4rem;
   font-style: normal;

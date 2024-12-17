@@ -9,14 +9,16 @@ interface AddButtonProps {
 export default function AddButton({ handleAdd, selectedIndex }: AddButtonProps) {
   return (
     <div className={styles.buttonWrapper}>
-      <ToolTip/>
-      <button
-        onClick={handleAdd}
-        className={`${styles.addButton} ${selectedIndex !== null ? styles.activeButton : ""}`}
-        disabled={selectedIndex === null}
-      >
-        추가하기
-      </button>
+      <div className={styles.addBtnWrapper}>
+        <ToolTip />
+        <button
+          onClick={handleAdd}
+          className={`${styles.addButton} ${selectedIndex !== null ? styles.activeButton : ""}`}
+          disabled={selectedIndex === null}
+        >
+          추가하기
+        </button>
+      </div>
     </div>
   );
 }

@@ -9,6 +9,7 @@
 
   overflow: visible;
   cursor: pointer;
+  font-family: var(--font-pretendard);
 }
 
 .coinWrap {
