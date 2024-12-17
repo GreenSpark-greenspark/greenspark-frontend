@@ -31,6 +31,11 @@
 
 .infoBtn,
 .logoutBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 6.3rem;
   width: 7.5rem;
   height: 2.4rem;
   border-radius: 2em;
@@ -41,7 +46,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-
   cursor: pointer;
 }
 
