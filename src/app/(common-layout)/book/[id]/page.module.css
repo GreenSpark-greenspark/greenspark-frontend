@@ -5,6 +5,7 @@
   height: 100vh;
   padding-top: 3em;
   margin-bottom: 5em;
+  overflow-x: hidden;
 }
 
 .container {
@@ -27,7 +28,7 @@
 
 .slider {
   width: 100%;
-  max-width: 400px;
+  max-width: 375px;
   position: relative;
 }
 
