@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ResetBottomSheet.module.css";
 
 type ResetBottomSheetProps = {
@@ -6,13 +6,28 @@ type ResetBottomSheetProps = {
 };
 
 const ResetBottomSheet: React.FC<ResetBottomSheetProps> = ({ onClose }) => {
+  const [showBottomSheet, setShowBottomSheet] = useState(true);
+
   const [startY, setStartY] = useState<number>(0);
   const [currentY, setCurrentY] = useState<number>(0);
   const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (showBottomSheet) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showBottomSheet]);
   const handleTouchStart = (e: React.TouchEvent) => {
     setStartY(e.touches[0].clientY);
     setIsDragging(true);
+    setIsTransitioning(false);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
@@ -25,24 +40,33 @@ const ResetBottomSheet: React.FC<ResetBottomSheetProps> = ({ onClose }) => {
     setIsDragging(false);
     if (currentY > 100) {
       // 100px 이상 이동 시 바텀시트 닫기
-
-      onClose();
+      setIsTransitioning(true);
+      setCurrentY(1000);
+      setTimeout(() => onClose(), 300);
     } else {
+      setIsTransitioning(true);
       setCurrentY(0);
     }
   };
+
   const handleOverlayClick = () => {
-    onClose();
+    setIsTransitioning(true);
+    setCurrentY(1000);
+    setTimeout(() => onClose(), 300);
   };
 
   const handleBottomSheetClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
+
   return (
     <div className={styles.overlay} onClick={handleOverlayClick}>
       <div
         className={styles.bottomSheet}
-        style={{ transform: `translateY(${currentY}px)` }} // 이동 거리 적용
+        style={{
+          transform: `translateY(${currentY}px)`,
+          transition: isTransitioning ? "transform 0.3s ease-out" : "none"
+        }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}

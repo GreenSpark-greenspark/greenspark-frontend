@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./InputBottomSheet.module.css";
 
 type InputBottomSheetProps = {
@@ -12,34 +12,64 @@ const InputBottomSheet: React.FC<InputBottomSheetProps> = ({
   onConfirmSave,
   onReEnter
 }) => {
-  const [startY, setStartY] = useState<number>(0);
-  const [currentY, setCurrentY] = useState<number>(0);
-  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [showBottomSheet, setShowBottomSheet] = useState(true);
+  const bottomSheetRef = useRef<HTMLDivElement | null>(null);
+  const [startY, setStartY] = useState(0);
+  const [currentY, setCurrentY] = useState(0);
+  const [dragging, setDragging] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    if (showBottomSheet) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showBottomSheet]);
+
+  const closeBottomSheet = () => {
+    setIsTransitioning(true);
+    setCurrentY(1000);
+    setTimeout(() => {
+      setIsTransitioning(false);
+      setShowBottomSheet(false);
+      onClose();
+    }, 300);
+  };
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setStartY(e.touches[0].clientY);
-    setIsDragging(true);
+    setIsTransitioning(false);
+    setDragging(true);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    const deltaY = e.touches[0].clientY - startY; // 이동 거리 계산
-    if (deltaY > 0) setCurrentY(deltaY); //아래로 이동 (양수 값만 적용)
+    if (dragging && bottomSheetRef.current) {
+      const deltaY = e.touches[0].clientY - startY;
+      if (deltaY > 0) {
+        setCurrentY(deltaY);
+      }
+    }
   };
 
   const handleTouchEnd = () => {
-    setIsDragging(false);
-    if (currentY > 100) {
-      // 100px 이상 이동 시 바텀시트 닫기
+    setDragging(false);
 
-      onClose();
+    if (currentY > 100) {
+      closeBottomSheet();
     } else {
+      setIsTransitioning(true);
       setCurrentY(0);
+      setTimeout(() => setIsTransitioning(false), 300);
     }
   };
 
   const handleOverlayClick = () => {
-    onClose();
+    closeBottomSheet();
   };
 
   const handleBottomSheetClick = (e: React.MouseEvent) => {
@@ -47,32 +77,40 @@ const InputBottomSheet: React.FC<InputBottomSheetProps> = ({
   };
 
   return (
-    <div className={styles.overlay} onClick={handleOverlayClick}>
-      <div
-        className={styles.bottomSheet}
-        style={{ transform: `translateY(${currentY}px)` }} // 이동 거리 적용
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        onClick={handleBottomSheetClick}
-      >
-        <div className={styles.bottomBar}></div>
-        <div className={styles.sheetContent}>
-          <p className={styles.sheetTitle}>
-            지난 달과 차이가 커요! <br />
-            정확히 입력했나요?
-          </p>
-          <div className={styles.btnContainer}>
-            <button className={styles.confirmBtn} onClick={onConfirmSave}>
-              네, 그대로 입력할래요
-            </button>
-            <button className={styles.cancelBtn} onClick={onReEnter}>
-              아니요, 잘못 입력했어요
-            </button>
+    <>
+      {showBottomSheet && (
+        <div className={styles.overlay} onClick={handleOverlayClick}>
+          <div
+            ref={bottomSheetRef}
+            className={styles.bottomSheet}
+            style={{
+              transform: `translateY(${currentY}px)`,
+              transition: isTransitioning ? "transform 0.3s ease-out" : "none"
+            }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onClick={handleBottomSheetClick}
+          >
+            <div className={styles.bottomBar}></div>
+            <div className={styles.sheetContent}>
+              <p className={styles.sheetTitle}>
+                지난 달과 차이가 커요! <br />
+                정확히 입력했나요?
+              </p>
+              <div className={styles.btnContainer}>
+                <button className={styles.confirmBtn} onClick={onConfirmSave}>
+                  네, 그대로 입력할래요
+                </button>
+                <button className={styles.cancelBtn} onClick={onReEnter}>
+                  아니요, 잘못 입력했어요
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
