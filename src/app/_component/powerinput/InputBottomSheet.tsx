@@ -38,14 +38,23 @@ const InputBottomSheet: React.FC<InputBottomSheetProps> = ({
     }
   };
 
+  const handleOverlayClick = () => {
+    onClose();
+  };
+
+  const handleBottomSheetClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div className={styles.overlay}>
+    <div className={styles.overlay} onClick={handleOverlayClick}>
       <div
         className={styles.bottomSheet}
         style={{ transform: `translateY(${currentY}px)` }} // 이동 거리 적용
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onClick={handleBottomSheetClick}
       >
         <div className={styles.bottomBar}></div>
         <div className={styles.sheetContent}>
@@ -55,10 +64,10 @@ const InputBottomSheet: React.FC<InputBottomSheetProps> = ({
           </p>
           <div className={styles.btnContainer}>
             <button className={styles.confirmBtn} onClick={onConfirmSave}>
-              이대로 입력하기
+              네, 그대로 입력할래요
             </button>
-            <button className={styles.reenterBtn} onClick={onReEnter}>
-              다시 입력하기
+            <button className={styles.cancelBtn} onClick={onReEnter}>
+              아니요, 잘못 입력했어요
             </button>
           </div>
         </div>

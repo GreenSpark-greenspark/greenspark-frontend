@@ -1,6 +1,6 @@
 "use client";
 
-import TopBar from "@/components/TopBar";
+import TopBarToHome from "@/components/TopBarToHome";
 import { QuizProvider } from "@/context/QuizContext";
 
 export default function Layout({
@@ -11,7 +11,7 @@ export default function Layout({
   return (
     <>
       <QuizProvider>
-        <TopBar text={"에너지 퀴즈"} />
+        <TopBarToHome text={"에너지 퀴즈"} />
         {children}
       </QuizProvider>
     </>

@@ -77,7 +77,7 @@ export default function PointHistory() {
               ))}
             </select>
             <div className={styles.textPoint}>
-              <p>{point.toLocaleString()}</p> <IconPoint className={styles.iconPoint} />
+              <p>{point.toLocaleString("ko-KR")}</p> <IconPoint className={styles.iconPoint} />
             </div>
           </div>
         </div>
@@ -95,11 +95,16 @@ export default function PointHistory() {
               </div>
               <div className={styles.pointRightContainer}>
                 <div className={styles.textPointMiddle}>
-                  <p>{item.point_amount > 0 ? `+${item.point_amount}` : item.point_amount}</p>
+                  <p>
+                    {item.point_amount > 0
+                      ? `+${item.point_amount.toLocaleString("ko-KR")}`
+                      : item.point_amount.toLocaleString("ko-KR")}
+                  </p>
                   <IconPoint className={styles.iconPointMiddle} />
                 </div>
                 <div className={styles.textPointSmall}>
-                  <p>{item.after_point}</p> <IconPoint className={styles.iconPointSmall} />
+                  <p>{item.after_point.toLocaleString("ko-KR")}</p>
+                  <IconPoint className={styles.iconPointSmall} />
                 </div>
               </div>
             </div>

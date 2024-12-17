@@ -1,5 +1,11 @@
 export const commonNotice = [
   {
+    brand: "그린스파크",
+    이용가능매장: "숭실대 어디서나!",
+    공급자: "그린스파크",
+    이용조건: "숭멋사 부원이라면 누구나 사용 가능합니다."
+  },
+  {
     brand: "스타벅스",
     이용가능매장: "미군부대 매장, 워터파크 입점 매장 등 일부 매장에서는 사용이 불가합니다.",
     공급자: "(주)에스씨케이컴퍼니",
@@ -73,7 +79,13 @@ export const getNoticeByBrand = (brandName: string) => {
   if (!brandData) {
     return { error: "정보를 찾을 수 없습니다." };
   }
-
+  if (brandName === "그린스파크") {
+    return {
+      ...brandData,
+      환불조건: "환불 불가 상품입니다",
+      전화번호: "1544-2431 (통화료 발생 / 평일 9시 ~ 18시 (※ 점심시간 12:00 ~ 13:00))"
+    };
+  }
   return {
     ...brandData,
     ...globalConditions
