@@ -9,7 +9,6 @@
 
   color: #fff;
   text-align: center;
-  font-family: Pretendard;
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 500;
@@ -36,7 +35,6 @@
 .popupTitle {
   margin: 0.4em 0;
   color: #000;
-  font-family: Pretendard;
   font-size: 1.8rem;
   font-style: normal;
   font-weight: 600;
@@ -46,7 +44,6 @@
 .popupSubTitle {
   margin-bottom: 1.4em;
   color: rgba(0, 0, 0, 0.25);
-  font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
@@ -63,7 +60,6 @@
   border-radius: 8px;
   padding: 0.8rem;
   font-size: 1.2rem;
-  font-family: Pretendard;
   line-height: 1.5;
   resize: none;
 }
@@ -85,7 +81,6 @@
 
   color: #fff;
   text-align: center;
-  font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -107,7 +102,6 @@
 .charCount {
   color: rgba(0, 0, 0, 0.25);
   text-align: right;
-  font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
