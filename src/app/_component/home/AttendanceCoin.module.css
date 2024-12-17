@@ -4,6 +4,9 @@
   box-shadow: none;
   border-radius: 0;
   padding: 0;
+
+  color: #000;
+
   overflow: visible;
   cursor: pointer;
 }

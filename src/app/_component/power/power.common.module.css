@@ -3,6 +3,8 @@
   flex-direction: column;
   justify-items: center;
   align-items: center;
+
+  font-family: var(--font-pretendard);
 }
 
 .title {

@@ -64,7 +64,7 @@ export default function MyAppliances() {
   return (
     <div className={style.BoxWrapper}>
       <Box minHeight="452px">
-        <div className={style.GridLayout}>
+        <div className={style.FlexLayout}>
           {data.map(item => (
             <Link href={`list/appliances/${item.applianceId}`} key={item.applianceId}>
               <div className={style.LinkContainer}>

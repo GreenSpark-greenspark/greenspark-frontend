@@ -5,6 +5,7 @@
   height: 100vh;
   padding-top: 3em;
   margin-bottom: 5em;
+  overflow-x: hidden;
 }
 
 .container {
@@ -20,7 +21,6 @@
   margin-bottom: 2.8em;
   color: #333;
   text-align: center;
-  font-family: Pretendard;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
@@ -28,7 +28,7 @@
 
 .slider {
   width: 100%;
-  max-width: 400px;
+  max-width: 375px;
   position: relative;
 }
 
@@ -56,7 +56,6 @@
 .tipNumber {
   color: #333;
   text-align: center;
-  font-family: Pretendard;
   font-size: 18px;
   font-weight: 600;
   line-height: 1.5;
@@ -65,7 +64,6 @@
 .tipContent {
   color: #000;
   text-align: center;
-  font-family: Pretendard;
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;

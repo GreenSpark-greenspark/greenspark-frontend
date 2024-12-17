@@ -5,9 +5,6 @@
   background-color: #91e26b;
 }
 
-.logoTopContainer {
-}
-
 .logoContainer {
   display: flex;
   flex-direction: column;
