@@ -20,7 +20,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ["img1.kakaocdn.net"]
+    domains: ["img1.kakaocdn.net", "img.freepik.com"]
   }
 };
 

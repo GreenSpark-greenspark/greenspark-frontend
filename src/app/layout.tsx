@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import StyledComponentsRegistry from "@/lib/registry";
 import localFont from "next/font/local";
 import ScrollReset from "@/components/ScrollReset";
+import { Analytics } from "@vercel/analytics/react";
 
 const pretendard = localFont({
   src: "../fonts/PretendardVariable.woff2",
@@ -29,6 +30,7 @@ export default function RootLayout({
         <StyledComponentsRegistry>
           <ScrollReset />
           {children}
+          <Analytics />
         </StyledComponentsRegistry>
       </body>
     </html>
