@@ -7,6 +7,9 @@ import PowerInput from "../../_component/power/PowerInput";
 import ExpectPreCost from "../../_component/power/ExpectPreCost";
 import GraphCharge from "../../_component/power/GraphCharge";
 
+import { defaultOptions } from "@/lib/lottieOption";
+import Lottie from "react-lottie";
+
 export default function Power() {
   const [tokenRenewed, setTokenRenewed] = useState(false);
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -38,7 +41,17 @@ export default function Power() {
           <ExpectPreCost />
         </>
       ) : (
-        <p>토큰 갱신 중...</p>
+        <div
+          style={{
+            width: "375px",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <Lottie options={defaultOptions} height={400} width={400} />
+        </div>
       )}
     </div>
   );

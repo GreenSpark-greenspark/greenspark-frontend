@@ -5,6 +5,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import QuizAnswer from "@/app/_component/quiz/QuizAnswer";
 
+import { defaultOptions } from "@/lib/lottieOption";
+import Lottie from "react-lottie";
+
 const Page = () => {
   const { questionId } = useParams();
   const [id, setId] = useState<string | null>(null);
@@ -38,9 +41,27 @@ const Page = () => {
   return (
     <div style={{ height: "100vh" }}>
       {tokenRenewed ? (
-        <>{id ? <QuizAnswer id={id} /> : <p>Loading...</p>}</>
+        <>
+          {id ? (
+            <QuizAnswer id={id} />
+          ) : (
+            <div>
+              <Lottie options={defaultOptions} height={400} width={400} />
+            </div>
+          )}
+        </>
       ) : (
-        <p>토큰 갱신 중...</p>
+        <div
+          style={{
+            width: "375px",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <Lottie options={defaultOptions} height={400} width={400} />
+        </div>
       )}
     </div>
   );

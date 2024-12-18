@@ -7,6 +7,8 @@ import HomePower from "../../_component/home/HomePower";
 import HomeAppliances from "../../_component/home/HomeAppliances";
 import HomeQuiz from "../../_component/home/HomeQuiz";
 import HomeEncyclopedia from "../../_component/home/HomeEncyclopedia";
+import { defaultOptions } from "@/lib/lottieOption";
+import Lottie from "react-lottie";
 
 export default function Page() {
   const [tokenRenewed, setTokenRenewed] = useState(false);
@@ -42,7 +44,17 @@ export default function Page() {
             <HomeEncyclopedia />
           </>
         ) : (
-          <p>토큰 갱신 중...</p>
+          <div
+            style={{
+              width: "375px",
+              height: "100vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Lottie options={defaultOptions} height={400} width={400} />
+          </div>
         )}
       </div>
     </div>
