@@ -116,7 +116,8 @@ const InputBottomSheet: React.FC<InputBottomSheetProps> = ({
             <div className={styles.bottomBar}></div>
             <div className={styles.sheetContent}>
               <p className={styles.sheetTitle}>
-                {name}님의 평균적인 전기요금과 차이가 커요! <br />
+                {name}님의 평균적인 전기요금과
+                <br /> 차이가 커요! <br />
                 정확히 입력했나요?
               </p>
               <div className={styles.btnContainer}>
