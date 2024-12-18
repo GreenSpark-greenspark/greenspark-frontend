@@ -8,9 +8,15 @@ import { bookList } from "@/mock/bookList";
 import Image from "next/image";
 import { getImage } from "@/utils/getImage";
 
+interface Tip {
+  tipContent: string;
+  tip_id: number;
+  image?: string;
+}
+
 export default function Page({ params }: { params: { id: string } }) {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const [tips, setTips] = useState<{ tipContent: string; tip_id: number }[]>([]);
+  const [tips, setTips] = useState<Tip[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const startXRef = useRef<number | null>(null);
   const deltaXRef = useRef<number>(0);
@@ -62,10 +68,34 @@ export default function Page({ params }: { params: { id: string } }) {
 
   return (
     <div className={style.wrapper}>
-      <div>
-        <Image src={getImage(bookName)} alt={bookName} width={180} />
+      {params.id !== "12" && (
+        <div>
+          <Image src={getImage(bookName)} alt={bookName} width={180} />
+        </div>
+      )}
+
+      {/* book/12 회고 */}
+      {params.id === "12" && (
+        <div>
+          {tips.map((tip, index) => (
+            <div key={tip.tip_id}>
+              {index === currentIndex && (
+                <Image
+                  key={tip.tip_id}
+                  src={`/review/${88 + index}.png`}
+                  alt={`미모티콘`}
+                  width={200}
+                  height={200}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className={style.bookName}>
+        {bookName == "회고" ? "아기사자의 소감문 🦁" : <p>{bookName}</p>}
       </div>
-      <div className={style.bookName}>{bookName}</div>
       <div
         className={style.container}
         onTouchStart={handleTouchStart}

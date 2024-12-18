@@ -19,7 +19,9 @@ const Page = () => {
                       <Image src={getImage(item.name)} alt={item.name} width={93} />
                     </div>
                     <div className={style.rightSection}>
-                      <div className={style.itemName}>{item.name}</div>
+                      <div className={style.itemName}>
+                        {item.name === "회고" ? "아기사자의 소감문" : `${item.name}`}
+                      </div>
                       <button className={style.tipBtn}>꿀팁 보러가기</button>
                     </div>
                   </div>
