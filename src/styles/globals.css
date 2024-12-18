@@ -4,7 +4,6 @@
   --html-background: #f8fff3;
   --vh: 100%;
   font-size: 62.5%;
-  font-family: var(--font-pretendard);
 }
 
 html,
@@ -26,7 +25,6 @@ html {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
   max-width: 375px;
   width: 100%;
   min-height: 100vh;
@@ -39,9 +37,17 @@ body {
   background: #a9a9a9;
 }
 
-@media (prefers-color-scheme: dark) {
+button {
+  font-family: var(--font-pretendard);
+}
+
+a {
+  text-decoration: none;;
+}
+
+/* @media (prefers-color-scheme: dark) {
   body {
     background-color: var(--background);
     color: var(--foreground);
   }
-}
+} */

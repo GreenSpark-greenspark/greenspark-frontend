@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 import "@/styles/reset.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import StyledComponentsRegistry from "@/lib/registry";
 import localFont from "next/font/local";
 import ScrollReset from "@/components/ScrollReset";
@@ -26,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr" className={`${pretendard.variable}`}>
-      <body className={`${pretendard.variable}`}>
+      <body className={`${pretendard.className}`}>
         <StyledComponentsRegistry>
           <ScrollReset />
           {children}
