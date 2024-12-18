@@ -28,14 +28,13 @@
   animation: fadeIn 0.5s ease-in-out;
 }
 
-.imageContainer {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.popupBox {
+  width: 27.8rem;
+  height: 20rem;
+  border-radius: 1.5em;
 
-  color: #fff;
+  background-color: #fff;
+  padding: 2rem;
 }
 
 .closeBtn,
@@ -55,7 +54,7 @@
 }
 
 .closeBtn {
-  background-color: #d7f3c6;
+  background-color: #b8c7b0;
 }
 
 .confirmBtn {

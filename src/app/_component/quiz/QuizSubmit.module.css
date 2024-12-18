@@ -84,8 +84,8 @@
   align-items: center;
   float: right;
   width: 27.7rem;
-  height: 3.8rem;
-  border-radius: 1em;
+  height: 4.2rem;
+  border-radius: 10px;
   border: none;
   background-color: #f1f3f5;
   color: #929292;
@@ -102,8 +102,8 @@
   align-items: center;
   float: right;
   width: 27.7rem;
-  height: 3.8rem;
-  border-radius: 1em;
+  height: 4.2rem;
+  border-radius: 10px;
   border: none;
   background-color: #19e407;
   color: #fff;

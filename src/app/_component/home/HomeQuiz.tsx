@@ -28,7 +28,7 @@ export default function HomeQuiz() {
           </div>
 
           <button type="button" className={styles.btn} onClick={handleNavigate}>
-            퀴즈풀러가기
+            퀴즈 풀러가기
           </button>
         </Box>
       </div>

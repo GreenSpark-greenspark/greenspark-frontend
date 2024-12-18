@@ -162,7 +162,7 @@ export default function HomePower() {
             </div>
           </div>
           <button type="button" className={styles.btn} onClick={handleNavigate}>
-            전기요금 입력
+            전기요금 입력하기
           </button>
         </Box>
       </div>

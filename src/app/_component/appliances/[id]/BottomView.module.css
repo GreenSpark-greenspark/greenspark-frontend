@@ -22,7 +22,7 @@
 
   background-color: #f1f3f5;
   border-radius: 10px;
-  box-shadow: 0px 0px 8px var(--Color-8, #e8ebe7);
+  box-shadow: 0px 0px 8px #e8ebe7;
 
   color: #000;
   font-size: 1rem;

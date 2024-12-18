@@ -30,18 +30,17 @@ const LogoutPopup: React.FC<LogoutPopupProps> = ({ onClose }) => {
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.popup} onClick={e => e.stopPropagation()}>
-        <div className={styles.imageContainer}>
-          <Image src={PlugImg} alt="플러그 이미지" width={100} style={{ marginBottom: "2rem" }} />
-          <p style={{ fontSize: "1.6rem", fontWeight: "600" }}>정말 로그아웃 하시겠습니까?</p>
-        </div>
-
-        <div className={styles.btnContainer}>
-          <button className={styles.closeBtn} onClick={handleLogout}>
-            예
-          </button>
-          <button className={styles.confirmBtn} onClick={onClose}>
-            아니오
-          </button>
+        <div className={styles.popupBox}>
+          <Image src={PlugImg} alt="플러그 이미지" width={78} style={{ marginBottom: "2rem" }} />
+          <p style={{ fontSize: "1.6rem", fontWeight: "600" }}>정말 로그아웃 하시겠어요?</p>
+          <div className={styles.btnContainer}>
+            <button className={styles.closeBtn} onClick={handleLogout}>
+              로그아웃 하기
+            </button>
+            <button className={styles.confirmBtn} onClick={onClose}>
+              계속 이용하기
+            </button>
+          </div>
         </div>
       </div>
     </div>
