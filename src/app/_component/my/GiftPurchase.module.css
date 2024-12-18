@@ -87,6 +87,7 @@
   font-weight: 500;
   line-height: 2.1rem;
   width: 28rem;
+  white-space: pre-wrap;
 }
 .infoContainer {
   display: flex;
