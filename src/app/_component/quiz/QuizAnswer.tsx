@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useQuizContext } from "@/context/QuizContext";
 import axios from "axios";
@@ -9,7 +9,7 @@ import IconMent from "@/../public/icon/quiz_ment.svg";
 import IconCorrect from "@/../public/icon/quiz_correct.svg";
 import IconWrong from "@/../public/icon/quiz_wrong.svg";
 import Lottie from "react-lottie";
-import { defaultOptions } from "@/lib/lottieOption";
+import { confetti } from "@/lib/lottiConfetti";
 
 interface QuizAnswerProps {
   id: string;
@@ -17,19 +17,15 @@ interface QuizAnswerProps {
 
 export default function QuizAnswer({ id }: QuizAnswerProps) {
   const { question, userAnswer, correctAnswer, explanation, isCorrect } = useQuizContext();
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  const isConfettiPlayed = useRef(false);
 
   useEffect(() => {
-    console.log("QuizAnswer Context Data:", {
-      question,
-      userAnswer,
-      correctAnswer,
-      explanation,
-      isCorrect
-    });
-
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-    if (isCorrect === "true") {
+    if (isCorrect === "true" && !isConfettiPlayed.current) {
+      // 포인트 업데이트
       const updatePoint = async () => {
         try {
           const response = await axios.post(
@@ -49,8 +45,23 @@ export default function QuizAnswer({ id }: QuizAnswerProps) {
       };
 
       updatePoint();
+
+      // 컨페티
+      setShowConfetti(true);
+      isConfettiPlayed.current = true;
+
+      const timer = setTimeout(() => {
+        setShowConfetti(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
     }
   }, [isCorrect]);
+
+  const router = useRouter();
+  const goToQuizHome = () => {
+    router.push(`/quiz`);
+  };
 
   if (!question || !userAnswer || !correctAnswer || !explanation || !isCorrect) {
     return (
@@ -63,18 +74,27 @@ export default function QuizAnswer({ id }: QuizAnswerProps) {
           alignItems: "center"
         }}
       >
-        <Lottie options={defaultOptions} height={400} width={400} />
+        <Lottie options={confetti} height={400} width={400} />
       </div>
     );
   }
 
-  const router = useRouter();
-  const goToQuizHome = () => {
-    router.push(`/quiz`);
-  };
-
   return (
-    <div className={styles.boxContainer}>
+    <div className={styles.boxContainer} style={{ position: "relative" }}>
+      {showConfetti && (
+        <div
+          style={{
+            position: "absolute",
+            top: "1rem",
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 1000
+          }}
+        >
+          <Lottie options={confetti} height="400" width="400" />
+        </div>
+      )}
       <Box minHeight="330px">
         <div className={styles.quizBoxContainer}>
           <div className={styles.iconMentContainer}>

@@ -92,7 +92,7 @@ export const gift = [
   {
     id: 11,
     type: "멋사",
-    메뉴이름: "유혜인",
+    메뉴이름: "유해인",
     판매처: "디자인파트장",
     가격: "0",
     url: "https://drive.google.com/uc?id=1f61B7-rU__9-OE_c2JrtlQJs2h9DGSP3",
@@ -104,7 +104,7 @@ export const gift = [
     메뉴이름: "그린스파크의 뽀뽀",
     판매처: "그린스파크",
     가격: "50",
-    url: "https://img.freepik.com/premium-photo/green-heart-with-fluffy-fur-is-front-white-background_811493-433.jpg"
+    url: "https://drive.google.com/uc?id=1JsJuhlUOOVcc9lheq_oRq5UGKPpdzZir"
   },
   {
     id: 13,
