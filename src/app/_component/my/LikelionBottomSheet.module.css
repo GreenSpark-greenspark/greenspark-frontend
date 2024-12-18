@@ -1,0 +1,180 @@
+.textPoint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #000;
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.iconPointSmall {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-left: 0.5rem;
+}
+
+.giftMenuText {
+  color: #000;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.pointContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.8rem;
+}
+
+.availablePoint {
+  color: #5e5e5e;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-right: 0.8rem;
+}
+.overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.75);
+
+  z-index: 2000;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.bottomSheet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 32rem;
+  height: 15rem;
+  border-radius: 3.2rem 3.2rem 0 0;
+
+  background-color: white;
+  padding: 2rem;
+
+  font-family: var(--font-pretendard);
+
+  transition: transform 0.2s ease-out;
+  animation: slideUp 0.2s ease-in-out;
+}
+
+.bottomBar {
+  width: 8rem;
+  height: 1rem;
+  border-radius: 1rem;
+  margin: 0 auto 3.2rem;
+
+  background-color: #d7f3c6;
+
+  cursor: pointer;
+}
+
+.sheetContent {
+  text-align: center;
+}
+
+.sheetContent h1 {
+  color: #929292;
+  text-align: center;
+
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.sheetTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  margin-top: 1rem;
+}
+.cancelBtn,
+.confirmBtn {
+  width: 30rem;
+  height: 4rem;
+  border-radius: 8px;
+
+  font-size: 1.6rem;
+  text-align: center;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  font-family: var(--font-pretendard);
+
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancelBtn {
+  border: none;
+  background-color: #f1f3f5;
+
+  color: #929292;
+}
+
+.cancelBtn:hover {
+  background-color: #e5eaef;
+}
+
+.confirmBtn {
+  background-color: #19e407;
+  border: none;
+
+  color: #fff;
+}
+
+.confirmBtn:hover {
+  background-color: #18d207;
+}
+
+.cancelBtn:focus,
+.confirmBtn:focus {
+  outline: none;
+}
+
+.cancelBtn:active,
+.confirmBtn:active {
+  transform: scale(0.97);
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}

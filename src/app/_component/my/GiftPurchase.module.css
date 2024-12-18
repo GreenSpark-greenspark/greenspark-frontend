@@ -81,6 +81,14 @@
   line-height: 1.6rem;
 }
 
+.letterText {
+  color: #222325;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2.1rem;
+  width: 28rem;
+}
 .infoContainer {
   display: flex;
   gap: 2.5rem;
