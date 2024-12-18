@@ -20,7 +20,7 @@ export default function HomeEncyclopedia() {
             <p className={styles.text_normal}>쉽고 간단한 에너지 절약 방법, 함께 알아볼까요?</p>
           </div>
           <button type="button" className={styles.btn} onClick={handleNavigate}>
-            보러가기
+            절약 팁 보러가기
           </button>
         </Box>
       </div>
