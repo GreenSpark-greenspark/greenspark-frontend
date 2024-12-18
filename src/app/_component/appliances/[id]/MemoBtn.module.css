@@ -7,6 +7,7 @@
   box-shadow: 0px 0px 4px 0px #d4ddcf;
   cursor: pointer;
 
+  font-family: var(--font-pretendard);
   color: #fff;
   text-align: center;
   font-size: 1.2rem;
@@ -62,6 +63,7 @@
   font-size: 1.2rem;
   line-height: 1.5;
   resize: none;
+  font-family: var(--font-pretendard);
 }
 
 .popupActions {
@@ -79,6 +81,7 @@
   background: #19e407;
   cursor: pointer;
 
+  font-family: var(--font-pretendard);
   color: #fff;
   text-align: center;
   font-size: 16px;

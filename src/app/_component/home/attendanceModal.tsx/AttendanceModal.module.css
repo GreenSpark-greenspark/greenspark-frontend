@@ -15,7 +15,6 @@
 }
 
 .popupWrapper {
-  font-family: var(--font-pretendard);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,7 +122,6 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  font-family: var(--font-pretendard);
 
   cursor: pointer;
 }
