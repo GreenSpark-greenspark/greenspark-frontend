@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import Image from "next/image";
 import styles from "./PurchasePopup.module.css";
 import IconPoint from "@/../public/icon/point_icon.svg";
 import EmailPopup from "./EmailPopup";
