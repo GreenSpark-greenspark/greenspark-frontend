@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AttendanceCoin.module.css";
 import Box from "@/components/Box";
-import Iconcoin from "@/../public/icon/coin.svg";
 import AttendanceModal from "./attendanceModal.tsx/AttendanceModal";
 import axios from "axios";
 import Toast from "@/components/Toast";
+import Image from "next/image";
 
 export default function AttendanceCoin() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -64,7 +64,10 @@ export default function AttendanceCoin() {
             <div className={styles.coinContainer}>
               <p className={styles.text_normal}>하루에 한 번씩 포인트를 획득하세요!</p>
               <div className={styles.coin}>
-                <Iconcoin className={styles.coinIcon} />
+                <Image src={"/img/coin_default_img.png"} alt={"코인 이미지"}
+                width={20}
+                height={20}
+                />
                 <p className={styles.text_normal}>50</p>
               </div>
             </div>
