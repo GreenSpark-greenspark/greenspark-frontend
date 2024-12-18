@@ -52,7 +52,9 @@
   font-weight: 600;
   margin: 3rem;
 }
-
+.sheetTitle span {
+  margin-top: 0.5rem;
+}
 @keyframes slideUp {
   from {
     transform: translateY(100%);

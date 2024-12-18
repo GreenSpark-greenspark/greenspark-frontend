@@ -6,7 +6,9 @@ import Box from "@/components/Box";
 import Popup from "./Popup";
 import styles from "./QuizMain.module.css";
 import IconPower from "@/../public/icon/quiz_power.svg";
-import IconArrow from "@/../public/icon/arrow_left.svg";
+import IconPowerGray from "@/../public/icon/quiz_power_gray.svg";
+
+import IconArrow from "@/../public/icon/arrow_right_green.svg";
 
 interface QuizData {
   questionId: number;
@@ -132,7 +134,11 @@ export default function QuizMain() {
               onClick={() => !isQuizSolved(1) && handleQuizClick(1)}
             >
               <div className={styles.quizBtnLeft}>
-                <IconPower className={styles.iconPower} />
+                {isQuizSolved(1) ? (
+                  <IconPowerGray className={styles.iconPower} />
+                ) : (
+                  <IconPower className={styles.iconPower} />
+                )}
                 <p className={styles.quizNormal}>첫 번째 퀴즈</p>
               </div>
               {isQuizSolved(1) ? (
@@ -150,7 +156,11 @@ export default function QuizMain() {
               onClick={() => !isQuizSolved(2) && handleQuizClick(2)}
             >
               <div className={styles.quizBtnLeft}>
-                <IconPower className={styles.iconPower} />
+                {isQuizSolved(2) ? (
+                  <IconPowerGray className={styles.iconPower} />
+                ) : (
+                  <IconPower className={styles.iconPower} />
+                )}{" "}
                 <p className={styles.quizNormal}>두 번째 퀴즈</p>
               </div>
               {isQuizSolved(2) ? (
