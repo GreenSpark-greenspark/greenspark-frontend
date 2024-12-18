@@ -14,7 +14,7 @@ export default function MyMain() {
   const router = useRouter();
 
   const goToPoint = () => {
-    router.push(`/my/point`);
+    router.push(`/my/history`);
   };
 
   const goToEdit = () => {
@@ -25,6 +25,9 @@ export default function MyMain() {
     router.push(`/list`);
   };
 
+  const goToShop = () => {
+    router.push(`/shop/list`);
+  };
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [point, setPoint] = useState<number>(0);
   const [name, setName] = useState<string>("사자");
@@ -131,6 +134,12 @@ export default function MyMain() {
                 </div>
                 <IconArrow className={styles.iconArrow} />
               </div>
+            </div>
+          </div>
+          <div className={styles.bodyPoint}>
+            <div className={styles.alignDiv} onClick={() => goToShop()}>
+              <p className={styles.textTitle}>기프티콘 사러가기</p>
+              <IconArrow className={styles.iconArrow} />
             </div>
           </div>
           <div className={styles.bodyPoint}>

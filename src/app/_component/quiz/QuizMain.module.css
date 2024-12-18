@@ -75,6 +75,7 @@
   font-size: 1.6rem;
   font-weight: 500;
   line-height: normal;
+  margin: 2rem;
 }
 
 .quizNormal {
@@ -88,6 +89,7 @@
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 130%;
+  margin: 2rem;
 }
 
 /* 폰트 두께 (Bold) */
@@ -117,7 +119,6 @@
 .iconArrow {
   width: 0.7rem;
   height: 1.4rem;
-  transform: rotate(180deg);
   margin-left: 4.5rem;
 }
 

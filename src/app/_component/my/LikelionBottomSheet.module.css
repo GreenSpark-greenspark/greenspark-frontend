@@ -1,4 +1,43 @@
-/* 바텀시트 공통 스타일 */
+.textPoint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #000;
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.iconPointSmall {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-left: 0.5rem;
+}
+
+.giftMenuText {
+  color: #000;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.pointContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.8rem;
+}
+
+.availablePoint {
+  color: #5e5e5e;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-right: 0.8rem;
+}
 .overlay {
   position: fixed;
   bottom: 0;
@@ -10,7 +49,7 @@
   width: 100%;
   height: 100%;
 
-  background: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.75);
 
   z-index: 2000;
   transition: background-color 0.3s ease-in-out;
@@ -22,11 +61,13 @@
   align-items: center;
 
   width: 32rem;
-  height: 25rem;
+  height: 15rem;
   border-radius: 3.2rem 3.2rem 0 0;
 
   background-color: white;
   padding: 2rem;
+
+  font-family: var(--font-pretendard);
 
   transition: transform 0.2s ease-out;
   animation: slideUp 0.2s ease-in-out;
@@ -36,7 +77,7 @@
   width: 8rem;
   height: 1rem;
   border-radius: 1rem;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 3.2rem;
 
   background-color: #d7f3c6;
 
@@ -47,25 +88,21 @@
   text-align: center;
 }
 
+.sheetContent h1 {
+  color: #929292;
+  text-align: center;
+
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
 .sheetTitle {
   font-size: 2rem;
   font-weight: 600;
-  margin: 3rem;
-}
-.sheetTitle span {
-  margin-top: 0.5rem;
-}
-@keyframes slideUp {
-  from {
-    transform: translateY(100%);
-  }
-
-  to {
-    transform: translateY(0);
-  }
+  margin-bottom: 1rem;
 }
 
-/* 버튼 관련*/
 .btnContainer {
   display: flex;
   flex-direction: column;
@@ -73,7 +110,7 @@
   justify-content: center;
   gap: 1rem;
 
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 .cancelBtn,
 .confirmBtn {
@@ -87,6 +124,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  font-family: var(--font-pretendard);
 
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -122,4 +160,21 @@
 .cancelBtn:active,
 .confirmBtn:active {
   transform: scale(0.97);
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }
