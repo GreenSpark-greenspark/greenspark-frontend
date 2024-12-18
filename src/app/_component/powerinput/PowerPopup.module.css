@@ -28,7 +28,7 @@
 
 .popupBox {
   width: 31.8rem;
-  height: 21.8rem;
+  height: 20rem;
   border-radius: 1.5em;
   background-color: #fff;
 }
@@ -74,9 +74,9 @@
   z-index: 1003;
 
   width: 27.7rem;
-  height: 3.8rem;
+  height: 4.2rem;
   border: none;
-  border-radius: 1.5rem;
+  border-radius: 10px;
   background-color: #c4c4c4;
   color: #fff;
   font-size: 1.6rem;
@@ -112,9 +112,9 @@
   z-index: 1003;
 
   width: 27.7rem;
-  height: 3.8rem;
+  height: 4.2rem;
   border: none;
-  border-radius: 1.5rem;
+  border-radius: 10px;
   background-color: #d7f3c6;
   color: #000;
   font-size: 1.6rem;
@@ -127,9 +127,9 @@
   z-index: 1003;
 
   width: 27.7rem;
-  height: 3.8rem;
+  height: 4.2rem;
   border: none;
-  border-radius: 1.5rem;
+  border-radius: 10px;
   background-color: #19e407;
   color: #000;
   font-size: 1.6rem;

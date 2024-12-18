@@ -83,7 +83,7 @@
   width: 100%;
   height: 100%;
 
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.75);
 
   z-index: 1001;
 }
@@ -118,13 +118,13 @@
 
 .cancelBtn,
 .confirmBtn {
-  width: 30rem;
-  height: 4rem;
-  border-radius: 8px;
+  width: 27rem;
+  height: 4.2rem;
+  border-radius: 10px;
 
   font-size: 1.6rem;
   text-align: center;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;

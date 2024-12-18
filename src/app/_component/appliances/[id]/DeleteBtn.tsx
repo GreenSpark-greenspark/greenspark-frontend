@@ -117,16 +117,15 @@ const DeleteBtn = ({ applianceId }: DeleteBtnProps) => {
           >
             <div className={style.handleBar}></div>
             <p className={style.confirmText}>
-              제품을
-              <br />
+              제품을 {/* <br /> */}
               삭제하시겠어요?
             </p>
             <div className={style.actions}>
               <button className={style.confirmBtn} onClick={onDelete}>
-                삭제하기
+                삭제할래요
               </button>
               <button className={style.cancelBtn} onClick={closeBottomSheet}>
-                나중에 하기
+                나중에 할래요
               </button>
             </div>
           </div>
