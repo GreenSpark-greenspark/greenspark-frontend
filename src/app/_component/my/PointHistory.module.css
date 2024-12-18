@@ -5,6 +5,7 @@
   width: 100%;
   min-height: 100%;
   background-color: #fff;
+  font-family: var(--font-pretendard);
 }
 .topWrapper {
   background-color: #f8fff3;
@@ -47,6 +48,7 @@
   border: 2px solid #b6ec94;
   color: #333;
   cursor: pointer;
+  font-family: var(--font-pretendard);
 }
 
 .placeholder {
