@@ -1,8 +1,9 @@
 "use client";
-import LoadingDots from "@/components/LoadingDots";
+import { defaultOptions } from "@/lib/lottieOption";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Lottie from "react-lottie";
 
 export default function GoogleCallbackPage() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -35,9 +36,9 @@ export default function GoogleCallbackPage() {
   });
   return (
     <div
-      style={{ height: "500px", display: "flex", justifyContent: "center", alignItems: "center" }}
+      style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}
     >
-      <LoadingDots />
+      <Lottie options={defaultOptions} height={400} width={400} />
     </div>
   );
 }

@@ -5,7 +5,8 @@ import styles from "./expectPreCost.module.css";
 import { getDateLabel } from "@/utils/getDateLabels";
 import TipMentIconBig from "@/../public/icon/power_tipMent_big.svg";
 import TipMentIconSmall from "@/../public/icon/power_tipMent_small.svg";
-import LoadingDots from "@/components/LoadingDots";
+import Lottie from "react-lottie";
+import { defaultOptions } from "@/lib/lottieOption";
 
 interface ChargeData {
   lastMonth: number | null;
@@ -188,8 +189,10 @@ const ExpectPreChart: React.FC<ExpectPreChartProps> = ({ member }) => {
 
   if (isLoading) {
     return (
-      <div className={styles.LoadingWrapper}>
-        <LoadingDots />
+      <div
+        style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <Lottie options={defaultOptions} height={400} width={400} />
       </div>
     );
   }

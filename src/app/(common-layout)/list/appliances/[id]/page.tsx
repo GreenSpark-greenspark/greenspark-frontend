@@ -7,11 +7,12 @@ import { decodeHtmlEntities } from "@/utils/decodeHtmlEntities";
 import style from "./page.module.css";
 import TopView from "@/app/_component/appliances/[id]/TopView";
 import BottomView from "@/app/_component/appliances/[id]/BottomView";
-import LoadingDots from "@/components/LoadingDots";
 import DeleteBtn from "@/app/_component/appliances/[id]/DeleteBtn";
 import { apiWrapper } from "@/utils/api";
 import MemoBtn from "@/app/_component/appliances/[id]/MemoBtn";
 import { getGradientFromGrade } from "@/utils/getColorfromGrade";
+import Lottie from "react-lottie";
+import { defaultOptions } from "@/lib/lottieOption";
 
 export default function AppliancePage({ params }: { params: { id: string | string[] } }) {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -110,7 +111,7 @@ export default function AppliancePage({ params }: { params: { id: string | strin
       <div
         style={{ height: "500px", display: "flex", justifyContent: "center", alignItems: "center" }}
       >
-        <LoadingDots />
+        <Lottie options={defaultOptions} height={400} width={400} />
       </div>
     );
   if (!applianceDetails) return <p>데이터가 없습니다.</p>;

@@ -10,10 +10,10 @@ import ApplianceSelector from "../../_component/appliances/ApplianceSelector";
 import ModelInput from "../../_component/appliances/ModelInput";
 import ApplianceList from "../../_component/appliances/ApplianceList";
 import AddButton from "../appliances/AddButton";
-import LoadingDots from "@/components/LoadingDots";
 import { getDisplayName } from "@/utils/getDisplayName";
 import { apiWrapper } from "@/utils/api";
-import ToolTip from "./ToolTip";
+import Lottie from "react-lottie";
+import { defaultOptions } from "@/lib/lottieOption";
 
 interface ApplianceItem {
   id: number;
@@ -199,7 +199,7 @@ export default function ClientComponent() {
                 alignItems: "center"
               }}
             >
-              <LoadingDots />
+              <Lottie options={defaultOptions} height={400} width={400} />
             </div>
           ) : (
             <ApplianceList
