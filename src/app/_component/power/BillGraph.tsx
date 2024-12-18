@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Graph from "./Graph";
-import LoadingDots from "@/components/LoadingDots";
 import styles from "./power.common.module.css";
+import Lottie from "react-lottie";
+import { defaultOptions } from "@/lib/lottieOption";
 
 const BillGraph = () => {
   const [graphData, setGraphData] = useState([]);
@@ -38,7 +39,7 @@ const BillGraph = () => {
   if (isLoading) {
     return (
       <div className={styles.LoadingWrapper}>
-        <LoadingDots />
+        <Lottie options={defaultOptions} height={400} width={400} />
       </div>
     );
   }

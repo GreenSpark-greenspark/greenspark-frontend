@@ -4,6 +4,8 @@ import axios from "axios";
 import InfoIcon from "@/../public/icon/toast_info_icon.svg";
 import styles from "./expectPreCost.module.css";
 import ExpectPreChart from "./ExpectPreChart";
+import Lottie from "react-lottie";
+import { defaultOptions } from "@/lib/lottieOption";
 
 export default function ExpectPreCost() {
   const [name, setName] = useState<string | null>(null);
@@ -34,7 +36,19 @@ export default function ExpectPreCost() {
   }, []);
 
   if (name === null || family === null || date === null) {
-    return <p>로딩 중...</p>;
+    return (
+      <div
+        style={{
+          width: "375px",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Lottie options={defaultOptions} height={400} width={400} />
+      </div>
+    );
   }
 
   return (

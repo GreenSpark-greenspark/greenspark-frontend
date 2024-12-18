@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import GiftPurchase from "@/app/_component/my/GiftPurchase";
+import { defaultOptions } from "@/lib/lottieOption";
+import Lottie from "react-lottie";
 
 const Page = () => {
   const { id } = useParams();
@@ -31,9 +33,35 @@ const Page = () => {
   return (
     <div style={{ height: "100vh" }}>
       {tokenRenewed ? (
-        <>{idNumber ? <GiftPurchase id={idNumber} /> : <p>Loading...</p>}</>
+        <>
+          {idNumber ? (
+            <GiftPurchase id={idNumber} />
+          ) : (
+            <div
+              style={{
+                width: "375px",
+                height: "100vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <Lottie options={defaultOptions} height={400} width={400} />
+            </div>
+          )}
+        </>
       ) : (
-        <p>토큰 갱신 중...</p>
+        <div
+          style={{
+            width: "375px",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <Lottie options={defaultOptions} height={400} width={400} />
+        </div>
       )}
     </div>
   );

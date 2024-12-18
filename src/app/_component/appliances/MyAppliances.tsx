@@ -8,8 +8,9 @@ import IconPlus from "@/../public/icon/power_plus.svg";
 import style from "./MyAppliances.module.css";
 import GradeLabel from "./GradeLabel";
 import { useEffect, useState } from "react";
-import LoadingDots from "@/components/LoadingDots";
 import { apiWrapper } from "@/utils/api";
+import Lottie from "react-lottie";
+import { defaultOptions } from "@/lib/lottieOption";
 
 interface ApplianceData {
   applianceId: number;
@@ -55,8 +56,10 @@ export default function MyAppliances() {
 
   if (isLoading) {
     return (
-      <div className={style.LoadingWrapper}>
-        <LoadingDots />
+      <div
+        style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <Lottie options={defaultOptions} height={400} width={400} />
       </div>
     );
   }

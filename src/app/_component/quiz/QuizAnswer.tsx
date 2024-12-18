@@ -8,6 +8,8 @@ import styles from "./QuizAnswer.module.css";
 import IconMent from "@/../public/icon/quiz_ment.svg";
 import IconCorrect from "@/../public/icon/quiz_correct.svg";
 import IconWrong from "@/../public/icon/quiz_wrong.svg";
+import Lottie from "react-lottie";
+import { defaultOptions } from "@/lib/lottieOption";
 
 interface QuizAnswerProps {
   id: string;
@@ -51,7 +53,19 @@ export default function QuizAnswer({ id }: QuizAnswerProps) {
   }, [isCorrect]);
 
   if (!question || !userAnswer || !correctAnswer || !explanation || !isCorrect) {
-    return <p>로딩 중...</p>;
+    return (
+      <div
+        style={{
+          width: "375px",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Lottie options={defaultOptions} height={400} width={400} />
+      </div>
+    );
   }
 
   const router = useRouter();

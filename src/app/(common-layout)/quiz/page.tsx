@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import QuizMain from "@/app/_component/quiz/QuizMain";
+import { defaultOptions } from "@/lib/lottieOption";
+import Lottie from "react-lottie";
 
 const Page = () => {
   const [tokenRenewed, setTokenRenewed] = useState(false);
@@ -31,7 +33,17 @@ const Page = () => {
           <QuizMain />
         </>
       ) : (
-        <p>토큰 갱신 중...</p>
+        <div
+          style={{
+            width: "375px",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <Lottie options={defaultOptions} height={400} width={400} />
+        </div>
       )}
     </div>
   );

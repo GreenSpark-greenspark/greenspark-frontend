@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useSearchParams } from "next/navigation";
 import QuizSubmit from "@/app/_component/quiz/QuizSubmit";
+import { defaultOptions } from "@/lib/lottieOption";
+import Lottie from "react-lottie";
 
 const Page = () => {
   const { questionId } = useParams();
@@ -42,11 +44,31 @@ const Page = () => {
           {quizId && questionIdNumber ? (
             <QuizSubmit questionId={questionIdNumber} quizId={quizId} />
           ) : (
-            <p>Loading...</p>
+            <div
+              style={{
+                width: "375px",
+                height: "100vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <Lottie options={defaultOptions} height={400} width={400} />
+            </div>
           )}
         </>
       ) : (
-        <p>토큰 갱신 중...</p>
+        <div
+          style={{
+            width: "375px",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <Lottie options={defaultOptions} height={400} width={400} />
+        </div>
       )}
     </div>
   );
