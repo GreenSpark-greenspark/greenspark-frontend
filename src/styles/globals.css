@@ -38,11 +38,11 @@ body {
 }
 
 button {
-  font-family: var(--font-pretendard);
+  font-family: var(--font-pretendard), Arial, Helvetica;
 }
 
 a {
-  text-decoration: none;;
+  text-decoration: none;
 }
 
 /* @media (prefers-color-scheme: dark) {
