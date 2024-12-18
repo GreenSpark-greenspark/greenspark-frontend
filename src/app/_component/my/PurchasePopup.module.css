@@ -67,6 +67,8 @@
   background-color: white;
   padding: 2rem;
 
+  font-family: var(--font-pretendard);
+
   transition: transform 0.2s ease-out;
   animation: slideUp 0.2s ease-in-out;
 }
@@ -122,6 +124,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  font-family: var(--font-pretendard);
 
   cursor: pointer;
   transition: background-color 0.3s ease;

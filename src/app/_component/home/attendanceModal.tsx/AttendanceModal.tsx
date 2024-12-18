@@ -51,7 +51,7 @@ export default function AttendanceModal({ click, onClick }: AttendanceModalProps
           받은 포인트로 다양한 <span className={styles.textBold}>기프트콘</span>을 살 수 있어요!
         </div>
         <div className={styles.imgWrapper}>
-          <Image src={"/img/coin_img.png"} alt={"코인 이미지"} width={71} height={71} />
+          <Image src={"/img/coin_img.png"} alt={"코인 이미지"} width={85} height={98} />
         </div>
         <div className={styles.confirmWrapper}>
           <div className={styles.currentPoint}>
