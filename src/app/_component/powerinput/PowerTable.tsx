@@ -209,7 +209,7 @@ const PowerTable: React.FC = () => {
         id: "yearMonth"
       },
       {
-        Header: "전기요금",
+        Header: () => <div className={styles.yearHeader}>전기요금</div>,
         accessor: "cost",
         Cell: ({ row }: CellProps<TableRow>) => {
           const { year, month } = row.original;
@@ -231,7 +231,7 @@ const PowerTable: React.FC = () => {
         }
       },
       {
-        Header: "전력사용량",
+        Header: () => <div className={styles.yearHeader}>전력사용량</div>,
         accessor: "usage_amount",
         Cell: ({ row }: CellProps<TableRow>) => {
           const { year, month } = row.original;
