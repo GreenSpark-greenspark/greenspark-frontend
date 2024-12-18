@@ -18,9 +18,7 @@ export default function HomeQuiz() {
           <div className={styles.bodyContainer}>
             <p className={styles.text_title}>하루에 두 번 찾아오는 기회!</p>
             <p className={styles.text_normal}>
-              매일 <span className={styles.quizBold}>오전 7시</span>,
-              <span className={styles.quizBold}>오후 6시</span>에{" "}
-              <span className={styles.quizBold}>2시간</span>씩 오픈되는
+              매일 <span className={styles.quizBold}>2개씩</span> 오픈되는
               <br />
               오늘의 에너지 퀴즈를 풀어보세요.
               <br />

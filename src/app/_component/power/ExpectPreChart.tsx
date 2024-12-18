@@ -263,7 +263,11 @@ const ExpectPreChart: React.FC<ExpectPreChartProps> = ({ member }) => {
       )
     },
     expect: {
-      noMonths: <>예상 요금을 입력해주세요!</>,
+      noMonths: (
+        <>
+          <p>파워를 입력하면 예상 요금을 알 수 있어요!</p>
+        </>
+      ),
       noPreMonth: (
         <>
           <p>
@@ -277,7 +281,7 @@ const ExpectPreChart: React.FC<ExpectPreChartProps> = ({ member }) => {
       ),
       noCurrentMonth: (
         <>
-          <p>파워를 입력하면 예상 요금을 알 수 있어요</p>
+          <p>파워를 입력하면 예상 요금을 알 수 있어요!</p>
         </>
       ),
 

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import styles from "./InputBottomSheet.module.css";
 
 type InputBottomSheetProps = {
@@ -18,6 +19,7 @@ const InputBottomSheet: React.FC<InputBottomSheetProps> = ({
   const [currentY, setCurrentY] = useState(0);
   const [dragging, setDragging] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [name, setName] = useState<string>("사자");
 
   useEffect(() => {
     if (showBottomSheet) {
@@ -75,7 +77,26 @@ const InputBottomSheet: React.FC<InputBottomSheetProps> = ({
   const handleBottomSheetClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/users/my`, {
+          withCredentials: true
+        });
+        if (response.data && response.data.success) {
+          setName(response.data.data.name);
+        } else {
+          console.error("사용자 이름이 유효하지 않습니다.");
+        }
+      } catch (error) {
+        console.error("사용자 이름 가져오기 실패:", error);
+      }
+    };
+
+    fetchUserInfo();
+  }, []);
   return (
     <>
       {showBottomSheet && (
@@ -95,7 +116,8 @@ const InputBottomSheet: React.FC<InputBottomSheetProps> = ({
             <div className={styles.bottomBar}></div>
             <div className={styles.sheetContent}>
               <p className={styles.sheetTitle}>
-                지난 달과 차이가 커요! <br />
+                {name}님의 평균적인 전기요금과
+                <br /> 차이가 커요! <br />
                 정확히 입력했나요?
               </p>
               <div className={styles.btnContainer}>
