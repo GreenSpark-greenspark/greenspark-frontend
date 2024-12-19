@@ -81,35 +81,42 @@ export default function PointHistory() {
             </div>
           </div>
         </div>
-        <div className={styles.historyWrap}>
-          {pointHistory.map((item, index) => (
-            <div key={index} className={styles.historyContainer}>
-              <div className={styles.pointLeftContainer}>
-                <p className={styles.textPointSmall}>
-                  {new Date(item.date).toLocaleDateString("ko-KR", {
-                    month: "2-digit",
-                    day: "2-digit"
-                  })}
-                </p>
-                <p className={styles.textPointMiddle}>{item.event}</p>
-              </div>
-              <div className={styles.pointRightContainer}>
-                <div className={styles.textPointMiddle}>
-                  <p>
-                    {item.point_amount > 0
-                      ? `+${item.point_amount.toLocaleString("ko-KR")}`
-                      : item.point_amount.toLocaleString("ko-KR")}
-                  </p>
-                  <IconPoint className={styles.iconPointMiddle} />
+        {pointHistory.length === 0 ? (
+          <div className={styles.noHistory}>효율등급이 변경된 제품이 없습니다.</div>
+        ) : (
+          <>
+            {" "}
+            <div className={styles.historyWrap}>
+              {pointHistory.map((item, index) => (
+                <div key={index} className={styles.historyContainer}>
+                  <div className={styles.pointLeftContainer}>
+                    <p className={styles.textPointSmall}>
+                      {new Date(item.date).toLocaleDateString("ko-KR", {
+                        month: "2-digit",
+                        day: "2-digit"
+                      })}
+                    </p>
+                    <p className={styles.textPointMiddle}>{item.event}</p>
+                  </div>
+                  <div className={styles.pointRightContainer}>
+                    <div className={styles.textPointMiddle}>
+                      <p>
+                        {item.point_amount > 0
+                          ? `+${item.point_amount.toLocaleString("ko-KR")}`
+                          : item.point_amount.toLocaleString("ko-KR")}
+                      </p>
+                      <IconPoint className={styles.iconPointMiddle} />
+                    </div>
+                    <div className={styles.textPointSmall}>
+                      <p>{item.after_point.toLocaleString("ko-KR")}</p>
+                      <IconPoint className={styles.iconPointSmall} />
+                    </div>
+                  </div>
                 </div>
-                <div className={styles.textPointSmall}>
-                  <p>{item.after_point.toLocaleString("ko-KR")}</p>
-                  <IconPoint className={styles.iconPointSmall} />
-                </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
       </div>
     </>
   );
