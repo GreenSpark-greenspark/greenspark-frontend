@@ -118,7 +118,7 @@ const InputBottomSheet: React.FC<InputBottomSheetProps> = ({
               <p className={styles.sheetTitle}>
                 {name}님의 평균적인 전기요금과
                 <br /> 차이가 커요! <br />
-                <span>정확히 입력했나요?</span>
+                <p>정확히 입력했나요?</p>
               </p>
               <div className={styles.btnContainer}>
                 <button className={styles.confirmBtn} onClick={onConfirmSave}>
