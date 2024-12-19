@@ -3,6 +3,8 @@
   height: 100%;
 
   background-color: #91e26b;
+  position: relative;
+  overflow: hidden;
 }
 
 .logoContainer {
@@ -10,10 +12,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 12rem;
-  padding-bottom: 13rem;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  transition:
+    transform 1s ease,
+    opacity 1s ease;
+  opacity: 0;
+}
 
-  height: 20rem;
+.logoAnimate {
+  transform: translate(-50%, -20%);
+  opacity: 1;
 }
 
 .iconLogo {
@@ -42,6 +53,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
+  top: 60%;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.loginFadeIn {
+  opacity: 1;
 }
 
 .loginMent {
