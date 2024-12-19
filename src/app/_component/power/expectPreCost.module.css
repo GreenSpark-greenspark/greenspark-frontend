@@ -276,3 +276,14 @@
 
   height: 600px;
 }
+.loadingText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #91e26b;
+  position: relative;
+  top: -3rem;
+}

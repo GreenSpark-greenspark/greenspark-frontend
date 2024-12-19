@@ -6,7 +6,7 @@ import { getDateLabel } from "@/utils/getDateLabels";
 import TipMentIconBig from "@/../public/icon/power_tipMent_big.svg";
 import TipMentIconSmall from "@/../public/icon/power_tipMent_small.svg";
 import Lottie from "react-lottie";
-import { defaultOptions } from "@/lib/lottieOption";
+import { lottieChart } from "@/lib/lottieChart";
 
 interface ChargeData {
   lastMonth: number | null;
@@ -190,9 +190,21 @@ const ExpectPreChart: React.FC<ExpectPreChartProps> = ({ member }) => {
   if (isLoading) {
     return (
       <div
-        style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}
+        style={{
+          width: "375px",
+          // height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "absolute"
+        }}
       >
-        <Lottie options={defaultOptions} height={400} width={400} />
+        <Lottie options={lottieChart} height={200} width={200} />
+        <div className={styles.loadingText}>
+          <p>AI가 전기요금을 분석 중이에요</p>
+          <p>잠시만 기다려주세요!</p>
+        </div>
       </div>
     );
   }
