@@ -82,7 +82,7 @@ export default function PointHistory() {
           </div>
         </div>
         {pointHistory.length === 0 ? (
-          <div className={styles.noHistory}>효율등급이 변경된 제품이 없습니다.</div>
+          <div className={styles.noHistory}>아직 적립된 포인트가 없습니다.</div>
         ) : (
           <>
             {" "}
